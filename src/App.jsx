@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Navbar/Hero/Hero";
 import Programs from "./components/Navbar/Programs/Programs";
@@ -17,7 +17,7 @@ const App = () => {
       <Navbar />
       <Hero />
       <div className="container">
-        <Title subtitle="Our PROGRAM" title="What We Offer" />
+        {/* <Title subtitle="Our PROGRAM" title="What We Offer" />
         <Programs />
         <About setPlayState={setPlayState} />
         <Title subtitle="Gallery" title="Dance Photos" />
@@ -26,9 +26,9 @@ const App = () => {
         <Testimonials />
         <Title subtitle="Contact Us" title="Get in Touch" />
         <Contact />
-        <Footer />
+        <Footer /> */}
       </div>
-      <VideoPlayer playState={playState} setPlayState={setPlayState} />
+      {/* <VideoPlayer playState={playState} setPlayState={setPlayState} /> */}
     </div>
   );
 };
