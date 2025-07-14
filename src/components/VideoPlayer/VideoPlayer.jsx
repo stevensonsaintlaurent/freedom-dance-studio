@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import "./VideoPlayer.css";
 import video from "../../assets/freedom2.mp4";
 
