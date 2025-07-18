@@ -26,7 +26,7 @@ const Navbar = () => {
           <img src={logo} alt="" className="logo" />
         </div>
         <div>
-          <h1>Freedom Dance Vegas</h1>
+          <h1>Freedom Dance Studio</h1>
         </div>
       </div>
 
