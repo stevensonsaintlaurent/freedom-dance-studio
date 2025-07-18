@@ -3,9 +3,11 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
 
+// basename={import.meta.env.BASE_URL}
+
 createRoot(document.getElementById("root")).render(
-  <StrictMode basename={import.meta.env.BASE_URL}>
+  <StrictMode>
     <App />
   </StrictMode>
 );
-console.log(import.meta.env.BASE_URL);
+// console.log(import.meta.env.BASE_URL);
