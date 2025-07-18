@@ -7,7 +7,7 @@ import user_2 from "../../../assets/user-2.jpg";
 import user_3 from "../../../assets/ally3.jpg";
 import user_4 from "../../../assets/maribel.jpg";
 import user_5 from "../../../assets/adriana.jpg";
-import user_6 from "../../../assets/Kanani.jpg";
+import user_6 from "../../../assets/kanani.jpg/";
 import user_7 from "../../../assets/jesus.jpg";
 
 const Testimonials = () => {
