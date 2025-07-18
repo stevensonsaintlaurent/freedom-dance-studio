@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import "./Testimonials.css";
 import next_icon from "../../../assets/next-icon.png";
 import back_icon from "../../../assets/back-icon.png";
@@ -7,11 +7,11 @@ import user_2 from "../../../assets/user-2.jpg";
 import user_3 from "../../../assets/ally3.jpg";
 import user_4 from "../../../assets/maribel.jpg";
 import user_5 from "../../../assets/adriana.jpg";
-// import user_6 from "../../../assets/Kanani.jpg";
+import user_6 from "../../../assets/Kanani.jpg";
 import user_7 from "../../../assets/jesus.jpg";
 
 const Testimonials = () => {
-  const slider = React.useRef();
+  const slider = useRef();
   let tx = 0;
 
   const slideForward = () => {
@@ -137,12 +137,12 @@ const Testimonials = () => {
                 fun. They focus on correcting and perfectioning the techniques,
                 and Stevenson is very patient and professional with his
                 students. They give each student the right amount of attention
-                and encouragement. I would highly recommend this dance studio.
+                and encouragement. I would highly recommend this dance studio.
               </p>
             </div>
           </li>
 
-          {/* <li>
+          <li>
             <div className="slide">
               <div className="user-info">
                 <img src={user_6} alt="" />
@@ -157,10 +157,10 @@ const Testimonials = () => {
                 Kizomba, and BAMM!! Melted, lol. Later I took a Bachata Bootcamp
                 and learned from a dancer from Romania. Such a beautiful dancer
                 with so much skill and experience. I was blessed with being able
-                to learn from her as well as Stevenson.
+                to learn from her as well as Stevenson.
               </p>
             </div>
-          </li> */}
+          </li>
 
           <li>
             <div className="slide">
