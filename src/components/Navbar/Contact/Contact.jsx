@@ -59,8 +59,8 @@ const Contact = () => {
             <a href="7026084001">7026084001</a>
           </li>
           <li>
-            <img src={location_icon} alt="" /> 601 Mall Ring Cir, Henderson, NV
-            89014(Diamond Dance studio)
+            <img src={location_icon} alt="" /> 3110 E Sunset Rd Suite C, Las
+            Vegas, NV 89120
           </li>
           <li>
             <a href="https://www.facebook.com/profile.php?id=100095031592137&mibextid=LQQJ4d">
