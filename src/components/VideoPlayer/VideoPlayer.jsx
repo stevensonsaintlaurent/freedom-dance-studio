@@ -3,6 +3,8 @@ import "./VideoPlayer.css";
 import video from "../../assets/freedom2.mp4";
 
 const VideoPlayer = ({ playState, setPlayState }) => {
+  console.log(playState);
+  console.log(setPlayState);
   const player = useRef(null);
   const closePlayer = (e) => {
     if (e.target === player.current) {
