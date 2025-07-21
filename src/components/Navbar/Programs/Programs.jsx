@@ -1,7 +1,7 @@
 import React from "react";
 import "./Program.css";
-import group from "../../../assets/prices.jpg";
-import prive from "../../../assets/prices1.jpg";
+import group from "../../../assets/pricesList.jpg";
+import prive from "../../../assets/26july.jpg";
 import social from "../../../assets/schedules2.jpg";
 
 const Programs = () => {
@@ -12,7 +12,7 @@ const Programs = () => {
 
         <div className="caption">
           <img src={group} alt="" />
-          <p>Couples</p>
+          <p>Prices</p>
         </div>
       </div>
 
@@ -21,7 +21,7 @@ const Programs = () => {
 
         <div className="caption">
           <img src={prive} alt="" />
-          <p>Single person</p>
+          <p>Event</p>
         </div>
       </div>
 
