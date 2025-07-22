@@ -1,8 +1,7 @@
-import React from "react";
 import "./Program.css";
-import group from "../../../assets/pricesList.jpg";
+import group from "../../../assets/prices2.jpg";
 import prive from "../../../assets/26july.jpg";
-import social from "../../../assets/schedules2.jpg";
+import social from "../../../assets/event2.jpg";
 
 const Programs = () => {
   return (
