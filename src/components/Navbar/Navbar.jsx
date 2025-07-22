@@ -38,7 +38,7 @@ const Navbar = () => {
         </li>
         <li>
           <Link to="program" smooth={true} offset={-260} duration={500}>
-            Prices/Schedules
+            Prices/Events
           </Link>
         </li>
         <li>

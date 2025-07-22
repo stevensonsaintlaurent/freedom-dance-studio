@@ -29,7 +29,7 @@ const Programs = () => {
 
         <div className="caption">
           <img src={social} alt="" />
-          <p>Schedules</p>
+          <p>Event</p>
         </div>
       </div>
     </div>
