@@ -1,6 +1,6 @@
 import "./Program.css";
 import group from "../../../assets/prices2.jpg";
-import prive from "../../../assets/26july.jpg";
+import prive from "../../../assets/schedule1.jpg";
 import social from "../../../assets/event2.jpg";
 
 const Programs = () => {
@@ -20,7 +20,7 @@ const Programs = () => {
 
         <div className="caption">
           <img src={prive} alt="" />
-          <p>Event</p>
+          <p>Schedule</p>
         </div>
       </div>
 
