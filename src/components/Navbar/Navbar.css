@@ -12,7 +12,7 @@ nav {
 }
 
 .logo {
-  width: 110px;
+  width: 100px;
   border-radius: 50%;
   padding: 0 10px;
 }
@@ -79,5 +79,11 @@ nav ul li {
   .menu-icon {
     display: block;
     width: 30px;
+  }
+
+  .logo-title h1 {
+    background-color: black;
+    width: 200px;
+    visibility: hidden;
   }
 }
