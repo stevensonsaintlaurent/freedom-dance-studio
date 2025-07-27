@@ -22,11 +22,11 @@ const App = () => {
         <About setPlayState={setPlayState} />
         <Title subtitle="Gallery" title="Dance Photos" />
         <Dance />
-        <Title subtitle="TESTIMONIALS" title="What Dancers Says" />
-        <Testimonials />
+        {/* <Title subtitle="TESTIMONIALS" title="What Dancers Says" />
+        <Testimonials /> */}
         <Title subtitle="Contact Us" title="Get in Touch" />
         <Contact />
-        <Footer /> */
+        <Footer />
       </div>
       <VideoPlayer playState={playState} setPlayState={setPlayState} />
     </div>
