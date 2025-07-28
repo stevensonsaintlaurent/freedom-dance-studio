@@ -21,7 +21,7 @@ const App = () => {
         <Programs />
         <About setPlayState={setPlayState} />
         <Title subtitle="Gallery" title="Dance Photos" />
-        <Dance />
+        {/* <Dance /> */}
         {/* <Title subtitle="TESTIMONIALS" title="What Dancers Says" />
         <Testimonials /> */}
         <Title subtitle="Contact Us" title="Get in Touch" />
