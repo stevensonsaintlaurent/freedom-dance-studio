@@ -8,8 +8,11 @@ const Hero = () => {
         <h1>WELCOME TO OUR DANCE Academy</h1>
 
         <p>
-          We support fresh concepts, welcome creative originality, and provide
-          dancing performers with incredible opportunities.
+          We’re excited to have you join our community of artists and
+          performers! Our studio offers a variety of dance classes and music
+          lessons for all ages and skill levels. We also host events and
+          workshops to celebrate creativity and connection. Thank you for being
+          here, and we can’t wait to create and perform together!
         </p>
 
         <button className="btn">

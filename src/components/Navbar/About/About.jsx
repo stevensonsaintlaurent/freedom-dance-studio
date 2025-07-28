@@ -21,10 +21,24 @@ const About = ({ setPlayState }) => {
         <h3>About us</h3>
         <h2>Welcome to Freedom Dance!</h2>
         <p>
-          At Freedom Dance, we believe in the transformative power of dance. Our
-          passion for movement and expression drives us to create a space where
-          individuals can discover the joy, creativity, and freedom that dance
-          brings to life.
+          At Freedom Dance Studio, we are dedicated to fostering a passion for
+          the arts in a welcoming and inclusive environment. Located in Las
+          Vegas, our studio offers a diverse range of dance classes—including
+          ballet, hip-hop, bachata,salsa ,kizomba,konpa, and more—alongside
+          music lessons for various instruments.
+        </p>
+
+        <p>
+          Beyond education, we serve as a vibrant event center, hosting
+          recitals, performances, and community gatherings that celebrate
+          creativity and artistic expression. Our experienced instructors are
+          committed to nurturing talent and building confidence in every
+          student.
+        </p>
+
+        <p>
+          Join us at Freedom Dance Studio, where the love for dance and music
+          comes alive!
         </p>
 
         <h2>Our Mission</h2>
