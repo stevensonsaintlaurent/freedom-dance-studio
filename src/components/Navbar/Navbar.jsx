@@ -36,26 +36,29 @@ const Navbar = () => {
             Home
           </Link>
         </li>
+
         <li>
-          <Link to="program" smooth={true} offset={-260} duration={500}>
-            Prices/Events
-          </Link>
-        </li>
-        <li>
-          <Link to="about" smooth={true} offset={-150} duration={500}>
+          <Link to="about" smooth={true} offset={-260} duration={500}>
             About Us
           </Link>
         </li>
+
         <li>
+          <Link to="program" smooth={true} offset={-150} duration={500}>
+            Info
+          </Link>
+        </li>
+
+        {/* <li>
           <Link to="dance" smooth={true} offset={-260} duration={500}>
             Gallery
           </Link>
-        </li>
-        <li>
+        </li> */}
+        {/* <li>
           <Link to="testimonials" smooth={true} offset={-260} duration={500}>
             Testimonials
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link
             to="contact"
