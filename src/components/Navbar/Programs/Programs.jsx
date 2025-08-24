@@ -1,7 +1,7 @@
 import "./Program.css";
-import group from "../../../assets/prices2.jpg";
+import group from "../../../assets/last-bachata.jpg";
 import prive from "../../../assets/schedule1.jpg";
-import social from "../../../assets/bach.jpg";
+import social from "../../../assets/konpa-kiz-night1.jpg";
 
 const Programs = () => {
   return (
@@ -11,7 +11,7 @@ const Programs = () => {
 
         <div className="caption">
           <img src={group} alt="" />
-          <p>Prices</p>
+          <p>Event</p>
         </div>
       </div>
 
@@ -20,7 +20,7 @@ const Programs = () => {
 
         <div className="caption">
           <img src={prive} alt="" />
-          <p>Schedule</p>
+          <p>Schedules</p>
         </div>
       </div>
 
