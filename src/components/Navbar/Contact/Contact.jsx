@@ -56,7 +56,7 @@ const Contact = () => {
           </li>
           <li>
             <img src={phone_icon} alt="" />
-            <a href="7026084001">7026084001</a>
+            <a href="7026084001">7257240962</a>
           </li>
           <li>
             <img src={location_icon} alt="" /> 3110 E Sunset Rd Suite C, Las
@@ -68,7 +68,7 @@ const Contact = () => {
             </a>
           </li>
           <li>
-            <a href="https://www.instagram.com/freedom_dance_las_vegas?igsh=cXZmbm12dmM4MGQ0">
+            <a href="https://www.instagram.com/vegas_freedom_dance_studio?igsh=MXVoNmJtODh1azJ4Zg== ">
               <FontAwesomeIcon icon={faInstagram} /> Instagram
             </a>
           </li>
