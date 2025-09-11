@@ -1,7 +1,7 @@
 import "./Program.css";
-import group from "../../../assets/last-bachata.jpg";
-import prive from "../../../assets/schedule1.jpg";
-import social from "../../../assets/konpa-kiz-night1.jpg";
+import group from "../../../assets/studios-spt.jpg";
+import prive from "../../../assets/schedules-spt.jpg";
+import social from "../../../assets/sbk-party.jpg";
 
 const Programs = () => {
   return (
