@@ -1,5 +1,5 @@
 import "./About.css";
-import about_img from "../../../assets/hero5.jpg";
+import about_img from "../../../assets/first-clip.jpg";
 import play_icon from "../../../assets/play-icon.png";
 
 const About = ({ setPlayState }) => {
