@@ -89,6 +89,15 @@ const Contact = () => {
             placeholder=" Enter your name"
             required
           />
+
+          <label>Your Email</label>
+          <input
+            type="email"
+            name="email"
+            placeholder=" Enter your email Address"
+            required
+          />
+
           <label>Phone Number</label>
           <input
             type="tel"
@@ -96,6 +105,7 @@ const Contact = () => {
             placeholder=" Enter your mobile number"
             required
           />
+
           <label>Write your messages here</label>
           <textarea
             name="message"
