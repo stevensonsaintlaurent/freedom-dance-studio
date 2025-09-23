@@ -81,6 +81,8 @@ const Contact = () => {
       </div>
 
       <div className="contact-col">
+        <h1>Register now for your first class free! </h1>
+
         <form onSubmit={onSubmit}>
           <label>Your name</label>
           <input
