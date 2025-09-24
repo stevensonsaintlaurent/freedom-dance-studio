@@ -116,7 +116,7 @@ const Contact = () => {
             required
           ></textarea>
           <button type="submit" className="btn dark-btn">
-            Submit now <img src={white_arrow} alt="" />
+            Register now <img src={white_arrow} alt="" />
           </button>
         </form>
         <span>{result}</span>
