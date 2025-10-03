@@ -1,7 +1,7 @@
 import "./Program.css";
 import group from "../../../assets/studios-spt.jpg";
 import prive from "../../../assets/schedules-spt.jpg";
-import social from "../../../assets/workshops-salsa.jpg";
+import social from "../../../assets/octobersbk.jpg";
 
 const Programs = () => {
   return (
