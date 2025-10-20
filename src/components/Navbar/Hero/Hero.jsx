@@ -5,7 +5,7 @@ const Hero = () => {
   return (
     <div className="hero container">
       <div className="hero-text">
-        <h1>WELCOME TO OUR DANCE Academy</h1>
+        <h1>WELCOME TO OUR DANCE STUDIO</h1>
 
         <p>
           We’re excited to have you join our community of artists and
