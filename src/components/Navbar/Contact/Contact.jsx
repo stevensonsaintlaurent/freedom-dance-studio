@@ -51,27 +51,41 @@ const Contact = () => {
 
         <ul>
           <li>
-            <img src={mail_icon} alt="" />
-            freedomdancelasvegas@gmail.com
+            <a href="freedomdancelasvegas@gmail.com" className="link-item">
+              <img src={mail_icon} alt="" />
+              freedomdancelasvegas@gmail.com
+            </a>
           </li>
+
           <li>
-            <img src={phone_icon} alt="" />
-            <a href="7026084001">7257240962</a>
+            <a href="7257240962" className="link-item">
+              <img src={phone_icon} alt="" />
+              7257240962
+            </a>
           </li>
+
           <li>
-            <img src={location_icon} alt="" /> 3110 E Sunset Rd Suite C, Las
-            Vegas, NV 89120
+            <a
+              href=" 3110 E Sunset Rd Suite C, Las Vegas, NV 89120"
+              className="link-item"
+            >
+              <img src={location_icon} alt="" /> 3110 E Sunset Rd Suite C, Las
+              Vegas, NV 89120
+            </a>
           </li>
+
           <li>
             <a href="https://www.facebook.com/profile.php?id=100095031592137&mibextid=LQQJ4d">
               <FontAwesomeIcon icon={faFacebook} /> Facebook
             </a>
           </li>
+
           <li>
             <a href="https://www.instagram.com/vegas_freedom_dance_studio?igsh=MXVoNmJtODh1azJ4Zg== ">
               <FontAwesomeIcon icon={faInstagram} /> Instagram
             </a>
           </li>
+
           <li>
             <a href="https://www.tiktok.com/@fd.las_vegas?_t=8qEDieUuXCJ&_r=1">
               <FontAwesomeIcon icon={faTiktok} /> Tiktok
