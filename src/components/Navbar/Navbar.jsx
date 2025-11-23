@@ -3,6 +3,7 @@ import "./Navbar.css";
 import logo from "../../assets/logo.jpg";
 import { Link } from "react-scroll";
 import menu_icon from "../../assets/menu-icon.png";
+import { IoCloseSharp } from "react-icons/io5";
 
 const Navbar = () => {
   const [sticky, setSticky] = useState(false);
@@ -10,13 +11,14 @@ const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", () => {
       window.scrollY > 50 ? setSticky(true) : setSticky(false);
+      setMobileMenu(false);
     });
   }, []);
 
   const [mobileMenu, setMobileMenu] = useState(false);
 
   function toggleMenu() {
-    mobileMenu ? setMobileMenu(false) : setMobileMenu(true);
+    setMobileMenu(!mobileMenu);
   }
 
   return (
@@ -38,7 +40,7 @@ const Navbar = () => {
         </li>
 
         <li>
-          <Link to="about" smooth={true} offset={-260} duration={500}>
+          <Link to="about" smooth={true} offset={-210} duration={500}>
             About Us
           </Link>
         </li>
@@ -49,11 +51,11 @@ const Navbar = () => {
           </Link>
         </li>
 
-        {/* <li>
+        <li>
           <Link to="dance" smooth={true} offset={-260} duration={500}>
             Gallery
           </Link>
-        </li> */}
+        </li>
         {/* <li>
           <Link to="testimonials" smooth={true} offset={-260} duration={500}>
             Testimonials
@@ -71,7 +73,16 @@ const Navbar = () => {
           </Link>
         </li>
       </ul>
-      <img src={menu_icon} alt="" className="menu-icon" onClick={toggleMenu} />
+      {mobileMenu ? (
+        <IoCloseSharp className="close-icon" onClick={toggleMenu} />
+      ) : (
+        <img
+          src={menu_icon}
+          alt=""
+          className="menu-icon"
+          onClick={toggleMenu}
+        />
+      )}
     </nav>
   );
 };

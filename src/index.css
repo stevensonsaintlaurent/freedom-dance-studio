@@ -60,4 +60,8 @@ a {
   .hide-mobile-menu {
     right: -200px;
   }
+
+  .hide-mobile-menus {
+    right: 200px;
+  }
 }
