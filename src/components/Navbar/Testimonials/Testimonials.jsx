@@ -47,7 +47,6 @@ const Testimonials = () => {
                 <img src={user_1} alt="" />
                 <div>
                   <h3>Gabriela Oman</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
@@ -66,7 +65,6 @@ const Testimonials = () => {
                 <img src={user_2} alt="" />
                 <div>
                   <h3>Zagir</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
@@ -85,7 +83,6 @@ const Testimonials = () => {
                 <img src={user_3} alt="" />
                 <div>
                   <h3>Allyson Corella</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
@@ -107,7 +104,6 @@ const Testimonials = () => {
                 <img src={user_4} alt="" />
                 <div>
                   <h3>Maribel Magana</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
@@ -129,7 +125,6 @@ const Testimonials = () => {
                 <img src={user_5} alt="" />
                 <div>
                   <h3>Adriana Luna Blake</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
@@ -148,7 +143,6 @@ const Testimonials = () => {
                 <img src={user_6} alt="" />
                 <div>
                   <h3>Kanani Jane</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
@@ -168,7 +162,6 @@ const Testimonials = () => {
                 <img src={user_7} alt="" />
                 <div>
                   <h3>Jesús Silva</h3>
-                  <span>Freedom Dance ,Las Vegas</span>
                 </div>
               </div>
               <p>
