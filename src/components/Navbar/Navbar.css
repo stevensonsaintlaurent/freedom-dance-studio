@@ -81,6 +81,14 @@ nav ul li {
     width: 30px;
   }
 
+  .close-icon {
+    display: block;
+    font-size: 40px;
+    margin: 2px 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
   .logo-title h1 {
     background-color: black;
     width: 200px;

@@ -4,8 +4,14 @@ import gallery_2 from "../../../assets/leaders.jpg";
 import gallery_3 from "../../../assets/group.jpg";
 import gallery_4 from "../../../assets/poster33.jpg";
 import white_arrow from "../../../assets/white-arrow.png";
+import { useState } from "react";
 
 const Dance = () => {
+  const [picture, setPicture] = useState(false);
+  function handlePicture() {
+    console.log("picture");
+  }
+
   return (
     <div className="dance">
       <div className="gallery">
@@ -14,7 +20,7 @@ const Dance = () => {
         <img src={gallery_3} alt="" />
         <img src={gallery_4} alt="" />
       </div>
-      <button className="btn dark-btn">
+      <button className="btn dark-btn " onClick={handlePicture}>
         See more here <img src={white_arrow} alt="" />
       </button>
     </div>
