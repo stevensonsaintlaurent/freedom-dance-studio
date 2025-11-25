@@ -79,6 +79,22 @@ form {
 }
 
 /* ============ media query mobile devices============== */
+
+@media (max-width: 1200px) {
+  .contact {
+    display: block;
+  }
+
+  .contact-col {
+    padding: 20px;
+  }
+
+  .contact-col h1 {
+    font-size: 50px;
+    padding-bottom: 20px;
+  }
+}
+/* ============ media query mobile devices============== */
 @media (max-width: 700px) {
   .contact {
     display: block;
