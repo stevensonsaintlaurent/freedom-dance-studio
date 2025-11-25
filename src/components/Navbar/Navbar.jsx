@@ -22,7 +22,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className={`container ${sticky ? "dark-nav" : ""}`}>
+    <nav className={` ${sticky ? "dark-nav" : ""}`}>
       <div className="logo-title">
         <div>
           <img src={logo} alt="" className="logo" />

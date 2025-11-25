@@ -24,6 +24,7 @@ const App = () => {
         <Dance /> */}
         {/* <Title subtitle="TESTIMONIALS" title="What Dancers Say" />
         <Testimonials /> */}
+
         <Title subtitle="Contact Us" title="Get in Touch" />
         <Contact />
         <Footer />
