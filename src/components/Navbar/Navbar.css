@@ -38,7 +38,7 @@ nav ul li {
   transition: 0.5s;
 }
 
-.menu-icon {
+.menu-icon .close-icon {
   display: none;
 }
 
@@ -89,9 +89,23 @@ nav ul li {
 
 /* ============ media query ============== */
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
   .logo {
     width: 110px;
+  }
+
+  .menu-icon {
+    display: block;
+    width: 30px;
+    margin: 0 40px;
+  }
+
+  .close-icon {
+    display: block;
+    font-size: 40px;
+    margin: 0 40px;
+    cursor: pointer;
+    transition: all 0.3s ease;
   }
 
   nav ul li {
@@ -99,7 +113,7 @@ nav ul li {
   }
 }
 
-@media (max-width: 840px) {
+@media (max-width: 650px) {
   nav {
     padding: 15px 0;
   }
@@ -122,15 +136,21 @@ nav ul li {
   }
 
   .menu-icon {
+    position: absolute;
+    top: 40px;
+    right: 20px;
     display: block;
     width: 30px;
-    margin: 0 40px;
+    margin: 10px 5px;
   }
 
   .close-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     display: block;
     font-size: 40px;
-    margin: 0 40px;
+    margin: 20px 10px;
     cursor: pointer;
     transition: all 0.3s ease;
   }
