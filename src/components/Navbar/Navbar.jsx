@@ -21,6 +21,11 @@ const Navbar = () => {
     setMobileMenu(!mobileMenu);
   }
 
+  // function handleCloseM() {
+  //   setMobileMenu(false);
+  //   console.log("stev");
+  // }
+
   return (
     <nav className={` ${sticky ? "dark-nav" : ""}`}>
       <div className="logo-title">
