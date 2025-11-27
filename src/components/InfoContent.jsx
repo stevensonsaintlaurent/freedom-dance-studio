@@ -41,7 +41,7 @@ export const InfoContent = ({ setPlayState }) => {
           Salsa one of the world’s most popular dances.
         </p>
 
-        <h3>Kizomba</h3>
+        <h2>Kizomba</h2>
         <p>
           Kizomba is a popular dance originating from Angola. This beautiful
           partner dance combines smooth, flowing movements with rhythmic music,
@@ -53,7 +53,7 @@ export const InfoContent = ({ setPlayState }) => {
           experience the joy of Kizomba!
         </p>
 
-        <h3>Konpa</h3>
+        <h2>Konpa</h2>
         <p>
           We proudly offer Konpa classes, celebrating the vibrant rhythms and
           rich culture of this beloved Haitian partner dance. Our instructors
@@ -65,7 +65,7 @@ export const InfoContent = ({ setPlayState }) => {
           is a celebration of music and movement
         </p>
 
-        <h3>Music Community</h3>
+        <h2>Music Community</h2>
         <h4> INSPIRING CREATIVITY THROUGH THE POWER OF MUSIC!</h4>
         <p>! WE WELCOME HIGH SCHOOL STUDENTS AND ADULTS!</p>
 

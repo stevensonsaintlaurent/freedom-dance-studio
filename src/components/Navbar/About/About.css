@@ -16,6 +16,10 @@
   align-items: center;
   flex-direction: column;
 }
+
+.info-dance p {
+  text-transform: lowercase;
+}
 .about-left {
   flex-basis: 40%;
 
@@ -83,10 +87,12 @@
 
   .about-left {
     flex-basis: 100%;
-    margin: 20px;
+    margin: 0 20px;
     order: 2;
+    margin-bottom: 0;
   }
   .about-right {
     flex-basis: 100%;
+    margin-bottom: 0;
   }
 }
