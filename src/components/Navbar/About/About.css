@@ -6,8 +6,19 @@
   width: 90%;
 }
 
+.info-content {
+  display: flex;
+}
+
+.info-dance {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
 .about-left {
   flex-basis: 40%;
+
   position: relative;
 }
 

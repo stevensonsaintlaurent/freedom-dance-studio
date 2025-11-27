@@ -5,7 +5,7 @@ import "./Navbar/About/About.css";
 export const InfoContent = ({ setPlayState }) => {
   console.log(setPlayState);
   return (
-    <div className="about">
+    <div className="about info-content">
       <div className="about-left">
         {/* <img src={about_img} alt="" className="about-img" />
         <img
@@ -18,7 +18,7 @@ export const InfoContent = ({ setPlayState }) => {
         /> */}
       </div>
 
-      <div className="about-right">
+      <div className="about-right  info-dance">
         <h2>Bachata</h2>
         <p>
           We offer vibrant and engaging Bachata classes for all skill levels.
