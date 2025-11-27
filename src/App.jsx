@@ -9,6 +9,7 @@ import About from "./components/Navbar/About/About";
 import Contact from "./components/Navbar/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
+// import { InfoContent } from "./components/InfoContent";
 
 const App = () => {
   const [playState, setPlayState] = useState(false);
@@ -18,7 +19,9 @@ const App = () => {
       <Hero />
       <div className="container">
         <About setPlayState={setPlayState} />
+        {/* <InfoContent /> */}
         <Title subtitle="Our PROGRAM" title="What We Offer" />
+
         <Programs />
         {/* <Title subtitle="Gallery" title="Dance Photos" />
         <Dance /> */}
