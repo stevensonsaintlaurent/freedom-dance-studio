@@ -15,6 +15,26 @@ const About = ({ setPlayState }) => {
             setPlayState(true);
           }}
         />
+
+        <img src={about_img} alt="" className="about-img" />
+        <img
+          src={play_icon}
+          alt=""
+          className="play-icon"
+          onClick={() => {
+            setPlayState(true);
+          }}
+        />
+
+        <img src={about_img} alt="" className="about-img" />
+        <img
+          src={play_icon}
+          alt=""
+          className="play-icon"
+          onClick={() => {
+            setPlayState(true);
+          }}
+        />
       </div>
 
       <div className="about-right">
