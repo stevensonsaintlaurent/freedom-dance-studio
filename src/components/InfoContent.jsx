@@ -1,14 +1,19 @@
 import "./Navbar/About/About.css";
 // import about_img from "../../../assets/first-clip.jpg";
 // import play_icon from "../../../assets/play-icon.png";
+import concert from "../assets/concert-freedom-jazz/P1991000.jpg";
+import concert_1 from "../assets/concert-freedom-jazz/P1990994.jpg";
+import concert_2 from "../assets/concert-freedom-jazz/P1990974.jpg";
 
 export const InfoContent = ({ setPlayState }) => {
   console.log(setPlayState);
   return (
     <div className="about info-content">
       <div className="about-left">
-        {/* <img src={about_img} alt="" className="about-img" />
-        <img
+        <img src={concert} alt="" className="about-img" />
+        <img src={concert_1} alt="" className="about-img" />
+        <img src={concert_2} alt="" className="about-img" />
+        {/* <img
           src={play_icon}
           alt=""
           className="play-icon"
