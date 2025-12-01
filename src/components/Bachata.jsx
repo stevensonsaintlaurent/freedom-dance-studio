@@ -1,8 +1,8 @@
 export const Bachata = () => {
   return (
     <>
-      {" "}
       <h2>Bachata</h2>
+
       <p>
         We offer vibrant and engaging Bachata classes for all skill levels. Our
         experienced instructors guide you through the sensual rhythms and smooth
