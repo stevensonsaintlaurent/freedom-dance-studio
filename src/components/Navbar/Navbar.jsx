@@ -5,7 +5,7 @@ import { Link } from "react-scroll";
 import menu_icon from "../../assets/menu-icon.png";
 import { IoCloseSharp } from "react-icons/io5";
 
-const Navbar = () => {
+const Navbar = ({ setMobileMenu, mobileMenu }) => {
   const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
@@ -14,8 +14,6 @@ const Navbar = () => {
       setMobileMenu(false);
     });
   }, []);
-
-  const [mobileMenu, setMobileMenu] = useState(false);
 
   function toggleMenu() {
     setMobileMenu(!mobileMenu);

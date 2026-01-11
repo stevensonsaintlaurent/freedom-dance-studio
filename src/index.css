@@ -65,3 +65,8 @@ a {
     right: 200px;
   }
 }
+
+link .icon {
+  border-radius: 50%;
+  background-color: red;
+}

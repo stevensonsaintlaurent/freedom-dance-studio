@@ -13,9 +13,11 @@ import { InfoContent } from "./components/InfoContent";
 
 const App = () => {
   const [playState, setPlayState] = useState(false);
+  const [mobileMenu, setMobileMenu] = useState(false);
+
   return (
     <div>
-      <Navbar />
+      <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
       <Hero />
       <div className="container">
         <About setPlayState={setPlayState} />
