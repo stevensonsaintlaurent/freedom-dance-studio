@@ -1,4 +1,7 @@
 import "./Navbar/About/About.css";
+import Party_1 from "../assets/sbkParty/FJ8A6466.jpg";
+import Party_2 from "../assets/sbkParty/FJ8A6603.jpg";
+import Party_3 from "../assets/sbkParty/FJ8A6605.jpg";
 // import about_img from "../../../assets/first-clip.jpg";
 // import play_icon from "../../../assets/play-icon.png";
 import concert from "../assets/concert-freedom-jazz/P1991000.jpg";
@@ -51,6 +54,10 @@ export const InfoContent = ({ setPlayState }) => {
       </div>
       {/* ========== left to right ========== */}
       <div className="about-left">
+        <img src={Party_1} alt="" className="about-img" />
+        <img src={Party_2} alt="" className="about-img" />
+        <img src={Party_3} alt="" className="about-img" />
+
         {/* <img
           src={play_icon}
           alt=""
