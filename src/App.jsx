@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Navbar/Hero/Hero";
 import Programs from "./components/Navbar/Programs/Programs";
@@ -14,7 +14,11 @@ import { InfoContent } from "./components/InfoContent";
 const App = () => {
   const [playState, setPlayState] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
-
+  useEffect(() => {
+    setTimeout(() => {
+      setMobileMenu(false);
+    }, 10000);
+  });
   return (
     <div>
       <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
