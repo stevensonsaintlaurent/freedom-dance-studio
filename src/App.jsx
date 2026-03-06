@@ -10,6 +10,7 @@ import Contact from "./components/Navbar/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import { InfoContent } from "./components/InfoContent";
+import Interview from "./components/VideoPlayer/Interview";
 
 const App = () => {
   const [playState, setPlayState] = useState(false);
@@ -22,7 +23,7 @@ const App = () => {
   return (
     <div>
       <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
-      <Hero />
+      <Hero setPlayState={setPlayState} />
       <div className="container">
         <About setPlayState={setPlayState} />
         <Title subtitle="Our PROGRAM" title="What We Offer" />
@@ -39,6 +40,7 @@ const App = () => {
         <Footer />
       </div>
       <VideoPlayer playState={playState} setPlayState={setPlayState} />
+      <Interview playState={playState} setPlayState={setPlayState} />
     </div>
   );
 };

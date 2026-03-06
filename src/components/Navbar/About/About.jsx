@@ -19,24 +19,24 @@ const About = ({ setPlayState }) => {
         />
 
         <img src={about_img} alt="" className="about-img" />
-        <img
+        {/* <img
           src={play_icon}
           alt=""
           className="play-icon"
           onClick={() => {
             setPlayState(true);
           }}
-        />
+        /> */}
 
         <img src={ClipJesus} alt="" className="about-img" />
-        <img
+        {/* <img
           src={play_icon}
           alt=""
           className="play-icon"
           onClick={() => {
             setPlayState(true);
           }}
-        />
+        /> */}
       </div>
 
       <div className="about-right">
@@ -46,7 +46,7 @@ const About = ({ setPlayState }) => {
           At Freedom Dance Studio, we are dedicated to fostering a passion for
           the arts in a welcoming and inclusive environment. Located in Las
           Vegas, our studio offers a diverse range of dance classes—including
-          ballet, hip-hop, bachata, salsa, kizomba, konpa, and more—alongside
+          Ballet, Hip-Hop, Bachata, Salsa, Kizomba, Konpa, and more—alongside
           music lessons for various instruments.
         </p>
 
@@ -73,7 +73,7 @@ const About = ({ setPlayState }) => {
         </p>
 
         <h3>What Sets Us Apart</h3>
-        <h3>Expert Instructors</h3>
+
         <p>
           At Freedom Dance, we take pride in our team of experienced and
           passionate dance instructors. Each instructor brings a unique style
