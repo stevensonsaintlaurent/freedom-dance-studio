@@ -17,9 +17,6 @@
   flex-direction: column;
 }
 
-.info-dance p {
-  text-transform: lowercase;
-}
 .about-left {
   flex-basis: 40%;
 
@@ -48,13 +45,14 @@
 .about h3 {
   font-weight: 600;
   font-weight: 16px;
+  margin: 6px 0;
   color: #212ea0;
 }
 
 .about h2 {
-  font-size: 35px;
+  font-size: 30px;
   color: #000f38;
-  margin: 10px;
+  margin: 10px 0;
   max-width: 400px;
 }
 

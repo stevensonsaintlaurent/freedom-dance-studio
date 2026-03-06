@@ -1,7 +1,7 @@
 import "./Hero.css";
 import dark_arrow from "../../../assets/dark-arrow.png";
 
-const Hero = () => {
+const Hero = ({ setPlayState }) => {
   return (
     <div className="hero container">
       <div className="hero-text">
@@ -15,7 +15,12 @@ const Hero = () => {
           here, and we can’t wait to create and perform together!
         </p>
 
-        <button className="btn">
+        <button
+          className="btn"
+          onClick={() => {
+            setPlayState(true);
+          }}
+        >
           Explore more <img src={dark_arrow} alt="" />
         </button>
       </div>

@@ -10,7 +10,6 @@ import concert_2 from "../assets/concert-freedom-jazz/P1990974.jpg";
 import { Bachata } from "./Bachata";
 
 export const InfoContent = ({ setPlayState }) => {
-  console.log(setPlayState);
   return (
     <div className="about info-content">
       <div className="about-right  info-dance">
@@ -18,38 +17,38 @@ export const InfoContent = ({ setPlayState }) => {
 
         <h2>Music Community</h2>
         <img src={concert} alt="" className="about-img" />
-        <h4> INSPIRING CREATIVITY THROUGH THE POWER OF MUSIC!</h4>
-        <p>! WE WELCOME HIGH SCHOOL STUDENTS AND ADULTS!</p>
+        <h4> Inspiring creativity through the power of music!</h4>
+        <p>! We welcome high school student and adults !</p>
 
         <p>
-          DISCOVER THE JOY OF MUSIC IN A FUN, ENCOURAGING, AND CREATIVE
-          ENVIRONMENT!
+          Discover the joy of music in a fun, encouraging, and create discover
+          the of music in a fun, encouraging, and creative environment!
         </p>
 
         <h3> JAZZ BAND</h3>
         <img src={concert_1} alt="" className="about-img" />
         <p>
-          EXPLORE IMPROVISATION AND CREATIVITY LEARN ESSENTIAL TECHNIQUES PLAY
-          AND COLLABORATE WITH FELLOW MUSICIANS
+          Explore Improvisation and creativity learn essential techniques play
+          and collaborate with fellow musicians
         </p>
         <img src={concert_2} alt="" className="about-img" />
 
         <h3> CLASSICAL ORCHESTRA </h3>
         <p>
-          PERFORM TIMELESS PIECES STRENGTHEN YOUR MUSICAL SKILLS EXPERIENCE THE
-          BEAUTY OF ORCHESTRAL MUSIC
+          Perform timeless pieces strengthen your musical skills experience the
+          beauty of orchestral music
         </p>
 
         <h3> WHY JOIN US?</h3>
         <p>
-          WHETHER YOU’RE AN INTERMEDIATE OR ADVANCED MUSICIAN, OUR PROGRAMS HELP
-          YOU GROW, SHINE, AND SHARE YOUR LOVE OF MUSIC.
+          Whether you're an instermediate or avanced musician,our programs help
+          you grow, shine and share your love of music.
         </p>
 
         <h3> JOIN THE COMMUNITY!</h3>
         <p>
-          COME MAKE MUSIC WITH US AT FREEDOM DANCE STUDIO — WHERE CREATIVITY,
-          CONNECTION, AND EXPRESSION COME ALIVE!
+          Come make music with us at Freedom Dance Studio - Where creativity
+          connection, and expression come alive!
         </p>
       </div>
       {/* ========== left to right ========== */}
