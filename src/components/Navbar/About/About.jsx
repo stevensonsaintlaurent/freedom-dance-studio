@@ -46,7 +46,7 @@ const About = ({ setPlayState }) => {
           At Freedom Dance Studio, we are dedicated to fostering a passion for
           the arts in a welcoming and inclusive environment. Located in Las
           Vegas, our studio offers a diverse range of dance classes—including
-          ballet, hip-hop, bachata,salsa ,kizomba,konpa, and more—alongside
+          ballet, hip-hop, bachata, salsa, kizomba, konpa, and more—alongside
           music lessons for various instruments.
         </p>
 
@@ -85,9 +85,9 @@ const About = ({ setPlayState }) => {
         <p>
           Whether you’re a beginner taking your first steps or an experienced
           dancer looking to refine your skills, we offer a variety of dance
-          styles to suit every interest. From bachata dominicana,bachata
-          sensual,kizomba to urban Kiz Tarraxo konpa and Salsa2 , there’s
-          something for everyone at Freedom Dance.
+          styles to suit every interest. From Bachata Dominicana, Bachata
+          Sensual, Kizomba, to Urban Kiz, Tarraxo, Konpa and Salsa on 1 ,
+          there’s something for everyone at Freedom Dance.
         </p>
 
         <h3>Inclusive Community</h3>
