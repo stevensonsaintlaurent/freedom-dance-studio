@@ -78,7 +78,9 @@ export default function RegistrationForm({ onSubmit }) {
       setTimes([]);
       setClassesList([]);
       setDays([]);
-      setMessage("No classes available on this day");
+      setMessage(
+        "No classes available on this day  please choose a day we have classes to register",
+      );
       setManegeClass(false);
     } else {
       setMessage("When you register you will receive one hour for free.");
@@ -86,6 +88,18 @@ export default function RegistrationForm({ onSubmit }) {
 
     setSelectedClass(selectedClass);
   }, [selectedClass]);
+
+  // function handleSubmitFordaysNotAvaileble() {
+  //   if (selectedClass === "Sunday" || selectedClass === "Friday") {
+  //     setTimeout(() => {
+  //       setMessage(
+  //         " No classes available on this day please choose a day we have classes to register ",
+  //       );
+  //     }, 10000);
+  //   } else {
+  //     onSubmit;
+  //   }
+  // }
 
   return (
     <form onSubmit={onSubmit}>
