@@ -1,7 +1,7 @@
 import "./Hero.css";
 import dark_arrow from "../../../assets/dark-arrow.png";
 
-const Hero = ({ setPlayState }) => {
+const Hero = ({ setInterviewClips }) => {
   return (
     <div className="hero container">
       <div className="hero-text">
@@ -18,7 +18,7 @@ const Hero = ({ setPlayState }) => {
         <button
           className="btn"
           onClick={() => {
-            setPlayState(true);
+            setInterviewClips(true);
           }}
         >
           Explore more <img src={dark_arrow} alt="" />
