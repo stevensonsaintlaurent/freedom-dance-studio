@@ -100,7 +100,6 @@ export default function RegistrationForm({ onSubmit }) {
   //     onSubmit;
   //   }
   // }
-  console.log(days);
 
   return (
     <form onSubmit={onSubmit}>
