@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import "./Instructor.css";
+import "./instructor.css";
 import desmond from "../../assets/adriana.jpg";
 import steveandksenia from "../../assets/steveandkcenya.jpg";
 import { teachers } from "./data-instructor";
