@@ -1,18 +1,19 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./VideoPlayer.css";
 import video from "../../assets/interviewclip.mp4";
 
-const Interview = ({ interviewClips, setInterviewClips }) => {
-  const player = useRef(null);
+const Interview = ({ interviews, setInterviews }) => {
+  const players = useRef(null);
   const closePlayer = (e) => {
-    if (e.target === player.current) {
-      setInterviewClips(false);
+    e.preventDefault();
+    if (e.target === players.current) {
+      setInterviews(false);
     }
   };
   return (
     <div
-      className={`video-player ${interviewClips ? "" : "hide"}`}
-      ref={player}
+      className={`video-player ${interviews ? "" : "hide"}`}
+      ref={players}
       onClick={closePlayer}
     >
       <video src={video} autoPlay muted controls></video>

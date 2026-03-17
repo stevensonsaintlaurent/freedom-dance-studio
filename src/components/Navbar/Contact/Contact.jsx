@@ -10,7 +10,23 @@ import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faTiktok } from "@fortawesome/free-brands-svg-icons";
 import RegistrationForm from "./RegistrationForm";
 
-const Contact = () => {
+const Contact = ({
+  selectDay,
+  selectedClass,
+  setClassesList,
+  setDays,
+  setInstructor,
+  setLevels,
+  setMessage,
+  setSelectedClass,
+  setTimes,
+  days,
+  times,
+  levels,
+  message,
+  classesList,
+  instructor,
+}) => {
   const [result, setResult] = React.useState("");
   const [hidden, setHidden] = React.useState(false);
 
@@ -112,7 +128,24 @@ const Contact = () => {
         {hidden === false ? (
           <>
             <h1>Register now for your first class free! </h1>
-            <RegistrationForm onSubmit={onSubmit} />
+            <RegistrationForm
+              onSubmit={onSubmit}
+              selectDay={selectDay}
+              selectedClass={selectedClass}
+              setClassesList={setClassesList}
+              setDays={setDays}
+              setInstructor={setInstructor}
+              setLevels={setLevels}
+              setMessage={setMessage}
+              setSelectedClass={setSelectedClass}
+              setTimes={setTimes}
+              days={days}
+              times={times}
+              levels={levels}
+              message={message}
+              classesList={classesList}
+              instructor={instructor}
+            />
           </>
         ) : (
           <span
