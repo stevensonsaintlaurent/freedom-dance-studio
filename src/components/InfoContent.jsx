@@ -18,7 +18,7 @@ export const InfoContent = ({ setPlayState }) => {
         <h2>Music Community</h2>
         <img src={concert} alt="" className="about-img" />
         <h4> Inspiring creativity through the power of music!</h4>
-        <p>! We welcome high school student and adults !</p>
+        <p>!We welcome high school student and adults!</p>
 
         <p>
           Discover the joy of music in a fun, encouraging, and create discover
