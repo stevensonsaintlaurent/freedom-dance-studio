@@ -11,11 +11,12 @@ import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import { InfoContent } from "./components/InfoContent";
 import Interview from "./components/VideoPlayer/Interview";
+import Instructor from "./components/instructor/Instructor";
 
 const App = () => {
   const [playState, setPlayState] = useState(false);
   const [mobileMenu, setMobileMenu] = useState(false);
-  const [interviewClips, setInterviewClips] = useState(false);
+  const [interviews, setInterviews] = useState(false);
   useEffect(() => {
     setTimeout(() => {
       setMobileMenu(false);
@@ -24,7 +25,7 @@ const App = () => {
   return (
     <div>
       <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
-      <Hero setInterviewClips={setInterviewClips} />
+      <Hero setInterviews={setInterviews} />
       <div className="container">
         <About setPlayState={setPlayState} />
         <Title subtitle="Our PROGRAM" title="What We Offer" />
@@ -36,15 +37,14 @@ const App = () => {
         {/* <Title subtitle="TESTIMONIALS" title="What Dancers Say" />
         <Testimonials /> */}
 
+        <Instructor playState={playState} setPlayState={setPlayState} />
+
         <Title subtitle="Contact Us" title="Get in Touch" />
         <Contact />
         <Footer />
       </div>
       <VideoPlayer playState={playState} setPlayState={setPlayState} />
-      <Interview
-        interviewClips={interviewClips}
-        setInterviewClips={setInterviewClips}
-      />
+      <Interview setInterviews={setInterviews} interviews={interviews} />
     </div>
   );
 };

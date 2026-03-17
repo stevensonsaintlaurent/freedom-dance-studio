@@ -54,11 +54,11 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
           </Link>
         </li>
 
-        {/* <li>
-          <Link to="dance" smooth={true} offset={-260} duration={500}>
-            Gallery
+        <li>
+          <Link to="instructors" smooth={true} offset={-260} duration={500}>
+            Instroctors
           </Link>
-        </li> */}
+        </li>
         {/* <li>
           <Link to="testimonials" smooth={true} offset={-260} duration={500}>
             Testimonials

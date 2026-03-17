@@ -1,7 +1,7 @@
 import "./Hero.css";
 import dark_arrow from "../../../assets/dark-arrow.png";
 
-const Hero = ({ setInterviewClips }) => {
+const Hero = ({ setInterviews }) => {
   return (
     <div className="hero container">
       <div className="hero-text">
@@ -18,7 +18,7 @@ const Hero = ({ setInterviewClips }) => {
         <button
           className="btn"
           onClick={() => {
-            setInterviewClips(true);
+            setInterviews(true);
           }}
         >
           Explore more <img src={dark_arrow} alt="" />

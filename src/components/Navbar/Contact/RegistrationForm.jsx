@@ -89,18 +89,6 @@ export default function RegistrationForm({ onSubmit }) {
     setSelectedClass(selectedClass);
   }, [selectedClass]);
 
-  // function handleSubmitFordaysNotAvaileble() {
-  //   if (selectedClass === "Sunday" || selectedClass === "Friday") {
-  //     setTimeout(() => {
-  //       setMessage(
-  //         " No classes available on this day please choose a day we have classes to register ",
-  //       );
-  //     }, 10000);
-  //   } else {
-  //     onSubmit;
-  //   }
-  // }
-
   return (
     <form onSubmit={onSubmit}>
       <label>Your name</label>
