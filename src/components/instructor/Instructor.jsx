@@ -25,7 +25,7 @@ export default function Instructor() {
         {teachers.map((info) => {
           const { id, href, role, image, bio, name, style, discipline, video } =
             info;
-
+          console.log(id);
           return (
             <div
               key={id}
