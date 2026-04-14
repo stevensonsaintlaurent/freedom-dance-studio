@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import play_icon from "../../assets/play-icon.png";
 import BookSchedule from "../Navbar/Contact/BookSchedule";
+import { Link } from "react-scroll";
 
 const SingleInstructor = ({
   teachers,
@@ -84,13 +85,14 @@ const SingleInstructor = ({
                 >
                   <video src={playVideo} autoPlay muted controls></video>
                 </div>
-                <a
+                <Link
+                  to="instructors"
                   type="button"
                   className="btn dark-btn"
                   onClick={() => handleBooking(id)}
                 >
                   Book Now
-                </a>
+                </Link>
               </div>
             );
           })}
