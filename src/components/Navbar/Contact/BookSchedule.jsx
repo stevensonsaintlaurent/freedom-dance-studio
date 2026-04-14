@@ -47,7 +47,7 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
   const [date, setDate] = useState("");
   const [result, setResult] = useState("");
   const { hidden, onSubmit } = useOnSudmit();
-  const [message, setMessage] = useState(true);
+  const [message, setMessage] = useState(false);
 
   useEffect(() => {
     if (onSubmit) {
