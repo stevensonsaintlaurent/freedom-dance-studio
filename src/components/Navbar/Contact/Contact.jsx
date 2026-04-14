@@ -9,60 +9,10 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faTiktok } from "@fortawesome/free-brands-svg-icons";
 import RegistrationForm from "./RegistrationForm";
+import useOnSudmit from "../../../hooks/useOnSudmit";
 
-const Contact = ({
-  selectDay,
-  selectedClass,
-  setClassesList,
-  setDays,
-  setInstructor,
-  setLevels,
-  setMessage,
-  setSelectedClass,
-  setTimes,
-  days,
-  times,
-  levels,
-  message,
-  classesList,
-  instructor,
-}) => {
-  const [result, setResult] = React.useState("");
-  const [hidden, setHidden] = React.useState(false);
-
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    setResult("Registering....");
-    setHidden(true);
-    const formData = new FormData(event.target);
-
-    formData.append("access_key", "3148a73d-e80f-42d9-a521-d4c3192cb2c7");
-
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setResult(
-        "Thank you for registering! We have received your submission. If you have any questions or need assistance, you may contact us directly at freedomdancelasvegas@gmail.com or call/text us at 725-724-0962 for assistance",
-      );
-      event.target.reset();
-    } else {
-      setResult(data.message);
-    }
-  };
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setResult("");
-      setHidden(false);
-    }, 10000);
-
-    return () => clearTimeout(timer);
-  }, [result]);
+const Contact = () => {
+  const { result, hidden, onSubmit } = useOnSudmit();
 
   return (
     <div className="contact">
@@ -128,24 +78,7 @@ const Contact = ({
         {hidden === false ? (
           <>
             <h1>Register now for your first class free! </h1>
-            <RegistrationForm
-              onSubmit={onSubmit}
-              selectDay={selectDay}
-              selectedClass={selectedClass}
-              setClassesList={setClassesList}
-              setDays={setDays}
-              setInstructor={setInstructor}
-              setLevels={setLevels}
-              setMessage={setMessage}
-              setSelectedClass={setSelectedClass}
-              setTimes={setTimes}
-              days={days}
-              times={times}
-              levels={levels}
-              message={message}
-              classesList={classesList}
-              instructor={instructor}
-            />
+            <RegistrationForm onSubmit={onSubmit} />
           </>
         ) : (
           <span
