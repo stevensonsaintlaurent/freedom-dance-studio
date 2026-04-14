@@ -56,7 +56,7 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
 
     setTimeout(() => {
       setHidden(true);
-    }, 10000);
+    }, 100000);
   }, []);
 
   const formStyle = {
