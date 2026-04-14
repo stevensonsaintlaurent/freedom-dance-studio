@@ -52,6 +52,17 @@ a {
   color: #fff;
 }
 
+.light-btn {
+  background: #fff;
+  color: #212121;
+  text-transform: uppercase;
+}
+
+.light-btn:hover {
+  background: rgb(69, 12, 12);
+  color: #fff;
+}
+
 /* ============ media query ============== */
 @media (max-width: 1200px) {
   .container {

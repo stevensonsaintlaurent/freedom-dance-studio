@@ -15,7 +15,11 @@
 .program {
   flex-basis: 31%;
   position: relative;
-  background-color: blue;
+  /* background-color: blue; */
+}
+
+.hidden {
+  display: none;
 }
 
 .caption {

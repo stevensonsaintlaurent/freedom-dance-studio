@@ -11,6 +11,7 @@ import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
 import { InfoContent } from "./components/InfoContent";
 import Interview from "./components/VideoPlayer/Interview";
+import MindbodySchedulesWidget from "./schedule/Schedules";
 import Instructor from "./components/instructor/Instructor";
 
 const App = () => {
@@ -26,7 +27,12 @@ const App = () => {
     <div>
       <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
       <Hero setInterviews={setInterviews} />
+      <Title subtitle="Book through MindBody" title="Schedule a Class" />
+
+      <MindbodySchedulesWidget />
+
       <div className="container">
+        <Instructor playState={playState} setPlayState={setPlayState} />
         <About setPlayState={setPlayState} />
         <Title subtitle="Our PROGRAM" title="What We Offer" />
         <InfoContent />
@@ -36,8 +42,6 @@ const App = () => {
         <Dance /> */}
         {/* <Title subtitle="TESTIMONIALS" title="What Dancers Say" />
         <Testimonials /> */}
-
-        <Instructor playState={playState} setPlayState={setPlayState} />
 
         <Title subtitle="Contact Us" title="Get in Touch" />
         <Contact />
