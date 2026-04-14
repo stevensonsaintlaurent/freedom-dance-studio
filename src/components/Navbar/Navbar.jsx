@@ -43,6 +43,12 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
         </li>
 
         <li>
+          <Link to="instructors" smooth={true} offset={-10} duration={500}>
+            Instructors
+          </Link>
+        </li>
+
+        <li>
           <Link to="about" smooth={true} offset={-210} duration={500}>
             About
           </Link>
@@ -54,11 +60,6 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
           </Link>
         </li>
 
-        <li>
-          <Link to="instructors" smooth={true} offset={-260} duration={500}>
-            Instructors
-          </Link>
-        </li>
         {/* <li>
           <Link to="testimonials" smooth={true} offset={-260} duration={500}>
             Testimonials
