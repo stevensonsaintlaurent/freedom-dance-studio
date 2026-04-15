@@ -190,8 +190,17 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
       ) : (
         <span
           style={{
-            fontSize: "28px",
+            fontSize: "38px",
             fontWidth: "inherit",
+            backgroundColor: "GrayText",
+            width: "100%",
+            height: "50vh",
+            borderRadius: "100px",
+            textAlign: "center",
+            display: "flex",
+            alignItems: "center",
+            fontFamily: "monospace",
+            color: "white",
           }}
         >
           {result} instructor {name}
