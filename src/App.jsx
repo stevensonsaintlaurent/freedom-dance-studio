@@ -26,6 +26,7 @@ const App = () => {
   return (
     <div>
       <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
+
       <Hero setInterviews={setInterviews} />
       <Title subtitle="Book through MindBody" title="Schedule a Class" />
 
@@ -38,10 +39,6 @@ const App = () => {
         <InfoContent />
 
         <Programs />
-        {/* <Title subtitle="Gallery" title="Dance Photos" />
-        <Dance /> */}
-        {/* <Title subtitle="TESTIMONIALS" title="What Dancers Say" />
-        <Testimonials /> */}
 
         <Title subtitle="Contact Us" title="Get in Touch" />
         <Contact />
