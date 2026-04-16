@@ -31,11 +31,11 @@ const BookEvent = ({ setShow, result, setResult }) => {
   function calculCost(room) {
     let totalPrices = 0;
     if (room === "main room" && hour > 0) {
-      totalPrices = hour * 20;
+      totalPrices = hour * 25;
     } else if (room === "kizomba room" && hour > 0) {
       totalPrices = hour * 15;
     } else if (room === "both" && hour > 0) {
-      totalPrices = hour * 35;
+      totalPrices = hour * 50;
     }
     setCost(totalPrices);
   }
@@ -212,7 +212,7 @@ const BookEvent = ({ setShow, result, setResult }) => {
           </select>
 
           <label htmlFor="cost" style={labelStyle}>
-            Cost $
+            Cost Idea $
           </label>
           <input
             style={inputStyle}
