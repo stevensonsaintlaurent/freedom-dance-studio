@@ -1,11 +1,37 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Testimonials.css";
 import next_icon from "../../../assets/next-icon.png";
 import back_icon from "../../../assets/back-icon.png";
 import TestiSlider from "./TestiSlider";
 import { testimonials } from "../Contact/data";
+import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 const Testimonials = () => {
+  const [people, setPeople] = useState(testimonials);
+  const [currentPerson, setCurrentPerson] = useState(0);
+  console.log(people);
+
+  const prevSlide = () => {
+    setCurrentPerson((oldPerson) => {
+      const result = (oldPerson - 1 + people.length) % people.length;
+      return result;
+    });
+  };
+
+  const nextSlide = () => {
+    setCurrentPerson((oldPerson) => {
+      const result = (oldPerson + 1) % people.length;
+      return result;
+    });
+  };
+
+  useEffect(() => {
+    let slider = setInterval(() => {
+      nextSlide();
+    }, 2000);
+    return () => clearInterval(slider);
+  }, [currentPerson]);
+
   const slider = useRef();
   let tx = 0;
 
@@ -26,13 +52,12 @@ const Testimonials = () => {
   };
   return (
     <div className="slider-container">
-      {/* <img src={next_icon} alt="" className="next-btn" onClick={slideForward} />
-      <img
-        src={back_icon}
-        alt=""
-        className="back-btn"
-        onClick={slideBackward}
-      /> */}
+      <button type="button" className="prev" onClick={prevSlide}>
+        <FiChevronLeft />
+      </button>
+      <button className="next" onClick={nextSlide}>
+        <FiChevronRight />
+      </button>
       <TestiSlider />;
     </div>
   );
