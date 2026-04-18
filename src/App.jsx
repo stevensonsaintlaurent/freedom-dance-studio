@@ -39,6 +39,8 @@ const App = () => {
         <InfoContent />
 
         <Programs />
+
+        <Title subtitle="What Our Dancers Say" title="Testimonials" />
         <Testimonials />
 
         <Title subtitle="Contact Us" title="Get in Touch" />
