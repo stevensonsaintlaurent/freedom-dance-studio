@@ -12,9 +12,11 @@ const TestiSlider = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
   };
   return (
-    <section className="slick-container">
+    <section className="slide  ">
       <Slider {...settings}>
         {testimonials.map((person) => {
           const { id, name, image, text } = person;

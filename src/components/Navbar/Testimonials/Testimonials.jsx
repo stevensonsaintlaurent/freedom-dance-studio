@@ -51,14 +51,16 @@ const Testimonials = () => {
     }
   };
   return (
-    <div className="slider-container">
-      <button type="button" className="prev" onClick={prevSlide}>
+    <div className="slider-container ">
+      {/* <button type="button" className="prev" onClick={prevSlide}>
         <FiChevronLeft />
       </button>
       <button className="next" onClick={nextSlide}>
         <FiChevronRight />
-      </button>
-      <TestiSlider />;
+      </button> */}
+      <div className="slide">
+        <TestiSlider />
+      </div>
     </div>
   );
 };
