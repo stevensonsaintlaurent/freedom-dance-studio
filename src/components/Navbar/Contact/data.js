@@ -2,9 +2,9 @@ import gabriela from "../../../assets/user-1.jpg";
 import zagir from "../../../assets/user-2.jpg";
 import allyson from "../../../assets/ally3.jpg";
 import maribel from "../../../assets/maribel.jpg";
-import user_5 from "../../../assets/adriana.jpg";
-import user_6 from "../../../assets/kanani.jpg/";
-import user_7 from "../../../assets/jesus.jpg";
+import adriana from "../../../assets/adriana.jpg";
+import kanani from "../../../assets/kanani.jpg/";
+import jesus from "../../../assets/jesus.jpg";
 
 export const dataRooms = [
   {
@@ -60,7 +60,25 @@ const testimonials = [
   {
     id: 4,
     name: "Maribel Magana",
-    text: "   I started taking Bachata and Kizomba classes with Stevenson at Freedom Dance earlier this year. Stevenson is a very skilled and talented dancer who makes it his goal to encourage and teach his students to improve their dance skills while boosting their confidence. Not only is he a great teacher but his classes are also really fun. I highly recommend anyone who has a passion for dancing to go take his classes. You&apos;ll be learning from the best!",
+    text: "I started taking Bachata and Kizomba classes with Stevenson at Freedom Dance earlier this year. Stevenson is a very skilled and talented dancer who makes it his goal to encourage and teach his students to improve their dance skills while boosting their confidence. Not only is he a great teacher but his classes are also really fun. I highly recommend anyone who has a passion for dancing to go take his classes. You&apos;ll be learning from the best!",
     image: { maribel },
+  },
+  {
+    id: 4,
+    name: "Adriana Luna Blake",
+    text: "I love attending Freedom Dance Company because the classes are fun. They focus on correcting and perfectioning the techniques, and Stevenson is very patient and professional with his students. They give each student the right amount of attention  and encouragement. I would highly recommend this dance studio.",
+    image: { adriana },
+  },
+  {
+    id: 5,
+    name: "Kanani Jane",
+    text: " Freedom Dance is actually where I fell in love with Kizomba. 💜 Just walked into Stevenson&apos;s class, knowing nothing about Kizomba, and BAMM!! Melted, lol. Later I took a Bachata Bootcamp and learned from a dancer from Romania. Such a beautiful dancer with so much skill and experience. I was blessed with being able to learn from her as well as Stevenson.",
+    image: { kanani },
+  },
+  {
+    id: 6,
+    name: "Jesús Silva",
+    text: "               Freedom dance is one of the best dance studio in Vegas instructor Stevenson is a very nice and funny teacher He knows the dances he is teaching and puts all the enthusiasm to each class so come and join the team you will not regret it Personally I am very happy because there is a very good vibe with all the students come and practice Bachata and Kizomba.",
+    image: { jesus },
   },
 ];
