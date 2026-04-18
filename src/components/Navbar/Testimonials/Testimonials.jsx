@@ -58,9 +58,8 @@ const Testimonials = () => {
       <button className="next" onClick={nextSlide}>
         <FiChevronRight />
       </button> */}
-      <div className="slide">
-        <TestiSlider />
-      </div>
+
+      <TestiSlider />
     </div>
   );
 };
