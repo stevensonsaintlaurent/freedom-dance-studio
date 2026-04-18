@@ -5,7 +5,7 @@ import Programs from "./components/Navbar/Programs/Programs";
 import Title from "./components/Navbar/Title/Title";
 import About from "./components/Navbar/About/About";
 // import Dance from "./components/Navbar/Dance/Dance";
-// import Testimonials from "./components/Navbar/Testimonials/Testimonials";
+import Testimonials from "./components/Navbar/Testimonials/Testimonials";
 import Contact from "./components/Navbar/Contact/Contact";
 import Footer from "./components/Footer/Footer";
 import VideoPlayer from "./components/VideoPlayer/VideoPlayer";
@@ -39,8 +39,10 @@ const App = () => {
         <InfoContent />
 
         <Programs />
+        <Testimonials />
 
         <Title subtitle="Contact Us" title="Get in Touch" />
+
         <Contact />
         <Footer />
       </div>
