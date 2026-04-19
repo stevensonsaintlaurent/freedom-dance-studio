@@ -65,3 +65,30 @@ export const teachers = [
     level: "beginner",
   },
 ];
+
+export const discipline = [
+  {
+    id: 1,
+    title: "Bachata",
+    description:
+      " We offer vibrant and engaging Bachata classes for all skill levels. Our experienced instructors guide you through the sensual rhythms and smooth movements of Bachata, focusing on connection, musicality, and technique. Whether you’re a complete beginner or looking to refine your style, our supportive community and welcoming atmosphere will help you gain confidence on the dance floor. Join us to experience the joy, passion,and freedom of Bachata!",
+  },
+  {
+    id: 2,
+    title: "Salsa",
+    description:
+      "We invite you to experience the energy and excitement of Salsa! Our Salsa classes are designed for dancers of all levels, from absolute beginners to seasoned enthusiasts. Learn fundamental steps, partner work, and dynamic turn patterns in a fun, supportive environment led by passionate instructors. At our studio, you’ll discover the infectious rhythms, vibrant culture, and social connection that make Salsa one of the world’s most popular dances.",
+  },
+  {
+    id: 3,
+    title: "Kizomba",
+    description:
+      "Kizomba is a popular dance originating from Angola. This beautiful partner dance combines smooth, flowing movements with rhythmic music, creating a unique and engaging experience for dancers of all levels. Our skilled instructors will guide you through the basic steps and techniques, helping you build confidence and develop your style. Join us for classes, workshops, and social events, where you can connect with others who share your passion for dance. Come dance with us and experience the joy of Kizomba!",
+  },
+  {
+    id: 4,
+    title: "Konpa",
+    description:
+      " We proudly offer Konpa classes, celebrating the vibrant rhythms and rich culture of this beloved Haitian partner dance. Our instructors will introduce you to the smooth steps, gentle hip movements, and unique  musicality that define Konpa. Whether you’re just starting out or looking to refine your style, our supportive environment makes it easy to connect with others and enjoy the dance. Discover the warmth, joy, and community of Konpa at Freedom Dance Studio—where every class is a celebration of music and movement",
+  },
+];
