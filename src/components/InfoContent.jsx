@@ -7,13 +7,19 @@ import Party_3 from "../assets/sbkParty/FJ8A6605.jpg";
 import concert from "../assets/concert-freedom-jazz/P1991000.jpg";
 import concert_1 from "../assets/concert-freedom-jazz/P1990994.jpg";
 import concert_2 from "../assets/concert-freedom-jazz/P1990974.jpg";
-import { Bachata } from "./Bachata";
+import { StyleDance } from "./StyleDance";
+import { discipline } from "./instructor/data-instructor";
+import { useState } from "react";
 
-export const InfoContent = ({ setPlayState }) => {
+export const InfoContent = () => {
+  const [disc, setDisc] = useState(discipline);
+
   return (
     <div className="about info-content">
       <div className="about-right  info-dance">
-        <Bachata />
+        {disc.map((item) => {
+          return <StyleDance key={item.id} {...item} />;
+        })}
 
         <h2>Music Community</h2>
         <img src={concert} alt="" className="about-img" />
