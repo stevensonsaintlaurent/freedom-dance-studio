@@ -4,6 +4,7 @@ import logo from "../../assets/logo.jpg";
 import { Link } from "react-scroll";
 import menu_icon from "../../assets/menu-icon.png";
 import { IoCloseSharp } from "react-icons/io5";
+import Schedule from "./Programs/Schedule";
 
 const Navbar = ({ setMobileMenu, mobileMenu }) => {
   const [sticky, setSticky] = useState(false);
@@ -43,6 +44,12 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
         </li>
 
         <li>
+          <Link to="schedule" smooth={true} offset={0} duration={500}>
+            Schedule
+          </Link>
+        </li>
+
+        <li>
           <Link to="instructors" smooth={true} offset={-10} duration={500}>
             Instructors
           </Link>
@@ -60,11 +67,11 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
           </Link>
         </li>
 
-        {/* <li>
+        <li>
           <Link to="testimonials" smooth={true} offset={-260} duration={500}>
             Testimonials
           </Link>
-        </li> */}
+        </li>
         <li>
           <Link
             to="contact"
