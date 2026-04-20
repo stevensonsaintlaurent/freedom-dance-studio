@@ -51,7 +51,7 @@ const Testimonials = () => {
     }
   };
   return (
-    <div className="slider-container ">
+    <div className="slider-container " id="testimonials">
       {/* <button type="button" className="prev" onClick={prevSlide}>
         <FiChevronLeft />
       </button>

@@ -56,7 +56,7 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
   }, [onSubmit]);
   setHidden(false);
 
-  const formStyle = {
+  const formStyles = {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
@@ -66,6 +66,20 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
     padding: "20px",
     borderRadius: "5px",
     backgroundColor: "#f9f9f9",
+    alignItems: "center",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+  };
+
+  const formStyle = {
+    display: "flex",
+    flexDirection: "column",
+    gap: "10px",
+    width: "100%",
+    maxWidth: "400px",
+    margin: "0 auto",
+    padding: "20px",
+    borderRadius: "5px",
+    backgroundColor: "#e01f1f",
     alignItems: "center",
     boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
   };
@@ -214,7 +228,7 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
         <span
           style={{
             fontSize: "38px",
-            fontWidth: "inherit",
+            fontWeight: "inherit",
             backgroundColor: "GrayText",
             width: "100%",
             height: "50vh",
@@ -225,7 +239,7 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
             fontFamily: "Arial, sans-serif",
             color: "white",
             textAlignLast: "center",
-            padding: "   120px",
+            padding: "120px",
           }}
         >
           {result} instructor {name}

@@ -18,6 +18,17 @@ const SingleInstructor = ({
 }) => {
   const [bookingName, setBookingName] = useState();
 
+  const linkStyle = {
+    textDecoration: "none",
+    padding: "10px 20px",
+    borderRadius: "5px",
+    // backgroundColor: "green",
+    color: "white",
+    fontSize: "16px",
+    fontWeight: "bold",
+    cursor: "pointer",
+  };
+
   return (
     <>
       {hidden ? (
@@ -89,6 +100,7 @@ const SingleInstructor = ({
                   to="instructors"
                   type="button"
                   className="btn dark-btn"
+                  style={linkStyle}
                   onClick={() => handleBooking(id)}
                 >
                   Book Now

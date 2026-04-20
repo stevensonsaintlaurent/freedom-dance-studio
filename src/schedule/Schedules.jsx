@@ -17,6 +17,7 @@ const MindbodySchedulesWidget = () => {
 
   return (
     <div
+      id="schedule"
       ref={widgetRef}
       className="mindbody-widget"
       data-widget-type="Schedules"
