@@ -53,17 +53,21 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
     if (onSubmit) {
       setResult("Thank you for booking your class with");
     }
-
-    setTimeout(() => {
-      setHidden(true);
-    }, 100000);
-  }, []);
+  }, [onSubmit]);
+  setHidden(false);
 
   const formStyle = {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
     width: "100%",
+    maxWidth: "400px",
+    margin: "0 auto",
+    padding: "20px",
+    borderRadius: "5px",
+    backgroundColor: "#f9f9f9",
+    alignItems: "center",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
   };
 
   const labelStyle = {
@@ -97,6 +101,8 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
     borderRadius: "5px",
     border: "1px solid #ccc",
     fontSize: "16px",
+    backgroundColor: "green",
+    color: "white",
   };
 
   const selectOptionsStyle = {
@@ -104,6 +110,15 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
     borderRadius: "5px",
     border: "1px solid #ccc",
     fontSize: "16px",
+  };
+
+  const buttonCancelStyle = {
+    padding: "10px",
+    borderRadius: "5px",
+    border: "1px solid #ccc",
+    fontSize: "16px",
+    backgroundColor: "red",
+    color: "white",
   };
 
   // ================ handle after form being submite =====================
@@ -186,6 +201,14 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
           <button type="submit" style={inputStyleSubmit}>
             Book Schedule
           </button>
+
+          <button
+            style={buttonCancelStyle}
+            type="button"
+            onClick={() => setHidden(true)}
+          >
+            Reset
+          </button>
         </form>
       ) : (
         <span
@@ -199,8 +222,10 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
             textAlign: "center",
             display: "flex",
             alignItems: "center",
-            fontFamily: "monospace",
+            fontFamily: "Arial, sans-serif",
             color: "white",
+            textAlignLast: "center",
+            padding: "   120px",
           }}
         >
           {result} instructor {name}
