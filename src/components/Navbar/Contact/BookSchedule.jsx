@@ -135,6 +135,7 @@ const BookSchedule = ({ bookingName: bookingTeacher, setHidden }) => {
     color: "white",
   };
 
+  console.log(bookingTeacher);
   // ================ handle after form being submite =====================
 
   return (
