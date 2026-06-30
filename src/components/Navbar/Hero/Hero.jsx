@@ -5,11 +5,11 @@ const Hero = ({ setInterviews }) => {
   return (
     <div className="hero container">
       <div className="hero-text">
-        <h1>WELCOME TO OUR DANCE STUDIO</h1>
+        <h1>WELCOME TO OUR COMMUNITY</h1>
 
         <p>
           We’re excited to have you join our community of artists and
-          performers! Our studio offers a variety of dance classes and music
+          performers! Our community offers a variety of dance classes and music
           lessons for all ages and skill levels. We also host events and
           workshops to celebrate creativity and connection. Thank you for being
           here, and we can’t wait to create and perform together!
