@@ -6,6 +6,8 @@ import menu_icon from "../../assets/menu-icon.png";
 import { IoCloseSharp } from "react-icons/io5";
 import Schedule from "./Programs/Schedule";
 
+
+
 const Navbar = ({ setMobileMenu, mobileMenu }) => {
   const [sticky, setSticky] = useState(false);
 

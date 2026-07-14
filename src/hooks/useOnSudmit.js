@@ -11,7 +11,7 @@ const useOnSudmit = () => {
     setHidden(true);
     const formData = new FormData(event.target);
 
-    formData.append("access_key", "3148a73d-e80f-42d9-a521-d4c3192cb2c7");
+    formData.append("access_key", import.meta.env.VITE_ACCESS_KEY);
 
     const response = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
