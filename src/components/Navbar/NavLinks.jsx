@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const links = [
   { id: 1, url: "/", text: "home" },
   { id: 4, url: "about", text: "about" },
-  { id: 2, url: "schedule", text: "schedule" },
+  // { id: 2, url: "schedule", text: "schedule" },
   // { id: 3, url: "instructor", text: "instructors" },
   { id: 5, url: "contact", text: "contact" },
 ];
