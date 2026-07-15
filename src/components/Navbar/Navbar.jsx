@@ -39,54 +39,6 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
 
       <NavLinks mobileMenu={mobileMenu} />
 
-      {/* <ul className={mobileMenu ? "" : "hide-mobile-menu"}>
-        <li>
-          <Link to="hero" smooth={true} offset={0} duration={500}>
-            Home
-          </Link>
-        </li>
-
-        <li>
-          <Link to="schedule" smooth={true} offset={0} duration={500}>
-            Schedule
-          </Link>
-        </li>
-
-        <li>
-          <Link to="instructors" smooth={true} offset={-10} duration={500}>
-            Instructors
-          </Link>
-        </li>
-
-        <li>
-          <Link to="about" smooth={true} offset={-210} duration={500}>
-            About
-          </Link>
-        </li>
-
-        <li>
-          <Link to="program" smooth={true} offset={-150} duration={500}>
-            Info
-          </Link>
-        </li>
-
-        <li>
-          <Link to="testimonials" smooth={true} offset={-260} duration={500}>
-            Testimonials
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="contact"
-            smooth={true}
-            offset={-260}
-            duration={500}
-            className="btn"
-          >
-            Contact us
-          </Link>
-        </li>
-      </ul> */}
       {mobileMenu ? (
         <IoCloseSharp className="close-icon" onClick={toggleMenu} />
       ) : (

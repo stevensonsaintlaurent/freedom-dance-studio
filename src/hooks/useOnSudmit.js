@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const useOnSudmit = () => {
   const [result, setResult] = React.useState("");
@@ -13,27 +14,48 @@ const useOnSudmit = () => {
 
     formData.append("access_key", import.meta.env.VITE_ACCESS_KEY);
 
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      body: formData,
-    });
+    // const response = await fetch("https://api.web3forms.com/submit", {
+    //   method: "POST",
+    //   body: formData,
+    // });
 
-    const data = await response.json();
+    // const data = await response.json();
 
-    if (data.success) {
-      setResult(
-        "Thank you for registering! We have received your submission. If you have any questions or need assistance, you may contact us directly at freedomdancelasvegas@gmail.com or call/text us at 725-724-0962 for assistance",
-      );
-      event.target.reset();
-    } else {
-      setResult(data.message);
+    // if (data.success) {
+    //   setResult(
+    //     "Thank you for registering! We have received your submission. If you have any questions or need assistance, you may contact us directly at freedomdancelasvegas@gmail.com or call/text us at 725-724-0962 for assistance",
+    //   );
+    //   event.target.reset();
+    // } else {
+    //   setResult(data.message);
+    // }
+
+    async function submitForm() {
+      try {
+        const response = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: formData,
+        });
+        const data = await response.json();
+        if (data.success) {
+          toast.success(
+            "Thank you for registering! We have received your submission. If you have any questions or need assistance, you may contact us directly at freedomdancelasvegas@gmail.com or call/text us at 725-724-0962 for assistance",
+          );
+          event.target.reset();
+        } else {
+          toast.error(data.message);
+        }
+      } catch (err) {
+        toast.error("Something went wrong. Please try again later.");
+      }
     }
+    submitForm();
   };
   useEffect(() => {
     const timer = setTimeout(() => {
       setResult("");
       setHidden(false);
-    }, 10000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, [result]);
