@@ -9,7 +9,7 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faTiktok } from "@fortawesome/free-brands-svg-icons";
 import RegistrationForm from "./RegistrationForm";
-import useOnSudmit from "../../../hooks/useOnSudmit";
+import useOnSudmit from "../../hooks/useOnSudmit";
 
 const Contact = () => {
   const { result, hidden, onSubmit } = useOnSudmit();
