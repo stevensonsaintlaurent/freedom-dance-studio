@@ -33,7 +33,7 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
           <img src={logo} alt="" className="logo" />
         </div>
         <div>
-          <h1>Freedom Dance Studio</h1>
+          <h1>Freedom Studio</h1>
         </div>
       </div>
 

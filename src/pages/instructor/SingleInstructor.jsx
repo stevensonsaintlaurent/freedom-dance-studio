@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import play_icon from "../../assets/play-icon.png";
-import BookSchedule from "../Navbar/Contact/BookSchedule";
-import { Link } from "react-scroll";
+import BookSchedule from "./../Contact/BookSchedule";
+import { Link } from "react-router-dom";
 
 const SingleInstructor = ({
   teachers,
@@ -97,7 +97,7 @@ const SingleInstructor = ({
                   <video src={playVideo} autoPlay muted controls></video>
                 </div>
                 <Link
-                  to="instructors"
+                  to="instructor"
                   type="button"
                   className="btn dark-btn"
                   style={linkStyle}

@@ -1,5 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HomeLayout, Landing } from "./pages";
+import { HomeLayout, Landing, About, Schedule, Contact } from "./pages";
 
 const router = createBrowserRouter([
   {
@@ -10,6 +10,19 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "schedule",
+        element: <Schedule />,
+      },
+
+      {
+        path: "contact",
+        element: <Contact />,
       },
     ],
   },

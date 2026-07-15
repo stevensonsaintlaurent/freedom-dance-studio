@@ -1,8 +1,10 @@
 import React, { useRef, useState } from "react";
 import "./instructor.css";
+// import { teachers } from "../instructor/data-instructor";
+// import BookSchedule from "../Contact/BookSchedule";
+// import SingleInstructor from "./SingleInstructor";
 import { teachers } from "./data-instructor";
-import BookSchedule from "../Navbar/Contact/BookSchedule";
-import SingleInstructor from "./SingleInstructor";
+import SingleInstructor from "../instructor/SingleInstructor";
 
 export default function Instructor() {
   const [showFullBio, setShowFullBio] = useState();
