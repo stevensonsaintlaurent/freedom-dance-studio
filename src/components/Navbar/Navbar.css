@@ -82,8 +82,8 @@ nav ul li {
 
   .logo-title h1 {
     background-color: black;
-    width: 200px;
-    visibility: hidden;
+    width: 400px;
+    /* visibility: hidden; */
   }
 }
 
