@@ -1,12 +1,24 @@
+import { Link } from "react-scroll";
+
 const links = [
   { id: 1, url: "/", text: "home" },
-  { id: 2, url: "about", text: "about" },
-  { id: 3, url: "products", text: "products" },
-  { id: 4, url: "cart", text: "cart" },
-  { id: 5, url: "checkout", text: "checkout" },
-  { id: 6, url: "orders", text: "orders" },
+  { id: 2, url: "schedule", text: "schedule" },
+  { id: 3, url: "instructors", text: "instructors" },
+  { id: 4, url: "about", text: "about" },
+  { id: 5, url: "info", text: "info" },
 ];
 
-export const NavLinks=()=>{
-    return <h3> nav</h3>
-}
+export const NavLinks = ({ mobileMenu }) => {
+  return (
+    <ul className={mobileMenu ? "" : "hide-mobile-menu"}>
+      {links.map((link) => {
+        const { id, url, text } = link;
+        return (
+          <li key={id}>
+            <Link to={url}>{text}</Link>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};

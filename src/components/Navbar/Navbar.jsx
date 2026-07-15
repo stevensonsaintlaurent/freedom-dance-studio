@@ -5,8 +5,7 @@ import { Link } from "react-scroll";
 import menu_icon from "../../assets/menu-icon.png";
 import { IoCloseSharp } from "react-icons/io5";
 import Schedule from "./Programs/Schedule";
-
-
+import { NavLinks } from "./NavLinks";
 
 const Navbar = ({ setMobileMenu, mobileMenu }) => {
   const [sticky, setSticky] = useState(false);
@@ -38,7 +37,9 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
         </div>
       </div>
 
-      <ul className={mobileMenu ? "" : "hide-mobile-menu"}>
+      <NavLinks mobileMenu={mobileMenu} />
+
+      {/* <ul className={mobileMenu ? "" : "hide-mobile-menu"}>
         <li>
           <Link to="hero" smooth={true} offset={0} duration={500}>
             Home
@@ -85,7 +86,7 @@ const Navbar = ({ setMobileMenu, mobileMenu }) => {
             Contact us
           </Link>
         </li>
-      </ul>
+      </ul> */}
       {mobileMenu ? (
         <IoCloseSharp className="close-icon" onClick={toggleMenu} />
       ) : (
