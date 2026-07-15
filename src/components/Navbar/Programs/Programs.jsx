@@ -15,8 +15,6 @@ const Programs = () => {
   const { hidden } = useOnSudmit();
   const [result, setResult] = useState("");
 
-  console.log("hidden", hidden);
-
   useEffect(() => {
     return () => {
       setPrograms(true);

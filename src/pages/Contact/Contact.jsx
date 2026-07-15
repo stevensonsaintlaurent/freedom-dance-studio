@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import "./Contact.css";
-import msg_icon from "../../../assets/msg-icon.png";
-import mail_icon from "../../../assets/mail-icon.png";
-import location_icon from "../../../assets/location-icon.png";
-import phone_icon from "../../../assets/phone-icon.png";
+import msg_icon from "../../assets/msg-icon.png";
+import mail_icon from "../../assets/mail-icon.png";
+import location_icon from "../../assets/location-icon.png";
+import phone_icon from "../../assets/phone-icon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
