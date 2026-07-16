@@ -1,9 +1,9 @@
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-// import NavLinks from "./NavLinks";
 import { useEffect, useState } from "react";
 import { NavLinks } from "./NavLinks";
+import logo from "../assets/logo.jpg";
 const themes = {
   winter: "winter",
   dracula: "dracula",
@@ -35,9 +35,11 @@ const Navbar = () => {
           {/* TITLE */}
           <NavLink
             to="/"
-            className="hidden lg:flex btn btn-primary text-3xl items-center"
+            className="hidden lg:flex btn btn-primary text-3xl items-center rounded-2xl w-1
+            h-3"
           >
-            C
+            <img src={logo} alt="" className="" />
+            <h1 className="@max-xs:hidden">Freedom Studio</h1>
           </NavLink>
 
           {/* DROPDOWN */}
@@ -72,16 +74,6 @@ const Navbar = () => {
             {/* moon icon */}
             <BsMoonFill className="swap-off h-4 w-4" />
           </label>
-          {/* CART LINK */}
-
-          <NavLink to="/cart" className="btn btn-ghost btn-circle btn-md ml-4">
-            {/* <div className="indicator">
-              <BsCart3 className="h-6 w-6" />
-              <span className="badge badge-sm badge-primary indicator-item">
-                {numItemsInCart}
-              </span>
-            </div> */}
-          </NavLink>
         </div>
       </div>
     </nav>
