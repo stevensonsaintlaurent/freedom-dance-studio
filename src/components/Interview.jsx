@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import "./VideoPlayer.css";
+
 import video from "../../assets/interviewclip.mp4";
 
 const Interview = ({ interviews, setInterviews }) => {

@@ -1,8 +1,7 @@
-import "./About.css";
-import about_img from "../../assets/first-clip.jpg";
-import ClipStev from "../../assets/clipSteve.jpg";
-import ClipJesus from "../../assets/clipJesus.jpg";
-import play_icon from "../../assets/play-icon.png";
+import about_img from "../assets/first-clip.jpg";
+import ClipStev from "../assets/clipSteve.jpg";
+import ClipJesus from "../assets/clipJesus.jpg";
+import play_icon from "../assets/play-icon.png";
 
 const About = ({ setPlayState }) => {
   return (

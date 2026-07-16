@@ -1,4 +1,3 @@
-import "./Program.css";
 import group from "../../../assets/studios-spt.jpg";
 import prive from "../../../assets/schedules-spt.jpg";
 import social from "../../../assets/prices2.jpg";

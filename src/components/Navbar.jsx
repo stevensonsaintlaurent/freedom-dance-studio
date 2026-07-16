@@ -1,9 +1,9 @@
 import { BsCart3, BsMoonFill, BsSunFill } from "react-icons/bs";
 import { FaBarsStaggered } from "react-icons/fa6";
 import { NavLink } from "react-router-dom";
-import NavLinks from "./NavLinks";
+// import NavLinks from "./NavLinks";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { NavLinks } from "./NavLinks";
 const themes = {
   winter: "winter",
   dracula: "dracula",
@@ -27,8 +27,6 @@ const Navbar = () => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
-
-  const numItemsInCart = useSelector((state) => state.cartState.numItemsInCart);
 
   return (
     <nav className="bg-base-200">
