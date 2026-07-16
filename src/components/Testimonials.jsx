@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./Testimonials.css";
+
 import next_icon from "../../../assets/next-icon.png";
 import back_icon from "../../../assets/back-icon.png";
 import TestiSlider from "./TestiSlider";

@@ -1,5 +1,4 @@
 import React from "react";
-import "./Program.css";
 import group from "../../../assets/studios-spt.jpg";
 import BookEvent from "../Contact/BookEvent";
 import { faLess } from "@fortawesome/free-brands-svg-icons";

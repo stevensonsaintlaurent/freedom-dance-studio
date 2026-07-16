@@ -1,5 +1,4 @@
 import React from "react";
-import "./Program.css";
 import social from "../../../assets/prices2.jpg";
 export default function PriceList() {
   return (

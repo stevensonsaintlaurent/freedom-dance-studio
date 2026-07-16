@@ -1,4 +1,3 @@
-import "./Dance.css";
 import gallery_1 from "../../../assets/poster.jpg";
 import gallery_2 from "../../../assets/leaders.jpg";
 import gallery_3 from "../../../assets/group.jpg";
