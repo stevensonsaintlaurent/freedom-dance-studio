@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import white_arrow from "../../assets/white-arrow.png";
+import white_arrow from "../assets/white-arrow.png";
 
 export default function RegistrationForm({ onSubmit }) {
   const [levels, setLevels] = useState([]);

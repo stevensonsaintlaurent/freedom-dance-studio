@@ -15,10 +15,10 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />,
       },
-      {
-        path: "schedule",
-        element: <Schedule />,
-      },
+      // {
+      //   path: "schedule",
+      //   element: <Schedule />,
+      // },
 
       {
         path: "contact",
