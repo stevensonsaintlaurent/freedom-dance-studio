@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const links = [
   { id: 1, url: "/", text: "home" },
@@ -10,16 +10,18 @@ const links = [
 
 export const NavLinks = ({ mobileMenu }) => {
   return (
-    <ul className={mobileMenu ? "" : "hide-mobile-menu"}>
+    <>
       {links.map((link) => {
         const { id, url, text } = link;
 
         return (
           <li key={id}>
-            <Link to={url}>{text}</Link>
+            <NavLink to={url} className="capitalize">
+              {text}
+            </NavLink>
           </li>
         );
       })}
-    </ul>
+    </>
   );
 };
