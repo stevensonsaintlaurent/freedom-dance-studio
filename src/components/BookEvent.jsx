@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useOnSudmit from "./../../../hooks/useOnSudmit";
 import "./BookEvent.css";
-import { dataRooms } from "./data";
+import { dataRooms } from "./Contact/data";
 
 const BookEvent = ({ setShow, result, setResult }) => {
   const { hidden, onSubmit } = useOnSudmit();
