@@ -7,8 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faTiktok } from "@fortawesome/free-brands-svg-icons";
-import RegistrationForm from "./RegistrationForm";
-import useOnSudmit from "../../hooks/useOnSudmit";
+import RegistrationForm from "../components/RegistrationForm";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const Contact = () => {
   const { result, hidden, onSubmit } = useOnSudmit();
@@ -30,14 +30,14 @@ const Contact = () => {
           <ul>
             <li>
               <a href="freedomdancelasvegas@gmail.com" className="link-item">
-                <img src={mail_icon} alt="" />
+                {/* <img src={mail_icon} alt="" /> */}
                 freedomdancelasvegas@gmail.com
               </a>
             </li>
 
             <li>
               <a href="7257240962" className="link-item">
-                <img src={phone_icon} alt="" />
+                {/* <img src={phone_icon} alt="" /> */}
                 7257240962
               </a>
             </li>
@@ -47,26 +47,26 @@ const Contact = () => {
                 href=" 3110 E Sunset Rd Suite C, Las Vegas, NV 89120"
                 className="link-item"
               >
-                <img src={location_icon} alt="" /> 3110 E Sunset Rd Suite C, Las
+                {/* <img src={location_icon} alt="" /> 3110 E Sunset Rd Suite C, Las */}
                 Vegas, NV 89120
               </a>
             </li>
 
             <li>
               <a href="https://www.facebook.com/profile.php?id=100095031592137&mibextid=LQQJ4d">
-                <FontAwesomeIcon icon={faFacebook} /> Facebook
+                {/* <FontAwesomeIcon icon={faFacebook} /> Facebook */}
               </a>
             </li>
 
             <li>
               <a href="https://www.instagram.com/vegas_freedom_dance_studio?igsh=MXVoNmJtODh1azJ4Zg== ">
-                <FontAwesomeIcon icon={faInstagram} /> Instagram
+                {/* <FontAwesomeIcon icon={faInstagram} /> Instagram */}
               </a>
             </li>
 
             <li>
               <a href="https://www.tiktok.com/@fd.las_vegas?_t=8qEDieUuXCJ&_r=1">
-                <FontAwesomeIcon icon={faTiktok} /> Tiktok
+                {/* <FontAwesomeIcon icon={faTiktok} /> Tiktok */}
               </a>
             </li>
           </ul>
