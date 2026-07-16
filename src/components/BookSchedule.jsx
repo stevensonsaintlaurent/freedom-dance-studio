@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Instructor from "../instructor/Instructor";
-import useOnSudmit from "../../hooks/useOnSudmit";
+import Instructor from "./instructor/Instructor";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const inst = [
   {

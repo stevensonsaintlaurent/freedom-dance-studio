@@ -1,5 +1,5 @@
 import React from "react";
-import useOnSudmit from "../../../../hooks/useOnSudmit";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const FormBookStudio = () => {
   const { result, hidden, onSubmit } = useOnSudmit();

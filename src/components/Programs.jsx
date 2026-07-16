@@ -7,7 +7,7 @@ import EventCenter from "./EventCenter";
 import Schedule from "./Schedule";
 import PriceList from "./PriceList";
 import BookEvent from "../Contact/BookEvent";
-import useOnSudmit from "../../../hooks/useOnSudmit";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const Programs = () => {
   const [programs, setPrograms] = useState(true);

@@ -3,7 +3,7 @@ import "./instructor.css";
 // import { teachers } from "../instructor/data-instructor";
 // import BookSchedule from "../Contact/BookSchedule";
 // import SingleInstructor from "./SingleInstructor";
-import { teachers } from "./data-instructor";
+import { teachers } from "../../data/data-instructor";
 import SingleInstructor from "../instructor/SingleInstructor";
 
 export default function Instructor() {

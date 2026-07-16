@@ -14,9 +14,9 @@ const HomeLayout = () => {
     <section>
       <Navbar mobileMenu={mobileMenu} setMobileMenu={setMobileMenu} />
 
-      <div>
+      <section className="align-element py-20">
         <Outlet />
-      </div>
+      </section>
     </section>
   );
 };
