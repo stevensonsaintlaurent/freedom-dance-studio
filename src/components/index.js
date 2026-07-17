@@ -4,3 +4,4 @@ export { default as Schedule } from "./Schedule";
 export { default as Teachers } from "./Teachers";
 export { default as Galeries } from "./Galeries";
 export { default as MemberShip } from "./MemberShip";
+export { default as Footer } from "./Footer";

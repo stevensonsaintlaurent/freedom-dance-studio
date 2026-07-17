@@ -1,88 +1,91 @@
-import hero1 from "../assets/konpaClip.jpeg";
-import hero2 from "../assets/recentClip1.jpeg";
-import hero3 from "../assets/recentClip2.jpeg";
-import hero4 from "../assets/followerClip.jpeg";
+import { Link } from "react-router-dom";
+import heroVideo from "../assets/freedom2.mp4";
+import heroImage from "../assets/poster3.jpg";
 
-export default function Hero() {
+const Hero = () => {
   return (
-    <section className="min-h-screen bg-base-100 flex items-center">
-      <div className="hero-content max-w-7xl mx-auto flex-col-reverse gap-16 lg:flex-row px-6 py-20">
-        {/* LEFT SIDE */}
+    <section id="home" className="hero min-h-screen relative overflow-hidden">
+      {/* Background Video */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+      >
+        <source src={heroVideo} type="video/mp4" />
+      </video>
 
-        <div className="flex-1">
-          <div className="badge badge-primary badge-lg mb-6">
-            Freedom Dance Studio • Las Vegas
-          </div>
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/40"></div>
 
-          <h1 className="text-5xl lg:text-7xl font-black leading-tight">
-            Dance with
-            <span className="text-primary block">Passion.</span>
-            Connect with
-            <span className="text-secondary block">Freedom.</span>
-          </h1>
-
-          <p className="py-8 text-lg opacity-80 max-w-xl">
-            Learn Bachata, Salsa, Kizomba, and Konpa from experienced
-            instructors in a welcoming community. Whether you're taking your
-            first dance steps or preparing for the social dance floor, Freedom
-            Dance Studio is the place to grow, connect, and have fun.
-          </p>
-
-          <div className="flex flex-wrap gap-4">
-            <button className="btn btn-primary btn-lg">
-              Book Your First Class
-            </button>
-
-            <button className="btn btn-outline btn-lg">View Schedule</button>
-          </div>
-
-          <div className="stats shadow mt-10 bg-base-200">
-            <div className="stat">
-              <div className="stat-value text-primary">4+</div>
-
-              <div className="stat-desc">Latin Dance Styles</div>
+      {/* Content */}
+      <div className="hero-content relative z-10 w-full max-w-7xl px-6 py-20">
+        <div className="flex flex-col-reverse items-center gap-12 lg:flex-row lg:justify-between">
+          {/* Left Side */}
+          <div className="max-w-2xl text-center lg:text-left">
+            <div className="badge badge-primary badge-lg mb-6 animate-pulse">
+              💃 Welcome to Freedom Dance Studio
             </div>
 
-            <div className="stat">
-              <div className="stat-value text-secondary">All</div>
+            <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
+              Dance.
+              <span className="text-primary"> Connect.</span>
+              <br />
+              Live with
+              <span className="text-secondary"> Freedom.</span>
+            </h1>
 
-              <div className="stat-desc">Skill Levels Welcome</div>
+            <p className="mt-6 text-base leading-8 text-gray-200 sm:text-lg">
+              Join Las Vegas' premier dance community and learn Bachata, Salsa,
+              Urban Kiz, Konpa, and more. Whether you're dancing for fun,
+              fitness, or performance, we have classes for every level.
+            </p>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+              <Link to="schedule" className="btn btn-primary btn-lg">
+                Book Your First Class
+              </Link>
+
+              <Link
+                to="classes"
+                className="btn btn-outline btn-secondary btn-lg"
+              >
+                Explore Classes
+              </Link>
             </div>
 
-            <div className="stat">
-              <div className="stat-value">❤️</div>
+            {/* Stats */}
+            <div className="mt-10 grid grid-cols-3 gap-4 rounded-2xl bg-base-100/90 p-4 text-center shadow-2xl backdrop-blur">
+              <div>
+                <h2 className="text-2xl font-bold text-primary">150+</h2>
+                <p className="text-sm">Students</p>
+              </div>
 
-              <div className="stat-desc">Friendly Community</div>
+              <div>
+                <h2 className="text-2xl font-bold text-secondary">15+</h2>
+                <p className="text-sm">Weekly Classes</p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold">10+</h2>
+                <p className="text-sm">Years</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* RIGHT SIDE */}
-
-        <div className="flex-1">
-          <div className="grid grid-cols-2 gap-5">
+          {/* Right Side */}
+          <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg">
             <img
-              src={hero1}
-              className="rounded-3xl shadow-2xl h-80 object-cover hover:scale-105 duration-300"
-            />
-
-            <img
-              src={hero2}
-              className="rounded-3xl shadow-2xl h-56 mt-14 object-cover hover:scale-105 duration-300"
-            />
-
-            <img
-              src={hero3}
-              className="rounded-3xl shadow-2xl h-56 object-cover hover:scale-105 duration-300"
-            />
-
-            <img
-              src={hero4}
-              className="rounded-3xl shadow-2xl h-80 -mt-14 object-cover hover:scale-105 duration-300"
+              src={heroImage}
+              alt="Freedom Dance Studio"
+              className="w-full rounded-3xl border-4 border-white shadow-2xl transition duration-500 hover:scale-105"
             />
           </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
