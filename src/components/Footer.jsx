@@ -1,69 +1,156 @@
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaYoutube,
+  FaTiktok,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaClock,
+} from "react-icons/fa";
+
 const Footer = () => {
   return (
-    <div className="footer">
-      <p> &#169; 2023 Freedom Dance Studio.All rights reserved</p>
-      <ul>
-        <li>Terms of Services</li>
-        <li>Privacy Policy</li>
-      </ul>
-    </div>
-    // <footer className="footer bg-secondary py-6">
-    //   <div className="container">
-    //     <div className="row">
-    //       <div className="col-md-4 my-3">
-    //         <h6>About Vera</h6>
-    //         <p>
-    //           Vera is a dedicated software solutions company that aims to
-    //           provide exceptional services to its clients. We are committed to
-    //           delivering innovative and customized solutions that meet your
-    //           specific business needs.
-    //         </p>
-    //       </div>
-    //       <div className="col-md-4 my-3">
-    //         <h6>Links</h6>
-    //         <ul className="list-unstyled">
-    //           <li>
-    //             Important: <a href="#">Terms & Conditions</a>,
-    //             <a href="privacy.html">Privacy Policy</a>
-    //           </li>
-    //           <li>
-    //             Useful: <a href="index.html#expertise">Expertise</a>,
-    //             <a href="index.html#pricing">Pricing</a>,
-    //             <a href="index.html#newsletter">Newsletter</a>
-    //           </li>
-    //           <li>
-    //             Menu: <a href="index.html">Home</a>,{" "}
-    //             <a href="index.html#details">Details</a>,
-    //             <a href="index.html#solutions">Solutions</a>,
-    //             <a href="index.html#projects">Projects</a>
-    //           </li>
-    //         </ul>
-    //       </div>
-    //       <div className="col-md-4 my-3">
-    //         <div className="mb-4">
-    //           <a href="#" className="text-decoration-none">
-    //             <i className="fab fa-facebook fa-3x text-light mx-2"></i>
-    //           </a>
-    //           <a href="#" className="text-decoration-none">
-    //             <i className="fab fa-twitter fa-3x text-light mx-2"></i>
-    //           </a>
-    //           <a href="#" className="text-decoration-none">
-    //             <i className="fab fa-instagram fa-3x text-light mx-2"></i>
-    //           </a>
-    //           <a href="#" className="text-decoration-none">
-    //             <i className="fab fa-pinterest fa-3x text-light mx-2"></i>
-    //           </a>
-    //         </div>
-    //         <p>
-    //           We would love to hear from you
-    //           <a href="mailto:contact@site.com">
-    //             <strong>contact@site.com</strong>
-    //           </a>
-    //         </p>
-    //       </div>
-    //     </div>
-    //   </div>
-    // </footer>
+    <footer className="bg-neutral text-neutral-content mt-20">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-10">
+          {/* Studio Info */}
+          <div>
+            <h2 className="text-3xl font-bold text-primary">
+              Freedom Dance Studio
+            </h2>
+
+            <p className="mt-5 leading-7">
+              Learn Bachata, Salsa, Urban Kiz, Konpa, and more in a welcoming
+              environment. Join our growing dance family in Las Vegas and take
+              your dancing to the next level.
+            </p>
+
+            <a href="#pricing" className="btn btn-primary mt-6">
+              Book Your First Class
+            </a>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="footer-title text-lg">Quick Links</h3>
+
+            <a href="#home" className="link link-hover">
+              Home
+            </a>
+            <a href="#about" className="link link-hover">
+              About
+            </a>
+            <a href="#classes" className="link link-hover">
+              Classes
+            </a>
+            <a href="#pricing" className="link link-hover">
+              Pricing
+            </a>
+            <a href="#events" className="link link-hover">
+              Events
+            </a>
+            <a href="#contact" className="link link-hover">
+              Contact
+            </a>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h3 className="footer-title text-lg">Contact Us</h3>
+
+            <div className="space-y-4">
+              <div className="flex gap-3 items-start">
+                <FaMapMarkerAlt className="text-primary mt-1" />
+                <span>
+                  123 Dance Avenue
+                  <br />
+                  Las Vegas, NV 89101
+                </span>
+              </div>
+
+              <div className="flex gap-3 items-center">
+                <FaPhone className="text-primary" />
+                <span>(702) 000-0000</span>
+              </div>
+
+              <div className="flex gap-3 items-center">
+                <FaEnvelope className="text-primary" />
+                <span>info@freedomdancestudio.com</span>
+              </div>
+
+              <div className="flex gap-3 items-start">
+                <FaClock className="text-primary mt-1" />
+                <span>
+                  Mon - Fri: 5 PM - 10 PM
+                  <br />
+                  Sat - Sun: 12 PM - 8 PM
+                </span>
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-6">
+              <a
+                href="https://www.facebook.com/profile.php?id=100095031592137&mibextid=LQQJ4d"
+                className="btn btn-circle btn-outline btn-primary"
+              >
+                <FaFacebookF />
+              </a>
+
+              <a
+                href="https://www.instagram.com/vegas_freedom_dance_studio?igsh=MXVoNmJtODh1azJ4Zg== "
+                className="btn btn-circle btn-outline btn-primary"
+              >
+                <FaInstagram />
+              </a>
+
+              <a href="#" className="btn btn-circle btn-outline btn-primary">
+                <FaYoutube />
+              </a>
+
+              <a
+                href="https://www.tiktok.com/@fd.las_vegas?_t=8qEDieUuXCJ&_r=1"
+                className="btn btn-circle btn-outline btn-primary"
+              >
+                <FaTiktok />
+              </a>
+            </div>
+          </div>
+
+          {/* Google Map */}
+          <div>
+            <h3 className="footer-title text-lg">Find Us</h3>
+
+            <div className="rounded-xl overflow-hidden shadow-xl">
+              <iframe
+                title="Freedom Dance Studio Las Vegas"
+                src="https://www.google.com/maps?q=Las+Vegas+Nevada&output=embed"
+                width="100%"
+                height="260"
+                style={{ border: 0 }}
+                loading="lazy"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+        </div>
+
+        <div className="divider"></div>
+
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm">
+            © {new Date().getFullYear()} Freedom Dance Studio Las Vegas. All
+            Rights Reserved.
+          </p>
+
+          <div className="flex gap-6">
+            <a className="link link-hover">Privacy Policy</a>
+
+            <a className="link link-hover">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

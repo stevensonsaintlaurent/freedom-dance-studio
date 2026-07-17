@@ -1,4 +1,4 @@
-import { Navbar } from "../components";
+import { Footer, Navbar } from "../components";
 import { Outlet } from "react-router-dom";
 
 const HomeLayout = () => {
@@ -9,6 +9,7 @@ const HomeLayout = () => {
       <section className="align-element py-20">
         <Outlet />
       </section>
+      <Footer />
     </>
   );
 };

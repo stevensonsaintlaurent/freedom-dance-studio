@@ -5,7 +5,7 @@ import Hero2 from "../components/Hero2";
 const Landing = () => {
   return (
     <>
-      <Hero />
+      <Hero2 />
     </>
   );
 };
