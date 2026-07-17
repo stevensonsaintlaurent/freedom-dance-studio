@@ -35,11 +35,14 @@ const Navbar = () => {
           {/* TITLE */}
           <NavLink
             to="/"
-            className="hidden lg:flex btn btn-primary text-3xl items-center rounded-2xl w-1
-            h-3"
+            className="hidden lg:flex text-3xl items-center mx-0.5 "
           >
-            <img src={logo} alt="" className="" />
-            <h1 className="@max-xs:hidden">Freedom Studio</h1>
+            <img
+              src={logo}
+              alt=""
+              className="h-8 w-auto dark:brightness-0 dark:invert rounded-full"
+            />
+            <h1 className="@max-xs:hidden mx-2 text-2xl ">Freedom Studio</h1>
           </NavLink>
 
           {/* DROPDOWN */}

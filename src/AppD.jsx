@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HomeLayout, Landing, About, Contact } from "./pages";
+import { HomeLayout, Landing, About, Contact, Classes } from "./pages";
+import { Schedule, Teachers } from "./components";
 
 const router = createBrowserRouter([
   {
@@ -15,14 +16,22 @@ const router = createBrowserRouter([
         path: "about",
         element: <About />,
       },
-      // {
-      //   path: "schedule",
-      //   element: <Schedule />,
-      // },
+      {
+        path: "classes",
+        element: <Classes />,
+      },
 
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "schedule",
+        element: <Schedule />,
+      },
+      {
+        path: "teachers",
+        element: <Teachers />,
       },
     ],
   },
