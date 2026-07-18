@@ -5,3 +5,6 @@ export { default as Teachers } from "./Teachers";
 export { default as Galeries } from "./Galeries";
 export { default as MemberShip } from "./MemberShip";
 export { default as Footer } from "./Footer";
+export { default as MusicClasses } from "./MusicClasses";
+export { default as KidsClasses } from "./KidsClasses";
+export { default as AdultClasses } from "./AdultClasses";

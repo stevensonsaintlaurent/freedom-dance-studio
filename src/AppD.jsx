@@ -1,6 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomeLayout, Landing, About, Contact, Classes } from "./pages";
-import { Galeries, MemberShip, Schedule, Teachers } from "./components";
+import {
+  AdultClasses,
+  Galeries,
+  KidsClasses,
+  MemberShip,
+  MusicClasses,
+  Schedule,
+  Teachers,
+} from "./components";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +48,18 @@ const router = createBrowserRouter([
       {
         path: "membership",
         element: <MemberShip />,
+      },
+      {
+        path: "kids",
+        element: <KidsClasses />,
+      },
+      {
+        path: "adult",
+        element: <AdultClasses />,
+      },
+      {
+        path: "music",
+        element: <MusicClasses />,
       },
     ],
   },

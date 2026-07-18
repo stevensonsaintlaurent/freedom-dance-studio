@@ -63,20 +63,20 @@ const Footer = () => {
               <div className="flex gap-3 items-start">
                 <FaMapMarkerAlt className="text-primary mt-1" />
                 <span>
-                  123 Dance Avenue
+                  3110 E Sunset Rd Suite C
                   <br />
-                  Las Vegas, NV 89101
+                  Las Vegas, NV 89120
                 </span>
               </div>
 
               <div className="flex gap-3 items-center">
                 <FaPhone className="text-primary" />
-                <span>(702) 000-0000</span>
+                <span> 7257240962</span>
               </div>
 
               <div className="flex gap-3 items-center">
                 <FaEnvelope className="text-primary" />
-                <span>info@freedomdancestudio.com</span>
+                <span>freedomdancelasvegas@gmail.com</span>
               </div>
 
               <div className="flex gap-3 items-start">
