@@ -4,16 +4,39 @@ const schedule = [
   {
     dance: "Bachata Sensual",
     day: "Monday",
-    time: "7:00 PM - 8:30 PM",
+    time: "7:00 PM - 8:00 PM",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800",
   },
   {
-    dance: "Urban Kiz",
+    dance: "Bachata Ladies Styling ",
+    day: "Monday",
+    time: "6:00 PM - 7:00 PM",
+    level: "Beginner",
+    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800",
+  },
+
+  {
+    dance: "Kizomba",
+    day: "Monday",
+    time: "6:00 PM - 7:00 PM",
+    level: "Beginner",
+    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800",
+  },
+
+  {
+    dance: "Salsa",
     day: "Tuesday",
-    time: "7:30 PM - 9:00 PM",
-    level: "Intermediate",
-    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+    time: "6:00 PM - 7:00 PM",
+    level: "Beginner",
+    image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
+  },
+  {
+    dance: "Bachata",
+    day: "Tuesday",
+    time: "7:00 PM - 8:00 PM",
+    level: "Beginner",
+    image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
   },
   {
     dance: "Konpa",
@@ -23,9 +46,23 @@ const schedule = [
     image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
   },
   {
-    dance: "Salsa",
-    day: "Saturday",
-    time: "4:00 PM - 5:00 PM",
+    dance: "Urban Kiz",
+    day: "Wensday",
+    time: "6:00 PM - 7:00 PM",
+    level: "Intermediate",
+    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+  },
+  {
+    dance: "Bachata Sensual",
+    day: "Wensday",
+    time: "7:00 PM - 8:00 PM",
+    level: "Intermediate",
+    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+  },
+  {
+    dance: "Bachata Ladies Styling",
+    day: "Thursday",
+    time: "6:30 PM - 7:30 PM",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
   },
@@ -37,6 +74,13 @@ const schedule = [
     image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
   },
   {
+    dance: "Kizomba",
+    day: "Saturday",
+    time: "2:00 PM - 3:00 PM",
+    level: "All Levels",
+    image: "https://images.unsplash.com/photo-1508973378895-6cf4d0d7b30d?w=800",
+  },
+  {
     dance: "Bachata",
     day: "Saturday",
     time: "3:00 PM - 4:00 PM",
@@ -44,18 +88,25 @@ const schedule = [
     image: "https://images.unsplash.com/photo-1508973378895-6cf4d0d7b30d?w=800",
   },
   {
-    dance: "Kizomba",
+    dance: "Salsa",
     day: "Saturday",
-    time: "2:00 PM - 3:00 PM",
-    level: "All Levels",
-    image: "https://images.unsplash.com/photo-1508973378895-6cf4d0d7b30d?w=800",
+    time: "4:00 PM - 5:00 PM",
+    level: "Beginner",
+    image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+  },
+  {
+    dance: "Salsa",
+    day: "Saturday",
+    time: "5:00 PM - 6:00 PM",
+    level: "Intermediate",
+    image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
   },
 ];
 
 const pricing = [
   {
     title: "Single Class",
-    price: "$20",
+    price: "$15",
     description: "One class admission",
   },
   {
@@ -65,9 +116,9 @@ const pricing = [
     featured: true,
   },
   {
-    title: "10-Class Pass",
-    price: "$180",
-    description: "Use anytime within 3 months",
+    title: "Couple ",
+    price: "$189",
+    description: "Unlimited Adult Classes",
   },
 ];
 
