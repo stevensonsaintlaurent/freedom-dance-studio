@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Booking = () => {
   const [booking, setBooking] = useState({
@@ -6,9 +8,13 @@ const Booking = () => {
     email: "",
     phone: "",
     emergency: "",
-    experience: "Beginner",
     message: "",
   });
+  const location = useLocation();
+
+  const [confirm, setConfirm] = useState(location.state);
+
+  const { dance, day, time, level, instructor } = confirm;
 
   const handleChange = (e) => {
     setBooking({
@@ -19,7 +25,8 @@ const Booking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Your class has been booked successfully!");
+    toast.success("Your class has been booked successfully!");
+    console.log("confirm", confirm);
     console.log(booking);
   };
 
@@ -45,22 +52,22 @@ const Booking = () => {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="font-bold">Class</span>
-                  <span>Bachata Sensual</span>
+                  <span>{dance}</span>
                 </div>
 
                 <div className="flex justify-between">
                   <span className="font-bold">Instructor</span>
-                  <span>Stevenson St. Laurent</span>
+                  <span>{instructor}</span>
                 </div>
 
                 <div className="flex justify-between">
                   <span className="font-bold">Day</span>
-                  <span>Tuesday</span>
+                  <span>{day}</span>
                 </div>
 
                 <div className="flex justify-between">
                   <span className="font-bold">Time</span>
-                  <span>7:00 PM - 8:30 PM</span>
+                  <span>{time}</span>
                 </div>
 
                 <div className="flex justify-between">
@@ -132,16 +139,14 @@ const Booking = () => {
                   onChange={handleChange}
                 />
 
-                <select
-                  className="select select-bordered w-full"
-                  name="experience"
-                  value={booking.experience}
+                <input
+                  className="input input-bordered w-full"
+                  name="level"
+                  value={level}
                   onChange={handleChange}
-                >
-                  <option>Beginner</option>
-                  <option>Intermediate</option>
-                  <option>Advanced</option>
-                </select>
+                  placeholder={level}
+                  readOnly
+                />
 
                 <textarea
                   className="textarea textarea-bordered w-full"

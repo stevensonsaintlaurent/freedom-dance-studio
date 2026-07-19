@@ -10,12 +10,15 @@ import wen from "../assets/poster33.jpg";
 import tued from "../assets/poster3.jpg";
 import tues from "../assets/konpaClip.jpeg";
 import social from "../assets/sbkParty/FJ8A6429.jpg";
+import { data, Link, useNavigate } from "react-router-dom";
+import { Button } from "react-scroll";
 
 const schedule = [
   {
     dance: "Bachata Sensual",
     day: "Monday",
     time: "7:00 PM - 8:00 PM",
+    instructor: "Steven",
     level: "Beginner",
     image: recent,
   },
@@ -23,6 +26,7 @@ const schedule = [
     dance: "Bachata Ladies Styling ",
     day: "Monday",
     time: "6:00 PM - 7:00 PM",
+    instructor: "Luna",
     level: "Beginner",
     image: lady,
   },
@@ -31,6 +35,7 @@ const schedule = [
     dance: "Kizomba",
     day: "Monday",
     time: "6:00 PM - 7:00 PM",
+    instructor: "Steven",
     level: "Beginner",
     image: recent1,
   },
@@ -39,6 +44,7 @@ const schedule = [
     dance: "Salsa",
     day: "Tuesday",
     time: "6:00 PM - 7:00 PM",
+    instructor: "Steven",
     level: "Beginner",
     image: recent2,
   },
@@ -46,6 +52,7 @@ const schedule = [
     dance: "Bachata",
     day: "Tuesday",
     time: "7:00 PM - 8:00 PM",
+    instructor: "Steven",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
   },
@@ -53,6 +60,7 @@ const schedule = [
     dance: "Konpa",
     day: "Tuesday",
     time: "8:00 PM - 9:00 PM",
+    instructor: "Steven",
     level: "All Levels",
     image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
   },
@@ -60,6 +68,7 @@ const schedule = [
     dance: "Urban Kiz",
     day: "Wensday",
     time: "6:00 PM - 7:00 PM",
+    instructor: "Steven",
     level: "Intermediate",
     image: wen,
   },
@@ -67,6 +76,7 @@ const schedule = [
     dance: "Bachata Sensual",
     day: "Wensday",
     time: "7:00 PM - 8:00 PM",
+    instructor: "Steven",
     level: "Intermediate",
     image: wedn,
   },
@@ -74,6 +84,7 @@ const schedule = [
     dance: "Bachata Ladies Styling",
     day: "Thursday",
     time: "6:30 PM - 7:30 PM",
+    instructor: "Zagir",
     level: "Beginner",
     image: lady,
   },
@@ -87,6 +98,7 @@ const schedule = [
   {
     dance: "Kizomba",
     day: "Saturday",
+    instructor: "Steven",
     time: "2:00 PM - 3:00 PM",
     level: "All Levels",
     image: recent,
@@ -95,12 +107,14 @@ const schedule = [
     dance: "Bachata",
     day: "Saturday",
     time: "3:00 PM - 4:00 PM",
+    instructor: "Steven",
     level: "All Levels",
     image: "https://images.unsplash.com/photo-1508973378895-6cf4d0d7b30d?w=800",
   },
   {
     dance: "Salsa",
     day: "Saturday",
+    instructor: "Desmond",
     time: "4:00 PM - 5:00 PM",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
@@ -108,6 +122,7 @@ const schedule = [
   {
     dance: "Salsa",
     day: "Saturday",
+    instructor: "Desmond",
     time: "5:00 PM - 6:00 PM",
     level: "Intermediate",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
@@ -134,15 +149,19 @@ const pricing = [
 ];
 
 function AdultClasses() {
+  const navigate = useNavigate();
   // ======== Handle Schedule ==========
   const handleSpot = (days) => {
     const findSpot = schedule.find((d) => d.day === days);
+
+    navigate("/book", { state: findSpot });
     console.log(findSpot);
   };
 
   // ========= Handle Pricing ========
   const handlePrices = (plan) => {
     const findPrice = pricing.find((price) => price.price === plan);
+    setDataPrice(findPrice);
     console.log(findPrice);
   };
 
@@ -183,7 +202,6 @@ function AdultClasses() {
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
           {schedule.map((item) => {
             const { dance, day, image, level, time } = item;
-            console.log(day);
 
             return (
               <div
