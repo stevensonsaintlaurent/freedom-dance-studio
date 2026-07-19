@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { HomeLayout, Landing, About, Contact, Classes } from "./pages";
 import {
   AdultClasses,
+  Booking,
   Galeries,
   KidsClasses,
   MemberShip,
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
       {
         path: "music",
         element: <MusicClasses />,
+      },
+      {
+        path: "book",
+        element: <Booking />,
       },
     ],
   },
