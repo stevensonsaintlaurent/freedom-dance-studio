@@ -8,6 +8,7 @@ import {
   FaMapMarkerAlt,
   FaClock,
 } from "react-icons/fa";
+import { NavLinks } from "./NavLinks";
 
 const Footer = () => {
   return (
@@ -32,27 +33,10 @@ const Footer = () => {
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className=" flex justify-center items-center flex-col gap-6 ">
             <h3 className="footer-title text-lg">Quick Links</h3>
 
-            <a href="#home" className="link link-hover">
-              Home
-            </a>
-            <a href="#about" className="link link-hover">
-              About
-            </a>
-            <a href="#classes" className="link link-hover">
-              Classes
-            </a>
-            <a href="#pricing" className="link link-hover">
-              Pricing
-            </a>
-            <a href="#events" className="link link-hover">
-              Events
-            </a>
-            <a href="#contact" className="link link-hover">
-              Contact
-            </a>
+            <NavLinks />
           </div>
 
           {/* Contact */}

@@ -9,6 +9,12 @@ const links = [
 ];
 
 export const NavLinks = ({ mobileMenu }) => {
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <>
       {links.map((link) => {
@@ -16,7 +22,7 @@ export const NavLinks = ({ mobileMenu }) => {
 
         return (
           <li key={id}>
-            <NavLink to={url} className="capitalize">
+            <NavLink to={url} className="capitalize" onClick={scroolUp}>
               {text}
             </NavLink>
           </li>

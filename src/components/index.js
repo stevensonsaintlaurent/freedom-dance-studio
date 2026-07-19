@@ -8,3 +8,4 @@ export { default as Footer } from "./Footer";
 export { default as MusicClasses } from "./MusicClasses";
 export { default as KidsClasses } from "./KidsClasses";
 export { default as AdultClasses } from "./AdultClasses";
+export { default as Booking } from "./Booking";

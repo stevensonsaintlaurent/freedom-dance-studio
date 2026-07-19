@@ -103,8 +103,10 @@ import {
   FaInstagram,
   FaFacebook,
 } from "react-icons/fa";
+import useOnSudmit from "./../hooks/useOnSudmit";
 
 const Contact = () => {
+  const { onSubmit } = useOnSudmit();
   return (
     <section className="bg-base-100 py-20">
       <div className="container mx-auto px-6">
@@ -202,13 +204,14 @@ const Contact = () => {
             <div className="card-body">
               <h3 className="card-title text-3xl mb-4">Send Us a Message</h3>
 
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={onSubmit}>
                 <div>
                   <label className="label">
                     <span className="label-text">Full Name</span>
                   </label>
                   <input
                     type="text"
+                    name="name"
                     placeholder="John Doe"
                     className="input input-bordered w-full"
                   />
@@ -220,6 +223,7 @@ const Contact = () => {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     placeholder="you@example.com"
                     className="input input-bordered w-full"
                   />
@@ -233,6 +237,7 @@ const Contact = () => {
                     type="tel"
                     placeholder="(555) 555-5555"
                     className="input input-bordered w-full"
+                    name="phone"
                   />
                 </div>
 
@@ -242,6 +247,7 @@ const Contact = () => {
                   </label>
                   <textarea
                     rows="6"
+                    name="message"
                     placeholder="Tell us how we can help..."
                     className="textarea textarea-bordered w-full"
                   ></textarea>
