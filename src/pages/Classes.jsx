@@ -24,7 +24,7 @@ const classes = [
     ages: "13+",
     schedule: "Tue, Thu & Fri • 7:00 PM",
     badge: "Best Seller",
-    link: "/classes/adult",
+    link: "adult",
   },
   {
     id: 3,

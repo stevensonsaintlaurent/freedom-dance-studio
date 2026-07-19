@@ -59,7 +59,7 @@ const pricing = [
   },
   {
     name: "Monthly Membership",
-    price: "$120",
+    price: "Free",
     description: "Unlimited Orchestra & Jazz Classes",
     featured: true,
   },

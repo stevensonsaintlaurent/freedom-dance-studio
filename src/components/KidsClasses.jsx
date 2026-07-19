@@ -27,18 +27,23 @@ const classes = [
 const prices = [
   {
     title: "Drop In",
-    price: "$20",
+    price: "$35",
     description: "Perfect for trying a class.",
   },
   {
     title: "Monthly Membership",
-    price: "$85",
-    description: "Unlimited Kids Classes",
+    price: "$89",
+    description: "One  Kids Class per week",
     featured: true,
   },
   {
+    title: "Day package",
+    price: "$149",
+    description: " day ulimited",
+  },
+  {
     title: "Family Package",
-    price: "$150",
+    price: "$189",
     description: "2 Kids Included",
   },
 ];

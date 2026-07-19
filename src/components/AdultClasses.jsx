@@ -1,4 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import Classes from "./../pages/Classes";
+import lady from "../assets/followerClip1.jpeg";
+import recent from "../assets/recentClip.jpeg";
+import recent1 from "../assets/recentClip1.jpeg";
+import recent2 from "../assets/recentClip2.jpeg";
+import music from "../assets/concert-freedom-jazz/P1991039.jpg";
+import wedn from "../assets/followerClip1.jpeg";
+import wen from "../assets/poster33.jpg";
+import tued from "../assets/poster3.jpg";
+import tues from "../assets/konpaClip.jpeg";
+import social from "../assets/sbkParty/FJ8A6429.jpg";
 
 const schedule = [
   {
@@ -6,14 +17,14 @@ const schedule = [
     day: "Monday",
     time: "7:00 PM - 8:00 PM",
     level: "Beginner",
-    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800",
+    image: recent,
   },
   {
     dance: "Bachata Ladies Styling ",
     day: "Monday",
     time: "6:00 PM - 7:00 PM",
     level: "Beginner",
-    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800",
+    image: lady,
   },
 
   {
@@ -21,7 +32,7 @@ const schedule = [
     day: "Monday",
     time: "6:00 PM - 7:00 PM",
     level: "Beginner",
-    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=800",
+    image: recent1,
   },
 
   {
@@ -29,7 +40,7 @@ const schedule = [
     day: "Tuesday",
     time: "6:00 PM - 7:00 PM",
     level: "Beginner",
-    image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
+    image: recent2,
   },
   {
     dance: "Bachata",
@@ -50,35 +61,35 @@ const schedule = [
     day: "Wensday",
     time: "6:00 PM - 7:00 PM",
     level: "Intermediate",
-    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+    image: wen,
   },
   {
     dance: "Bachata Sensual",
     day: "Wensday",
     time: "7:00 PM - 8:00 PM",
     level: "Intermediate",
-    image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+    image: wedn,
   },
   {
     dance: "Bachata Ladies Styling",
     day: "Thursday",
     time: "6:30 PM - 7:30 PM",
     level: "Beginner",
-    image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+    image: lady,
   },
   {
     dance: "Social Dance Practice",
     day: "Friday",
     time: "8:00 PM - 11:00 PM",
     level: "Open to Everyone",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=800",
+    image: social,
   },
   {
     dance: "Kizomba",
     day: "Saturday",
     time: "2:00 PM - 3:00 PM",
     level: "All Levels",
-    image: "https://images.unsplash.com/photo-1508973378895-6cf4d0d7b30d?w=800",
+    image: recent,
   },
   {
     dance: "Bachata",
@@ -123,6 +134,18 @@ const pricing = [
 ];
 
 function AdultClasses() {
+  // ======== Handle Schedule ==========
+  const handleSpot = (days) => {
+    const findSpot = schedule.find((d) => d.day === days);
+    console.log(findSpot);
+  };
+
+  // ========= Handle Pricing ========
+  const handlePrices = (plan) => {
+    const findPrice = pricing.find((price) => price.price === plan);
+    console.log(findPrice);
+  };
+
   return (
     <section className="bg-base-200 py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -158,38 +181,48 @@ function AdultClasses() {
         </h2>
 
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-          {schedule.map((item, index) => (
-            <div
-              key={index}
-              className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
-            >
-              <figure>
-                <img
-                  src={item.image}
-                  alt={item.dance}
-                  className="h-64 w-full object-cover"
-                />
-              </figure>
+          {schedule.map((item) => {
+            const { dance, day, image, level, time } = item;
+            console.log(day);
 
-              <div className="card-body">
-                <h2 className="card-title">{item.dance}</h2>
+            return (
+              <div
+                key={day}
+                className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
+              >
+                <figure>
+                  <img
+                    src={image}
+                    alt={dance}
+                    className="h-64 w-full object-cover"
+                  />
+                </figure>
 
-                <p>
-                  <strong>Day:</strong> {item.day}
-                </p>
-                <p>
-                  <strong>Time:</strong> {item.time}
-                </p>
-                <p>
-                  <strong>Level:</strong> {item.level}
-                </p>
+                <div className="card-body">
+                  <h2 className="card-title">{dance}</h2>
 
-                <div className="card-actions justify-end mt-4">
-                  <button className="btn btn-primary">Reserve Spot</button>
+                  <p>
+                    <strong>Day:</strong> {day}
+                  </p>
+                  <p>
+                    <strong>Time:</strong> {time}
+                  </p>
+                  <p>
+                    <strong>Level:</strong> {level}
+                  </p>
+
+                  <div className="card-actions justify-end mt-4">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleSpot(day)}
+                    >
+                      Reserve Spot
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pricing */}
@@ -200,34 +233,38 @@ function AdultClasses() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {pricing.map((plan, index) => (
-              <div
-                key={index}
-                className={`card shadow-xl ${
-                  plan.featured
-                    ? "bg-primary text-primary-content scale-105"
-                    : "bg-base-100"
-                }`}
-              >
-                <div className="card-body text-center">
-                  <h2 className="card-title justify-center text-3xl">
-                    {plan.title}
-                  </h2>
+            {pricing.map((plan) => {
+              const { title, description, price } = plan;
+              return (
+                <div
+                  key={title}
+                  className={`card shadow-xl ${
+                    plan.featured
+                      ? "bg-primary text-primary-content scale-105"
+                      : "bg-base-100"
+                  }`}
+                >
+                  <div className="card-body text-center">
+                    <h2 className="card-title justify-center text-3xl">
+                      {title}
+                    </h2>
 
-                  <div className="text-6xl font-bold my-5">{plan.price}</div>
+                    <div className="text-6xl font-bold my-5">{price}</div>
 
-                  <p>{plan.description}</p>
+                    <p>{description}</p>
 
-                  <button
-                    className={`btn mt-6 ${
-                      plan.featured ? "btn-secondary" : "btn-primary"
-                    }`}
-                  >
-                    Join Today
-                  </button>
+                    <button
+                      className={`btn mt-6 ${
+                        plan.featured ? "btn-secondary" : "btn-primary"
+                      }`}
+                      onClick={() => handlePrices(price)}
+                    >
+                      Join Today
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
