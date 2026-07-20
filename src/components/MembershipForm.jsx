@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const MembershipForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
   const { title, price, description } = location.state;
-  console.log("location", location);
+  const { onSubmit } = useOnSudmit();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -76,10 +77,7 @@ const MembershipForm = () => {
           </div>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="card bg-base-100 shadow-xl p-8"
-        >
+        <form onSubmit={onSubmit} className="card bg-base-100 shadow-xl p-8">
           {/* Personal Information */}
 
           <h2 className="text-2xl font-bold mb-5">Personal Information</h2>
@@ -95,6 +93,7 @@ const MembershipForm = () => {
                 type="text"
                 placeholder="John"
                 className="input input-bordered"
+                name="name"
               />
             </div>
 
@@ -108,6 +107,7 @@ const MembershipForm = () => {
                 type="text"
                 placeholder="Doe"
                 className="input input-bordered"
+                name="last name"
               />
             </div>
 
@@ -121,6 +121,7 @@ const MembershipForm = () => {
                 type="email"
                 placeholder="john@email.com"
                 className="input input-bordered"
+                name="email"
               />
             </div>
 
@@ -134,6 +135,7 @@ const MembershipForm = () => {
                 type="tel"
                 placeholder="(702) 555-5555"
                 className="input input-bordered"
+                name="number"
               />
             </div>
 
@@ -150,7 +152,7 @@ const MembershipForm = () => {
                 <span className="label-text">Gender</span>
               </label>
 
-              <select className="select select-bordered">
+              <select className="select select-bordered" name="gender">
                 <option>Male</option>
                 <option>Female</option>
                 <option>Prefer not to say</option>
@@ -164,22 +166,24 @@ const MembershipForm = () => {
 
           <h2 className="text-2xl font-bold mb-5">Membership Types</h2>
           <input
-            required
+            readOnly
             type="tel"
             placeholder="$30"
             className="input input-bordered"
-            value={title}
+            value={title ? "" : "bachata"}
+            name="title"
           />
 
           <h2 className="text-2xl font-bold mb-5">Membership Prices</h2>
 
           <div className="grid md:grid-cols-2 gap-5">
             <input
-              required
+              readOnly
               type="tel"
-              placeholder="$30"
+              placeholder={title ? title : ""}
               className="input input-bordered"
               value={price}
+              name="price"
             />
 
             <input
@@ -188,6 +192,7 @@ const MembershipForm = () => {
               placeholder="bachata"
               className="input input-bordered"
               value={description}
+              name="description"
             />
           </div>
 
@@ -200,6 +205,7 @@ const MembershipForm = () => {
           <textarea
             className="textarea textarea-bordered h-32"
             placeholder="Tell us about your dance experience..."
+            name="message"
           ></textarea>
 
           {/* Terms */}
@@ -228,7 +234,11 @@ const MembershipForm = () => {
             </span>
           </label>
 
-          <button className="btn btn-primary btn-lg mt-8" type="submit">
+          <button
+            className="btn btn-primary btn-lg mt-8"
+            type="submit"
+            onClick={handleSubmit}
+          >
             Submit Membership Request
           </button>
         </form>

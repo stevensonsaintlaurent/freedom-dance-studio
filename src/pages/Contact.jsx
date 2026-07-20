@@ -106,7 +106,7 @@ import {
 import useOnSudmit from "./../hooks/useOnSudmit";
 
 const Contact = () => {
-  const { onSubmit } = useOnSudmit();
+  const { setText, onSubmit } = useOnSudmit();
   return (
     <section className="bg-base-100 py-20">
       <div className="container mx-auto px-6">
@@ -253,7 +253,11 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  onClick={() => setText("you successfuly send message ")}
+                >
                   Send Message
                 </button>
               </form>

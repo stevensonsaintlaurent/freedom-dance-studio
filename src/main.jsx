@@ -11,6 +11,6 @@ createRoot(document.getElementById("root")).render(
     {/* <App /> */}
 
     <AppD />
-    <ToastContainer position="top-center" autoClose={20000} />
+    <ToastContainer position="top-center" autoClose={10000} />
   </StrictMode>,
 );

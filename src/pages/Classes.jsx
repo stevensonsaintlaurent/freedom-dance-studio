@@ -2,6 +2,7 @@ import kidsImg from "../assets/kids.jpeg";
 import adultsImg from "../assets/recentClip.jpeg";
 import musicImg from "../assets/concert-freedom-jazz/p1991039.jpg";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const classes = [
   {
@@ -13,7 +14,7 @@ const classes = [
     ages: "Ages 4-12",
     schedule: "Mon & Wed • 5:00 PM",
     badge: "Popular",
-    link: "kids",
+    link: "/kids",
   },
   {
     id: 2,
@@ -24,7 +25,7 @@ const classes = [
     ages: "13+",
     schedule: "Tue, Thu & Fri • 7:00 PM",
     badge: "Best Seller",
-    link: "adult",
+    link: "/adult",
   },
   {
     id: 3,
@@ -35,7 +36,7 @@ const classes = [
     ages: "All Ages",
     schedule: "Saturday • 12:00 PM",
     badge: "New",
-    link: "music",
+    link: "/music",
   },
 ];
 
@@ -94,11 +95,13 @@ export default function Classes() {
                 </div>
 
                 <div className="card-actions justify-between mt-6">
-                  <a href={item.link} className="btn btn-primary">
+                  <Link to={item.link} className="btn btn-primary">
                     Book Now
-                  </a>
+                  </Link>
 
-                  <button className="btn btn-outline">Learn More</button>
+                  <Link to="/schedule" className="btn btn-outline">
+                    See Schedule
+                  </Link>
                 </div>
               </div>
             </div>
