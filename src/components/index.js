@@ -9,3 +9,4 @@ export { default as MusicClasses } from "./MusicClasses";
 export { default as KidsClasses } from "./KidsClasses";
 export { default as AdultClasses } from "./AdultClasses";
 export { default as Booking } from "./Booking";
+export { default as MembershipForm } from "./MembershipForm";
