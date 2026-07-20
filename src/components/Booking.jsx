@@ -76,8 +76,8 @@ const Booking = () => {
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="font-bold">Price</span>
-                  <span className="text-success text-xl font-bold">$20</span>
+                  <span className="font-bold">Drop-in Price</span>
+                  <span className="text-success text-xl font-bold">$15</span>
                 </div>
 
                 <div className="divider"></div>
