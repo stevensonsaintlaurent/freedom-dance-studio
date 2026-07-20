@@ -1,4 +1,6 @@
 import React from "react";
+import kids from "../assets/ladies1.jpg";
+import alain from "../assets/sbkParty/FJ8A6437.jpg";
 
 const classes = [
   {

@@ -12,7 +12,7 @@ const classes = [
     description:
       "Fun and energetic dance classes designed to help children build confidence, coordination, rhythm, and teamwork.",
     ages: "Ages 4-12",
-    schedule: "Mon & Wed • 5:00 PM",
+    schedule: "Mon, Tue & Wed • 4:00 PM",
     badge: "Popular",
     link: "/kids",
   },
@@ -23,18 +23,18 @@ const classes = [
     description:
       "Learn Bachata, Salsa, Urban Kiz, Konpa, and more in beginner and intermediate classes for adults.",
     ages: "13+",
-    schedule: "Tue, Thu & Fri • 7:00 PM",
+    schedule: "Mon, Thu & Sat • 6:00 PM",
     badge: "Best Seller",
     link: "/adult",
   },
   {
     id: 3,
-    title: "Music Classes",
+    title: "Music",
     image: musicImg,
     description:
       "Develop your musical skills through instrument lessons, rhythm training, and live band experience.",
     ages: "All Ages",
-    schedule: "Saturday • 12:00 PM",
+    schedule: "Saturday • 10:30 AM",
     badge: "New",
     link: "/music",
   },
