@@ -3,6 +3,7 @@ import { HomeLayout, Landing, About, Contact, Classes } from "./pages";
 import {
   AdultClasses,
   Booking,
+  Error,
   Galeries,
   KidsClasses,
   MemberShip,
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeLayout />,
-    errorElement: <h2>there is an error</h2>,
+    errorElement: <Error />,
     children: [
       {
         index: true,

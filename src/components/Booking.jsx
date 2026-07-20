@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { toast } from "react-toastify";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const Booking = () => {
   const [booking, setBooking] = useState({
@@ -10,6 +10,7 @@ const Booking = () => {
     emergency: "",
     message: "",
   });
+  const { setText, onSubmit } = useOnSudmit();
   const location = useLocation();
 
   const [confirm, setConfirm] = useState(location.state);
@@ -21,13 +22,6 @@ const Booking = () => {
       ...booking,
       [e.target.name]: e.target.value,
     });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    toast.success("Your class has been booked successfully!");
-    console.log("confirm", confirm);
-    console.log(booking);
   };
 
   return (
@@ -52,7 +46,7 @@ const Booking = () => {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="font-bold">Class</span>
-                  <span>{dance}</span>
+                  <span>{dance ? "lesson" : ""}</span>
                 </div>
 
                 <div className="flex justify-between">
@@ -99,7 +93,7 @@ const Booking = () => {
             <div className="card-body">
               <h2 className="card-title text-3xl mb-6">Personal Information</h2>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={onSubmit} className="space-y-5">
                 <input
                   type="text"
                   placeholder="Full Name"
@@ -168,7 +162,12 @@ const Booking = () => {
                   </span>
                 </label>
 
-                <button className="btn btn-primary w-full text-lg">
+                <button
+                  className="btn btn-primary w-full text-lg"
+                  onClick={() =>
+                    setText("Your class has been booked successfully!")
+                  }
+                >
                   Confirm Booking
                 </button>
               </form>

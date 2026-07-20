@@ -1,4 +1,5 @@
 import { Music, Users, Heart, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function About() {
   const features = [
@@ -24,7 +25,7 @@ export default function About() {
       icon: <Sparkles className="w-8 h-8 text-primary" />,
       title: "Social Dancing",
       description:
-        "Practice what you learn at weekly socials, workshops, and special events with dancers from across Las Vegas.",
+        "Practice what you learn at monthly socials, workshops, and special events with dancers from across Las Vegas.",
     },
   ];
 
@@ -79,9 +80,9 @@ export default function About() {
                 through dance.
               </p>
 
-              <a href="/classes" className="btn btn-secondary btn-lg">
+              <Link to="/classes" className="btn btn-secondary btn-lg">
                 View Our Classes
-              </a>
+              </Link>
             </div>
           </div>
         </div>

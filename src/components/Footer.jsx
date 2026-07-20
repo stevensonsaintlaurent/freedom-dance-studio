@@ -9,8 +9,15 @@ import {
   FaClock,
 } from "react-icons/fa";
 import { NavLinks } from "./NavLinks";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <footer className="bg-neutral text-neutral-content mt-20">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -27,9 +34,13 @@ const Footer = () => {
               your dancing to the next level.
             </p>
 
-            <a href="#pricing" className="btn btn-primary mt-6">
+            <Link
+              to="/classes"
+              className="btn btn-primary mt-6"
+              onClick={scroolUp}
+            >
               Book Your First Class
-            </a>
+            </Link>
           </div>
 
           {/* Quick Links */}

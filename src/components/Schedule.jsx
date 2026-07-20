@@ -1,8 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const services = [
   {
+    id: 1,
     title: "Private Lessons",
     icon: "💃",
     color: "primary",
@@ -12,6 +13,7 @@ const services = [
     price: "$80+",
   },
   {
+    id: 2,
     title: "Partner Lessons",
     icon: "❤️",
     color: "secondary",
@@ -22,6 +24,7 @@ const services = [
     price: "$120+",
   },
   {
+    id: 3,
     title: "Group Classes",
     icon: "👥",
     color: "accent",
@@ -31,6 +34,7 @@ const services = [
     price: "$15 Drop-In",
   },
   {
+    id: 4,
     title: "Live Band & Orchestra",
     icon: "🎺",
     color: "warning",
@@ -44,89 +48,115 @@ const services = [
 
 const weeklySchedule = [
   {
+    id: 1,
     day: "Monday",
     time: "6:00 PM",
-    class: "Beginner Kizomba",
+    dance: "Beginner Kizomba",
     instructor: "Stevenson",
   },
   {
+    id: 2,
     day: "Monday",
     time: "6:00 PM",
-    class: "Ladies styling",
-    instructor: "Stevenson",
+    dance: "Ladies styling",
+    instructor: "Luna",
   },
   {
+    id: 3,
     day: "Monday",
     time: "7:00 PM",
-    class: "Beginner Bachata",
+    dance: "Beginner Bachata",
     instructor: "Stevenson",
   },
 
   {
+    id: 4,
     day: "Tuesday",
     time: "6:00 PM",
-    class: "Beginner Salsa",
+    dance: "Beginner Salsa",
     instructor: "Stevenson",
   },
   {
+    id: 5,
     day: "Tuesday",
     time: "7:00 PM",
-    class: "Beginner Bachata",
+    dance: "Beginner Bachata",
     instructor: "Stevenson",
   },
   {
+    id: 6,
     day: "Tuesday",
     time: "8:00 PM",
-    class: "Konpa",
+    dance: "Konpa",
     instructor: "Stevenson",
   },
   {
+    id: 7,
     day: "Wednesday",
     time: "6:00 PM",
-    class: "Intermediate Kizomba",
-    instructor: "Staff",
+    dance: "Intermediate Kizomba",
+    instructor: "Stevenson",
   },
   {
+    id: 8,
     day: "Wednesday",
     time: "7:00 PM",
-    class: "Intermediate Bachata",
-    instructor: "Staff",
+    dance: "Intermediate Bachata",
+    instructor: "Stevenson",
   },
 
   {
+    id: 9,
     day: "Thursday",
     time: "6:30 PM",
-    class: "Ladies Styling",
-    instructor: "Staff",
+    dance: "Ladies Styling",
+    instructor: "Zagir",
   },
   {
+    id: 10,
     day: "Saturday",
     time: "2:00 PM",
-    class: "Open Level Kizomba",
-    instructor: "Staff",
+    dance: "Open Level Kizomba",
+    instructor: "Stevenson",
   },
   {
+    id: 11,
     day: "Saturday",
     time: "3:00 PM",
-    class: "Open Level Bachata",
-    instructor: "Staff",
+    dance: "Open Level Bachata",
+    instructor: "Stevenson",
   },
   {
+    id: 12,
     day: "Saturday",
     time: "4:00 PM",
-    class: "Beginner Salsa",
+    dance: "Beginner Salsa",
     instructor: "Desmond",
   },
 
   {
+    id: 13,
     day: "Saturday",
     time: "5:00 PM",
-    class: "Intermediate Salsa",
+    dance: "Intermediate Salsa",
     instructor: "Desmond",
   },
 ];
 
 export default function Schedule() {
+  const navigate = useNavigate();
+  const handleBooking = (id) => {
+    const findSchedule = weeklySchedule.find((week) => week.id === id);
+
+    navigate("/book", { state: findSchedule });
+  };
+
+  // ============= handle services ============
+  const handleServices = (id) => {
+    const findServices = services.find((service) => service.id === id);
+    console.log("service", findServices);
+    navigate("/membersForm", { state: findServices });
+  };
   return (
     <section className="py-20 bg-base-200">
       <div className="max-w-7xl mx-auto px-5">
@@ -156,15 +186,18 @@ export default function Schedule() {
 
             <tbody>
               {weeklySchedule.map((item, index) => {
-                const { day, time, class: lesson, instructor } = item;
+                const { id, day, time, dance, instructor } = item;
                 return (
                   <tr key={index}>
                     <td>{day}</td>
                     <td>{time}</td>
-                    <td>{lesson}</td>
+                    <td>{dance}</td>
                     <td>{instructor}</td>
                     <td>
-                      <button className="btn btn-primary btn-sm">
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => handleBooking(id)}
+                      >
                         Book Now
                       </button>
                     </td>
@@ -200,14 +233,16 @@ export default function Schedule() {
                     </p>
 
                     <div className="flex flex-wrap gap-2">
-                      {service.styles.map((dance) => (
-                        <span
-                          key={dance}
-                          className={`badge badge-${service.color}`}
-                        >
-                          {dance}
-                        </span>
-                      ))}
+                      {service.styles.map((dance) => {
+                        return (
+                          <span
+                            key={dance}
+                            className={`badge badge-${service.color}`}
+                          >
+                            {dance}
+                          </span>
+                        );
+                      })}
                     </div>
 
                     <p>
@@ -220,7 +255,12 @@ export default function Schedule() {
                   </div>
 
                   <div className="card-actions justify-end mt-6">
-                    <button className="btn btn-primary w-full">Book Now</button>
+                    <button
+                      className="btn btn-primary w-full"
+                      onClick={() => handleServices(service.id)}
+                    >
+                      Book Now
+                    </button>
                   </div>
                 </div>
               </div>
@@ -245,7 +285,7 @@ export default function Schedule() {
                   Book Dance Lessons
                 </Link>
 
-                <button className="btn btn-accent">Hire Live Band</button>
+                <button className="btn btn-accent">Reahersal</button>
               </div>
             </div>
           </div>

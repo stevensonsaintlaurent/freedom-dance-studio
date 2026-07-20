@@ -165,6 +165,13 @@ function AdultClasses() {
     navigate("/membersForm", { state: findPrice });
   };
 
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="bg-base-200 py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -275,7 +282,9 @@ function AdultClasses() {
                       className={`btn mt-6 ${
                         plan.featured ? "btn-secondary" : "btn-primary"
                       }`}
-                      onClick={() => handlePrices(price)}
+                      onClick={() => {
+                        (scroolUp, handlePrices(price));
+                      }}
                     >
                       Join Today
                     </button>
