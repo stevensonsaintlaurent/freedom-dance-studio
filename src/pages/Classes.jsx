@@ -1,6 +1,6 @@
 import kidsImg from "../assets/kids.jpeg";
 import adultsImg from "../assets/recentClip.jpeg";
-import musicImg from "../assets/concert-freedom-jazz/p1991039.jpg";
+import musicImg from "../assets/concert-freedom-jazz/P1990974.jpg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
