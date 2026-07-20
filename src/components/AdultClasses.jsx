@@ -127,6 +127,16 @@ const schedule = [
     level: "Intermediate",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
   },
+  {
+    dance: "Restorative Yoga",
+    day: "Friday",
+    level: "All Levels",
+    instructor: "Olivia Wilson",
+    time: "5:00 PM - 6:15 PM",
+    description:
+      "A calming practice using props and gentle poses to reduce stress, promote healing, and restore both body and mind.",
+    image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+  },
 ];
 
 const pricing = [
