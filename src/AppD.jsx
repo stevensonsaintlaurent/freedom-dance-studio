@@ -6,6 +6,7 @@ import {
   Galeries,
   KidsClasses,
   MemberShip,
+  MembershipForm,
   MusicClasses,
   Schedule,
   Teachers,
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "book",
         element: <Booking />,
+      },
+      {
+        path: "membersForm",
+        element: <MembershipForm />,
       },
     ],
   },
