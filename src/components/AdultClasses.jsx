@@ -7,7 +7,7 @@ import recent2 from "../assets/recentClip2.jpeg";
 import music from "../assets/concert-freedom-jazz/P1991039.jpg";
 import wedn from "../assets/followerClip1.jpeg";
 import wen from "../assets/konpaClip.jpeg";
-import tued from "../assets/poster3.jpg";
+import tued from "../assets/hero3.jpg";
 import tues from "../assets/konpaClip.jpeg";
 import social from "../assets/sbkParty/FJ8A6429.jpg";
 import { data, Link, useNavigate } from "react-router-dom";
