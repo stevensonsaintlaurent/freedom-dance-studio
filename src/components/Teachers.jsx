@@ -7,6 +7,7 @@ import adrianaVideo from "../assets/BAdriana.mp4";
 import zagir from "../assets/zag.png";
 import zagirVideo from "../assets/zagirVideo.mp4";
 import allyson from "../assets/ally3.jpg";
+import alain from "../assets/sbkParty/FJ8A6437.jpg";
 const instructors = [
   {
     name: "Stevenson",
@@ -40,7 +41,7 @@ const instructors = [
     name: "Alain",
     role: "Band Leader",
     specialties: ["Live Music", "Performance"],
-    image: "https://i.pravatar.cc/300?img=52",
+    image: alain,
     bio: "Leads the Freedom Dance Studio band, bringing live Latin music to socials and special events.",
   },
   {

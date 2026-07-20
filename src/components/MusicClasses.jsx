@@ -1,53 +1,31 @@
-import React from "react";
+import concert from "../assets/concert-freedom-jazz/P1991000.jpg";
+import concert1 from "../assets/concert-freedom-jazz/P1990994.jpg";
+import concert2 from "../assets/concert-freedom-jazz/P1990974.jpg";
 
 const classes = [
   {
     title: "Youth Orchestra",
-    day: "Monday",
-    time: "5:00 PM - 6:30 PM",
+    day: "Tuesday",
+    time: "4:30 PM - 6:00 PM",
     ages: "Ages 8-18",
     instructor: "Freedom Music Staff",
     image: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=900",
   },
   {
     title: "Jazz Band",
-    day: "Tuesday",
-    time: "7:00 PM - 8:30 PM",
+    day: "Saturday",
+    time: "5:00 PM - 7:00 PM",
     ages: "Teens & Adults",
     instructor: "Professional Jazz Director",
-    image: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?w=900",
+    image: concert,
   },
   {
     title: "Beginner Band",
-    day: "Wednesday",
-    time: "5:30 PM - 6:30 PM",
+    day: "Saturday",
+    time: "10:30 AM - 12:00 PM",
     ages: "All Ages",
     instructor: "Music Instructor",
-    image: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=900",
-  },
-  {
-    title: "Concert Orchestra",
-    day: "Thursday",
-    time: "6:30 PM - 8:30 PM",
-    ages: "Intermediate & Advanced",
-    instructor: "Orchestra Conductor",
-    image: "https://images.unsplash.com/photo-1501612780327-45045538702b?w=900",
-  },
-  {
-    title: "Jazz Improvisation",
-    day: "Friday",
-    time: "7:00 PM - 8:30 PM",
-    ages: "Adults",
-    instructor: "Jazz Band Director",
-    image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=900",
-  },
-  {
-    title: "Saturday Ensemble",
-    day: "Saturday",
-    time: "11:00 AM - 1:00 PM",
-    ages: "All Levels",
-    instructor: "Freedom Music Team",
-    image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=900",
+    image: concert1,
   },
 ];
 

@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
 import { HomeLayout, Landing, About, Contact, Classes } from "./pages";
 import {
   AdultClasses,
@@ -12,6 +16,7 @@ import {
   Schedule,
   Teachers,
 } from "./components";
+import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {
@@ -77,6 +82,16 @@ const router = createBrowserRouter([
 ]);
 
 const AppD = () => {
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return <RouterProvider router={router} />;
 };
 

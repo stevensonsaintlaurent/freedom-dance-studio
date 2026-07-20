@@ -15,7 +15,7 @@ const plans = [
     description: "Our membership.",
     features: ["1 class/week", "4 classes/month", "Free ladies styling"],
     button: "Get Started",
-    popular: true,
+    popular: false,
   },
   {
     name: "Monthly",
@@ -37,7 +37,7 @@ const plans = [
       " free ladies styling",
     ],
     button: "Get Started",
-    popular: true,
+    popular: false,
   },
   {
     name: "Private Lessons",

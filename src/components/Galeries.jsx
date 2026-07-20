@@ -6,12 +6,16 @@ import dance3 from "../assets/recentClip2.jpeg";
 import dance4 from "../assets/recentLeader.jpeg";
 import dance5 from "../assets/followerClip.jpeg";
 import dance6 from "../assets/followerClip.jpeg";
+import party1 from "../assets/sbkParty/FJ8A6466.jpg";
+import party2 from "../assets/sbkParty/FJ8A6603.jpg";
+import party3 from "../assets/sbkParty/FJ8A6605.jpg";
+import concert2 from "../assets/concert-freedom-jazz/P1990974.jpg";
 
 const images = [
   {
     id: 1,
-    title: "Salsa Social Night",
-    image: dance1,
+    title: "SBK Social Night",
+    image: party1,
   },
   {
     id: 2,
@@ -25,8 +29,8 @@ const images = [
   },
   {
     id: 4,
-    title: "Konpa Night",
-    image: dance4,
+    title: "Party Night",
+    image: party2,
   },
   {
     id: 5,
@@ -36,7 +40,7 @@ const images = [
   {
     id: 6,
     title: "Live Orchestra",
-    image: dance6,
+    image: concert2,
   },
 ];
 
