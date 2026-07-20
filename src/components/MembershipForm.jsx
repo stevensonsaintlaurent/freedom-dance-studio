@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const MembershipForm = () => {
   const [submitted, setSubmitted] = useState(false);
+  const location = useLocation();
+  const { title, price, description } = location.state;
+  console.log("location", location);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -153,59 +158,37 @@ const MembershipForm = () => {
             </div>
           </div>
 
-          {/* Address */}
-
-          <div className="divider"></div>
-
-          <h2 className="text-2xl font-bold mb-5">Address</h2>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            <input
-              required
-              className="input input-bordered"
-              placeholder="Street Address"
-            />
-
-            <input
-              required
-              className="input input-bordered"
-              placeholder="City"
-            />
-
-            <input
-              required
-              className="input input-bordered"
-              placeholder="State"
-            />
-
-            <input
-              required
-              className="input input-bordered"
-              placeholder="Zip Code"
-            />
-          </div>
-
           {/* Membership */}
 
           <div className="divider"></div>
 
-          <h2 className="text-2xl font-bold mb-5">Membership Details</h2>
+          <h2 className="text-2xl font-bold mb-5">Membership Types</h2>
+          <input
+            required
+            type="tel"
+            placeholder="$30"
+            className="input input-bordered"
+            value={title}
+          />
+
+          <h2 className="text-2xl font-bold mb-5">Membership Prices</h2>
 
           <div className="grid md:grid-cols-2 gap-5">
-            <select className="select select-bordered">
-              <option>Monthly Membership</option>
-              <option>3 Month Membership</option>
-              <option>6 Month Membership</option>
-              <option>Annual Membership</option>
-            </select>
+            <input
+              required
+              type="tel"
+              placeholder="$30"
+              className="input input-bordered"
+              value={price}
+            />
 
-            <select className="select select-bordered">
-              <option>Bachata</option>
-              <option>Kizomba</option>
-              <option>Konpa</option>
-              <option>Urban Kiz</option>
-              <option>All Dance Classes</option>
-            </select>
+            <input
+              required
+              type="text"
+              placeholder="bachata"
+              className="input input-bordered"
+              value={description}
+            />
           </div>
 
           {/* Experience */}
@@ -219,26 +202,6 @@ const MembershipForm = () => {
             placeholder="Tell us about your dance experience..."
           ></textarea>
 
-          {/* Emergency Contact */}
-
-          <div className="divider"></div>
-
-          <h2 className="text-2xl font-bold mb-5">Emergency Contact</h2>
-
-          <div className="grid md:grid-cols-2 gap-5">
-            <input
-              required
-              className="input input-bordered"
-              placeholder="Emergency Contact Name"
-            />
-
-            <input
-              required
-              className="input input-bordered"
-              placeholder="Emergency Phone"
-            />
-          </div>
-
           {/* Terms */}
 
           <div className="divider"></div>
@@ -251,8 +214,17 @@ const MembershipForm = () => {
             />
 
             <span>
-              I understand that this form is a membership request only and
-              payment will be made in person at Freedom Dance Studio.
+              I understand that this
+              <br />
+              form is a membership
+              <br />
+              request only
+              <br />
+              and payment will be
+              <br />
+              made in person at
+              <br />
+              Freedom Dance Studio.
             </span>
           </label>
 

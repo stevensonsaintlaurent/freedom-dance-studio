@@ -161,8 +161,8 @@ function AdultClasses() {
   // ========= Handle Pricing ========
   const handlePrices = (plan) => {
     const findPrice = pricing.find((price) => price.price === plan);
-    setDataPrice(findPrice);
-    console.log(findPrice);
+
+    navigate("/membersForm", { state: findPrice });
   };
 
   return (
