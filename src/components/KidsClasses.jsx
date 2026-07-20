@@ -1,5 +1,5 @@
 import React from "react";
-import kids from "../assets/ladies1.jpg";
+import kids from "../assets/hero5.jpg";
 
 const classes = [
   {
