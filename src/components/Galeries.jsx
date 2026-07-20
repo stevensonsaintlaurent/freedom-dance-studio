@@ -19,12 +19,12 @@ const images = [
   },
   {
     id: 2,
-    title: "Bachata Class",
-    image: dance2,
+    title: "Bachata Ladies",
+    image: dance5,
   },
   {
     id: 3,
-    title: "Kizomba Workshop",
+    title: "Salsa  Group",
     image: dance3,
   },
   {
@@ -35,7 +35,7 @@ const images = [
   {
     id: 5,
     title: "Freedom Dance Family",
-    image: dance5,
+    image: dance2,
   },
   {
     id: 6,

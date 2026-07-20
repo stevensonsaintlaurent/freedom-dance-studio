@@ -1,6 +1,5 @@
 import React from "react";
 import kids from "../assets/ladies1.jpg";
-import alain from "../assets/sbkParty/FJ8A6437.jpg";
 
 const classes = [
   {
@@ -58,7 +57,7 @@ function KidsClasses() {
         <div className="hero rounded-3xl bg-primary text-primary-content mb-16">
           <div className="hero-content flex-col lg:flex-row gap-10">
             <img
-              src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=900"
+              src={kids}
               alt="Kids Dance"
               className="rounded-3xl shadow-2xl w-full max-w-lg"
             />
