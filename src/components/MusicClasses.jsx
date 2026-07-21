@@ -1,6 +1,7 @@
 import concert from "../assets/concert-freedom-jazz/P1991000.jpg";
 import concert1 from "../assets/concert-freedom-jazz/P1990994.jpg";
 import concert2 from "../assets/concert-freedom-jazz/P1990974.jpg";
+import { useNavigate } from "react-router-dom";
 
 const classes = [
   {
@@ -31,18 +32,18 @@ const classes = [
 
 const pricing = [
   {
-    name: "Single Lesson",
+    title: "Single Lesson",
     price: "$30",
     description: "One music class",
   },
   {
-    name: "Monthly Membership",
+    title: "Monthly Membership",
     price: "Free",
     description: "Unlimited Orchestra & Jazz Classes",
     featured: true,
   },
   {
-    name: "Private Lessons",
+    title: "Private Lessons",
     price: "$60",
     description: "One-on-one instruction (1 Hour)",
   },
@@ -60,6 +61,27 @@ const instruments = [
 ];
 
 function MusicClasses() {
+  const navigate = useNavigate();
+  // ======== Handle Schedule ==========
+  const handleSpot = (days) => {
+    const findSpot = classes.find((d) => d.day === days);
+
+    navigate("/book", { state: findSpot });
+  };
+
+  // ========= Handle Pricing ========
+  const handlePrices = (plan) => {
+    const findPrice = pricing.find((price) => price.price === plan);
+
+    navigate("/membersForm", { state: findPrice });
+  };
+
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
   return (
     <section className="bg-base-200 py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -95,44 +117,52 @@ function MusicClasses() {
         </h2>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {classes.map((music, index) => (
-            <div
-              key={index}
-              className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
-            >
-              <figure>
-                <img
-                  src={music.image}
-                  alt={music.title}
-                  className="h-64 w-full object-cover"
-                />
-              </figure>
+          {classes.map((music, index) => {
+            const { title, image, day, time, ages, instructor } = music;
+            return (
+              <div
+                key={index}
+                className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
+              >
+                <figure>
+                  <img
+                    src={image}
+                    alt={title}
+                    className="h-64 w-full object-cover"
+                  />
+                </figure>
 
-              <div className="card-body">
-                <h2 className="card-title">{music.title}</h2>
+                <div className="card-body">
+                  <h2 className="card-title">{title}</h2>
 
-                <p>
-                  <strong>Day:</strong> {music.day}
-                </p>
+                  <p>
+                    <strong>Day:</strong> {day}
+                  </p>
 
-                <p>
-                  <strong>Time:</strong> {music.time}
-                </p>
+                  <p>
+                    <strong>Time:</strong> {time}
+                  </p>
 
-                <p>
-                  <strong>Students:</strong> {music.ages}
-                </p>
+                  <p>
+                    <strong>Students:</strong> {ages}
+                  </p>
 
-                <p>
-                  <strong>Instructor:</strong> {music.instructor}
-                </p>
+                  <p>
+                    <strong>Instructor:</strong> {instructor}
+                  </p>
 
-                <div className="card-actions justify-end mt-4">
-                  <button className="btn btn-primary">Reserve Your Seat</button>
+                  <div className="card-actions justify-end mt-4">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleSpot(day)}
+                    >
+                      Reserve Your Seat
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pricing */}
@@ -143,34 +173,40 @@ function MusicClasses() {
           </h2>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {pricing.map((plan, index) => (
-              <div
-                key={index}
-                className={`card shadow-xl ${
-                  plan.featured
-                    ? "bg-primary text-primary-content scale-105"
-                    : "bg-base-100"
-                }`}
-              >
-                <div className="card-body text-center">
-                  <h2 className="card-title justify-center text-2xl">
-                    {plan.name}
-                  </h2>
+            {pricing.map((plan, index) => {
+              const { featured, title, price, description } = plan;
+              return (
+                <div
+                  key={index}
+                  className={`card shadow-xl ${
+                    featured
+                      ? "bg-primary text-primary-content scale-105"
+                      : "bg-base-100"
+                  }`}
+                >
+                  <div className="card-body text-center">
+                    <h2 className="card-title justify-center text-2xl">
+                      {title}
+                    </h2>
 
-                  <div className="text-6xl font-bold my-5">{plan.price}</div>
+                    <div className="text-6xl font-bold my-5">{price}</div>
 
-                  <p>{plan.description}</p>
+                    <p>{description}</p>
 
-                  <button
-                    className={`btn mt-6 ${
-                      plan.featured ? "btn-secondary" : "btn-primary"
-                    }`}
-                  >
-                    Register
-                  </button>
+                    <button
+                      className={`btn mt-6 ${
+                        featured ? "btn-secondary" : "btn-primary"
+                      }`}
+                      onClick={() => {
+                        (scroolUp, handlePrices(price));
+                      }}
+                    >
+                      Register
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

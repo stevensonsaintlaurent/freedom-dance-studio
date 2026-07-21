@@ -1,5 +1,6 @@
 import React from "react";
 import kids from "../assets/hero5.jpg";
+import { useNavigate } from "react-router-dom";
 
 const classes = [
   {
@@ -50,6 +51,29 @@ const prices = [
 ];
 
 function KidsClasses() {
+  const navigate = useNavigate();
+  // ======== Handle Schedule ==========
+  const handleSpot = (days) => {
+    const findSpot = classes.find((d) => d.day === days);
+
+    navigate("/book", { state: findSpot });
+  };
+
+  // ========= Handle Pricing ========
+
+  const handlePrices = (title) => {
+    const findPrice = prices.find((price) => price.title);
+
+    navigate("/membersForm", { state: findPrice });
+  };
+
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="py-20 bg-base-200">
       <div className="max-w-7xl mx-auto px-6">
@@ -85,40 +109,49 @@ function KidsClasses() {
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8 mb-20">
-          {classes.map((item, index) => (
-            <div
-              key={index}
-              className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
-            >
-              <figure>
-                <img
-                  src={item.image}
-                  alt={item.dance}
-                  className="h-60 w-full object-cover"
-                />
-              </figure>
+          {classes.map((item, index) => {
+            const { dance, age, day, image, time } = item;
 
-              <div className="card-body">
-                <h2 className="card-title">{item.dance}</h2>
+            return (
+              <div
+                key={index}
+                className="card bg-base-100 shadow-xl hover:shadow-2xl transition"
+              >
+                <figure>
+                  <img
+                    src={image}
+                    alt={dance}
+                    className="h-60 w-full object-cover"
+                  />
+                </figure>
 
-                <p>
-                  <strong>Day:</strong> {item.day}
-                </p>
+                <div className="card-body">
+                  <h2 className="card-title">{dance}</h2>
 
-                <p>
-                  <strong>Time:</strong> {item.time}
-                </p>
+                  <p>
+                    <strong>Day:</strong> {day}
+                  </p>
 
-                <p>
-                  <strong>{item.age}</strong>
-                </p>
+                  <p>
+                    <strong>Time:</strong> {time}
+                  </p>
 
-                <div className="card-actions justify-end mt-4">
-                  <button className="btn btn-primary">Reserve Spot</button>
+                  <p>
+                    <strong>{age}</strong>
+                  </p>
+
+                  <div className="card-actions justify-end mt-4">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleSpot(day)}
+                    >
+                      Reserve Spot
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         {/* Pricing */}
@@ -146,6 +179,7 @@ function KidsClasses() {
                   className={`btn ${
                     price.featured ? "btn-secondary" : "btn-primary"
                   }`}
+                  onClick={() => handlePrices(price)}
                 >
                   Enroll Now
                 </button>

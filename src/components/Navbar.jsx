@@ -67,7 +67,7 @@ const Navbar = () => {
           </ul>
         </div>
 
-        <div className="navbar-end">
+        <div className="navbar-end pr-6">
           {/* THEME SETUP  */}
           <label className="swap swap-rotate">
             <input type="checkbox" onChange={handleTheme} />

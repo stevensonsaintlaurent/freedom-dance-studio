@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import useOnSudmit from "../hooks/useOnSudmit";
 
@@ -15,7 +15,7 @@ const Booking = () => {
 
   const [confirm, setConfirm] = useState(location.state);
 
-  const { dance, day, time, level, instructor } = confirm;
+  const { title, dance, day, time, level, instructor } = confirm;
 
   const handleChange = (e) => {
     setBooking({
@@ -46,7 +46,7 @@ const Booking = () => {
               <div className="space-y-4">
                 <div className="flex justify-between">
                   <span className="font-bold">Class</span>
-                  <span>{dance ? "lesson" : ""}</span>
+                  <span>{dance || title}</span>
                 </div>
 
                 <div className="flex justify-between">
@@ -125,15 +125,6 @@ const Booking = () => {
                 />
 
                 <input
-                  type="text"
-                  placeholder="Emergency Contact"
-                  className="input input-bordered w-full"
-                  name="emergency"
-                  value={booking.emergency}
-                  onChange={handleChange}
-                />
-
-                <input
                   className="input input-bordered w-full"
                   name="level"
                   value={level}
@@ -165,7 +156,9 @@ const Booking = () => {
                 <button
                   className="btn btn-primary w-full text-lg"
                   onClick={() =>
-                    setText("Your class has been booked successfully!")
+                    setText(
+                      `Your class has been booked successfully! with ${instructor}`,
+                    )
                   }
                 >
                   Confirm Booking

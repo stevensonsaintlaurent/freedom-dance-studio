@@ -6,6 +6,7 @@ import useOnSudmit from "../hooks/useOnSudmit";
 const MembershipForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
+  console.log(location);
   const { title, price, description } = location.state;
   const { onSubmit } = useOnSudmit();
 
