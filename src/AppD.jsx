@@ -3,7 +3,14 @@ import {
   RouterProvider,
   useLocation,
 } from "react-router-dom";
-import { HomeLayout, Landing, About, Contact, Classes } from "./pages";
+import {
+  HomeLayout,
+  Landing,
+  About,
+  Contact,
+  Classes,
+  StudioRental,
+} from "./pages";
 import {
   AdultClasses,
   Booking,
@@ -76,6 +83,10 @@ const router = createBrowserRouter([
       {
         path: "membersForm",
         element: <MembershipForm />,
+      },
+      {
+        path: "rental",
+        element: <StudioRental />,
       },
     ],
   },

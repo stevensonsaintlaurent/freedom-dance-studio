@@ -5,6 +5,7 @@ const links = [
   { id: 4, url: "about", text: "about" },
   { id: 2, url: "classes", text: "classes" },
   { id: 8, url: "membership", text: "prices" },
+  { id: 6, url: "rental", text: " Studio Rental" },
   { id: 5, url: "contact", text: "contact" },
 ];
 
