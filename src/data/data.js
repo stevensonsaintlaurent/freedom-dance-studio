@@ -82,3 +82,119 @@ export const testimonials = [
     image: jesus,
   },
 ];
+
+const yogaClasses = [
+  {
+    id: 1,
+    name: "Beginner Yoga",
+    level: "Beginner",
+    instructor: "Sarah Johnson",
+    price: "$20 / Class",
+    monthly: "$75 / Month",
+    schedule: "Monday & Wednesday • 6:00 PM - 7:00 PM",
+    duration: "60 Minutes",
+    description:
+      "Perfect for beginners who want to improve flexibility, balance, posture, and relaxation while learning the fundamentals of yoga.",
+    image: "/images/yoga/beginner.jpg",
+  },
+
+  {
+    id: 2,
+    name: "Hatha Yoga",
+    level: "All Levels",
+    instructor: "Emily Carter",
+    price: "$22 / Class",
+    monthly: "$80 / Month",
+    schedule: "Tuesday & Thursday • 7:00 PM - 8:00 PM",
+    duration: "60 Minutes",
+    description:
+      "A traditional yoga class focusing on breathing techniques, flexibility, balance, and overall physical wellness.",
+    image: "/images/yoga/hatha.jpg",
+  },
+
+  {
+    id: 3,
+    name: "Vinyasa Flow",
+    level: "Intermediate",
+    instructor: "Michael Lee",
+    price: "$25 / Class",
+    monthly: "$90 / Month",
+    schedule: "Monday, Wednesday & Friday • 8:00 AM - 9:00 AM",
+    duration: "60 Minutes",
+    description:
+      "Flow through dynamic movements synchronized with your breath to improve strength, flexibility, and endurance.",
+    image: "/images/yoga/vinyasa.jpg",
+  },
+
+  {
+    id: 4,
+    name: "Power Yoga",
+    level: "Advanced",
+    instructor: "Jessica Brown",
+    price: "$28 / Class",
+    monthly: "$100 / Month",
+    schedule: "Tuesday & Thursday • 6:30 PM - 7:45 PM",
+    duration: "75 Minutes",
+    description:
+      "An energetic workout designed to build strength, improve cardiovascular fitness, and increase flexibility.",
+    image: "/images/yoga/power.jpg",
+  },
+
+  {
+    id: 5,
+    name: "Yin Yoga",
+    level: "All Levels",
+    instructor: "Anna Martinez",
+    price: "$20 / Class",
+    monthly: "$75 / Month",
+    schedule: "Friday • 7:00 PM - 8:00 PM",
+    duration: "60 Minutes",
+    description:
+      "Slow-paced yoga focusing on deep stretching, relaxation, mindfulness, and improving joint mobility.",
+    image: "/images/yoga/yin.jpg",
+  },
+
+  {
+    id: 6,
+    name: "Morning Sunrise Yoga",
+    level: "All Levels",
+    instructor: "Sophia Green",
+    price: "$18 / Class",
+    monthly: "$70 / Month",
+    schedule: "Saturday • 8:00 AM - 9:00 AM",
+    duration: "60 Minutes",
+    description:
+      "Start your weekend feeling refreshed with gentle stretching, breathing exercises, and meditation.",
+    image: "/images/yoga/sunrise.jpg",
+  },
+
+  {
+    id: 7,
+    name: "Restorative Yoga",
+    level: "All Levels",
+    instructor: "Olivia Wilson",
+    price: "$22 / Class",
+    monthly: "$80 / Month",
+    schedule: "Sunday • 5:00 PM - 6:15 PM",
+    duration: "75 Minutes",
+    description:
+      "A calming practice using props and gentle poses to reduce stress, promote healing, and restore both body and mind.",
+    image: "/images/yoga/restorative.jpg",
+  },
+
+  {
+    id: 8,
+    name: "Family Yoga",
+    level: "Kids & Adults",
+    instructor: "Rachel Adams",
+    price: "$30 / Family",
+    monthly: "$110 / Month",
+    schedule: "Saturday • 10:00 AM - 11:00 AM",
+    duration: "60 Minutes",
+    description:
+      "A fun and interactive class designed for parents and children to enjoy yoga together while building flexibility, balance, and connection.",
+    image: "/images/yoga/family.jpg",
+  },
+];
+
+export default yogaClasses;

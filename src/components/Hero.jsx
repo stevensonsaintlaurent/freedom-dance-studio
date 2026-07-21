@@ -30,7 +30,7 @@ const Hero = () => {
           {/* Left Side */}
           <div className="max-w-2xl text-center lg:text-left">
             <div className="badge badge-primary badge-lg mb-6 animate-pulse">
-              💃 Welcome to Freedom Dance Studio
+              💃 Welcome to Freedom Studio
             </div>
 
             <h1 className="text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-7xl">
@@ -42,9 +42,9 @@ const Hero = () => {
             </h1>
 
             <p className="mt-6 text-base leading-8 text-gray-200 sm:text-lg">
-              Join Las Vegas' premier dance community and learn Bachata, Salsa,
-              Urban Kiz, Konpa, and more. Whether you're dancing for fun,
-              fitness, or performance, we have classes for every level.
+              Join Las Vegas' Freedom community and learn Bachata, Salsa, Urban
+              Kiz, Konpa, and more. Whether you're dancing for fun, fitness, or
+              performance, we have classes for every level.
             </p>
 
             <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
