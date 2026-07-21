@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa";
 import { NavLinks } from "./NavLinks";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Footer = () => {
   const scroolUp = () => {
@@ -18,6 +19,10 @@ const Footer = () => {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <footer className="bg-neutral text-neutral-content mt-20">
       <div className="max-w-7xl mx-auto px-6 py-16">
@@ -34,17 +39,13 @@ const Footer = () => {
               your dancing to the next level.
             </p>
 
-            <Link
-              to="/classes"
-              className="btn btn-primary mt-6"
-              onClick={scroolUp}
-            >
+            <Link to="/classes" className="btn btn-primary mt-6">
               Book Your First Class
             </Link>
           </div>
 
           {/* Quick Links */}
-          <div className=" flex justify-center items-center flex-col gap-6 ">
+          <div className=" flex justify-center items-center flex-col gap-6 sm:block sm:m-2 sm:gap-1">
             <h3 className="footer-title text-lg">Quick Links</h3>
 
             <NavLinks />

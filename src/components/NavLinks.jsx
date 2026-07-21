@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 const links = [
@@ -16,14 +17,25 @@ export const NavLinks = ({ mobileMenu }) => {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <>
       {links.map((link) => {
         const { id, url, text } = link;
 
         return (
-          <li key={id}>
-            <NavLink to={url} className="capitalize" onClick={scroolUp}>
+          <li
+            key={id}
+            className="list-none hover:bg-base-content   transition-all"
+          >
+            <NavLink
+              to={url}
+              className="capitalize sm:block"
+              onClick={scroolUp}
+            >
               {text}
             </NavLink>
           </li>
