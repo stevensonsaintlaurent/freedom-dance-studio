@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 import useOnSudmit from "../hooks/useOnSudmit";
@@ -56,6 +56,16 @@ const MembershipForm = () => {
     );
   }
 
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <section className="bg-base-200 py-16 px-5">
       <div className="max-w-5xl mx-auto">
@@ -167,11 +177,9 @@ const MembershipForm = () => {
 
           <h2 className="text-2xl font-bold mb-5">Membership Types</h2>
           <input
-            readOnly
             type="tel"
-            placeholder="$30"
             className="input input-bordered"
-            value={title ? "" : "bachata"}
+            value={title}
             name="title"
           />
 
@@ -179,9 +187,7 @@ const MembershipForm = () => {
 
           <div className="grid md:grid-cols-2 gap-5">
             <input
-              readOnly
               type="tel"
-              placeholder={title ? title : ""}
               className="input input-bordered"
               value={price}
               name="price"
@@ -190,7 +196,6 @@ const MembershipForm = () => {
             <input
               required
               type="text"
-              placeholder="bachata"
               className="input input-bordered"
               value={description}
               name="description"

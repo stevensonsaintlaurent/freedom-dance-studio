@@ -27,10 +27,7 @@ export const NavLinks = ({ mobileMenu }) => {
         const { id, url, text } = link;
 
         return (
-          <li
-            key={id}
-            className="list-none hover:bg-base-content   transition-all"
-          >
+          <li key={id} className="list-none  transition-all">
             <NavLink
               to={url}
               className="capitalize sm:block"

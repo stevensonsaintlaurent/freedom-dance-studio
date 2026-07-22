@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import rehearsal from "../assets/rehearsal.jpeg";
 
 const StudioRental = () => {
+  const navigate = useNavigate();
+  const handleRental = () => {
+    navigate("/rentalStudio");
+  };
+
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <section className="bg-base-200 py-16 px-4">
       <div className="max-w-7xl mx-auto">
@@ -21,7 +38,7 @@ const StudioRental = () => {
           <div className="card bg-base-100 shadow-xl overflow-hidden">
             <figure>
               <img
-                src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?auto=format&fit=crop&w=1200&q=80"
+                src={rehearsal}
                 alt="Dance Studio"
                 className="h-80 w-full object-cover"
               />
@@ -139,7 +156,9 @@ const StudioRental = () => {
             provides a clean, modern, and welcoming space for your guests.
           </p>
 
-          <button className="btn btn-primary btn-lg">Book Your Event</button>
+          <button className="btn btn-primary btn-lg" onClick={handleRental}>
+            Book Your Event
+          </button>
         </div>
       </div>
     </section>

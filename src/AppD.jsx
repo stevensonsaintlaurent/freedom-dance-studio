@@ -21,6 +21,7 @@ import {
   MembershipForm,
   MusicClasses,
   Schedule,
+  StudioRentalConfirmation,
   Teachers,
 } from "./components";
 import { useEffect } from "react";
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: "rental",
         element: <StudioRental />,
+      },
+      {
+        path: "rentalStudio",
+        element: <StudioRentalConfirmation />,
       },
     ],
   },

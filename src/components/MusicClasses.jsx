@@ -2,6 +2,7 @@ import concert from "../assets/concert-freedom-jazz/P1991000.jpg";
 import concert1 from "../assets/concert-freedom-jazz/P1990994.jpg";
 import concert2 from "../assets/concert-freedom-jazz/P1990974.jpg";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const classes = [
   {
@@ -72,6 +73,7 @@ function MusicClasses() {
   // ========= Handle Pricing ========
   const handlePrices = (plan) => {
     const findPrice = pricing.find((price) => price.price === plan);
+    console.log("prices", findPrice);
 
     navigate("/membersForm", { state: findPrice });
   };
@@ -82,6 +84,10 @@ function MusicClasses() {
       behavior: "smooth",
     });
   };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <section className="bg-base-200 py-20">
       <div className="max-w-7xl mx-auto px-6">
@@ -197,9 +203,7 @@ function MusicClasses() {
                       className={`btn mt-6 ${
                         featured ? "btn-secondary" : "btn-primary"
                       }`}
-                      onClick={() => {
-                        (scroolUp, handlePrices(price));
-                      }}
+                      onClick={() => handlePrices(price)}
                     >
                       Register
                     </button>
