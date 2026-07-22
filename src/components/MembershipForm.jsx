@@ -15,6 +15,10 @@ const MembershipForm = () => {
     setSubmitted(true);
   };
 
+  const handleChange = (e) => {
+    e.target.value;
+  };
+
   if (submitted) {
     return (
       <section className="min-h-screen bg-base-200 flex justify-center items-center p-6">
@@ -105,6 +109,7 @@ const MembershipForm = () => {
                 placeholder="John"
                 className="input input-bordered"
                 name="name"
+                onChange={handleChange}
               />
             </div>
 
@@ -119,6 +124,7 @@ const MembershipForm = () => {
                 placeholder="Doe"
                 className="input input-bordered"
                 name="last name"
+                onChange={handleChange}
               />
             </div>
 
@@ -133,6 +139,7 @@ const MembershipForm = () => {
                 placeholder="john@email.com"
                 className="input input-bordered"
                 name="email"
+                onChange={handleChange}
               />
             </div>
 
@@ -147,6 +154,7 @@ const MembershipForm = () => {
                 placeholder="(702) 555-5555"
                 className="input input-bordered"
                 name="number"
+                onChange={handleChange}
               />
             </div>
 
@@ -155,7 +163,12 @@ const MembershipForm = () => {
                 <span className="label-text">Date of Birth</span>
               </label>
 
-              <input required type="date" className="input input-bordered" />
+              <input
+                required
+                type="date"
+                className="input input-bordered"
+                onChange={handleChange}
+              />
             </div>
 
             <div className="form-control">
@@ -163,7 +176,11 @@ const MembershipForm = () => {
                 <span className="label-text">Gender</span>
               </label>
 
-              <select className="select select-bordered" name="gender">
+              <select
+                className="select select-bordered"
+                name="gender"
+                onChange={handleChange}
+              >
                 <option>Male</option>
                 <option>Female</option>
                 <option>Prefer not to say</option>
@@ -181,6 +198,7 @@ const MembershipForm = () => {
             className="input input-bordered"
             value={title}
             name="title"
+            onChange={handleChange}
           />
 
           <h2 className="text-2xl font-bold mb-5">Membership Prices</h2>
@@ -191,6 +209,7 @@ const MembershipForm = () => {
               className="input input-bordered"
               value={price}
               name="price"
+              onChange={handleChange}
             />
 
             <input
@@ -199,6 +218,7 @@ const MembershipForm = () => {
               className="input input-bordered"
               value={description}
               name="description"
+              onChange={handleChange}
             />
           </div>
 
@@ -212,6 +232,7 @@ const MembershipForm = () => {
             className="textarea textarea-bordered h-32"
             placeholder="Tell us about your dance experience..."
             name="message"
+            onChange={handleChange}
           ></textarea>
 
           {/* Terms */}
@@ -223,6 +244,7 @@ const MembershipForm = () => {
               required
               type="checkbox"
               className="checkbox checkbox-primary"
+              onChange={handleChange}
             />
 
             <span>

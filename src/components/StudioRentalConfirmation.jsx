@@ -32,10 +32,9 @@ export default function RentalConfirmation() {
     );
   };
 
-  const handleText = (e) => {
-    e.preventDefault();
+  const handleText = () => {
     setText(
-      "you successfuly reserve your date our team will contact you within 24 hours ",
+      "Thank you! Your reservation request has been submitted. We will contact you soon with your customized quote.",
     );
 
     navigate("/rental");
