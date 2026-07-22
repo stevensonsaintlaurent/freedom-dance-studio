@@ -45,32 +45,70 @@ const Booking = () => {
 
               <div className="space-y-4">
                 <div className="flex justify-between">
-                  <span className="font-bold">Class</span>
-                  <span>{dance || title}</span>
+                  <span className="font-bold flex justify-between items-center">
+                    Class
+                  </span>
+                  <input
+                    type="text"
+                    className="input input-bordered w-full border-0"
+                    name="dance"
+                    value={dance || title}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="font-bold">Instructor</span>
-                  <span>{instructor}</span>
+                  <span className="font-bold flex justify-between items-center">
+                    Instructor
+                  </span>
+                  <input
+                    type="text"
+                    className="input input-bordered w-full  border-0"
+                    name="instructor"
+                    value={instructor}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="font-bold">Day</span>
-                  <span>{day}</span>
+                  <span className="font-bold flex justify-between items-center">
+                    Day
+                  </span>
+                  <input
+                    type="text"
+                    className="input input-bordered w-full  border-0"
+                    name="day"
+                    value={day}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="font-bold">Time</span>
-                  <span>{time}</span>
+                  <span className="font-bold flex justify-between items-center">
+                    Time
+                  </span>
+                  <input
+                    type="text"
+                    className="input input-bordered w-full  border-0"
+                    name="time"
+                    value={time}
+                    onChange={handleChange}
+                    required
+                  />
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="font-bold">Location</span>
+                  <span className="font-bold flex justify-between items-center">
+                    Location
+                  </span>
                   <span>Freedom Dance Studio</span>
                 </div>
 
                 <div className="flex justify-between">
-                  <span className="font-bold">Drop-in Price</span>
+                  <span className="font-bold flex ">Drop-in Price</span>
                   <span className="text-success text-xl font-bold">$15</span>
                 </div>
 
