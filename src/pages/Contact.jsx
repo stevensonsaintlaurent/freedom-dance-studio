@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from "uuid";
 
 const Contact = () => {
   const { setText, onSubmit } = useOnSudmit();
+  const id = uuidv4().toString();
+  console.log(typeof id);
   return (
     <section className="bg-base-100 py-20">
       <div className="container mx-auto px-6">
@@ -108,7 +110,7 @@ const Contact = () => {
               <h3 className="card-title text-3xl mb-4">Send Us a Message</h3>
 
               <form className="space-y-5" onSubmit={onSubmit}>
-                <input type="hidden" name="access_key" value={uuidv4()}></input>
+                {/* <input type="hidden" name="access_key" value={id}></input> */}
                 <div>
                   <label className="label">
                     <span className="label-text">Full Name</span>
@@ -157,11 +159,7 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
-                <button
-                  type="submit"
-                  className="btn btn-primary btn-block"
-                  onClick={() => setText("you successfuly send message ")}
-                >
+                <button type="submit" className="btn btn-primary btn-block">
                   Send Message
                 </button>
               </form>
