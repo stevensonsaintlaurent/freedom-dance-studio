@@ -25,7 +25,9 @@ const useOnSudmit = () => {
           toast.success(text);
           event.target.reset();
         } else {
-          toast.error(data.message);
+          toast.error(
+            "we cant book your class please text us from number or email",
+          );
         }
       } catch (err) {
         toast.error("Something went wrong. Please try again later.");
