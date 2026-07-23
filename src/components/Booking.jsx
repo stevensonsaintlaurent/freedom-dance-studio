@@ -15,7 +15,7 @@ const Booking = () => {
 
   const [confirm, setConfirm] = useState(location.state);
 
-  const { title, dance, day, time, level, instructor } = confirm;
+  const { name, title, dance, day, time, level, instructor } = confirm;
 
   const handleChange = (e) => {
     setBooking({
@@ -52,7 +52,7 @@ const Booking = () => {
                     type="text"
                     className="input input-bordered w-full border-0"
                     name="dance"
-                    value={dance || title}
+                    value={dance || title || name}
                     onChange={handleChange}
                     required
                   />

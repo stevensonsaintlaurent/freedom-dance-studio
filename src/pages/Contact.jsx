@@ -159,7 +159,15 @@ const Contact = () => {
                   ></textarea>
                 </div>
 
-                <button type="submit" className="btn btn-primary btn-block">
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  onClick={() =>
+                    setText(
+                      "Thank you for contacting Freedom Studio. We received your message and will get back to you as soon as possible.",
+                    )
+                  }
+                >
                   Send Message
                 </button>
               </form>

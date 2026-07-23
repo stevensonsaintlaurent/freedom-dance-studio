@@ -6,9 +6,9 @@ import useOnSudmit from "../hooks/useOnSudmit";
 const MembershipForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const location = useLocation();
-  console.log(location);
-  const { title, price, description } = location.state;
-  const { onSubmit } = useOnSudmit();
+
+  const { name, title, price, description } = location.state;
+  const { setText, onSubmit } = useOnSudmit();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -75,7 +75,7 @@ const MembershipForm = () => {
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-10">
           <h1 className="text-5xl font-bold text-primary">
-            Freedom Dance Studio Membership
+            Freedom Studio Membership
           </h1>
 
           <p className="py-4 max-w-3xl mx-auto">
@@ -196,7 +196,7 @@ const MembershipForm = () => {
           <input
             type="tel"
             className="input input-bordered"
-            value={title}
+            value={title || name}
             name="title"
             onChange={handleChange}
           />
@@ -265,7 +265,11 @@ const MembershipForm = () => {
           <button
             className="btn btn-primary btn-lg mt-8"
             type="submit"
-            onClick={handleSubmit}
+            onClick={() =>
+              setText(
+                "We've received your request and will contact you shortly to confirm your class and reservation.",
+              )
+            }
           >
             Submit Membership Request
           </button>

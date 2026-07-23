@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 const plans = [
   {
+    id: 0,
     name: "Drop-In",
     price: "$15",
     period: "/class",
@@ -11,6 +13,7 @@ const plans = [
     popular: false,
   },
   {
+    id: 1,
     name: "Monthly",
     price: "$49",
     period: "/month",
@@ -20,6 +23,7 @@ const plans = [
     popular: false,
   },
   {
+    id: 2,
     name: "Monthly",
     price: "$69",
     period: "/month",
@@ -29,6 +33,7 @@ const plans = [
     popular: true,
   },
   {
+    id: 3,
     name: "Monthly",
     price: "$99",
     period: "/month",
@@ -42,6 +47,7 @@ const plans = [
     popular: false,
   },
   {
+    id: 5,
     name: "Private Lessons",
     price: "$85",
     period: "/session",
@@ -58,7 +64,12 @@ const plans = [
 ];
 
 export default function Pricing() {
-  const id = uuidv4();
+  const navigate = useNavigate();
+
+  const handlePricing = (id) => {
+    const findPrices = plans.find((plan) => plan.id === id);
+    navigate("/membersForm", { state: findPrices });
+  };
   return (
     <section id="pricing" className="bg-base-200 py-20 px-6">
       <div className="max-w-7xl mx-auto">
@@ -74,7 +85,7 @@ export default function Pricing() {
         <div className="grid gap-8 md:grid-cols-3">
           {plans.map((plan) => (
             <div
-              key={plan.name}
+              key={plan.id}
               className={`card bg-base-100 shadow-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
                 plan.popular ? "border-primary scale-105" : "border-base-300"
               }`}
@@ -110,6 +121,7 @@ export default function Pricing() {
                     className={`btn w-full ${
                       plan.popular ? "btn-primary" : "btn-outline btn-primary"
                     }`}
+                    onClick={() => handlePricing(plan.id)}
                   >
                     {plan.button}
                   </button>
