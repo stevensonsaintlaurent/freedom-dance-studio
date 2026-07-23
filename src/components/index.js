@@ -12,3 +12,4 @@ export { default as Booking } from "./Booking";
 export { default as MembershipForm } from "./MembershipForm";
 export { default as Error } from "./Error";
 export { default as StudioRentalConfirmation } from "./StudioRentalConfirmation";
+export { default as InfoContent } from "./InfoContent";

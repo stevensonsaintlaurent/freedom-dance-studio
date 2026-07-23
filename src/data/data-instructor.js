@@ -1,11 +1,11 @@
-import steve from "../../assets/stev.png";
-import steveVideo from "../../assets/BSteven.mp4";
-import desmond from "../../assets/desm.png";
-import desmondV from "../../assets/SDesmond.mp4";
-import adriana from "../../assets/adria.jpeg";
-import adrianaVideo from "../../assets/BAdriana.mp4";
-import zagir from "../../assets/zag.png";
-import zagirVideo from "../../assets/zagirVideo.mp4";
+import steve from "../assets/stev.png";
+import steveVideo from "../assets/BSteven.mp4";
+import desmond from "../assets/desm.png";
+import desmondV from "../assets/SDesmond.mp4";
+import adriana from "../assets/adria.jpeg";
+import adrianaVideo from "../assets/BAdriana.mp4";
+import zagir from "../assets/zag.png";
+import zagirVideo from "../assets/zagirVideo.mp4";
 
 export const teachers = [
   {

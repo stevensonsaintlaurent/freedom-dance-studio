@@ -1,5 +1,6 @@
 import { Footer, Navbar } from "../components";
 import { Outlet } from "react-router-dom";
+import { About } from "../pages";
 
 const HomeLayout = () => {
   return (
@@ -9,6 +10,7 @@ const HomeLayout = () => {
       <section className="align-element py-20">
         <Outlet />
       </section>
+
       <Footer />
     </>
   );

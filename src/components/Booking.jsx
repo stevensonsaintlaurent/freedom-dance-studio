@@ -198,6 +198,7 @@ const Booking = () => {
                       `Your class has been booked successfully! with ${instructor}`,
                     )
                   }
+                  type="submit"
                 >
                   Confirm Booking
                 </button>

@@ -16,6 +16,7 @@ import {
   Booking,
   Error,
   Galeries,
+  InfoContent,
   KidsClasses,
   MemberShip,
   MembershipForm,
@@ -92,6 +93,11 @@ const router = createBrowserRouter([
       {
         path: "rentalStudio",
         element: <StudioRentalConfirmation />,
+      },
+
+      {
+        path: "info",
+        element: <InfoContent />,
       },
     ],
   },
