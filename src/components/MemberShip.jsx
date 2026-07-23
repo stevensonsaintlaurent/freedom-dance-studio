@@ -1,3 +1,5 @@
+import { v4 as uuidv4 } from "uuid";
+
 const plans = [
   {
     name: "Drop-In",
@@ -56,6 +58,7 @@ const plans = [
 ];
 
 export default function Pricing() {
+  const id = uuidv4();
   return (
     <section id="pricing" className="bg-base-200 py-20 px-6">
       <div className="max-w-7xl mx-auto">

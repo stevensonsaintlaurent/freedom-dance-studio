@@ -11,7 +11,7 @@ import { v4 as uuidv4 } from "uuid";
 const Contact = () => {
   const { setText, onSubmit } = useOnSudmit();
   const id = uuidv4().toString();
-  console.log(typeof id);
+
   return (
     <section className="bg-base-100 py-20">
       <div className="container mx-auto px-6">
