@@ -34,14 +34,14 @@ const Booking = () => {
             <div className="card-body">
               <h2 className="card-title text-3xl mb-6">Booking Summary</h2>
 
-              <div className="space-y-4">
-                <div className="flex justify-between">
+              <div className="space-y-4 ">
+                <div className="flex justify-between ">
                   <span className="font-bold flex justify-between items-center">
                     Class
                   </span>
                   <input
                     type="text"
-                    className="input input-bordered w-full border-0"
+                    className="input input-bordered w-full border-0  text-cyan-500"
                     name="dance"
                     value={dance || title || name}
                     onChange={handleChange}
@@ -55,7 +55,7 @@ const Booking = () => {
                   </span>
                   <input
                     type="text"
-                    className="input input-bordered w-full  border-0"
+                    className="input input-bordered w-full  border-0  text-cyan-500"
                     name="instructor"
                     value={instructor}
                     onChange={handleChange}
@@ -69,7 +69,7 @@ const Booking = () => {
                   </span>
                   <input
                     type="text"
-                    className="input input-bordered w-full  border-0"
+                    className="input input-bordered w-full  border-0  text-cyan-500"
                     name="day"
                     value={day}
                     onChange={handleChange}
@@ -83,7 +83,7 @@ const Booking = () => {
                   </span>
                   <input
                     type="text"
-                    className="input input-bordered w-full  border-0"
+                    className="input input-bordered w-full  border-0  text-cyan-500"
                     name="time"
                     value={time}
                     onChange={handleChange}
@@ -95,7 +95,7 @@ const Booking = () => {
                   <span className="font-bold flex justify-between items-center">
                     Location
                   </span>
-                  <span>Freedom Dance Studio</span>
+                  <span className=" text-cyan-500">Freedom Dance Studio</span>
                 </div>
 
                 <div className="flex justify-between">
@@ -155,8 +155,19 @@ const Booking = () => {
                   value={level || age}
                   onChange={handleChange}
                   placeholder={level}
+                />
+
+                {/* ====================== data form summary to us ============================ */}
+                <input className="hidden" name="day" value={day} readOnly />
+                <input className="hidden" name="time" value={time} readOnly />
+                <input
+                  className="hidden"
+                  name="dance"
+                  value={dance || title}
                   readOnly
                 />
+
+                {/* ====================== text message  ============================ */}
 
                 <textarea
                   className="textarea textarea-bordered w-full"

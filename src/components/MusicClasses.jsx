@@ -9,25 +9,28 @@ const classes = [
     title: "Youth Orchestra",
     day: "Tuesday",
     time: "4:30 PM - 6:00 PM",
-    ages: "Ages 8-18",
+    age: "Ages 8-18",
     instructor: "Freedom Music Staff",
     image: "https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=900",
+    drop: 0,
   },
   {
     title: "Jazz Band",
     day: "Saturday",
     time: "5:00 PM - 7:00 PM",
-    ages: "Teens & Adults",
+    age: "Teens & Adults",
     instructor: "Professional Jazz Director",
     image: concert,
+    drop: 0,
   },
   {
     title: "Beginner Band",
     day: "Saturday",
     time: "10:30 AM - 12:00 PM",
-    ages: "All Ages",
+    age: "All Ages",
     instructor: "Music Instructor",
     image: concert1,
+    drop: 0,
   },
 ];
 
@@ -124,7 +127,7 @@ function MusicClasses() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {classes.map((music, index) => {
-            const { title, image, day, time, ages, instructor } = music;
+            const { title, image, day, time, age, instructor } = music;
             return (
               <div
                 key={index}
@@ -150,7 +153,7 @@ function MusicClasses() {
                   </p>
 
                   <p>
-                    <strong>Students:</strong> {ages}
+                    <strong>Students:</strong> {age}
                   </p>
 
                   <p>
