@@ -21,6 +21,7 @@ const schedule = [
     instructor: "Steven",
     level: "Beginner",
     image: recent,
+    drop: 15,
   },
   {
     dance: "Bachata Ladies Styling ",
@@ -29,6 +30,7 @@ const schedule = [
     instructor: "Luna",
     level: "Beginner",
     image: lady,
+    drop: 15,
   },
 
   {
@@ -38,6 +40,7 @@ const schedule = [
     instructor: "Steven",
     level: "Beginner",
     image: recent1,
+    drop: 15,
   },
 
   {
@@ -47,6 +50,7 @@ const schedule = [
     instructor: "Steven",
     level: "Beginner",
     image: recent2,
+    drop: 15,
   },
   {
     dance: "Bachata",
@@ -55,6 +59,7 @@ const schedule = [
     instructor: "Steven",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
+    drop: 15,
   },
   {
     dance: "Konpa",
@@ -63,6 +68,7 @@ const schedule = [
     instructor: "Steven",
     level: "All Levels",
     image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=800",
+    drop: 15,
   },
   {
     dance: "Urban Kiz",
@@ -71,6 +77,7 @@ const schedule = [
     instructor: "Steven",
     level: "Intermediate",
     image: wen,
+    drop: 15,
   },
   {
     dance: "Bachata Sensual",
@@ -79,6 +86,7 @@ const schedule = [
     instructor: "Steven",
     level: "Intermediate",
     image: wedn,
+    drop: 15,
   },
   {
     dance: "Bachata Ladies Styling",
@@ -87,6 +95,7 @@ const schedule = [
     instructor: "Zagir",
     level: "Beginner",
     image: lady,
+    drop: 15,
   },
   {
     dance: "Social Dance Practice",
@@ -94,6 +103,7 @@ const schedule = [
     time: "8:00 PM - 11:00 PM",
     level: "Open to Everyone",
     image: social,
+    drop: 15,
   },
   {
     dance: "Kizomba",
@@ -102,6 +112,7 @@ const schedule = [
     time: "2:00 PM - 3:00 PM",
     level: "All Levels",
     image: recent,
+    drop: 15,
   },
   {
     dance: "Bachata",
@@ -110,6 +121,7 @@ const schedule = [
     instructor: "Steven",
     level: "All Levels",
     image: "https://images.unsplash.com/photo-1508973378895-6cf4d0d7b30d?w=800",
+    drop: 15,
   },
   {
     dance: "Salsa",
@@ -118,6 +130,7 @@ const schedule = [
     time: "4:00 PM - 5:00 PM",
     level: "Beginner",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+    drop: 15,
   },
   {
     dance: "Salsa",
@@ -126,6 +139,7 @@ const schedule = [
     time: "5:00 PM - 6:00 PM",
     level: "Intermediate",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+    drop: 15,
   },
   {
     dance: "Restorative Yoga",
@@ -136,6 +150,7 @@ const schedule = [
     description:
       "A calming practice using props and gentle poses to reduce stress, promote healing, and restore both body and mind.",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+    drop: 15,
   },
 ];
 

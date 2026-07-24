@@ -10,6 +10,7 @@ const classes = [
     dance: "Kids Dance Fundamentals",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
     instructor: "staff",
+    drop: 35,
   },
   {
     day: "Tuesday",
@@ -18,6 +19,7 @@ const classes = [
     dance: "Kids Dance Fundamentals",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
     instructor: "staff",
+    drop: 35,
   },
   {
     day: "Wednesday",
@@ -26,6 +28,7 @@ const classes = [
     dance: "Hip Hop & Freestyle",
     image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
     instructor: "staff",
+    drop: 35,
   },
 ];
 

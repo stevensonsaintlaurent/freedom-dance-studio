@@ -110,7 +110,6 @@ const Contact = () => {
               <h3 className="card-title text-3xl mb-4">Send Us a Message</h3>
 
               <form className="space-y-5" onSubmit={onSubmit}>
-                {/* <input type="hidden" name="access_key" value={id}></input> */}
                 <div>
                   <label className="label">
                     <span className="label-text">Full Name</span>

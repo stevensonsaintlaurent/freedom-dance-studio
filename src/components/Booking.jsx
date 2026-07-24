@@ -3,26 +3,16 @@ import { useLocation } from "react-router-dom";
 import useOnSudmit from "../hooks/useOnSudmit";
 
 const Booking = () => {
-  const [booking, setBooking] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    emergency: "",
-    message: "",
-  });
   const { setText, onSubmit } = useOnSudmit();
   const location = useLocation();
 
-  console.log(location);
   const [confirm, setConfirm] = useState(location.state);
 
-  const { name, title, dance, age, day, time, level, instructor } = confirm;
+  const { name, title, dance, age, day, time, level, instructor, drop } =
+    confirm;
 
   const handleChange = (e) => {
-    setBooking({
-      ...booking,
-      [e.target.name]: e.target.value,
-    });
+    e.target.value;
   };
 
   return (
@@ -110,7 +100,9 @@ const Booking = () => {
 
                 <div className="flex justify-between">
                   <span className="font-bold flex ">Drop-in Price</span>
-                  <span className="text-success text-xl font-bold">$15</span>
+                  <span className="text-success text-xl font-bold">
+                    ${drop}
+                  </span>
                 </div>
 
                 <div className="divider"></div>
@@ -138,8 +130,6 @@ const Booking = () => {
                   placeholder="Full Name"
                   className="input input-bordered w-full"
                   name="fullName"
-                  value={booking.fullName}
-                  onChange={handleChange}
                   required
                 />
 
@@ -148,8 +138,6 @@ const Booking = () => {
                   placeholder="Email"
                   className="input input-bordered w-full"
                   name="email"
-                  value={booking.email}
-                  onChange={handleChange}
                   required
                 />
 
@@ -158,8 +146,6 @@ const Booking = () => {
                   placeholder="Phone Number"
                   className="input input-bordered w-full"
                   name="phone"
-                  value={booking.phone}
-                  onChange={handleChange}
                   required
                 />
 
@@ -177,7 +163,6 @@ const Booking = () => {
                   rows="4"
                   placeholder="Special Requests"
                   name="message"
-                  value={booking.message}
                   onChange={handleChange}
                 ></textarea>
 
