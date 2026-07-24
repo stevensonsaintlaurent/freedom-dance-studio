@@ -13,9 +13,10 @@ const Booking = () => {
   const { setText, onSubmit } = useOnSudmit();
   const location = useLocation();
 
+  console.log(location);
   const [confirm, setConfirm] = useState(location.state);
 
-  const { name, title, dance, day, time, level, instructor } = confirm;
+  const { name, title, dance, age, day, time, level, instructor } = confirm;
 
   const handleChange = (e) => {
     setBooking({
@@ -165,7 +166,7 @@ const Booking = () => {
                 <input
                   className="input input-bordered w-full"
                   name="level"
-                  value={level}
+                  value={level || age}
                   onChange={handleChange}
                   placeholder={level}
                   readOnly

@@ -9,6 +9,7 @@ const classes = [
     age: "Ages 4-7",
     dance: "Kids Dance Fundamentals",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+    instructor: "staff",
   },
   {
     day: "Tuesday",
@@ -16,6 +17,7 @@ const classes = [
     age: "Ages 4-7",
     dance: "Kids Dance Fundamentals",
     image: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=800",
+    instructor: "staff",
   },
   {
     day: "Wednesday",
@@ -23,6 +25,7 @@ const classes = [
     age: "Ages 8-12",
     dance: "Hip Hop & Freestyle",
     image: "https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=800",
+    instructor: "staff",
   },
 ];
 
@@ -65,13 +68,6 @@ function KidsClasses() {
     const findPrice = prices.find((price) => price.title);
 
     navigate("/membersForm", { state: findPrice });
-  };
-
-  const scroolUp = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
   };
 
   return (

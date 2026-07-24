@@ -60,16 +60,6 @@ const MembershipForm = () => {
     );
   }
 
-  const scroolUp = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    scroolUp();
-  });
   return (
     <section className="bg-base-200 py-16 px-5">
       <div className="max-w-5xl mx-auto">

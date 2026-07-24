@@ -3,45 +3,12 @@ import useOnSudmit from "../hooks/useOnSudmit";
 import { useNavigate } from "react-router-dom";
 
 export default function RentalConfirmation() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    eventType: "",
-    date: "",
-    startTime: "",
-    endTime: "",
-    guests: "",
-    notes: "",
-  });
   const { onSubmit, setText } = useOnSudmit();
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    e.target.value;
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    alert(
-      "Thank you! Your reservation request has been submitted. We will contact you soon with your customized quote.",
-    );
-  };
-
-  const scroolUp = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    scroolUp();
-  });
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -228,7 +195,7 @@ export default function RentalConfirmation() {
                 <input
                   type="time"
                   name="endTime"
-                  className="input input-bordered w-full"
+                  className="input input-bordered w-full  focus:ring-blue-500"
                   onChange={handleChange}
                   required
                 />
