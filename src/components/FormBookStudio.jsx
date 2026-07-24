@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import useOnSudmit from "../hooks/useOnSudmit";
 
 const FormBookStudio = () => {
   const { result, hidden, onSubmit } = useOnSudmit();
   const [show, setShow] = React.useState(false);
+
+  const refname = useRef(null);
+
+  useEffect(() => {
+    refname.current?.focus();
+  });
   return (
     <>
       {hidden === false ? (
@@ -22,6 +28,7 @@ const FormBookStudio = () => {
             name="email"
             placeholder=" Enter your email Address"
             required
+            ref={refname}
           />
 
           <label>Phone Number</label>

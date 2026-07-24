@@ -32,14 +32,6 @@ export default function RentalConfirmation() {
     );
   };
 
-  const handleText = () => {
-    setText(
-      "Thank you! Your reservation request has been submitted. We will contact you soon with your customized quote.",
-    );
-
-    navigate("/rental");
-  };
-
   const scroolUp = () => {
     window.scrollTo({
       top: 0,
@@ -280,7 +272,11 @@ export default function RentalConfirmation() {
               <button
                 type="submit"
                 className="btn btn-primary btn-wide"
-                onClick={handleText}
+                onClick={() =>
+                  setText(
+                    "Thank you! Your reservation request has been submitted. We will contact you soon with your customized quote.",
+                  )
+                }
               >
                 Reserve My Date
               </button>

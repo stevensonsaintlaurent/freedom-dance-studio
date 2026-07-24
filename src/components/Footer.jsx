@@ -78,11 +78,11 @@ const Footer = () => {
               <div className="flex gap-3 items-start">
                 <FaClock className="text-primary mt-1" />
                 <span>
-                  Mon - Fri: 10 AM - 10 PM
+                  Mon - Fri: 10 AM - 9 PM
                   <br />
                   Sat : 10:30 AM - 8 PM
                   <br />
-                  Sunday-Close
+                  Sun : Closed
                 </span>
               </div>
             </div>
