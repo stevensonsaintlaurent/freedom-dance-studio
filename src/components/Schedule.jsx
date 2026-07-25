@@ -53,13 +53,17 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Beginner Kizomba",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Beginner",
   },
   {
     id: 2,
     day: "Monday",
     time: "6:00 PM",
-    dance: "Ladies styling",
+    dance: "Ladies styling Bachata",
     instructor: "Luna",
+    drop: 15,
+    level: "Beginner",
   },
   {
     id: 3,
@@ -67,6 +71,8 @@ const weeklySchedule = [
     time: "7:00 PM",
     dance: "Beginner Bachata",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Beginner",
   },
 
   {
@@ -75,6 +81,8 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Beginner Salsa",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Beginner",
   },
   {
     id: 5,
@@ -82,6 +90,8 @@ const weeklySchedule = [
     time: "7:00 PM",
     dance: "Beginner Bachata",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Beginner",
   },
   {
     id: 6,
@@ -89,6 +99,8 @@ const weeklySchedule = [
     time: "8:00 PM",
     dance: "Konpa",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Open level",
   },
   {
     id: 7,
@@ -96,21 +108,27 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Intermediate Kizomba",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Intermediate",
   },
   {
     id: 8,
     day: "Wednesday",
     time: "7:00 PM",
-    dance: "Intermediate Bachata",
+    dance: "Intermediate Bachata Sensual",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Intermediate",
   },
 
   {
     id: 9,
     day: "Thursday",
     time: "6:30 PM",
-    dance: "Ladies Styling",
+    dance: "Ladies Styling Bachata",
     instructor: "Zagir",
+    drop: 15,
+    level: "Beginner",
   },
   {
     id: 10,
@@ -118,6 +136,8 @@ const weeklySchedule = [
     time: "2:00 PM",
     dance: "Open Level Kizomba",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Open level",
   },
   {
     id: 11,
@@ -125,6 +145,8 @@ const weeklySchedule = [
     time: "3:00 PM",
     dance: "Open Level Bachata",
     instructor: "Stevenson",
+    drop: 15,
+    level: "Open level",
   },
   {
     id: 12,
@@ -132,6 +154,8 @@ const weeklySchedule = [
     time: "4:00 PM",
     dance: "Beginner Salsa",
     instructor: "Desmond",
+    drop: 15,
+    level: "Beginner",
   },
 
   {
@@ -140,6 +164,8 @@ const weeklySchedule = [
     time: "5:00 PM",
     dance: "Intermediate Salsa",
     instructor: "Desmond",
+    drop: 15,
+    level: "Intermediate",
   },
 ];
 
