@@ -24,6 +24,7 @@ import {
   Schedule,
   StudioRentalConfirmation,
   Teachers,
+  Testimonials,
 } from "./components";
 import { useEffect } from "react";
 
@@ -98,6 +99,11 @@ const router = createBrowserRouter([
       {
         path: "info",
         element: <InfoContent />,
+      },
+
+      {
+        path: "reviews",
+        element: <Testimonials />,
       },
     ],
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const services = [
@@ -183,6 +183,17 @@ export default function Schedule() {
     console.log("service", findServices);
     navigate("/membersForm", { state: findServices });
   };
+
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <section className="py-20 bg-base-200">
       <div className="max-w-7xl mx-auto px-5">

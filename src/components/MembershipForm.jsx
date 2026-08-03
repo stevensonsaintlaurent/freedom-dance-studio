@@ -161,7 +161,10 @@ const MembershipForm = () => {
               />
             </div>
 
-            <div className="form-control">
+            <div
+              className="form-control flex flex-col gap-4
+            "
+            >
               <label className="label">
                 <span className="label-text">Gender</span>
               </label>
@@ -174,6 +177,22 @@ const MembershipForm = () => {
                 <option>Male</option>
                 <option>Female</option>
                 <option>Prefer not to say</option>
+              </select>
+              {/* select  the dance  class */}
+
+              <label className="label">
+                <span className="label-text">Style</span>
+              </label>
+
+              <select
+                className="select select-bordered"
+                name="style"
+                onChange={handleChange}
+              >
+                <option>Salsa</option>
+                <option>Bachata </option>
+                <option>Kizomba</option>
+                <option>Konpa</option>
               </select>
             </div>
           </div>

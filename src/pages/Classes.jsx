@@ -1,7 +1,7 @@
 import kidsImg from "../assets/kids.jpeg";
 import adultsImg from "../assets/recentClip.jpeg";
 import musicImg from "../assets/concert-freedom-jazz/P1990974.jpg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const classes = [
@@ -42,6 +42,17 @@ const classes = [
 
 export default function Classes() {
   const [selectedClass, setSelectClass] = useState();
+
+  const scroolUp = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    scroolUp();
+  });
   return (
     <section id="classes" className="py-20 bg-base-200">
       <div className="max-w-7xl mx-auto px-6">
