@@ -25,6 +25,7 @@ import {
   StudioRentalConfirmation,
   Teachers,
   Testimonials,
+  IndependentClasses,
 } from "./components";
 import { useEffect } from "react";
 
@@ -104,6 +105,10 @@ const router = createBrowserRouter([
       {
         path: "reviews",
         element: <Testimonials />,
+      },
+      {
+        path: "independent",
+        element: <IndependentClasses />,
       },
     ],
   },

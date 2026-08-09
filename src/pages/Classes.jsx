@@ -3,6 +3,7 @@ import adultsImg from "../assets/recentClip.jpeg";
 import musicImg from "../assets/concert-freedom-jazz/P1990974.jpg";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { IndependentClasses } from "../components";
 
 const classes = [
   {
@@ -119,6 +120,10 @@ export default function Classes() {
           ))}
         </div>
       </div>
+
+      {/* =================== independance classes at freedom dance studio ==================== */}
+
+      {/* <IndependentClasses /> */}
     </section>
   );
 }
