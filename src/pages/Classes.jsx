@@ -123,7 +123,7 @@ export default function Classes() {
 
       {/* =================== independance classes at freedom dance studio ==================== */}
 
-      {/* <IndependentClasses /> */}
+      <IndependentClasses />
     </section>
   );
 }

@@ -1,4 +1,4 @@
-import reviews from "../data/review/reviewsData";
+import { testimonials } from "../data/data";
 import { FaStar, FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
 
@@ -16,7 +16,7 @@ const Reviews = () => {
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reviews.map((review) => (
+          {testimonials.map((review) => (
             <motion.div
               key={review.id}
               className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3"

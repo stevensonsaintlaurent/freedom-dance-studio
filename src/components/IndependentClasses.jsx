@@ -9,6 +9,10 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
+//  ====================== Picture =======================
+import edourdo from "../assets/instructors/edourdo.jpg";
+import luis from "../assets/instructors/luis1.jpg";
+import luz from "../assets/instructors/luz.jpg";
 
 const independentClasses = [
   {
@@ -20,8 +24,7 @@ const independentClasses = [
     category: "Latin / Urban",
     description:
       "Bring your energy and learn Reparto with Luis in a fun and high-energy class.",
-    image:
-      "https://images.unsplash.com/photo-1547153760-18fc86324498?auto=format&fit=crop&w=1200&q=80",
+    image: luis,
     video:
       "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
   },
@@ -34,8 +37,7 @@ const independentClasses = [
     category: "Urban / Fitness",
     description:
       "Turn up the energy with Luz and learn confidence, movement, and powerful twerk combinations.",
-    image:
-      "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?auto=format&fit=crop&w=1200&q=80",
+    image: luz,
     video: "https://cdn.coverr.co/videos/coverr-woman-dancing-1573/1080p.mp4",
   },
   {
@@ -47,8 +49,7 @@ const independentClasses = [
     category: "Urban / Reggaeton",
     description:
       "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
-    image:
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80",
+    image: edourdo,
     video: "https://cdn.coverr.co/videos/coverr-woman-dancing-1574/1080p.mp4",
   },
   {
@@ -60,9 +61,21 @@ const independentClasses = [
     category: "Hip-Hop / Urban",
     description:
       "Learn Hip-Hop fundamentals, combinations, and freestyle movement in a fun atmosphere.",
-    image:
-      "https://images.unsplash.com/photo-1535525153412-5a42439a210d?auto=format&fit=crop&w=1200&q=80",
+    image: edourdo,
     video: "https://cdn.coverr.co/videos/coverr-dancing-1576/1080p.mp4",
+  },
+  {
+    day: "Sunday",
+    date: "Every Sunday",
+    title: "Reparto",
+    time: "5:30 PM – 6:30 PM",
+    instructor: "Luis",
+    category: "Latin / Urban",
+    description:
+      "Bring your energy and learn Reparto with Luis in a fun and high-energy class.",
+    image: luis,
+    video:
+      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
   },
 ];
 
