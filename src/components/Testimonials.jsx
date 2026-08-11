@@ -162,7 +162,7 @@ const Reviews = () => {
                 muted
                 playsInline
                 controls
-                preload="auto"
+                preload="metadata"
                 onPlay={() => handlePlay(0)}
                 className="w-full h-[400px] object-cover"
                 poster="/reviews/student1.jpg"
@@ -194,7 +194,7 @@ const Reviews = () => {
                 muted
                 playsInline
                 controls
-                preload="auto"
+                preload="metadata"
                 onPlay={() => handlePlay(1)}
                 className="w-full h-[400px] object-cover"
                 poster="/reviews/student3.jpg"

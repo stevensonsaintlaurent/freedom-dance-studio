@@ -360,7 +360,7 @@ export default function Gallery() {
                     muted
                     playsInline
                     controls
-                    preload="auto"
+                    preload="metadata"
                     onPlay={() => handleVideoPlay(index)}
                     onClick={() => handleVideoClick(index)}
                     className="
