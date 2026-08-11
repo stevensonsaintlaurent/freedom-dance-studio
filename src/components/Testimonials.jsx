@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { testimonials } from "../data/data";
 import { FaStar, FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
-import interview from "../assets/reviews/interviewClip.mp4";
-import interview1 from "../assets/reviews/freemanInterview.mp4";
+import interview from "../assets/clipVideo/konpa.mp4";
+import interview1 from "../assets/clipVideo/kizomba.mp4";
 
 const Reviews = () => {
   const videoRefs = useRef([]);

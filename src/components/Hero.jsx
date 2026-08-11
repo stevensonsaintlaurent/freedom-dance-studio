@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import heroVideo from "../assets/freedom2.mp4";
+import heroVideo from "../assets/clipVideo/bachataclip2.mp4";
 import heroImage from "../assets/recentClip1.jpeg";
 
 import hero1 from "../assets/konpaClip.jpeg";

@@ -1,8 +1,5 @@
-import {
-  createBrowserRouter,
-  RouterProvider,
-  useLocation,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import {
   HomeLayout,
   Landing,
@@ -11,6 +8,7 @@ import {
   Classes,
   StudioRental,
 } from "./pages";
+
 import {
   AdultClasses,
   Booking,
@@ -27,7 +25,6 @@ import {
   Testimonials,
   IndependentClasses,
 } from "./components";
-import { useEffect } from "react";
 
 const router = createBrowserRouter([
   {
@@ -43,122 +40,87 @@ const router = createBrowserRouter([
 
       {
         path: "about",
-        lazy: async () => {
-          const { default: About } = await import("./pages/About");
-          return { Component: About };
-        },
+        element: <About />,
       },
 
       {
         path: "classes",
-        lazy: async () => {
-          const { default: Classes } = await import("./pages/Classes");
-          return { Component: Classes };
-        },
+        element: <Classes />,
       },
 
       {
         path: "contact",
-        lazy: async () => {
-          const { default: Contact } = await import("./pages/Contact");
-          return { Component: Contact };
-        },
+        element: <Contact />,
       },
 
       {
         path: "schedule",
-        lazy: async () => {
-          const { default: Schedule } = await import("./components/Schedule");
-
-          return { Component: Schedule };
-        },
+        element: <Schedule />,
       },
 
       {
         path: "teachers",
-        lazy: async () => {
-          const { default: Teachers } = await import("./components/Teachers");
-
-          return { Component: Teachers };
-        },
+        element: <Teachers />,
       },
 
       {
         path: "gallery",
-        lazy: async () => {
-          const { default: Galeries } = await import("./components/Galeries");
-
-          return { Component: Galeries };
-        },
+        element: <Galeries />,
       },
 
       {
         path: "membership",
-        lazy: async () => {
-          const { default: MemberShip } =
-            await import("./components/MemberShip");
+        element: <MemberShip />,
+      },
 
-          return { Component: MemberShip };
-        },
+      {
+        path: "membersForm",
+        element: <MembershipForm />,
       },
 
       {
         path: "kids",
-        lazy: async () => {
-          const { default: KidsClasses } =
-            await import("./components/KidsClasses");
-
-          return { Component: KidsClasses };
-        },
+        element: <KidsClasses />,
       },
 
       {
         path: "adult",
-        lazy: async () => {
-          const { default: AdultClasses } =
-            await import("./components/AdultClasses");
-
-          return { Component: AdultClasses };
-        },
+        element: <AdultClasses />,
       },
 
       {
         path: "music",
-        lazy: async () => {
-          const { default: MusicClasses } =
-            await import("./components/MusicClasses");
-
-          return { Component: MusicClasses };
-        },
+        element: <MusicClasses />,
       },
 
       {
         path: "book",
-        lazy: async () => {
-          const { default: Booking } = await import("./components/Booking");
+        element: <Booking />,
+      },
 
-          return { Component: Booking };
-        },
+      {
+        path: "rental",
+        element: <StudioRental />,
+      },
+
+      {
+        path: "rentalStudio",
+        element: <StudioRentalConfirmation />,
+      },
+
+      {
+        path: "info",
+        element: <InfoContent />,
       },
 
       {
         path: "reviews",
-        lazy: async () => {
-          const { default: Testimonials } =
-            await import("./components/Testimonials");
-
-          return { Component: Testimonials };
-        },
+        element: <Testimonials />,
       },
 
       {
         path: "independent",
-        lazy: async () => {
-          const { default: IndependentClasses } =
-            await import("./components/IndependentClasses");
-
-          return { Component: IndependentClasses };
-        },
+        element: <IndependentClasses />,
       },
     ],
   },

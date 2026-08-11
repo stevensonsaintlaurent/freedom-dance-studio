@@ -13,7 +13,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/vite-react-gallery/",
+  base: "/",
 
   build: {
     rollupOptions: {
