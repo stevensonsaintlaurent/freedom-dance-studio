@@ -1,26 +1,26 @@
-import { useEffect, useRef, useState } from "react";
-
-import { Play, Maximize, Camera, Video, X, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import {
+  Maximize,
+  Camera,
+  Video,
+  X,
+  ArrowRight,
+  ExternalLink,
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 // ====================== PHOTOS ======================
-import dance1 from "../assets/recentClip.jpeg";
 import dance2 from "../assets/recentClip1.jpeg";
 import dance3 from "../assets/recentClip2.jpeg";
-import dance4 from "../assets/recentLeader.jpeg";
 import dance5 from "../assets/followerClip.jpeg";
-import dance6 from "../assets/followerClip.jpeg";
 
 import party1 from "../assets/sbkParty/FJ8A6466.jpg";
 import party2 from "../assets/sbkParty/FJ8A6603.jpg";
-import party3 from "../assets/sbkParty/FJ8A6605.jpg";
 
 import concert2 from "../assets/concert-freedom-jazz/P1990974.jpg";
 
 // ====================== VIDEOS ======================
-import kizomba from "../assets/clipVideo/kizomba.mp4";
-import bachata from "../assets/clipVideo/bachataclip2.mp4";
-import konpa from "../assets/clipVideo/konpa.mp4";
-import { useNavigate } from "react-router-dom";
+import { videos } from "../data/video";
 
 // ====================== PHOTO DATA ======================
 const images = [
@@ -62,103 +62,46 @@ const images = [
   },
 ];
 
-// ====================== VIDEO DATA ======================
-const videos = [
-  {
-    id: 1,
-    title: "Konpa",
-    description: "Feel the rhythm and energy of Konpa.",
-    url: konpa,
-  },
-  {
-    id: 2,
-    title: "Bachata",
-    description: "Smooth Bachata movement and connection.",
-    url: bachata,
-  },
-  {
-    id: 3,
-    title: "Kizomba UrbanKiz",
-    description: "Experience the smooth energy of Urban Kiz.",
-    url: kizomba,
-  },
-];
-
 export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState(null);
   const navigate = useNavigate();
 
-  const videoRefs = useRef([]);
+  // =====================================================
+  // REMOVE THE STUDENT INTERVIEW FROM THE GALLERY
+  // =====================================================
+  const galleryVideos = videos.filter(
+    (video) => video.title !== "A Student’s Experience at Freedom Dance Studio",
+  );
 
   // =====================================================
-  // AUTOPLAY FIRST VIDEO WHEN PAGE LOADS
+  // CONVERT YOUTUBE URL TO EMBED URL
   // =====================================================
-  useEffect(() => {
-    const firstVideo = videoRefs.current[0];
+  const getYouTubeEmbedUrl = (url) => {
+    if (!url) return "";
 
-    if (!firstVideo) return;
+    try {
+      const parsedUrl = new URL(url);
 
-    firstVideo.muted = true;
+      // https://youtu.be/VIDEO_ID
+      if (parsedUrl.hostname === "youtu.be") {
+        const videoId = parsedUrl.pathname.substring(1);
 
-    const playPromise = firstVideo.play();
-
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Browser may block autoplay.
-        // User can still click the video.
-      });
-    }
-  }, []);
-
-  // =====================================================
-  // WHEN A VIDEO PLAYS, PAUSE ALL OTHER VIDEOS
-  // =====================================================
-  const handleVideoPlay = (index) => {
-    videoRefs.current.forEach((video, i) => {
-      if (video && i !== index) {
-        video.pause();
+        return `https://www.youtube.com/embed/${videoId}`;
       }
-    });
-  };
 
-  // =====================================================
-  // USER CLICKS VIDEO
-  // AUTOPLAYED VIDEO IS MUTED.
-  // CLICKING IT ENABLES SOUND.
-  // =====================================================
-  const handleVideoClick = (index) => {
-    const video = videoRefs.current[index];
+      // https://www.youtube.com/watch?v=VIDEO_ID
+      if (parsedUrl.hostname.includes("youtube.com")) {
+        const videoId = parsedUrl.searchParams.get("v");
 
-    if (!video) return;
-
-    // User interaction allows sound.
-    video.muted = false;
-
-    // Pause every other video.
-    videoRefs.current.forEach((otherVideo, i) => {
-      if (otherVideo && i !== index) {
-        otherVideo.pause();
-        otherVideo.muted = true;
+        if (videoId) {
+          return `https://www.youtube.com/embed/${videoId}`;
+        }
       }
-    });
 
-    if (video.paused) {
-      video.play().catch(() => {});
-    }
-  };
-
-  // =====================================================
-  // FULLSCREEN
-  // =====================================================
-  const handleFullscreen = (index) => {
-    const video = videoRefs.current[index];
-
-    if (!video) return;
-
-    if (video.requestFullscreen) {
-      video.requestFullscreen();
-    } else if (video.webkitRequestFullscreen) {
-      video.webkitRequestFullscreen();
+      return url;
+    } catch (error) {
+      console.error("Invalid YouTube URL:", url);
+      return "";
     }
   };
 
@@ -221,7 +164,6 @@ export default function Gallery() {
                 animationFillMode: "both",
               }}
             >
-              {/* Image */}
               <div className="relative h-80 overflow-hidden">
                 <img
                   src={photo.image}
@@ -316,7 +258,7 @@ export default function Gallery() {
         </div>
 
         {/* ================================================= */}
-        {/* VIDEO GALLERY */}
+        {/* YOUTUBE VIDEO GALLERY */}
         {/* ================================================= */}
 
         <div className="mt-24">
@@ -329,122 +271,74 @@ export default function Gallery() {
           </div>
 
           <p className="text-base-content/60 mb-8">
-            Videos start muted automatically. Click a video to play it with
-            sound.
+            Watch our latest dance videos directly from YouTube.
           </p>
 
-          <div className="grid gap-8 lg:grid-cols-3">
-            {videos.map((video, index) => (
-              <div
-                key={video.id}
-                className="
-                  group
-                  card
-                  bg-base-100
-                  shadow-xl
-                  overflow-hidden
-                  rounded-3xl
-                  transition-all
-                  duration-500
-                  hover:-translate-y-2
-                  hover:shadow-2xl
-                "
-              >
-                {/* Video */}
-                <div className="relative aspect-video bg-black overflow-hidden">
-                  <video
-                    ref={(el) => {
-                      videoRefs.current[index] = el;
-                    }}
-                    src={video.url}
-                    muted
-                    playsInline
-                    controls
-                    preload="metadata"
-                    onPlay={() => handleVideoPlay(index)}
-                    onClick={() => handleVideoClick(index)}
-                    className="
-                      w-full
-                      h-full
-                      object-cover
-                      cursor-pointer
-                      transition-transform
-                      duration-700
-                      group-hover:scale-105
-                    "
-                  />
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {galleryVideos.map((video) => {
+              const embedUrl = getYouTubeEmbedUrl(video.url);
 
-                  {/* Play overlay */}
-                  <div
-                    className="
-                      absolute
-                      inset-0
-                      pointer-events-none
-                      flex
-                      items-center
-                      justify-center
-                      transition-opacity
-                      duration-300
-                    "
-                  >
-                    <div
-                      className="
-                        btn
-                        btn-circle
-                        btn-primary
-                        btn-lg
-                        opacity-70
-                        group-hover:opacity-100
-                        shadow-2xl
+              return (
+                <div
+                  key={video.id}
+                  className="
+                    group
+                    card
+                    bg-base-100
+                    shadow-xl
+                    overflow-hidden
+                    rounded-3xl
+                    transition-all
+                    duration-500
+                    hover:-translate-y-2
+                    hover:shadow-2xl
+                  "
+                >
+                  {/* YouTube Player */}
+                  <div className="relative aspect-video bg-black overflow-hidden">
+                    <iframe
+                      src={embedUrl}
+                      title={video.title}
+                      className="w-full h-full"
+                      loading="lazy"
+                      allow="
+                        accelerometer;
+                        autoplay;
+                        clipboard-write;
+                        encrypted-media;
+                        gyroscope;
+                        picture-in-picture;
+                        web-share
                       "
-                    >
-                      <Play size={25} fill="currentColor" />
+                      allowFullScreen
+                    />
+                  </div>
+
+                  {/* Video information */}
+                  <div className="card-body">
+                    <h2 className="card-title text-xl md:text-2xl">
+                      {video.title}
+                    </h2>
+
+                    <p className="text-base-content/60">
+                      Watch this video from Freedom Dance Studio.
+                    </p>
+
+                    <div className="card-actions justify-end mt-3">
+                      <a
+                        href={video.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn btn-primary gap-2"
+                      >
+                        Watch on YouTube
+                        <ExternalLink size={17} />
+                      </a>
                     </div>
                   </div>
-
-                  {/* Fullscreen */}
-                  <button
-                    onClick={() => handleFullscreen(index)}
-                    className="
-                      absolute
-                      top-3
-                      right-3
-                      btn
-                      btn-circle
-                      btn-sm
-                      bg-black/60
-                      hover:bg-black/80
-                      text-white
-                      border-none
-                      opacity-0
-                      group-hover:opacity-100
-                      transition-opacity
-                      duration-300
-                    "
-                    aria-label="Fullscreen"
-                  >
-                    <Maximize size={16} />
-                  </button>
                 </div>
-
-                {/* Video info */}
-                <div className="card-body">
-                  <h2 className="card-title text-2xl">{video.title}</h2>
-
-                  <p className="text-base-content/60">{video.description}</p>
-
-                  <div className="card-actions justify-end mt-3">
-                    <button
-                      onClick={() => handleVideoClick(index)}
-                      className="btn btn-primary gap-2"
-                    >
-                      <Play size={17} fill="currentColor" />
-                      Watch Video
-                    </button>
-                  </div>
-                </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

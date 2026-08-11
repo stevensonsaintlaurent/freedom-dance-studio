@@ -2,14 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import { testimonials } from "../data/data";
 import { FaStar, FaPlay } from "react-icons/fa";
 import { motion } from "framer-motion";
-import interview from "../assets/clipVideo/konpa.mp4";
-import interview1 from "../assets/clipVideo/kizomba.mp4";
+
+import { videos } from "../data/video";
 
 const Reviews = () => {
   const videoRefs = useRef([]);
   const [expandedReviews, setExpandedReviews] = useState({});
 
-  // Autoplay the first video when the page loads
+  // Only display the first 2 videos
+  const reviewVideos = videos.slice(0, 2);
+  console.log(reviewVideos);
+
+  // Autoplay first video when page loads
   useEffect(() => {
     const firstVideo = videoRefs.current[0];
 
@@ -19,12 +23,14 @@ const Reviews = () => {
       const playPromise = firstVideo.play();
 
       if (playPromise !== undefined) {
-        playPromise.catch(() => {});
+        playPromise.catch(() => {
+          // Browser may block autoplay
+        });
       }
     }
   }, []);
 
-  // Make sure only one video can play at a time
+  // Only allow one video to play at a time
   const handlePlay = (index) => {
     videoRefs.current.forEach((video, i) => {
       if (video && i !== index) {
@@ -33,7 +39,7 @@ const Reviews = () => {
     });
   };
 
-  // Fullscreen when clicking the video
+  // Fullscreen
   const handleVideoClick = async (video) => {
     try {
       if (video.requestFullscreen) {
@@ -143,70 +149,53 @@ const Reviews = () => {
             Video Testimonials
           </h2>
 
-          <div className="grid lg:grid-cols-2 gap-10">
-            {/* VIDEO 1 */}
-            <div
-              className="relative rounded-xl overflow-hidden shadow-xl group cursor-pointer"
-              onClick={(e) => {
-                if (e.target.tagName !== "VIDEO") return;
+          <div className="grid md:grid-cols-2 gap-10">
+            {reviewVideos.map((video, index) => {
+              const youtubeId = video.url.split("youtu.be/")[1]?.split("?")[0];
 
-                const video = videoRefs.current[0];
+              return (
+                <motion.div
+                  key={video.id}
+                  initial={{ opacity: 0, y: 50 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: index * 0.15,
+                  }}
+                  className="card bg-base-100 shadow-xl overflow-hidden group hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
+                >
+                  {/* YouTube Video */}
+                  <div className="relative aspect-video overflow-hidden">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${youtubeId}`}
+                      title={video.title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
 
-                if (video) {
-                  handleVideoClick(video);
-                }
-              }}
-            >
-              <video
-                ref={(el) => (videoRefs.current[0] = el)}
-                muted
-                playsInline
-                controls
-                preload="metadata"
-                onPlay={() => handlePlay(0)}
-                className="w-full h-[400px] object-cover"
-                poster="/reviews/student1.jpg"
-              >
-                <source src={interview1} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+                  {/* Video Information */}
+                  <div className="card-body">
+                    <h3 className="card-title text-xl">{video.title}</h3>
 
-              <div className="absolute inset-0 flex justify-center items-center pointer-events-none group-hover:bg-black/30 duration-300">
-                <FaPlay className="text-white text-6xl animate-pulse" />
-              </div>
-            </div>
+                    <p className="text-base-content/70">
+                      Watch and experience the energy of Freedom Dance Studio.
+                    </p>
 
-            {/* VIDEO 2 */}
-            <div
-              className="relative rounded-xl overflow-hidden shadow-xl group cursor-pointer"
-              onClick={(e) => {
-                if (e.target.tagName !== "VIDEO") return;
-
-                const video = videoRefs.current[1];
-
-                if (video) {
-                  handleVideoClick(video);
-                }
-              }}
-            >
-              <video
-                ref={(el) => (videoRefs.current[1] = el)}
-                muted
-                playsInline
-                controls
-                preload="metadata"
-                onPlay={() => handlePlay(1)}
-                className="w-full h-[400px] object-cover"
-                poster="/reviews/student3.jpg"
-              >
-                <source src={interview} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-
-              <div className="absolute inset-0 flex justify-center items-center pointer-events-none group-hover:bg-black/30 duration-300">
-                <FaPlay className="text-white text-6xl animate-pulse" />
-              </div>
-            </div>
+                    <a
+                      href={video.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary mt-3"
+                    >
+                      Watch on YouTube
+                    </a>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
 
