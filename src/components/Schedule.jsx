@@ -174,7 +174,6 @@ const days = [
   "Thursday",
   "Friday",
   "Saturday",
-  "Sunday",
 ];
 
 export default function Schedule() {
