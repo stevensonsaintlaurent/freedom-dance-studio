@@ -53,7 +53,7 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Beginner Kizomba",
     instructor: "Stevenson",
-    drop: 15,
+    drop: 0,
     level: "Beginner",
   },
   {

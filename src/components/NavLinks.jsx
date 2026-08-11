@@ -3,11 +3,13 @@ import { NavLink } from "react-router-dom";
 
 const links = [
   { id: 1, url: "/", text: "home" },
-  { id: 4, url: "about", text: "about" },
-  { id: 2, url: "classes", text: "classes" },
-  { id: 8, url: "membership", text: "prices" },
-  { id: 6, url: "rental", text: " Studio Rental" },
-  { id: 5, url: "contact", text: "contact" },
+  { id: 2, url: "about", text: "about" },
+  { id: 3, url: "classes", text: "classes" },
+  { id: 4, url: "membership", text: "prices" },
+  { id: 5, url: "rental", text: " Studio Rental" },
+  { id: 6, url: "gallery", text: " Gallery" },
+  { id: 7, url: "reviews", text: " Testimonials" },
+  { id: 8, url: "contact", text: "contact" },
 ];
 
 export const NavLinks = ({ mobileMenu }) => {

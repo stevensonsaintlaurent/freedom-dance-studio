@@ -34,98 +34,136 @@ const router = createBrowserRouter([
     path: "/",
     element: <HomeLayout />,
     errorElement: <Error />,
+
     children: [
       {
         index: true,
         element: <Landing />,
       },
+
       {
         path: "about",
-        element: <About />,
+        lazy: async () => {
+          const { default: About } = await import("./pages/About");
+          return { Component: About };
+        },
       },
+
       {
         path: "classes",
-        element: <Classes />,
+        lazy: async () => {
+          const { default: Classes } = await import("./pages/Classes");
+          return { Component: Classes };
+        },
       },
 
       {
         path: "contact",
-        element: <Contact />,
-      },
-      {
-        path: "schedule",
-        element: <Schedule />,
-      },
-      {
-        path: "teachers",
-        element: <Teachers />,
-      },
-      {
-        path: "galeries",
-        element: <Galeries />,
-      },
-      {
-        path: "membership",
-        element: <MemberShip />,
-      },
-      {
-        path: "kids",
-        element: <KidsClasses />,
-      },
-      {
-        path: "adult",
-        element: <AdultClasses />,
-      },
-      {
-        path: "music",
-        element: <MusicClasses />,
-      },
-      {
-        path: "book",
-        element: <Booking />,
-      },
-      {
-        path: "membersForm",
-        element: <MembershipForm />,
-      },
-      {
-        path: "rental",
-        element: <StudioRental />,
-      },
-      {
-        path: "rentalStudio",
-        element: <StudioRentalConfirmation />,
+        lazy: async () => {
+          const { default: Contact } = await import("./pages/Contact");
+          return { Component: Contact };
+        },
       },
 
       {
-        path: "info",
-        element: <InfoContent />,
+        path: "schedule",
+        lazy: async () => {
+          const { default: Schedule } = await import("./components/Schedule");
+
+          return { Component: Schedule };
+        },
+      },
+
+      {
+        path: "teachers",
+        lazy: async () => {
+          const { default: Teachers } = await import("./components/Teachers");
+
+          return { Component: Teachers };
+        },
+      },
+
+      {
+        path: "gallery",
+        lazy: async () => {
+          const { default: Galeries } = await import("./components/Galeries");
+
+          return { Component: Galeries };
+        },
+      },
+
+      {
+        path: "membership",
+        lazy: async () => {
+          const { default: MemberShip } =
+            await import("./components/MemberShip");
+
+          return { Component: MemberShip };
+        },
+      },
+
+      {
+        path: "kids",
+        lazy: async () => {
+          const { default: KidsClasses } =
+            await import("./components/KidsClasses");
+
+          return { Component: KidsClasses };
+        },
+      },
+
+      {
+        path: "adult",
+        lazy: async () => {
+          const { default: AdultClasses } =
+            await import("./components/AdultClasses");
+
+          return { Component: AdultClasses };
+        },
+      },
+
+      {
+        path: "music",
+        lazy: async () => {
+          const { default: MusicClasses } =
+            await import("./components/MusicClasses");
+
+          return { Component: MusicClasses };
+        },
+      },
+
+      {
+        path: "book",
+        lazy: async () => {
+          const { default: Booking } = await import("./components/Booking");
+
+          return { Component: Booking };
+        },
       },
 
       {
         path: "reviews",
-        element: <Testimonials />,
+        lazy: async () => {
+          const { default: Testimonials } =
+            await import("./components/Testimonials");
+
+          return { Component: Testimonials };
+        },
       },
+
       {
         path: "independent",
-        element: <IndependentClasses />,
+        lazy: async () => {
+          const { default: IndependentClasses } =
+            await import("./components/IndependentClasses");
+
+          return { Component: IndependentClasses };
+        },
       },
     ],
   },
 ]);
 
-const AppD = () => {
-  const scroolUp = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    scroolUp();
-  });
+export default function AppD() {
   return <RouterProvider router={router} />;
-};
-
-export default AppD;
+}
