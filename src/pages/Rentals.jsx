@@ -1,175 +1,19 @@
-// import React, { useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
-// import rehearsal from "../assets/rehearsal.jpeg";
-
-// const StudioRental = () => {
-//   const navigate = useNavigate();
-//   const handleRental = () => {
-//     navigate("/rentalStudio");
-//   };
-
-//   const scroolUp = () => {
-//     window.scrollTo({
-//       top: 0,
-//       behavior: "smooth",
-//     });
-//   };
-
-//   useEffect(() => {
-//     scroolUp();
-//   });
-//   return (
-//     <section className="bg-base-200 py-16 px-4">
-//       <div className="max-w-7xl mx-auto">
-//         {/* Header */}
-//         <div className="text-center mb-12">
-//           <h2 className="text-5xl font-bold text-primary">Rent Our Studio</h2>
-
-//           <p className="mt-5 text-lg max-w-3xl mx-auto">
-//             Looking for the perfect venue for your next event? Freedom Dance
-//             Studio offers a beautiful, spacious, and welcoming environment for
-//             parties, rehearsals, workshops, private lessons, fitness sessions,
-//             meetings, and special celebrations.
-//           </p>
-//         </div>
-
-//         {/* Images */}
-//         <div className="grid lg:grid-cols-2 gap-8 mb-14">
-//           <div className="card bg-base-100 shadow-xl overflow-hidden">
-//             <figure>
-//               <img
-//                 src={rehearsal}
-//                 alt="Dance Studio"
-//                 className="h-80 w-full object-cover"
-//               />
-//             </figure>
-//           </div>
-
-//           <div className="card bg-base-100 shadow-xl overflow-hidden">
-//             <figure>
-//               <img
-//                 src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80"
-//                 alt="Studio Event Space"
-//                 className="h-80 w-full object-cover"
-//               />
-//             </figure>
-//           </div>
-//         </div>
-
-//         {/* Pricing */}
-//         <div className="grid md:grid-cols-3 gap-8">
-//           <div className="card bg-base-100 shadow-xl">
-//             <div className="card-body text-center">
-//               <h3 className="card-title justify-center">Hourly Rental</h3>
-
-//               <div className="text-5xl font-bold text-success mt-4">$20</div>
-
-//               <p className="text-lg mt-2">Starting price per hour</p>
-//             </div>
-//           </div>
-
-//           <div className="card bg-primary text-primary-content shadow-xl">
-//             <div className="card-body text-center">
-//               <h3 className="card-title justify-center">Large Events</h3>
-
-//               <div className="text-5xl font-bold mt-4">$120</div>
-
-//               <p className="mt-2">
-//                 Events with more than <strong>25 guests</strong>
-//               </p>
-//             </div>
-//           </div>
-
-//           <div className="card bg-error text-white shadow-xl">
-//             <div className="card-body text-center">
-//               <h3 className="card-title justify-center">Cleaning Fee</h3>
-
-//               <div className="text-5xl font-bold mt-4">$120</div>
-
-//               <p className="mt-2">Required after every event</p>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* Information */}
-//         <div className="grid lg:grid-cols-2 gap-10 mt-16">
-//           {/* Perfect For */}
-//           <div className="card bg-base-100 shadow-xl">
-//             <div className="card-body">
-//               <h3 className="text-3xl font-bold mb-5">Perfect For</h3>
-
-//               <ul className="space-y-3 text-lg">
-//                 <li>🎉 Birthday Parties</li>
-//                 <li>💃 Dance Rehearsals</li>
-//                 <li>🧘 Yoga & Fitness Classes</li>
-//                 <li>🎵 Music Rehearsals</li>
-//                 <li>👨‍🏫 Workshops</li>
-//                 <li>👥 Private Classes</li>
-//                 <li>📸 Photo & Video Shoots</li>
-//                 <li>🎭 Community Events</li>
-//               </ul>
-//             </div>
-//           </div>
-
-//           {/* Rental Details */}
-//           <div className="card bg-base-100 shadow-xl">
-//             <div className="card-body">
-//               <h3 className="text-3xl font-bold mb-5">Rental Details</h3>
-
-//               <div className="space-y-4 text-lg">
-//                 <p>
-//                   ✅ Minimum rental price:
-//                   <span className="font-bold text-success"> $20/hour</span>
-//                 </p>
-
-//                 <p>
-//                   ✅ Events with more than
-//                   <strong> 25 guests </strong>
-//                   are charged
-//                   <span className="font-bold text-primary"> $120/hour</span>
-//                 </p>
-
-//                 <p>
-//                   ✅ Mandatory cleaning fee:
-//                   <span className="font-bold text-error"> $120</span>
-//                 </p>
-
-//                 <p>✅ Spacious dance floor</p>
-
-//                 <p>✅ Mirrors & Sound System Available</p>
-
-//                 <p>✅ Air Conditioned</p>
-
-//                 <p>✅ Free Parking</p>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-
-//         {/* CTA */}
-//         <div className="text-center mt-16">
-//           <h3 className="text-3xl font-bold mb-5">Reserve Your Date Today</h3>
-
-//           <p className="max-w-2xl mx-auto mb-8 text-lg">
-//             Whether you're hosting a private class, rehearsal, birthday
-//             celebration, workshop, or special event, Freedom Dance Studio
-//             provides a clean, modern, and welcoming space for your guests.
-//           </p>
-
-//           <button className="btn btn-primary btn-lg" onClick={handleRental}>
-//             Book Your Event
-//           </button>
-//         </div>
-//       </div>
-//     </section>
-//   );
-// };
-
-// export default StudioRental;
-
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  CalendarCheck,
+  CheckCircle2,
+  Clock3,
+  Dumbbell,
+  Music2,
+  PartyPopper,
+  Users,
+  Video,
+  Sparkles,
+  Building2,
+} from "lucide-react";
 
 import rehearsal from "../assets/rehearsal.jpeg";
 import room1 from "../assets/rent/main.jpg";
@@ -191,7 +35,7 @@ const StudioRental = () => {
   }, []);
 
   const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 35 },
     visible: {
       opacity: 1,
       y: 0,
@@ -203,7 +47,7 @@ const StudioRental = () => {
   };
 
   const fadeLeft = {
-    hidden: { opacity: 0, x: -50 },
+    hidden: { opacity: 0, x: -40 },
     visible: {
       opacity: 1,
       x: 0,
@@ -215,7 +59,7 @@ const StudioRental = () => {
   };
 
   const fadeRight = {
-    hidden: { opacity: 0, x: 50 },
+    hidden: { opacity: 0, x: 40 },
     visible: {
       opacity: 1,
       x: 0,
@@ -230,384 +74,831 @@ const StudioRental = () => {
     {
       src: rehearsal,
       title: "Main Dance Room",
-      description: "Spacious dance floor perfect for rehearsals and classes.",
+      description:
+        "Spacious dance floor perfect for rehearsals, classes and workshops.",
     },
     {
       src: room1,
       title: "Studio Room 1",
-      description: "A comfortable space for private classes and small events.",
+      description:
+        "A comfortable space for private classes and small group sessions.",
     },
     {
       src: room2,
       title: "Studio Room 2",
-      description: "Flexible space for workshops, rehearsals and celebrations.",
+      description:
+        "Flexible space for rehearsals, workshops and smaller events.",
     },
     {
       src: studio,
       title: "Event Space",
-      description: "A welcoming environment for your special events.",
+      description:
+        "A welcoming environment for celebrations and special events.",
     },
   ];
 
+  const perfectFor = [
+    {
+      icon: Music2,
+      title: "Dance Classes",
+      text: "Teach Bachata, Salsa, Kizomba, Hip-Hop, Ballroom and more.",
+    },
+    {
+      icon: Users,
+      title: "Private Lessons",
+      text: "A professional environment for one-on-one instruction.",
+    },
+    {
+      icon: CalendarCheck,
+      title: "Weekly Classes",
+      text: "Build a consistent schedule with recurring studio time.",
+    },
+    {
+      icon: Dumbbell,
+      title: "Fitness & Wellness",
+      text: "Perfect for yoga, Pilates, Zumba and fitness sessions.",
+    },
+    {
+      icon: Video,
+      title: "Content Creation",
+      text: "Film dance videos, reels, classes and creative projects.",
+    },
+    {
+      icon: PartyPopper,
+      title: "Events & Workshops",
+      text: "Host workshops, celebrations and community events.",
+    },
+  ];
+
+  const features = [
+    "Spacious dance floor",
+    "Mirrors",
+    "Sound system",
+    "Air conditioning",
+    "Free parking",
+    "Flexible rental times",
+  ];
+
   return (
-    <section className="min-h-screen bg-base-200 py-16 overflow-hidden">
-      <div className="container mx-auto px-4">
-        {/* Hero */}
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={fadeUp}
-          className="text-center max-w-4xl mx-auto mb-16"
-        >
-          <div className="badge badge-primary badge-lg mb-5">STUDIO RENTAL</div>
+    <section className="min-h-screen overflow-hidden bg-base-200">
+      {/* =====================================================
+          HERO
+      ====================================================== */}
 
-          <h1 className="text-5xl md:text-6xl font-extrabold">
-            Rent Our Studio
-          </h1>
+      <div className="relative isolate overflow-hidden bg-neutral">
+        {/* Decorative background */}
+        <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
+        <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-secondary/20 blur-3xl" />
 
-          <p className="mt-6 text-lg md:text-xl text-base-content/70 leading-relaxed">
-            Looking for the perfect venue for your next event? Freedom Dance
-            Studio offers beautiful, spacious, and welcoming rooms for parties,
-            rehearsals, workshops, private lessons, fitness sessions, meetings,
-            photo shoots, and special celebrations.
-          </p>
+        <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-24 lg:px-8 lg:py-28">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Hero text */}
 
-          <div className="flex flex-wrap justify-center gap-3 mt-8">
-            <div className="badge badge-outline badge-lg">💃 Dance Floor</div>
-            <div className="badge badge-outline badge-lg">🔊 Sound System</div>
-            <div className="badge badge-outline badge-lg">
-              ❄️ Air Conditioned
-            </div>
-            <div className="badge badge-outline badge-lg">🚗 Free Parking</div>
-          </div>
-        </motion.div>
+            <motion.div initial="hidden" animate="visible" variants={fadeLeft}>
+              <div className="badge badge-primary badge-lg gap-2 px-4 py-4">
+                <Building2 size={16} />
+                Las Vegas Studio Rental
+              </div>
 
-        {/* Rooms */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={fadeUp}
-          className="mb-20"
-        >
-          <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold">Our Studio Spaces</h2>
+              <h1 className="mt-6 text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+                Your Space.
+                <span className="text-primary"> Your Class.</span>
+                <br />
+                Your Students.
+              </h1>
 
-            <p className="mt-3 text-base-content/70 text-lg">
-              Choose from our two flexible studio rooms for your event.
-            </p>
-          </div>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-white/70 sm:text-lg">
+                Need a professional space for your dance class, rehearsal,
+                private lesson, workshop, fitness session or event? Freedom
+                Dance Studio has flexible studio space available in Las Vegas.
+              </p>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {/* Room 1 */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <button
+                  onClick={handleRental}
+                  className="
+                    btn btn-primary btn-lg
+                    rounded-full
+                    shadow-xl shadow-primary/20
+                    transition-all duration-300
+                    hover:-translate-y-1
+                  "
+                >
+                  Check Availability
+                  <ArrowRight size={19} />
+                </button>
+
+                <a
+                  href="#spaces"
+                  className="
+                    btn btn-outline btn-secondary btn-lg
+                    rounded-full
+                  "
+                >
+                  Explore the Studio
+                </a>
+              </div>
+
+              {/* Trust points */}
+
+              <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/60">
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={17} className="text-primary" />
+                  Flexible Hours
+                </span>
+
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={17} className="text-primary" />
+                  Professional Space
+                </span>
+
+                <span className="flex items-center gap-2">
+                  <CheckCircle2 size={17} className="text-primary" />
+                  Las Vegas
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Hero image */}
+
             <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={fadeRight}
+              className="relative"
+            >
+              <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/5 p-2 shadow-2xl backdrop-blur">
+                <img
+                  src={rehearsal}
+                  alt="Freedom Dance Studio rental space"
+                  className="
+                    h-[350px]
+                    w-full
+                    rounded-[1.5rem]
+                    object-cover
+                    sm:h-[450px]
+                  "
+                />
+              </div>
+
+              <div
+                className="
+                  absolute
+                  -bottom-5
+                  left-5
+                  rounded-2xl
+                  border
+                  border-white/10
+                  bg-base-100
+                  px-5
+                  py-4
+                  shadow-2xl
+                  sm:left-10
+                "
+              >
+                <div className="flex items-center gap-3">
+                  <div className="rounded-xl bg-primary/10 p-2 text-primary">
+                    <Clock3 size={22} />
+                  </div>
+
+                  <div>
+                    <p className="text-xs text-base-content/60">Flexible</p>
+                    <p className="font-bold">Hourly & Recurring Rental</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* =====================================================
+          QUICK BENEFITS
+      ====================================================== */}
+
+      <div className="relative z-10 mx-auto -mt-8 max-w-6xl px-6">
+        <div className="grid overflow-hidden rounded-3xl bg-base-100 shadow-2xl sm:grid-cols-3">
+          <div className="flex items-center gap-4 border-b border-base-200 p-6 sm:border-b-0 sm:border-r">
+            <div className="rounded-2xl bg-primary/10 p-3 text-primary">
+              <Clock3 size={25} />
+            </div>
+
+            <div>
+              <p className="font-bold">Flexible Hours</p>
+              <p className="text-sm text-base-content/60">
+                Book when you need it
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 border-b border-base-200 p-6 sm:border-b-0 sm:border-r">
+            <div className="rounded-2xl bg-secondary/10 p-3 text-secondary">
+              <Users size={25} />
+            </div>
+
+            <div>
+              <p className="font-bold">Multiple Spaces</p>
+              <p className="text-sm text-base-content/60">
+                Choose the right room
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-4 p-6">
+            <div className="rounded-2xl bg-primary/10 p-3 text-primary">
+              <CalendarCheck size={25} />
+            </div>
+
+            <div>
+              <p className="font-bold">Recurring Rentals</p>
+              <p className="text-sm text-base-content/60">
+                Build your weekly schedule
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* =====================================================
+          PERFECT FOR
+      ====================================================== */}
+
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={fadeUp}
+        className="mx-auto max-w-7xl px-6 py-24 lg:px-8"
+      >
+        <div className="mx-auto max-w-3xl text-center">
+          <div className="badge badge-secondary badge-lg">Perfect For</div>
+
+          <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+            More Than Just a Dance Studio
+          </h2>
+
+          <p className="mt-5 text-base leading-8 text-base-content/70 sm:text-lg">
+            Whether you're teaching, rehearsing, creating or hosting, our
+            flexible spaces can work for your needs.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {perfectFor.map((item) => {
+            const Icon = item.icon;
+
+            return (
+              <motion.div
+                key={item.title}
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.25 }}
+                className="
+                  group
+                  rounded-3xl
+                  border
+                  border-base-300
+                  bg-base-100
+                  p-6
+                  shadow-lg
+                  transition-all
+                  duration-300
+                  hover:border-primary/40
+                  hover:shadow-2xl
+                "
+              >
+                <div
+                  className="
+                    flex
+                    h-12
+                    w-12
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-primary/10
+                    text-primary
+                    transition-all
+                    duration-300
+                    group-hover:bg-primary
+                    group-hover:text-primary-content
+                  "
+                >
+                  <Icon size={24} />
+                </div>
+
+                <h3 className="mt-5 text-xl font-bold">{item.title}</h3>
+
+                <p className="mt-2 leading-7 text-base-content/60">
+                  {item.text}
+                </p>
+              </motion.div>
+            );
+          })}
+        </div>
+      </motion.div>
+
+      {/* =====================================================
+          STUDIO SPACES
+      ====================================================== */}
+
+      <section id="spaces" className="bg-base-100 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={fadeUp}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <div className="badge badge-primary badge-lg">Our Spaces</div>
+
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Find the Right Space
+            </h2>
+
+            <p className="mt-5 text-base-content/70 sm:text-lg">
+              Choose from flexible spaces designed for classes, rehearsals,
+              private sessions and events.
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {/* Room 1 */}
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={fadeLeft}
               whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="card bg-base-100 shadow-xl overflow-hidden"
+              className="card overflow-hidden bg-base-200 shadow-xl"
             >
               <figure className="relative">
                 <img
                   src={room1}
-                  alt="Freedom Dance Studio Room 1"
-                  className="w-full h-80 object-cover transition duration-700 hover:scale-105"
+                  alt="Main studio room at Freedom Dance Studio"
+                  className="h-80 w-full object-cover transition duration-700 hover:scale-105"
                 />
 
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute left-5 top-5">
                   <div className="badge badge-primary badge-lg">Room 1</div>
                 </div>
               </figure>
 
-              <div className="card-body">
+              <div className="card-body p-7">
                 <h3 className="card-title text-2xl">Main Studio Room</h3>
 
-                <p className="text-base-content/70">
+                <p className="text-base-content/60">
                   Perfect for dance classes, rehearsals, workshops, private
-                  lessons, fitness sessions, and larger gatherings.
+                  lessons, fitness sessions and larger gatherings.
                 </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="badge badge-outline">Dance Floor</span>
+                  <span className="badge badge-outline">Mirrors</span>
+                  <span className="badge badge-outline">Sound</span>
+                </div>
               </div>
             </motion.div>
 
             {/* Room 2 */}
+
             <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={fadeRight}
               whileHover={{ y: -8 }}
-              transition={{ duration: 0.3 }}
-              className="card bg-base-100 shadow-xl overflow-hidden"
+              className="card overflow-hidden bg-base-200 shadow-xl"
             >
               <figure className="relative">
                 <img
                   src={room2}
-                  alt="Freedom Dance Studio Room 2"
-                  className="w-full h-80 object-cover transition duration-700 hover:scale-105"
+                  alt="Flexible studio room at Freedom Dance Studio"
+                  className="h-80 w-full object-cover transition duration-700 hover:scale-105"
                 />
 
-                <div className="absolute bottom-4 left-4">
+                <div className="absolute left-5 top-5">
                   <div className="badge badge-secondary badge-lg">Room 2</div>
                 </div>
               </figure>
 
-              <div className="card-body">
+              <div className="card-body p-7">
                 <h3 className="card-title text-2xl">Flexible Studio Room</h3>
 
-                <p className="text-base-content/70">
+                <p className="text-base-content/60">
                   A versatile space for private classes, rehearsals, meetings,
-                  photo shoots, small celebrations, and more.
+                  photo shoots, small celebrations and more.
                 </p>
+
+                <div className="mt-4 flex flex-wrap gap-2">
+                  <span className="badge badge-outline">Private</span>
+                  <span className="badge badge-outline">Flexible</span>
+                  <span className="badge badge-outline">Comfortable</span>
+                </div>
               </div>
             </motion.div>
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* Gallery */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={fadeUp}
-          className="mb-20"
-        >
-          <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold">Take a Look Inside</h2>
+      {/* =====================================================
+          FEATURES
+      ====================================================== */}
 
-            <p className="mt-3 text-base-content/70">
-              A clean, comfortable and welcoming space for your next event.
-            </p>
+      <section className="bg-base-200 py-24">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={fadeLeft}
+            >
+              <div className="badge badge-secondary badge-lg">Why Freedom?</div>
+
+              <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+                Everything You Need to Get Started
+              </h2>
+
+              <p className="mt-5 leading-8 text-base-content/70">
+                We provide a clean, comfortable and professional environment so
+                you can focus on teaching, practicing and creating.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                {features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-3">
+                    <CheckCircle2 size={21} className="shrink-0 text-primary" />
+
+                    <span className="font-medium">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              variants={fadeRight}
+              className="overflow-hidden rounded-3xl shadow-2xl"
+            >
+              <img
+                src={studio}
+                alt="Freedom Dance Studio interior"
+                className="h-[400px] w-full object-cover transition duration-700 hover:scale-105"
+              />
+            </motion.div>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* =====================================================
+          PRICING
+      ====================================================== */}
+
+      <section className="bg-base-100 py-24">
+        <div className="mx-auto max-w-6xl px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            variants={fadeUp}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <div className="badge badge-primary badge-lg">Rental Options</div>
+
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Simple & Transparent
+            </h2>
+
+            <p className="mt-5 text-base-content/70 sm:text-lg">
+              Choose the rental option that fits your needs.
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
+            {/* Hourly */}
+
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="
+                card
+                border
+                border-base-300
+                bg-base-100
+                shadow-xl
+              "
+            >
+              <div className="card-body">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                  <Clock3 size={25} />
+                </div>
+
+                <h3 className="mt-5 text-2xl font-bold">Hourly Rental</h3>
+
+                <div className="mt-3 text-5xl font-black text-primary">$20</div>
+
+                <p className="text-base-content/60">Starting price per hour</p>
+
+                <div className="divider" />
+
+                <ul className="space-y-3 text-sm">
+                  <li className="flex gap-2">
+                    <CheckCircle2 size={18} className="text-success" />
+                    Flexible booking
+                  </li>
+
+                  <li className="flex gap-2">
+                    <CheckCircle2 size={18} className="text-success" />
+                    Great for private sessions
+                  </li>
+
+                  <li className="flex gap-2">
+                    <CheckCircle2 size={18} className="text-success" />
+                    Perfect for rehearsals
+                  </li>
+                </ul>
+
+                <button
+                  onClick={handleRental}
+                  className="btn btn-primary mt-6 rounded-full"
+                >
+                  Check Availability
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Instructor */}
+
+            <motion.div
+              whileHover={{ y: -10 }}
+              className="
+                card
+                relative
+                overflow-hidden
+                bg-primary
+                text-primary-content
+                shadow-2xl
+              "
+            >
+              <div className="absolute right-4 top-4">
+                <div className="badge badge-secondary gap-1">
+                  <Sparkles size={13} />
+                  Recommended
+                </div>
+              </div>
+
+              <div className="card-body">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
+                  <CalendarCheck size={25} />
+                </div>
+
+                <h3 className="mt-5 text-2xl font-bold">
+                  Recurring Instructor
+                </h3>
+
+                <p className="mt-2 opacity-80">
+                  Teach your class every week with consistent studio time.
+                </p>
+
+                <div className="divider opacity-20" />
+
+                <ul className="space-y-3 text-sm">
+                  <li className="flex gap-2">
+                    <CheckCircle2 size={18} />
+                    Consistent weekly schedule
+                  </li>
+
+                  <li className="flex gap-2">
+                    <CheckCircle2 size={18} />
+                    Better for growing instructors
+                  </li>
+
+                  <li className="flex gap-2">
+                    <CheckCircle2 size={18} />
+                    Ask about recurring packages
+                  </li>
+                </ul>
+
+                <button
+                  onClick={handleRental}
+                  className="
+                    btn
+                    mt-6
+                    rounded-full
+                    border-none
+                    bg-base-100
+                    text-base-content
+                    hover:bg-base-200
+                  "
+                >
+                  Become a Studio Partner
+                </button>
+              </div>
+            </motion.div>
+
+            {/* Events */}
+
+            <motion.div
+              whileHover={{ y: -8 }}
+              className="
+                card
+                bg-neutral
+                text-neutral-content
+                shadow-xl
+              "
+            >
+              <div className="card-body">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
+                  <PartyPopper size={25} />
+                </div>
+
+                <h3 className="mt-5 text-2xl font-bold">Events</h3>
+
+                <div className="mt-3 text-5xl font-black">$120</div>
+
+                <p className="opacity-70">
+                  For events with more than 25 guests
+                </p>
+
+                <div className="divider opacity-20" />
+
+                <p className="text-sm opacity-70">
+                  Contact us for event requirements, availability and cleaning
+                  details.
+                </p>
+
+                <button
+                  onClick={handleRental}
+                  className="
+                    btn
+                    btn-secondary
+                    mt-6
+                    rounded-full
+                  "
+                >
+                  Ask About Events
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* =====================================================
+          GALLERY
+      ====================================================== */}
+
+      <section className="bg-base-200 py-24">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeUp}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <div className="badge badge-secondary badge-lg">Inside Freedom</div>
+
+            <h2 className="mt-4 text-4xl font-black sm:text-5xl">
+              Take a Look Inside
+            </h2>
+
+            <p className="mt-5 text-base-content/70 sm:text-lg">
+              See the spaces before you book.
+            </p>
+          </motion.div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {images.map((image, index) => (
               <motion.div
                 key={image.title}
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{
                   duration: 0.5,
-                  delay: index * 0.1,
+                  delay: index * 0.08,
                 }}
-                whileHover={{ scale: 1.03 }}
-                className={`card bg-base-100 shadow-lg overflow-hidden ${
-                  index === 0 ? "lg:col-span-2" : ""
+                whileHover={{ scale: 1.02 }}
+                className={`group relative overflow-hidden rounded-3xl bg-base-100 shadow-xl ${
+                  index === 0 ? "md:col-span-2 lg:col-span-2" : ""
                 }`}
               >
-                <figure className="relative">
-                  <img
-                    src={image.src}
-                    alt={image.title}
-                    className="w-full h-72 object-cover"
-                  />
+                <img
+                  src={image.src}
+                  alt={image.title}
+                  className="
+                    h-72
+                    w-full
+                    object-cover
+                    transition
+                    duration-700
+                    group-hover:scale-110
+                  "
+                />
 
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 hover:opacity-100 transition duration-500">
-                    <div className="absolute bottom-0 p-5 text-white">
-                      <h3 className="text-xl font-bold">{image.title}</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
 
-                      <p className="text-sm mt-1">{image.description}</p>
-                    </div>
-                  </div>
-                </figure>
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <h3 className="text-xl font-bold">{image.title}</h3>
+
+                  <p className="mt-1 max-w-md text-sm text-white/75">
+                    {image.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
-        </motion.div>
+        </div>
+      </section>
 
-        {/* Pricing */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={fadeUp}
-          className="mb-20"
-        >
-          <div className="text-center mb-10">
-            <h2 className="text-4xl font-bold">Simple & Transparent Pricing</h2>
+      {/* =====================================================
+          FINAL CTA
+      ====================================================== */}
 
-            <p className="mt-3 text-base-content/70">
-              Choose the option that works best for your event.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Hourly */}
-            <motion.div
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="card bg-base-100 shadow-xl border border-base-300"
-            >
-              <div className="card-body text-center">
-                <div className="text-4xl mb-3">⏱️</div>
-
-                <h3 className="text-2xl font-bold">Hourly Rental</h3>
-
-                <div className="text-5xl font-extrabold text-success mt-4">
-                  $20
-                </div>
-
-                <p className="text-lg text-base-content/70">
-                  Starting price per hour
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Large Events */}
-            <motion.div
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="card bg-primary text-primary-content shadow-xl"
-            >
-              <div className="card-body text-center">
-                <div className="text-4xl mb-3">🎉</div>
-
-                <h3 className="text-2xl font-bold">Large Events</h3>
-
-                <div className="text-5xl font-extrabold mt-4">$120</div>
-
-                <p className="text-lg opacity-90">
-                  For events with more than 25 guests
-                </p>
-              </div>
-            </motion.div>
-
-            {/* Cleaning */}
-            <motion.div
-              whileHover={{ y: -10, scale: 1.02 }}
-              className="card bg-error text-error-content shadow-xl"
-            >
-              <div className="card-body text-center">
-                <div className="text-4xl mb-3">🧹</div>
-
-                <h3 className="text-2xl font-bold">Cleaning Fee</h3>
-
-                <div className="text-5xl font-extrabold mt-4">$120</div>
-
-                <p className="text-lg opacity-90">Required after every event</p>
-              </div>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Perfect For + Details */}
-        <div className="grid lg:grid-cols-2 gap-8 mb-20">
+      <section className="bg-neutral py-24">
+        <div className="mx-auto max-w-5xl px-6 lg:px-8">
           <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={fadeLeft}
-            className="card bg-base-100 shadow-xl"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="
+              relative
+              overflow-hidden
+              rounded-[2rem]
+              border
+              border-white/10
+              bg-gradient-to-br
+              from-primary
+              to-secondary
+              p-8
+              text-center
+              shadow-2xl
+              sm:p-12
+              lg:p-16
+            "
           >
-            <div className="card-body">
-              <h3 className="text-3xl font-bold mb-5">Perfect For</h3>
+            <div className="absolute -left-20 -top-20 h-56 w-56 rounded-full bg-white/10 blur-3xl" />
+            <div className="absolute -bottom-20 -right-20 h-56 w-56 rounded-full bg-black/10 blur-3xl" />
 
-              <div className="grid sm:grid-cols-2 gap-4">
-                {[
-                  "🎉 Birthday Parties",
-                  "💃 Dance Rehearsals",
-                  "🧘 Yoga & Fitness Classes",
-                  "🎵 Music Rehearsals",
-                  "👨‍🏫 Workshops",
-                  "👥 Private Classes",
-                  "📸 Photo & Video Shoots",
-                  "🎭 Community Events",
-                ].map((item) => (
-                  <div
-                    key={item}
-                    className="p-3 rounded-xl bg-base-200 hover:bg-primary hover:text-primary-content transition duration-300"
-                  >
-                    {item}
-                  </div>
-                ))}
+            <div className="relative">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-white">
+                <Building2 size={32} />
               </div>
-            </div>
-          </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.15 }}
-            variants={fadeRight}
-            className="card bg-base-100 shadow-xl"
-          >
-            <div className="card-body">
-              <h3 className="text-3xl font-bold mb-5">Rental Details</h3>
+              <h2 className="mt-6 text-3xl font-black text-white sm:text-5xl">
+                Ready to Use the Studio?
+              </h2>
 
-              <div className="space-y-4 text-lg">
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>
-                    Minimum rental:
-                    <strong className="text-success ml-1">$20/hour</strong>
-                  </p>
-                </div>
+              <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-white/85 sm:text-lg">
+                Tell us what you're planning and when you need the space. We'll
+                help you find the right rental option.
+              </p>
 
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>
-                    More than <strong>25 guests</strong>:
-                    <strong className="text-primary ml-1">$120/hour</strong>
-                  </p>
-                </div>
+              <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+                <button
+                  onClick={handleRental}
+                  className="
+                    btn
+                    btn-lg
+                    rounded-full
+                    border-none
+                    bg-white
+                    text-base-content
+                    shadow-xl
+                    transition-all
+                    duration-300
+                    hover:-translate-y-1
+                    hover:bg-base-100
+                  "
+                >
+                  Request Studio Rental
+                  <ArrowRight size={19} />
+                </button>
 
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>
-                    Mandatory cleaning fee:
-                    <strong className="text-error ml-1">$120</strong>
-                  </p>
-                </div>
-
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>Spacious dance floor</p>
-                </div>
-
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>Mirrors & Sound System Available</p>
-                </div>
-
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>Air Conditioned</p>
-                </div>
-
-                <div className="flex gap-3">
-                  <span>✅</span>
-                  <p>Free Parking</p>
-                </div>
+                <a
+                  href="/contact"
+                  className="
+                    btn
+                    btn-lg
+                    rounded-full
+                    border
+                    border-white/30
+                    bg-white/10
+                    text-white
+                    hover:bg-white/20
+                  "
+                >
+                  Contact Us
+                </a>
               </div>
             </div>
           </motion.div>
         </div>
-
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="hero rounded-3xl bg-primary text-primary-content shadow-2xl"
-        >
-          <div className="hero-content text-center py-16 px-6">
-            <div className="max-w-3xl">
-              <div className="text-5xl mb-5">📅</div>
-
-              <h2 className="text-4xl md:text-5xl font-extrabold">
-                Reserve Your Date Today
-              </h2>
-
-              <p className="text-lg md:text-xl mt-6 opacity-90">
-                Whether you're hosting a private class, rehearsal, birthday
-                celebration, workshop, photo shoot, or special event, Freedom
-                Dance Studio provides a clean, modern, and welcoming space for
-                your guests.
-              </p>
-
-              <button
-                className="btn btn-lg bg-base-100 text-base-content border-none hover:scale-105 mt-8 transition-transform"
-                onClick={handleRental}
-              >
-                Book Your Event
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      </div>
+      </section>
     </section>
   );
 };

@@ -4,11 +4,11 @@ import { Classes, StudioRental } from "../pages";
 
 const Landing = () => {
   return (
-    <>
+    <main>
       <Hero />
       <Classes />
       <StudioRental />
-    </>
+    </main>
   );
 };
 
