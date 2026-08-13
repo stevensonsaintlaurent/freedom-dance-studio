@@ -8,8 +8,21 @@ const Booking = () => {
 
   const [confirm, setConfirm] = useState(location.state);
 
-  const { name, title, dance, age, day, time, level, instructor, drop } =
-    confirm;
+  const {
+    name,
+    title,
+    dance,
+    age,
+    day,
+    time,
+    level,
+    instructor,
+    drop,
+    date,
+    price,
+    priceDetails,
+    extraPrice,
+  } = confirm;
 
   const handleChange = (e) => {
     e.target.value;
@@ -71,7 +84,7 @@ const Booking = () => {
                     type="text"
                     className="input input-bordered w-full  border-0  text-cyan-500"
                     name="day"
-                    value={day}
+                    value={day || date}
                     onChange={handleChange}
                     required
                   />
@@ -101,7 +114,7 @@ const Booking = () => {
                 <div className="flex justify-between">
                   <span className="font-bold flex ">Drop-in Price</span>
                   <span className="text-success text-xl font-bold">
-                    ${drop}
+                    {drop || price || (price && priceDetails && extraPrice)}
                   </span>
                 </div>
 

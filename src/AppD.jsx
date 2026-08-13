@@ -7,6 +7,7 @@ import {
   Contact,
   Classes,
   StudioRental,
+  Events,
 } from "./pages";
 
 import {
@@ -121,6 +122,11 @@ const router = createBrowserRouter([
       {
         path: "independent",
         element: <IndependentClasses />,
+      },
+
+      {
+        path: "events",
+        element: <Events />,
       },
     ],
   },
