@@ -1,7 +1,7 @@
-import steve from "../assets/stev.png";
+import steve from "../assets/stevean.jpg";
 import desmond from "../assets/desm.png";
-import adriana from "../assets/adria.jpeg";
-import zagir from "../assets/zag.png";
+import adriana from "../assets/adriana.jpg";
+import zagir from "../assets/lady/followerClip.jpeg";
 
 import { videos } from "./video";
 

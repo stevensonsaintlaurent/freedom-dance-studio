@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import Classes from "./../pages/Classes";
-import lady from "../assets/followerClip1.jpeg";
+import lady from "../assets/lady/followerClip1.jpeg";
 import recent from "../assets/recentClip.jpeg";
 import recent1 from "../assets/recentClip1.jpeg";
 import recent2 from "../assets/recentClip2.jpeg";
 import music from "../assets/concert-freedom-jazz/P1991039.jpg";
-import wedn from "../assets/followerClip1.jpeg";
+import wedn from "../assets/lady/followerClip.jpeg";
 import wen from "../assets/konpaClip.jpeg";
 import tued from "../assets/hero3.jpg";
 import tues from "../assets/konpaClip.jpeg";

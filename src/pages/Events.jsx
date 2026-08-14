@@ -8,7 +8,7 @@ import {
   Users,
 } from "lucide-react";
 
-import lady from "../assets/ladies1.jpg";
+import lady from "../assets/lady/ladies1.jpg";
 import social from "../assets/sbkParty/FJ8A6384.jpg";
 import workshop from "../assets/konpaClip.jpeg";
 import { Link, useNavigate } from "react-router-dom";

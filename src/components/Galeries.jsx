@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
 // ====================== PHOTOS ======================
 import dance2 from "../assets/recentClip1.jpeg";
 import dance3 from "../assets/recentClip2.jpeg";
-import dance5 from "../assets/followerClip.jpeg";
+import dance5 from "../assets/lady/followerClip.jpeg";
 
 import party1 from "../assets/sbkParty/FJ8A6466.jpg";
 import party2 from "../assets/sbkParty/FJ8A6603.jpg";
