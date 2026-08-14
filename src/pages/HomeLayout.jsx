@@ -1,6 +1,5 @@
 import { Footer, Navbar } from "../components";
 import { Outlet, ScrollRestoration } from "react-router-dom";
-import Events from "./Events";
 
 const HomeLayout = () => {
   return (
@@ -9,8 +8,6 @@ const HomeLayout = () => {
 
       <main className="pt-[76px]">
         <Outlet />
-
-        <Events />
       </main>
 
       <Footer />

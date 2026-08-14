@@ -1,6 +1,6 @@
 import React from "react";
 import { Hero } from "../components";
-import { Classes, StudioRental } from "../pages";
+import { Classes, Events, StudioRental } from "../pages";
 
 const Landing = () => {
   return (
@@ -8,6 +8,7 @@ const Landing = () => {
       <Hero />
       <Classes />
       <StudioRental />
+      <Events />
     </main>
   );
 };
