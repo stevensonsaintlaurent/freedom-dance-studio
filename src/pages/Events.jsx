@@ -56,7 +56,7 @@ const events = [
     date: "August 14–16, 2026",
     time: "Full Weekend",
     location: "Freedom Dance Studio",
-    price: "$99",
+    price: "$129",
     priceDetails: "Weekend Pass",
     image: workshop,
     description:
