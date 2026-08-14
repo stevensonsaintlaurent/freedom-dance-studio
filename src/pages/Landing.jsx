@@ -6,9 +6,9 @@ const Landing = () => {
   return (
     <main>
       <Hero />
+      <Events />
       <Classes />
       <StudioRental />
-      <Events />
     </main>
   );
 };
