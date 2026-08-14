@@ -76,7 +76,7 @@ const events = [
     location: "Lake Havasu City, Arizona",
     image: havasu,
     description:
-      "Join our Freedom Dance Studio family for an unforgettable Bachata weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
+      "Join our Freedom Dance Studio family for an unforgettable  weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
     button: "Join the Trip",
   },
 ];
