@@ -12,6 +12,7 @@ import {
   Users,
   Star,
   Mail,
+  PartyPopper,
 } from "lucide-react";
 
 const mainLinks = [
@@ -41,6 +42,12 @@ const mainLinks = [
   },
   {
     id: 5,
+    url: "/events",
+    text: "Events",
+    icon: PartyPopper,
+  },
+  {
+    id: 6,
     url: "/gallery",
     text: "Gallery",
     icon: Images,
