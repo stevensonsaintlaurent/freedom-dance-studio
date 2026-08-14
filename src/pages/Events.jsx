@@ -11,6 +11,7 @@ import {
 import lady from "../assets/lady/sandra.jpg";
 import social from "../assets/sbkParty/FJ8A6384.jpg";
 import workshop from "../assets/konpaClip.jpeg";
+import havasu from "../assets/havasu.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const events = [
@@ -65,21 +66,19 @@ const events = [
     featured: true,
   },
 
-  //   {
-  //     id: 4,
-  //     type: "BOOTCAMP",
-  //     title: "Bachata Bootcamp",
-  //     instructor: "All Levels Welcome",
-  //     date: "September 12–13, 2026",
-  //     time: "Full Weekend",
-  //     location: "Freedom Dance Studio",
-  //     price: "$99",
-  //     priceDetails: "Full Bootcamp",
-  //     image: "/images/events/bachata-bootcamp.jpg",
-  //     description:
-  //       "Take your Bachata to the next level with focused training, partner work, technique, musicality, and guided practice.",
-  //     button: "Book Your Spot",
-  //   },
+  {
+    id: 4,
+    type: "TRIP",
+    title: "SBK Lake Havasu Trip",
+    instructor: "Teachers & Students",
+    date: "August 28–30, 2026",
+    time: "Friday–Sunday",
+    location: "Lake Havasu City, Arizona",
+    image: havasu,
+    description:
+      "Join our Freedom Dance Studio family for an unforgettable Bachata weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
+    button: "Join the Trip",
+  },
 ];
 
 const Events = () => {

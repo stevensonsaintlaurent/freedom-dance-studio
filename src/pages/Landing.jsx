@@ -1,5 +1,5 @@
 import React from "react";
-import { Hero } from "../components";
+import { Hero, Testimonials } from "../components";
 import { Classes, Events, StudioRental } from "../pages";
 
 const Landing = () => {
@@ -9,6 +9,7 @@ const Landing = () => {
       <Events />
       <Classes />
       <StudioRental />
+      <Testimonials />
     </main>
   );
 };
