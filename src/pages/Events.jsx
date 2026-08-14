@@ -8,7 +8,7 @@ import {
   Users,
 } from "lucide-react";
 
-import lady from "../assets/lady/ladies1.jpg";
+import lady from "../assets/lady/sandra.jpg";
 import social from "../assets/sbkParty/FJ8A6384.jpg";
 import workshop from "../assets/konpaClip.jpeg";
 import { Link, useNavigate } from "react-router-dom";
@@ -27,7 +27,7 @@ const events = [
     extraPrice: "$25 Non-Members",
     image: lady,
     description:
-      "Learn beautiful Salsa On2 styling with Sandra. This workshop focuses on turns, hand styling, styling basics, and building confidence in your dancing.",
+      "Ready to level up your Salsa On2? Join Instructor Sandra for an exciting ladies’ styling workshop designed to bring out your confidence, musicality, and personal style. Explore Mambo footwork, fusion, styling, choreography, and performance quality while building stronger foundations and learning how to truly express yourself on the dance floor. Come ready to move, learn, and shine!",
     button: "Register Now",
     featured: true,
   },
