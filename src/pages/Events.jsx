@@ -8,11 +8,12 @@ import {
   Users,
 } from "lucide-react";
 
+import { Link, useNavigate } from "react-router-dom";
+
 import lady from "../assets/lady/sandra.jpg";
 import septemberSocial from "../assets/septemberSocial.png";
-import workshop from "../assets/konpaClip.jpeg";
+import workshop from "../assets/workshop.png";
 import havasu from "../assets/havasu.png";
-import { Link, useNavigate } from "react-router-dom";
 
 const events = [
   {
@@ -44,6 +45,10 @@ const events = [
     price: "$20",
     priceDetails: "Admission",
     image: septemberSocial,
+
+    // Keeps the entire portrait flyer visible
+    imageFit: "contain",
+
     description:
       "Join us for a night of Salsa, Bachata, and Kizomba! Enjoy free Bachata and Kizomba classes, a special Kizomba performance, great music, and an amazing night with the Freedom Dance community.",
     button: "Get Your Ticket",
@@ -76,35 +81,42 @@ const events = [
     location: "Lake Havasu City, Arizona",
     image: havasu,
     description:
-      "Join our Freedom Dance Studio family for an unforgettable  weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
+      "Join our Freedom Dance Studio family for an unforgettable weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
     button: "Join the Trip",
   },
 ];
 
 const Events = () => {
   const navigate = useNavigate();
+
   const handleEvents = (id) => {
     const findEvent = events.find((event) => event.id === id);
-    navigate("/book", { state: findEvent });
-    console.log("event");
+
+    navigate("/book", {
+      state: findEvent,
+    });
   };
+
   return (
     <section
       id="events"
       className="relative overflow-hidden bg-base-100 py-20 md:py-28"
     >
-      {/* Background Glow */}
+      {/* ================= BACKGROUND GLOW ================= */}
+
       <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
 
       <div className="pointer-events-none absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ================= HEADER ================= */}
+
         <div className="mx-auto mb-14 max-w-3xl text-center">
           <div
             className="
               mb-5
               inline-flex
+              animate-pulse
               items-center
               gap-2
               rounded-full
@@ -114,7 +126,6 @@ const Events = () => {
               text-sm
               font-bold
               text-primary
-              animate-pulse
             "
           >
             <Sparkles className="h-4 w-4" />
@@ -133,6 +144,7 @@ const Events = () => {
         </div>
 
         {/* ================= EVENTS GRID ================= */}
+
         <div className="grid gap-8 md:grid-cols-2">
           {events.map((event, index) => (
             <div
@@ -157,33 +169,41 @@ const Events = () => {
               }}
             >
               {/* ================= IMAGE ================= */}
-              <figure className="relative h-72 overflow-hidden">
+
+              <figure className="relative aspect-[2/3] overflow-hidden bg-black">
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="
+                  className={`
                     h-full
                     w-full
-                    object-cover
                     transition-transform
                     duration-700
-                    group-hover:scale-110
-                  "
+                    ${
+                      event.imageFit === "contain"
+                        ? "object-contain"
+                        : "object-cover"
+                    }
+                    group-hover:scale-[1.02]
+                  `}
                 />
 
                 {/* DARK GRADIENT */}
+
                 <div
                   className="
+                    pointer-events-none
                     absolute
                     inset-0
                     bg-gradient-to-t
                     from-black/90
-                    via-black/30
+                    via-black/20
                     to-transparent
                   "
                 />
 
                 {/* CATEGORY */}
+
                 <div className="absolute left-5 top-5">
                   <span className="badge badge-primary gap-2 px-4 py-4 font-bold shadow-lg">
                     <Sparkles className="h-3.5 w-3.5" />
@@ -192,6 +212,7 @@ const Events = () => {
                 </div>
 
                 {/* FEATURED */}
+
                 {event.featured && (
                   <div className="absolute right-5 top-5">
                     <span className="badge badge-warning px-4 py-3 font-bold shadow-lg">
@@ -201,6 +222,7 @@ const Events = () => {
                 )}
 
                 {/* IMAGE TITLE */}
+
                 <div className="absolute bottom-5 left-5 right-5 text-white">
                   <h3 className="text-2xl font-black md:text-3xl">
                     {event.title}
@@ -213,15 +235,19 @@ const Events = () => {
               </figure>
 
               {/* ================= CARD BODY ================= */}
+
               <div className="card-body p-6 md:p-7">
                 {/* DESCRIPTION */}
+
                 <p className="leading-relaxed text-base-content/70">
                   {event.description}
                 </p>
 
                 {/* ================= DETAILS ================= */}
+
                 <div className="mt-5 space-y-3">
                   {/* DATE */}
+
                   <div className="flex items-center gap-3">
                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
                       <CalendarDays className="h-5 w-5" />
@@ -237,6 +263,7 @@ const Events = () => {
                   </div>
 
                   {/* TIME */}
+
                   <div className="flex items-center gap-3">
                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
                       <Clock3 className="h-5 w-5" />
@@ -252,6 +279,7 @@ const Events = () => {
                   </div>
 
                   {/* LOCATION */}
+
                   <div className="flex items-center gap-3">
                     <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
                       <MapPin className="h-5 w-5" />
@@ -268,6 +296,7 @@ const Events = () => {
                 </div>
 
                 {/* ================= PRICE BOX ================= */}
+
                 <div className="mt-6 rounded-2xl bg-base-200 p-5">
                   <div className="flex items-center justify-between gap-4">
                     <div>
@@ -275,13 +304,17 @@ const Events = () => {
                         Admission
                       </p>
 
-                      <p className="mt-1 text-2xl font-black text-primary">
-                        {event.price}
-                      </p>
+                      {event.price && (
+                        <p className="mt-1 text-2xl font-black text-primary">
+                          {event.price}
+                        </p>
+                      )}
 
-                      <p className="text-sm text-base-content/60">
-                        {event.priceDetails}
-                      </p>
+                      {event.priceDetails && (
+                        <p className="text-sm text-base-content/60">
+                          {event.priceDetails}
+                        </p>
+                      )}
 
                       {event.extraPrice && (
                         <p className="mt-1 text-sm font-semibold">
@@ -303,6 +336,7 @@ const Events = () => {
                 </div>
 
                 {/* ================= REGISTER ================= */}
+
                 <div className="card-actions mt-5">
                   <button
                     className="
@@ -338,6 +372,7 @@ const Events = () => {
         </div>
 
         {/* ================= COMMUNITY CTA ================= */}
+
         <div
           className="
             mt-16
