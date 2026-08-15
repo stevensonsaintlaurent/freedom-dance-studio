@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import lady from "../assets/lady/sandra.jpg";
-import social from "../assets/sbkParty/FJ8A6384.jpg";
+import social from "../assets/social.jpg";
 import workshop from "../assets/konpaClip.jpeg";
 import havasu from "../assets/havasu.png";
 import { Link, useNavigate } from "react-router-dom";
