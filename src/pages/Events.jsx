@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import lady from "../assets/lady/sandra.jpg";
-import social from "../assets/social.jpg";
+import septemberSocial from "../assets/septemberSocial.png";
 import workshop from "../assets/konpaClip.jpeg";
 import havasu from "../assets/havasu.png";
 import { Link, useNavigate } from "react-router-dom";
@@ -37,15 +37,15 @@ const events = [
     id: 2,
     type: "SOCIAL",
     title: "Freedom Dance Social",
-    instructor: "Salsa • Bachata • More",
-    date: "August 14, 2026",
-    time: "10:30 PM – 2:00 AM",
+    instructor: "Salsa • Bachata • Kizomba • More",
+    date: "September 4, 2026",
+    time: "9:00 PM – 2:00 AM",
     location: "Freedom Dance Studio",
     price: "$20",
     priceDetails: "Admission",
-    image: social,
+    image: septemberSocial,
     description:
-      "Come dance, connect, meet new people, and enjoy a great night with the Freedom Dance community.",
+      "Join us for a night of Salsa, Bachata, and Kizomba! Enjoy free Bachata and Kizomba classes, a special Kizomba performance, great music, and an amazing night with the Freedom Dance community.",
     button: "Get Your Ticket",
   },
 
