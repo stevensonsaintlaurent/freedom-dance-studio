@@ -129,49 +129,6 @@ const slides = [
 ];
 
 /* =========================================================
-   ANIMATION SETTINGS
-========================================================= */
-
-const smoothEase = [0.22, 1, 0.36, 1];
-
-const slideVariants = {
-  initial: {
-    opacity: 0,
-    y: 18,
-  },
-
-  animate: {
-    opacity: 1,
-    y: 0,
-  },
-
-  exit: {
-    opacity: 0,
-    y: -18,
-  },
-};
-
-const imageVariants = {
-  initial: {
-    opacity: 0,
-    scale: 1.035,
-    x: 18,
-  },
-
-  animate: {
-    opacity: 1,
-    scale: 1,
-    x: 0,
-  },
-
-  exit: {
-    opacity: 0,
-    scale: 1.015,
-    x: -12,
-  },
-};
-
-/* =========================================================
    HERO
 ========================================================= */
 
@@ -179,6 +136,9 @@ const Hero = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const slide = slides[activeSlide];
+
+  // IMPORTANT:
+  // Keep SlideIcon inside the component so it always exists.
   const SlideIcon = slide.icon;
 
   /* =========================================================
@@ -199,7 +159,6 @@ const Hero = () => {
 
   const changeSlide = (index) => {
     if (index === activeSlide) return;
-
     setActiveSlide(index);
   };
 
@@ -208,41 +167,26 @@ const Hero = () => {
       id="home"
       className="
         relative
-        min-h-[100svh]
         w-full
         overflow-hidden
         bg-black
+        min-h-[100svh]
         lg:min-h-screen
       "
     >
       {/* =====================================================
-          BACKGROUND
+          BACKGROUND IMAGE
       ====================================================== */}
 
-      <AnimatePresence initial={false}>
+      <AnimatePresence mode="sync" initial={false}>
         <motion.div
-          key={slide.id}
-          initial={{
-            opacity: 0,
-            scale: 1.025,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          exit={{
-            opacity: 0,
-            scale: 1.01,
-          }}
+          key={`background-${slide.id}`}
+          initial={{ opacity: 0, scale: 1.025 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 1.01 }}
           transition={{
-            opacity: {
-              duration: 1.15,
-              ease: "easeInOut",
-            },
-            scale: {
-              duration: 7,
-              ease: "easeOut",
-            },
+            duration: 1.1,
+            ease: [0.22, 1, 0.36, 1],
           }}
           className="absolute inset-0"
         >
@@ -261,10 +205,14 @@ const Hero = () => {
       </AnimatePresence>
 
       {/* =====================================================
-          OVERLAYS
+          MOBILE IMAGE DARKNESS
       ====================================================== */}
 
       <div className="absolute inset-0 bg-black/70 lg:bg-black/65" />
+
+      {/* =====================================================
+          DESKTOP GRADIENT
+      ====================================================== */}
 
       <div
         className="
@@ -279,6 +227,10 @@ const Hero = () => {
         "
       />
 
+      {/* =====================================================
+          MOBILE GRADIENT
+      ====================================================== */}
+
       <div
         className="
           absolute
@@ -290,6 +242,10 @@ const Hero = () => {
           lg:hidden
         "
       />
+
+      {/* =====================================================
+          BOTTOM GRADIENT
+      ====================================================== */}
 
       <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
 
@@ -346,7 +302,7 @@ const Hero = () => {
       />
 
       {/* =====================================================
-          MAIN
+          MAIN CONTENT
       ====================================================== */}
 
       <div
@@ -384,11 +340,11 @@ const Hero = () => {
             "
           >
             {/* =================================================
-                LEFT
+                LEFT CONTENT
             ================================================== */}
 
             <div className="text-center lg:text-left">
-              {/* BADGE */}
+              {/* BRAND BADGE */}
 
               <motion.div
                 initial={{
@@ -401,9 +357,14 @@ const Hero = () => {
                 }}
                 transition={{
                   duration: 0.6,
-                  ease: smoothEase,
+                  ease: "easeOut",
                 }}
-                className="mb-3 inline-flex sm:mb-6 lg:mb-7"
+                className="
+                  mb-3
+                  inline-flex
+                  sm:mb-6
+                  lg:mb-7
+                "
               >
                 <div
                   className="
@@ -446,38 +407,28 @@ const Hero = () => {
               </motion.div>
 
               {/* =================================================
-                  STABLE CONTAINER
-
-                  This is important.
-
-                  The height stays stable while slides change,
-                  preventing the entire page from jumping.
+                  EVERYTHING THAT CHANGES WITH THE SLIDE
+                  IS NOW ONE ANIMATION
               ================================================== */}
 
               <div
                 className="
                   relative
-                  min-h-[560px]
-                  sm:min-h-[590px]
-                  lg:min-h-[600px]
+                  min-h-0
+                  sm:min-h-[390px]
+                  lg:min-h-[430px]
                 "
               >
-                <AnimatePresence initial={false} mode="sync">
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={slide.id}
-                    variants={slideVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
+                    initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, y: -6, filter: "blur(2px)" }}
                     transition={{
-                      duration: 0.65,
-                      ease: smoothEase,
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
-                    className="
-                      absolute
-                      inset-x-0
-                      top-0
-                    "
                   >
                     {/* =================================================
                         EYEBROW
@@ -567,7 +518,7 @@ const Hero = () => {
                     </p>
 
                     {/* =================================================
-                        MOBILE EVENT INFO
+                        MOBILE EVENT INFORMATION
                     ================================================== */}
 
                     {slide.type === "event" && (
@@ -587,6 +538,8 @@ const Hero = () => {
                           lg:hidden
                         "
                       >
+                        {/* DATE */}
+
                         <div className="min-w-0 p-2.5 text-center">
                           <CalendarCheck
                             size={15}
@@ -602,6 +555,8 @@ const Hero = () => {
                           </p>
                         </div>
 
+                        {/* TIME */}
+
                         <div className="min-w-0 border-x border-white/10 p-2.5 text-center">
                           <Clock3
                             size={15}
@@ -616,6 +571,8 @@ const Hero = () => {
                             {slide.time}
                           </p>
                         </div>
+
+                        {/* PRICE */}
 
                         <div className="min-w-0 p-2.5 text-center">
                           <Ticket
@@ -635,7 +592,7 @@ const Hero = () => {
                     )}
 
                     {/* =================================================
-                        DESKTOP EVENT INFO
+                        DESKTOP EVENT INFORMATION
                     ================================================== */}
 
                     {slide.type === "event" && (
@@ -652,16 +609,19 @@ const Hero = () => {
                       >
                         <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-xl">
                           <CalendarCheck size={16} className="text-primary" />
+
                           {slide.date}
                         </div>
 
                         <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-xl">
                           <Clock3 size={16} className="text-secondary" />
+
                           {slide.time}
                         </div>
 
                         <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/20 px-4 py-2 text-sm font-black text-white backdrop-blur-xl">
                           <Ticket size={16} />
+
                           {slide.price}
                         </div>
                       </div>
@@ -669,6 +629,12 @@ const Hero = () => {
 
                     {/* =================================================
                         BUTTONS
+                        
+                        IMPORTANT:
+                        These buttons are now INSIDE the same
+                        AnimatePresence as the text.
+                        
+                        This removes the weird transition.
                     ================================================== */}
 
                     <div
@@ -749,27 +715,25 @@ const Hero = () => {
                           aria-label={`Show ${item.title}`}
                           className="group p-1"
                         >
-                          <motion.span
-                            animate={{
-                              width: activeSlide === index ? 48 : 12,
-                              opacity: activeSlide === index ? 1 : 0.4,
-                            }}
-                            transition={{
-                              duration: 0.45,
-                              ease: smoothEase,
-                            }}
-                            className="
+                          <span
+                            className={`
                               block
                               h-1.5
                               rounded-full
-                              bg-white
-                            "
+                              transition-all
+                              duration-500
+                              ${
+                                activeSlide === index
+                                  ? "w-8 bg-primary sm:w-12"
+                                  : "w-2.5 bg-white/30 group-hover:bg-white/60 sm:w-3"
+                              }
+                            `}
                           />
                         </button>
                       ))}
                     </div>
 
-                    {/* NUMBER */}
+                    {/* SLIDE NUMBER */}
 
                     <div className="mt-2 text-center lg:text-left">
                       <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">
@@ -778,7 +742,9 @@ const Hero = () => {
                       </span>
                     </div>
 
-                    {/* TRUST POINTS */}
+                    {/* =================================================
+                        TRUST POINTS
+                    ================================================== */}
 
                     <div
                       className="
@@ -820,7 +786,9 @@ const Hero = () => {
                       </span>
                     </div>
 
-                    {/* STATS */}
+                    {/* =================================================
+                        STATS
+                    ================================================== */}
 
                     <div
                       className="
@@ -878,7 +846,7 @@ const Hero = () => {
             </div>
 
             {/* =================================================
-                RIGHT IMAGE
+                RIGHT SIDE / IMAGE
             ================================================== */}
 
             <div
@@ -890,22 +858,26 @@ const Hero = () => {
                 lg:block
               "
             >
-              {/* GLOW */}
+              {/* IMAGE GLOW */}
 
               <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/15 blur-3xl" />
 
               {/* IMAGE */}
 
-              <AnimatePresence initial={false} mode="sync">
+              <AnimatePresence mode="sync" initial={false}>
                 <motion.div
-                  key={slide.id}
-                  variants={imageVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
+                  key={`visual-${slide.id}`}
+                  initial={{
+                    opacity: 0,
+                    scale: 0.985,
+                    x: 12,
+                    filter: "blur(3px)",
+                  }}
+                  animate={{ opacity: 1, scale: 1, x: 0, filter: "blur(0px)" }}
+                  exit={{ opacity: 0, scale: 0.99, x: -8, filter: "blur(2px)" }}
                   transition={{
-                    duration: 0.85,
-                    ease: smoothEase,
+                    duration: 0.9,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
                   className="
                     relative
@@ -931,26 +903,19 @@ const Hero = () => {
                     "
                   >
                     <motion.img
-                      key={`image-${slide.id}`}
                       src={slide.image}
                       alt={
                         slide.type === "event"
                           ? slide.title
                           : "Freedom Dance Studio Las Vegas"
                       }
-                      initial={{
-                        scale: 1.02,
-                      }}
-                      animate={{
-                        scale: 1,
-                      }}
-                      transition={{
-                        duration: 7,
-                        ease: "easeOut",
-                      }}
+                      initial={{ scale: 1.03 }}
+                      animate={{ scale: 1 }}
+                      transition={{ duration: 7, ease: "linear" }}
                       className={`
                         h-[270px]
                         w-full
+                        object-center
                         sm:h-[430px]
                         lg:h-[620px]
                         ${
@@ -966,7 +931,7 @@ const Hero = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/10" />
 
                     {/* =================================================
-                        EVENT LABEL
+                        EVENT IMAGE LABEL
                     ================================================== */}
 
                     {slide.type === "event" && (
@@ -1032,7 +997,7 @@ const Hero = () => {
                     )}
 
                     {/* =================================================
-                        MESSAGE LABEL
+                        MESSAGE IMAGE LABEL
                     ================================================== */}
 
                     {slide.type !== "event" && (
@@ -1057,18 +1022,16 @@ const Hero = () => {
               </AnimatePresence>
 
               {/* =================================================
-                  DESKTOP EVENT CARD
-
-                  Kept synchronized with slide.
+                  DESKTOP EVENT INFO CARD
               ================================================== */}
 
-              <AnimatePresence initial={false} mode="sync">
+              <AnimatePresence mode="wait" initial={false}>
                 {slide.type === "event" && (
                   <motion.div
                     key={`event-card-${slide.id}`}
                     initial={{
                       opacity: 0,
-                      y: 12,
+                      y: 15,
                     }}
                     animate={{
                       opacity: 1,
@@ -1076,11 +1039,11 @@ const Hero = () => {
                     }}
                     exit={{
                       opacity: 0,
-                      y: -8,
+                      y: -10,
                     }}
                     transition={{
-                      duration: 0.55,
-                      ease: smoothEase,
+                      duration: 0.65,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
                     className="
                       absolute
@@ -1153,7 +1116,7 @@ const Hero = () => {
               </AnimatePresence>
 
               {/* =================================================
-                  RENTAL CARD
+                  RENTAL FLOATING CARD
               ================================================== */}
 
               <motion.div
@@ -1295,7 +1258,7 @@ const Hero = () => {
       </div>
 
       {/* =====================================================
-          MOBILE CTA
+          MOBILE QUICK CTA
       ====================================================== */}
 
       <div className="absolute bottom-3 left-4 right-4 z-30 lg:hidden">
@@ -1328,7 +1291,7 @@ const Hero = () => {
       </div>
 
       {/* =====================================================
-          DESKTOP SCROLL
+          DESKTOP SCROLL INDICATOR
       ====================================================== */}
 
       <motion.a
