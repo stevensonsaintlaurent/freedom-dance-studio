@@ -76,7 +76,7 @@ export const testimonials = [
     image: maribel,
   },
   {
-    id: 4,
+    id: 5,
     name: "Adriana Luna Blake",
     title: "Bachata Sensual",
     rating: 5,
@@ -85,7 +85,7 @@ export const testimonials = [
     image: adriana,
   },
   {
-    id: 5,
+    id: 6,
     name: "Kanani Jane",
     title: "Kizomba, UrbanKiz",
     rating: 5,
@@ -94,7 +94,7 @@ export const testimonials = [
     image: kanani,
   },
   {
-    id: 6,
+    id: 7,
     name: "Jesús Silva",
     title: "Bachata Sensual, Kizomba and Salsa",
     rating: 5,
