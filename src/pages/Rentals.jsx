@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  CalendarCheck,
   CheckCircle2,
   Clock3,
   Music2,
@@ -157,12 +156,14 @@ const StudioRental = () => {
       label: "Website",
       value: "vegasfreedomdancestudio.com",
       href: "https://www.vegasfreedomdancestudio.com",
+      external: true,
     },
     {
       icon: FaInstagram,
       label: "Instagram",
       value: "@freedom_dance_las_vegas",
       href: "https://www.instagram.com/freedom_dance_las_vegas/",
+      external: true,
     },
   ];
 
@@ -173,7 +174,6 @@ const StudioRental = () => {
       ====================================================== */}
 
       <div className="relative isolate overflow-hidden bg-neutral">
-        {/* Decorative background */}
         <div className="absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
         <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-secondary/20 blur-3xl" />
 
@@ -200,7 +200,6 @@ const StudioRental = () => {
                 repetitions.
               </p>
 
-              {/* Price */}
               <div className="mt-8 flex items-center gap-4">
                 <div className="rounded-2xl bg-white/10 p-4 backdrop-blur">
                   <Clock3 className="text-primary" size={28} />
@@ -208,6 +207,7 @@ const StudioRental = () => {
 
                 <div>
                   <p className="text-sm text-white/60">Rates From</p>
+
                   <p className="text-3xl font-black text-white sm:text-4xl">
                     $20–$120
                     <span className="ml-2 text-lg font-medium text-white/60">
@@ -232,18 +232,18 @@ const StudioRental = () => {
                   <ArrowRight size={19} />
                 </button>
 
-                <Link
-                  to="#spaces"
+                {/* FIXED: regular anchor for page section */}
+                <a
+                  href="#spaces"
                   className="
                     btn btn-outline btn-secondary btn-lg
                     rounded-full
                   "
                 >
                   View Our Spaces
-                </Link>
+                </a>
               </div>
 
-              {/* Trust Points */}
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-white/60">
                 <span className="flex items-center gap-2">
                   <CheckCircle2 size={17} className="text-primary" />
@@ -308,6 +308,7 @@ const StudioRental = () => {
                     <p className="text-xs text-base-content/60">
                       Freedom Dance Studio
                     </p>
+
                     <p className="font-bold">Studio For Rent</p>
                   </div>
                 </div>
@@ -599,6 +600,7 @@ const StudioRental = () => {
                         size={20}
                         className="shrink-0 text-primary"
                       />
+
                       <span>{item}</span>
                     </li>
                   ))}
@@ -665,7 +667,8 @@ const StudioRental = () => {
                 </div>
               </div>
 
-              <Link
+              {/* FIXED: <a> instead of React Router Link */}
+              <a
                 href="https://www.google.com/maps/search/?api=1&query=3110+E+Sunset+Rd+Ste+C+Las+Vegas+NV+89120"
                 target="_blank"
                 rel="noreferrer"
@@ -673,7 +676,7 @@ const StudioRental = () => {
               >
                 Get Directions
                 <ArrowRight size={18} />
-              </Link>
+              </a>
             </motion.div>
 
             {/* Contact */}
@@ -700,19 +703,11 @@ const StudioRental = () => {
                   const Icon = item.icon;
 
                   return (
-                    <Link
+                    <a
                       key={item.label}
-                      to={item.href}
-                      target={
-                        item.label === "Website" || item.label === "Instagram"
-                          ? "_blank"
-                          : undefined
-                      }
-                      rel={
-                        item.label === "Website" || item.label === "Instagram"
-                          ? "noreferrer"
-                          : undefined
-                      }
+                      href={item.href}
+                      target={item.external ? "_blank" : undefined}
+                      rel={item.external ? "noreferrer" : undefined}
                       className="
                         group
                         flex
@@ -749,7 +744,7 @@ const StudioRental = () => {
                         size={18}
                         className="ml-auto shrink-0 text-base-content/30 transition group-hover:translate-x-1 group-hover:text-primary"
                       />
-                    </Link>
+                    </a>
                   );
                 })}
               </div>
@@ -895,8 +890,9 @@ const StudioRental = () => {
                   <ArrowRight size={19} />
                 </button>
 
-                <Link
-                  to="tel:+17257240962"
+                {/* FIXED: <a> instead of React Router Link */}
+                <a
+                  href="tel:+17257240962"
                   className="
                     btn
                     btn-lg
@@ -910,7 +906,7 @@ const StudioRental = () => {
                 >
                   <Phone size={18} />
                   Call Us
-                </Link>
+                </a>
               </div>
             </div>
           </motion.div>
