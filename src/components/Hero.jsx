@@ -129,6 +129,54 @@ const slides = [
 ];
 
 /* =========================================================
+   ANIMATION SETTINGS
+========================================================= */
+
+const textVariants = {
+  initial: {
+    opacity: 0,
+    y: 18,
+  },
+
+  animate: {
+    opacity: 1,
+    y: 0,
+  },
+
+  exit: {
+    opacity: 0,
+    y: -12,
+  },
+};
+
+const textTransition = {
+  duration: 0.55,
+  ease: [0.22, 1, 0.36, 1],
+};
+
+const imageVariants = {
+  initial: {
+    opacity: 0,
+    scale: 1.025,
+  },
+
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+
+  exit: {
+    opacity: 0,
+    scale: 1.01,
+  },
+};
+
+const imageTransition = {
+  duration: 0.8,
+  ease: [0.22, 1, 0.36, 1],
+};
+
+/* =========================================================
    HERO
 ========================================================= */
 
@@ -155,6 +203,8 @@ const Hero = () => {
   ========================================================= */
 
   const changeSlide = (index) => {
+    if (index === activeSlide) return;
+
     setActiveSlide(index);
   };
 
@@ -174,30 +224,14 @@ const Hero = () => {
           BACKGROUND IMAGE
       ====================================================== */}
 
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false}>
         <motion.div
           key={`background-${slide.id}`}
-          initial={{
-            opacity: 0,
-            scale: 1.02,
-          }}
-          animate={{
-            opacity: 1,
-            scale: 1,
-          }}
-          exit={{
-            opacity: 0,
-          }}
-          transition={{
-            opacity: {
-              duration: 0.9,
-              ease: "easeInOut",
-            },
-            scale: {
-              duration: 7,
-              ease: "easeOut",
-            },
-          }}
+          variants={imageVariants}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          transition={imageTransition}
           className="absolute inset-0"
         >
           <img
@@ -215,7 +249,7 @@ const Hero = () => {
       </AnimatePresence>
 
       {/* =====================================================
-          MOBILE IMAGE DARKNESS
+          DARK OVERLAY
       ====================================================== */}
 
       <div className="absolute inset-0 bg-black/70 lg:bg-black/65" />
@@ -246,8 +280,8 @@ const Hero = () => {
           absolute
           inset-0
           bg-gradient-to-b
-          from-black/85
-          via-black/55
+          from-black/80
+          via-black/50
           to-black
           lg:hidden
         "
@@ -257,7 +291,16 @@ const Hero = () => {
           BOTTOM GRADIENT
       ====================================================== */}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+      <div
+        className="
+          absolute
+          inset-0
+          bg-gradient-to-t
+          from-black
+          via-transparent
+          to-black/30
+        "
+      />
 
       {/* =====================================================
           COLOR LIGHT
@@ -265,11 +308,11 @@ const Hero = () => {
 
       <motion.div
         animate={{
-          opacity: [0.08, 0.18, 0.08],
-          scale: [1, 1.12, 1],
+          opacity: [0.08, 0.16, 0.08],
+          scale: [1, 1.08, 1],
         }}
         transition={{
-          duration: 7,
+          duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -289,11 +332,11 @@ const Hero = () => {
 
       <motion.div
         animate={{
-          opacity: [0.06, 0.14, 0.06],
-          scale: [1.1, 1, 1.1],
+          opacity: [0.06, 0.12, 0.06],
+          scale: [1.08, 1, 1.08],
         }}
         transition={{
-          duration: 8,
+          duration: 9,
           repeat: Infinity,
           ease: "easeInOut",
         }}
@@ -321,9 +364,8 @@ const Hero = () => {
           z-20
           flex
           min-h-[100svh]
-          items-start
+          items-center
           lg:min-h-screen
-          lg:items-center
         "
       >
         <div
@@ -332,10 +374,10 @@ const Hero = () => {
             w-full
             max-w-7xl
             px-4
-            pb-16
+            pb-8
             pt-16
             sm:px-6
-            sm:pb-20
+            sm:pb-14
             sm:pt-20
             lg:px-10
             lg:py-28
@@ -358,19 +400,13 @@ const Hero = () => {
               {/* BRAND BADGE */}
 
               <motion.div
-                initial={{
-                  opacity: 0,
-                  y: -10,
-                }}
-                animate={{
-                  opacity: 1,
-                  y: 0,
-                }}
+                initial={{ opacity: 0, y: -12 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{
-                  duration: 0.7,
-                  ease: "easeOut",
+                  duration: 0.6,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
-                className="mb-4 inline-flex sm:mb-6 lg:mb-7"
+                className="mb-3 inline-flex sm:mb-5 lg:mb-7"
               >
                 <div
                   className="
@@ -414,30 +450,20 @@ const Hero = () => {
               <div
                 className="
                   relative
-                  min-h-0
-                  sm:min-h-[280px]
-                  lg:min-h-[310px]
+                  min-h-[410px]
+                  sm:min-h-[450px]
+                  lg:min-h-[420px]
                 "
               >
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait" initial={false}>
                   <motion.div
                     key={slide.id}
-                    initial={{
-                      opacity: 0,
-                      y: 12,
-                    }}
-                    animate={{
-                      opacity: 1,
-                      y: 0,
-                    }}
-                    exit={{
-                      opacity: 0,
-                      y: -8,
-                    }}
-                    transition={{
-                      duration: 0.8,
-                      ease: "easeOut",
-                    }}
+                    variants={textVariants}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                    transition={textTransition}
+                    className="absolute inset-x-0 top-0"
                   >
                     {/* EYEBROW */}
 
@@ -599,20 +625,76 @@ const Hero = () => {
                     ================================================== */}
 
                     {slide.type === "event" && (
-                      <div className="mt-7 hidden flex-wrap justify-center gap-2 lg:flex lg:justify-start">
-                        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-xl">
+                      <div
+                        className="
+                          mt-7
+                          hidden
+                          flex-wrap
+                          justify-center
+                          gap-2
+                          lg:flex
+                          lg:justify-start
+                        "
+                      >
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-2
+                            rounded-full
+                            border
+                            border-white/10
+                            bg-white/10
+                            px-4
+                            py-2
+                            text-sm
+                            text-white
+                            backdrop-blur-xl
+                          "
+                        >
                           <CalendarCheck size={16} className="text-primary" />
 
                           {slide.date}
                         </div>
 
-                        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm text-white backdrop-blur-xl">
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-2
+                            rounded-full
+                            border
+                            border-white/10
+                            bg-white/10
+                            px-4
+                            py-2
+                            text-sm
+                            text-white
+                            backdrop-blur-xl
+                          "
+                        >
                           <Clock3 size={16} className="text-secondary" />
 
                           {slide.time}
                         </div>
 
-                        <div className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/20 px-4 py-2 text-sm font-black text-white backdrop-blur-xl">
+                        <div
+                          className="
+                            flex
+                            items-center
+                            gap-2
+                            rounded-full
+                            border
+                            border-primary/30
+                            bg-primary/20
+                            px-4
+                            py-2
+                            text-sm
+                            font-black
+                            text-white
+                            backdrop-blur-xl
+                          "
+                        >
                           <Ticket size={16} />
 
                           {slide.price}
@@ -627,12 +709,12 @@ const Hero = () => {
                   BUTTONS
               ================================================== */}
 
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={`buttons-${slide.id}`}
                   initial={{
                     opacity: 0,
-                    y: 8,
+                    y: 12,
                   }}
                   animate={{
                     opacity: 1,
@@ -640,15 +722,15 @@ const Hero = () => {
                   }}
                   exit={{
                     opacity: 0,
-                    y: -5,
+                    y: -8,
                   }}
                   transition={{
-                    delay: 0.1,
-                    duration: 0.65,
-                    ease: "easeOut",
+                    duration: 0.45,
+                    delay: 0.08,
+                    ease: [0.22, 1, 0.36, 1],
                   }}
                   className="
-                    mt-5
+                    mt-2
                     flex
                     flex-col
                     gap-2.5
@@ -717,7 +799,17 @@ const Hero = () => {
                   SLIDER
               ================================================== */}
 
-              <div className="mt-5 flex items-center justify-center gap-1.5 lg:mt-8 lg:justify-start">
+              <div
+                className="
+                  mt-5
+                  flex
+                  items-center
+                  justify-center
+                  gap-1.5
+                  lg:mt-8
+                  lg:justify-start
+                "
+              >
                 {slides.map((item, index) => (
                   <button
                     key={item.id}
@@ -725,26 +817,39 @@ const Hero = () => {
                     aria-label={`Show ${item.title}`}
                     className="group p-1"
                   >
-                    <span
-                      className={`
+                    <motion.span
+                      animate={{
+                        width: activeSlide === index ? 48 : 12,
+                        opacity: activeSlide === index ? 1 : 0.45,
+                      }}
+                      transition={{
+                        duration: 0.35,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                      className="
                         block
                         h-1.5
                         rounded-full
-                        transition-all
-                        duration-500
-                        ${
-                          activeSlide === index
-                            ? "w-8 bg-primary sm:w-12"
-                            : "w-2.5 bg-white/30 group-hover:bg-white/60 sm:w-3"
-                        }
-                      `}
+                        bg-primary
+                        sm:h-1.5
+                      "
                     />
                   </button>
                 ))}
               </div>
 
+              {/* SLIDE NUMBER */}
+
               <div className="mt-2 text-center lg:text-left">
-                <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-white/40">
+                <span
+                  className="
+                    text-[9px]
+                    font-bold
+                    uppercase
+                    tracking-[0.25em]
+                    text-white/40
+                  "
+                >
                   {String(activeSlide + 1).padStart(2, "0")} /{" "}
                   {String(slides.length).padStart(2, "0")}
                 </span>
@@ -865,29 +970,26 @@ const Hero = () => {
             >
               {/* IMAGE GLOW */}
 
-              <div className="absolute -inset-4 rounded-[2.5rem] bg-primary/15 blur-3xl" />
+              <div
+                className="
+                  absolute
+                  -inset-4
+                  rounded-[2.5rem]
+                  bg-primary/15
+                  blur-3xl
+                "
+              />
 
               {/* IMAGE */}
 
-              <AnimatePresence mode="wait">
+              <AnimatePresence initial={false} mode="wait">
                 <motion.div
                   key={`visual-${slide.id}`}
-                  initial={{
-                    opacity: 0,
-                    scale: 0.985,
-                  }}
-                  animate={{
-                    opacity: 1,
-                    scale: 1,
-                  }}
-                  exit={{
-                    opacity: 0,
-                    scale: 1.01,
-                  }}
-                  transition={{
-                    duration: 1,
-                    ease: "easeInOut",
-                  }}
+                  variants={imageVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={imageTransition}
                   className="
                     relative
                     overflow-hidden
@@ -919,10 +1021,8 @@ const Hero = () => {
                           : "Freedom Dance Studio Las Vegas"
                       }
                       className={`
-                        h-[250px]
+                        h-[270px]
                         w-full
-                        transition-transform
-                        duration-[8000ms]
                         sm:h-[430px]
                         lg:h-[620px]
                         ${
@@ -935,14 +1035,33 @@ const Hero = () => {
 
                     {/* IMAGE GRADIENT */}
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/10" />
+                    <div
+                      className="
+                        absolute
+                        inset-0
+                        bg-gradient-to-t
+                        from-black
+                        via-transparent
+                        to-black/10
+                      "
+                    />
 
                     {/* =================================================
                         EVENT IMAGE LABEL
                     ================================================== */}
 
                     {slide.type === "event" && (
-                      <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5">
+                      <div
+                        className="
+                          absolute
+                          bottom-3
+                          left-3
+                          right-3
+                          sm:bottom-5
+                          sm:left-5
+                          sm:right-5
+                        "
+                      >
                         <div
                           className="
                             rounded-xl
@@ -981,7 +1100,15 @@ const Hero = () => {
                                 Upcoming Event
                               </div>
 
-                              <h3 className="truncate text-base font-black text-white sm:text-2xl">
+                              <h3
+                                className="
+                                  truncate
+                                  text-base
+                                  font-black
+                                  text-white
+                                  sm:text-2xl
+                                "
+                              >
                                 {slide.title}{" "}
                                 <span className="text-primary">
                                   {slide.highlight}
@@ -989,7 +1116,19 @@ const Hero = () => {
                               </h3>
                             </div>
 
-                            <div className="hidden rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-center sm:block">
+                            <div
+                              className="
+                                hidden
+                                rounded-xl
+                                border
+                                border-white/10
+                                bg-white/10
+                                px-4
+                                py-3
+                                text-center
+                                sm:block
+                              "
+                            >
                               <p className="text-[9px] uppercase tracking-wider text-white/40">
                                 Cover
                               </p>
@@ -1008,13 +1147,51 @@ const Hero = () => {
                     ================================================== */}
 
                     {slide.type !== "event" && (
-                      <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6">
-                        <div className="rounded-xl border border-white/10 bg-black/55 p-3 backdrop-blur-xl sm:rounded-2xl sm:p-5">
-                          <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-primary sm:text-xs">
+                      <div
+                        className="
+                          absolute
+                          bottom-3
+                          left-3
+                          right-3
+                          sm:bottom-6
+                          sm:left-6
+                          sm:right-6
+                        "
+                      >
+                        <div
+                          className="
+                            rounded-xl
+                            border
+                            border-white/10
+                            bg-black/55
+                            p-3
+                            backdrop-blur-xl
+                            sm:rounded-2xl
+                            sm:p-5
+                          "
+                        >
+                          <p
+                            className="
+                              text-[9px]
+                              font-bold
+                              uppercase
+                              tracking-[0.15em]
+                              text-primary
+                              sm:text-xs
+                            "
+                          >
                             Freedom Dance Studio
                           </p>
 
-                          <p className="mt-1 text-base font-black text-white sm:text-2xl">
+                          <p
+                            className="
+                              mt-1
+                              text-base
+                              font-black
+                              text-white
+                              sm:text-2xl
+                            "
+                          >
                             Dance • Learn • Create
                           </p>
 
@@ -1030,10 +1207,9 @@ const Hero = () => {
 
               {/* =================================================
                   DESKTOP EVENT INFO CARD
-                  HIDDEN ON MOBILE
               ================================================== */}
 
-              <AnimatePresence mode="wait">
+              <AnimatePresence mode="wait" initial={false}>
                 {slide.type === "event" && (
                   <motion.div
                     key={`event-card-${slide.id}`}
@@ -1050,8 +1226,8 @@ const Hero = () => {
                       y: -8,
                     }}
                     transition={{
-                      duration: 0.7,
-                      ease: "easeOut",
+                      duration: 0.45,
+                      ease: [0.22, 1, 0.36, 1],
                     }}
                     className="
                       absolute
@@ -1125,14 +1301,13 @@ const Hero = () => {
 
               {/* =================================================
                   RENTAL FLOATING CARD
-                  DESKTOP / TABLET ONLY
               ================================================== */}
 
               <motion.div
                 initial={{
                   opacity: 0,
-                  x: -10,
-                  y: 10,
+                  x: -15,
+                  y: 15,
                 }}
                 animate={{
                   opacity: 1,
@@ -1141,15 +1316,15 @@ const Hero = () => {
                 }}
                 transition={{
                   opacity: {
-                    delay: 0.8,
+                    delay: 0.7,
                     duration: 0.6,
                   },
                   x: {
-                    delay: 0.8,
+                    delay: 0.7,
                     duration: 0.6,
                   },
                   y: {
-                    delay: 1.5,
+                    delay: 1.4,
                     duration: 4,
                     repeat: Infinity,
                     ease: "easeInOut",
@@ -1186,7 +1361,19 @@ const Hero = () => {
                     hover:shadow-primary/30
                   "
                 >
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <div
+                    className="
+                      flex
+                      h-11
+                      w-11
+                      shrink-0
+                      items-center
+                      justify-center
+                      rounded-xl
+                      bg-primary/10
+                      text-primary
+                    "
+                  >
                     <PartyPopper size={21} />
                   </div>
 
@@ -1206,14 +1393,20 @@ const Hero = () => {
 
                   <ArrowRight
                     size={17}
-                    className="ml-auto shrink-0 text-primary transition-transform duration-300 group-hover:translate-x-1"
+                    className="
+                      ml-auto
+                      shrink-0
+                      text-primary
+                      transition-transform
+                      duration-300
+                      group-hover:translate-x-1
+                    "
                   />
                 </Link>
               </motion.div>
 
               {/* =================================================
                   COMMUNITY BADGE
-                  DESKTOP / TABLET ONLY
               ================================================== */}
 
               <motion.div
@@ -1244,7 +1437,18 @@ const Hero = () => {
                 "
               >
                 <div className="flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-secondary/15 text-secondary">
+                  <div
+                    className="
+                      flex
+                      h-9
+                      w-9
+                      items-center
+                      justify-center
+                      rounded-full
+                      bg-secondary/15
+                      text-secondary
+                    "
+                  >
                     <Users size={17} />
                   </div>
 
@@ -1264,7 +1468,16 @@ const Hero = () => {
           MOBILE QUICK CTA
       ====================================================== */}
 
-      <div className="absolute bottom-3 left-4 right-4 z-30 lg:hidden">
+      <div
+        className="
+          absolute
+          bottom-3
+          left-4
+          right-4
+          z-30
+          lg:hidden
+        "
+      >
         <Link
           to="/schedule"
           className="
