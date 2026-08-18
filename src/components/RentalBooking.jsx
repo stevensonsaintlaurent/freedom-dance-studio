@@ -14,6 +14,7 @@ import {
   Users,
   X,
 } from "lucide-react";
+import useOnSudmit from "../hooks/useOnSudmit";
 
 const rates = {
   weekday: [
@@ -32,6 +33,7 @@ const LARGE_GROUP_RATE = 120;
 const LARGE_GROUP_MIN = 25;
 
 export default function RentalBooking() {
+  const { onSubmit, setText } = useOnSudmit();
   const [day, setDay] = useState("weekday");
   const [time, setTime] = useState(1);
   const [hours, setHours] = useState(2);
@@ -591,7 +593,7 @@ Please confirm availability and final pricing.
 
                 {/* FORM */}
 
-                <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+                <form onSubmit={onSubmit} className="mt-7 space-y-5">
                   {/* NAME + PHONE */}
 
                   <div className="grid gap-5 sm:grid-cols-2">
@@ -769,13 +771,16 @@ Please confirm availability and final pricing.
                           Estimated Total
                         </p>
 
-                        <p className="mt-1 text-3xl font-black text-primary">
+                        <p
+                          className="mt-1 text-3xl font-black text-primary"
+                          name="estimate"
+                        >
                           ${estimate}
                         </p>
                       </div>
 
                       <div className="text-right text-xs text-white/40">
-                        <p>${hourlyRate}/hour</p>
+                        <p name="hourlyRate">${hourlyRate}/hour</p>
 
                         <p>
                           {hours} hour
