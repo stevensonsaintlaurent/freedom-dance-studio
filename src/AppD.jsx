@@ -10,6 +10,7 @@ import {
   Events,
 } from "./pages";
 
+import StudioRentals from "./components/StudioRentals";
 import {
   AdultClasses,
   Booking,
@@ -25,6 +26,7 @@ import {
   Teachers,
   Testimonials,
   IndependentClasses,
+  StudioRentalPricing,
 } from "./components";
 
 const router = createBrowserRouter([
@@ -108,7 +110,10 @@ const router = createBrowserRouter([
         path: "rentalStudio",
         element: <StudioRentalConfirmation />,
       },
-
+      {
+        path: "studiopricing",
+        element: <StudioRental />,
+      },
       {
         path: "info",
         element: <InfoContent />,

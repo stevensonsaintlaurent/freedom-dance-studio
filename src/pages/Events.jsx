@@ -54,22 +54,22 @@ const events = [
     button: "Get Your Ticket",
   },
 
-  {
-    id: 3,
-    type: "WEEKEND INTENSIVE",
-    title: "Bachata Weekend Intensive",
-    instructor: "Training • Technique • Musicality",
-    date: "August 14–16, 2026",
-    time: "Full Weekend",
-    location: "Freedom Dance Studio",
-    price: "$129",
-    priceDetails: "Weekend Pass",
-    image: workshop,
-    description:
-      "A complete Bachata weekend designed to help you improve your technique, musicality, connection, body movement, and confidence.",
-    button: "Register Now",
-    featured: true,
-  },
+  // {
+  //   id: 3,
+  //   type: "WEEKEND INTENSIVE",
+  //   title: "Bachata Weekend Intensive",
+  //   instructor: "Training • Technique • Musicality",
+  //   date: "August 14–16, 2026",
+  //   time: "Full Weekend",
+  //   location: "Freedom Dance Studio",
+  //   price: "$129",
+  //   priceDetails: "Weekend Pass",
+  //   image: workshop,
+  //   description:
+  //     "A complete Bachata weekend designed to help you improve your technique, musicality, connection, body movement, and confidence.",
+  //   button: "Register Now",
+  //   featured: true,
+  // },
 
   {
     id: 4,

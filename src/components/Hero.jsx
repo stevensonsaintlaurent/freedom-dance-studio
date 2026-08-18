@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -46,23 +46,23 @@ const slides = [
     accent: "primary",
   },
 
-  {
-    id: "workshop",
-    type: "event",
-    eyebrow: "BACHATA • TRAINING • INTENSIVE",
-    title: "Bachata Weekend",
-    highlight: "Intensive.",
-    description:
-      "A full weekend dedicated to training, technique, musicality and improving your Bachata dancing.",
-    date: "August 14–16, 2026",
-    time: "Full Weekend",
-    price: "$129",
-    image: workshop,
-    button: "View Workshop",
-    link: "/book",
-    icon: Sparkles,
-    accent: "secondary",
-  },
+  // {
+  //   id: "workshop",
+  //   type: "event",
+  //   eyebrow: "BACHATA • TRAINING • INTENSIVE",
+  //   title: "Bachata Weekend",
+  //   highlight: "Intensive.",
+  //   description:
+  //     "A full weekend dedicated to training, technique, musicality and improving your Bachata dancing.",
+  //   date: "August 14–16, 2026",
+  //   time: "Full Weekend",
+  //   price: "$129",
+  //   image: workshop,
+  //   button: "View Workshop",
+  //   link: "/book",
+  //   icon: Sparkles,
+  //   accent: "secondary",
+  // },
 
   {
     id: "havasu",
@@ -146,12 +146,12 @@ const Hero = () => {
   ========================================================= */
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = setTimeout(() => {
       setActiveSlide((current) => (current + 1) % slides.length);
     }, 7000);
 
-    return () => clearInterval(timer);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [activeSlide]);
 
   /* =========================================================
      MANUAL SLIDE
@@ -178,7 +178,7 @@ const Hero = () => {
           BACKGROUND IMAGE
       ====================================================== */}
 
-      <AnimatePresence mode="sync" initial={false}>
+      <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={`background-${slide.id}`}
           initial={{ opacity: 0, scale: 1.025 }}
@@ -864,7 +864,7 @@ const Hero = () => {
 
               {/* IMAGE */}
 
-              <AnimatePresence mode="sync" initial={false}>
+              <AnimatePresence mode="wait" initial={false}>
                 <motion.div
                   key={`visual-${slide.id}`}
                   initial={{
@@ -1331,4 +1331,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default memo(Hero);
