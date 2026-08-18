@@ -15,6 +15,7 @@ import {
   X,
 } from "lucide-react";
 import useOnSudmit from "../hooks/useOnSudmit";
+import { useFormAction, useSubmit } from "react-router-dom";
 
 const rates = {
   weekday: [
@@ -33,12 +34,12 @@ const LARGE_GROUP_RATE = 120;
 const LARGE_GROUP_MIN = 25;
 
 export default function RentalBooking() {
-  const { onSubmit, setText } = useOnSudmit();
+  const { onSubmit } = useOnSudmit();
+
   const [day, setDay] = useState("weekday");
   const [time, setTime] = useState(1);
   const [hours, setHours] = useState(2);
   const [guests, setGuests] = useState("");
-
   const [showRequest, setShowRequest] = useState(false);
 
   const [form, setForm] = useState({
@@ -51,7 +52,6 @@ export default function RentalBooking() {
   });
 
   const selected = rates[day][time];
-
   const guestCount = Number(guests) || 0;
 
   // 25 guests or more = $120/hour
@@ -59,9 +59,7 @@ export default function RentalBooking() {
 
   const hourlyRate = isLargeGroup ? LARGE_GROUP_RATE : selected.rate;
 
-  const estimate = useMemo(() => {
-    return hourlyRate * hours;
-  }, [hourlyRate, hours]);
+  const estimate = useMemo(() => hourlyRate * hours, [hourlyRate, hours]);
 
   const handleDayChange = (newDay) => {
     setDay(newDay);
@@ -105,52 +103,9 @@ export default function RentalBooking() {
     document.body.style.overflow = "";
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    const subject = encodeURIComponent(
-      "Freedom Dance Studio - Rental Availability Request",
-    );
-
-    const body = encodeURIComponent(
-      `
-NEW STUDIO RENTAL REQUEST
-
-CUSTOMER
-Name: ${form.name}
-Email: ${form.email}
-Phone: ${form.phone}
-
-EVENT
-Type: ${form.eventType}
-Requested Date: ${form.date}
-
-RENTAL DETAILS
-Day: ${day === "weekday" ? "Weekday" : "Weekend"}
-Time: ${selected.label}
-Hours: ${hours}
-Guests: ${guestCount}
-
-PRICING
-Hourly Rate: $${hourlyRate}/hr
-Estimated Total: $${estimate}
-
-SPECIAL REQUEST
-${form.message || "No additional details provided."}
-
-Please confirm availability and final pricing.
-    `.trim(),
-    );
-
-    window.location.href = `mailto:info@vegasfreedomdancestudio.com?subject=${subject}&body=${body}`;
-  };
-
   return (
     <>
-      {/* =========================================================
-          RENTAL BOOKING
-      ========================================================== */}
-
+      {/* RENTAL BOOKING */}
       <section
         id="booking"
         className="relative overflow-hidden bg-neutral py-20 text-neutral-content sm:py-24 lg:py-28"
@@ -161,7 +116,6 @@ Please confirm availability and final pricing.
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             {/* LEFT SIDE */}
-
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">
                 Ready to book?
@@ -215,7 +169,6 @@ Please confirm availability and final pricing.
             </div>
 
             {/* BOOKING CARD */}
-
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -224,7 +177,6 @@ Please confirm availability and final pricing.
               className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl backdrop-blur-xl sm:p-7"
             >
               {/* DAY */}
-
               <div className="grid grid-cols-2 gap-2 rounded-2xl bg-black/20 p-2">
                 <button
                   type="button"
@@ -251,11 +203,9 @@ Please confirm availability and final pricing.
                 </button>
               </div>
 
-              {/* FORM */}
-
+              {/* FORM OPTIONS */}
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
                 {/* TIME */}
-
                 <label className="form-control">
                   <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                     Time
@@ -264,23 +214,7 @@ Please confirm availability and final pricing.
                   <select
                     value={time}
                     onChange={(e) => setTime(Number(e.target.value))}
-                    className="
-                      select
-                      select-bordered
-                      w-full
-                      rounded-xl
-                      border-white/10
-                      bg-white/10
-                      text-white
-                      outline-none
-                      transition-all
-                      duration-300
-                      hover:border-primary/40
-                      focus:border-primary
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-primary/20
-                    "
+                    className="select select-bordered w-full rounded-xl border-white/10 bg-white/10 text-white outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   >
                     {rates[day].map((item, index) => (
                       <option
@@ -295,7 +229,6 @@ Please confirm availability and final pricing.
                 </label>
 
                 {/* HOURS */}
-
                 <label className="form-control">
                   <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                     Hours
@@ -307,27 +240,11 @@ Please confirm availability and final pricing.
                     max="12"
                     value={hours}
                     onChange={handleHoursChange}
-                    className="
-                      input
-                      input-bordered
-                      rounded-xl
-                      border-white/10
-                      bg-white/10
-                      text-white
-                      outline-none
-                      transition-all
-                      duration-300
-                      hover:border-primary/40
-                      focus:border-primary
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-primary/20
-                    "
+                    className="input input-bordered rounded-xl border-white/10 bg-white/10 text-white outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   />
                 </label>
 
                 {/* GUESTS */}
-
                 <label className="form-control sm:col-span-2">
                   <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                     Estimated guests
@@ -339,26 +256,8 @@ Please confirm availability and final pricing.
                     value={guests}
                     onChange={handleGuestsChange}
                     placeholder="How many people?"
-                    className="
-                      input
-                      input-bordered
-                      rounded-xl
-                      border-white/10
-                      bg-white/10
-                      text-white
-                      placeholder:text-white/25
-                      outline-none
-                      transition-all
-                      duration-300
-                      hover:border-primary/40
-                      focus:border-primary
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-primary/20
-                    "
+                    className="input input-bordered rounded-xl border-white/10 bg-white/10 text-white placeholder:text-white/25 outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   />
-
-                  {/* 25+ GUEST MESSAGE */}
 
                   {isLargeGroup && (
                     <motion.div
@@ -375,20 +274,11 @@ Please confirm availability and final pricing.
               </div>
 
               {/* ESTIMATE */}
-
               <motion.div
                 key={`${day}-${time}-${hours}-${guestCount}`}
-                initial={{
-                  opacity: 0.6,
-                  scale: 0.98,
-                }}
-                animate={{
-                  opacity: 1,
-                  scale: 1,
-                }}
-                transition={{
-                  duration: 0.25,
-                }}
+                initial={{ opacity: 0.6, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25 }}
                 className="mt-6 rounded-2xl bg-primary p-6 text-primary-content"
               >
                 <div className="flex items-end justify-between gap-4">
@@ -415,7 +305,6 @@ Please confirm availability and final pricing.
               </motion.div>
 
               {/* BUTTONS */}
-
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
@@ -443,10 +332,7 @@ Please confirm availability and final pricing.
         </div>
       </section>
 
-      {/* =========================================================
-          REQUEST AVAILABILITY MODAL
-      ========================================================== */}
-
+      {/* REQUEST AVAILABILITY MODAL */}
       <AnimatePresence>
         {showRequest && (
           <motion.div
@@ -456,7 +342,6 @@ Please confirm availability and final pricing.
             className="fixed inset-0 z-[999] flex items-center justify-center p-4"
           >
             {/* BACKDROP */}
-
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -466,7 +351,6 @@ Please confirm availability and final pricing.
             />
 
             {/* MODAL */}
-
             <motion.div
               initial={{
                 opacity: 0,
@@ -490,7 +374,6 @@ Please confirm availability and final pricing.
               className="relative z-10 max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/10 bg-neutral shadow-2xl"
             >
               {/* HEADER */}
-
               <div className="sticky top-0 z-20 border-b border-white/10 bg-neutral/95 p-5 backdrop-blur-xl sm:p-7">
                 <div className="flex items-start justify-between gap-5">
                   <div>
@@ -520,10 +403,8 @@ Please confirm availability and final pricing.
               </div>
 
               {/* BODY */}
-
               <div className="p-5 sm:p-7">
                 {/* RENTAL SUMMARY */}
-
                 <div className="rounded-2xl border border-primary/20 bg-primary/10 p-5">
                   <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-primary">
                     <CheckCircle2 size={15} />
@@ -572,8 +453,6 @@ Please confirm availability and final pricing.
                     </div>
                   </div>
 
-                  {/* SHOW RATE IN MODAL */}
-
                   <div className="mt-4 border-t border-primary/10 pt-4">
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-white/40">Hourly rate</span>
@@ -592,10 +471,35 @@ Please confirm availability and final pricing.
                 </div>
 
                 {/* FORM */}
-
                 <form onSubmit={onSubmit} className="mt-7 space-y-5">
-                  {/* NAME + PHONE */}
+                  {/* RENTAL DATA SENT TO WEB3FORMS */}
+                  <input
+                    type="hidden"
+                    name="rentalDay"
+                    value={day === "weekday" ? "Weekday" : "Weekend"}
+                  />
 
+                  <input
+                    type="hidden"
+                    name="rentalTime"
+                    value={selected.label}
+                  />
+
+                  <input type="hidden" name="hours" value={hours} />
+
+                  <input type="hidden" name="guests" value={guestCount} />
+
+                  <input type="hidden" name="hourlyRate" value={hourlyRate} />
+
+                  <input type="hidden" name="estimatedTotal" value={estimate} />
+
+                  <input
+                    type="hidden"
+                    name="rentalType"
+                    value="Studio Rental"
+                  />
+
+                  {/* NAME + PHONE */}
                   <div className="grid gap-5 sm:grid-cols-2">
                     <label className="form-control">
                       <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
@@ -645,7 +549,6 @@ Please confirm availability and final pricing.
                   </div>
 
                   {/* EMAIL + EVENT TYPE */}
-
                   <div className="grid gap-5 sm:grid-cols-2">
                     <label className="form-control">
                       <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
@@ -729,7 +632,6 @@ Please confirm availability and final pricing.
                   </div>
 
                   {/* DATE */}
-
                   <label className="form-control">
                     <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                       Requested Date
@@ -746,7 +648,6 @@ Please confirm availability and final pricing.
                   </label>
 
                   {/* SPECIAL REQUEST */}
-
                   <label className="form-control">
                     <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                       Special Request / Additional Details
@@ -763,7 +664,6 @@ Please confirm availability and final pricing.
                   </label>
 
                   {/* FINAL PRICE */}
-
                   <div className="rounded-2xl bg-white/5 p-5">
                     <div className="flex items-center justify-between gap-4">
                       <div>
@@ -771,16 +671,13 @@ Please confirm availability and final pricing.
                           Estimated Total
                         </p>
 
-                        <p
-                          className="mt-1 text-3xl font-black text-primary"
-                          name="estimate"
-                        >
+                        <p className="mt-1 text-3xl font-black text-primary">
                           ${estimate}
                         </p>
                       </div>
 
                       <div className="text-right text-xs text-white/40">
-                        <p name="hourlyRate">${hourlyRate}/hour</p>
+                        <p>${hourlyRate}/hour</p>
 
                         <p>
                           {hours} hour
@@ -791,7 +688,6 @@ Please confirm availability and final pricing.
                   </div>
 
                   {/* SUBMIT */}
-
                   <button
                     type="submit"
                     className="btn btn-primary btn-lg w-full rounded-xl shadow-lg shadow-primary/20"
