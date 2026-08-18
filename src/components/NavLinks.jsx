@@ -63,7 +63,7 @@ const moreLinks = [
   },
   {
     id: 7,
-    url: "/rental",
+    url: "/studiopricing",
     text: "Studio Rental",
     icon: Building2,
   },

@@ -28,8 +28,8 @@ const rates = {
   ],
 };
 
-const LARGE_GROUP_RATE = 120;
-const LARGE_GROUP_MIN = 25;
+const SMALL_GROUP_RATE = 120;
+const SMALL_GROUP_MAX = 25;
 
 export default function RentalBooking() {
   const [day, setDay] = useState("weekday");
@@ -38,6 +38,7 @@ export default function RentalBooking() {
   const [guests, setGuests] = useState("");
 
   const [showRequest, setShowRequest] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const [form, setForm] = useState({
     name: "",
@@ -52,10 +53,9 @@ export default function RentalBooking() {
 
   const guestCount = Number(guests) || 0;
 
-  // 25 guests or more = $120/hour
-  const isLargeGroup = guestCount >= LARGE_GROUP_MIN;
+  const isSmallGroup = guestCount >= 1 && guestCount <= SMALL_GROUP_MAX;
 
-  const hourlyRate = isLargeGroup ? LARGE_GROUP_RATE : selected.rate;
+  const hourlyRate = isSmallGroup ? SMALL_GROUP_RATE : selected.rate;
 
   const estimate = useMemo(() => {
     return hourlyRate * hours;
@@ -94,6 +94,7 @@ export default function RentalBooking() {
   };
 
   const openRequest = () => {
+    setSubmitted(false);
     setShowRequest(true);
     document.body.style.overflow = "hidden";
   };
@@ -106,59 +107,58 @@ export default function RentalBooking() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const subject = encodeURIComponent(
-      "Freedom Dance Studio - Rental Availability Request",
-    );
+    const subject = encodeURIComponent("Studio Rental Availability Request");
 
     const body = encodeURIComponent(
       `
 NEW STUDIO RENTAL REQUEST
 
-CUSTOMER
+Customer
 Name: ${form.name}
 Email: ${form.email}
 Phone: ${form.phone}
 
-EVENT
-Type: ${form.eventType}
-Requested Date: ${form.date}
+EVENT INFORMATION
+Event Type: ${form.eventType || "Not specified"}
+Requested Date: ${form.date || "Not specified"}
 
 RENTAL DETAILS
-Day: ${day === "weekday" ? "Weekday" : "Weekend"}
+Day Type: ${day === "weekday" ? "Weekday" : "Weekend"}
 Time: ${selected.label}
 Hours: ${hours}
-Guests: ${guestCount}
+Guests: ${guestCount || "Not specified"}
 
 PRICING
 Hourly Rate: $${hourlyRate}/hr
 Estimated Total: $${estimate}
 
-SPECIAL REQUEST
+SPECIAL REQUEST / DETAILS
 ${form.message || "No additional details provided."}
 
 Please confirm availability and final pricing.
     `.trim(),
     );
 
+    setSubmitted(true);
+
     window.location.href = `mailto:info@vegasfreedomdancestudio.com?subject=${subject}&body=${body}`;
   };
 
   return (
     <>
-      {/* =========================================================
-          RENTAL BOOKING
-      ========================================================== */}
-
       <section
         id="booking"
         className="relative overflow-hidden bg-neutral py-20 text-neutral-content sm:py-24 lg:py-28"
       >
+        {/* BACKGROUND */}
         <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            {/* LEFT SIDE */}
+            {/* =====================================================
+                LEFT SIDE
+            ====================================================== */}
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">
@@ -166,13 +166,13 @@ Please confirm availability and final pricing.
               </p>
 
               <h2 className="mt-3 text-4xl font-black leading-tight sm:text-5xl">
-                Let’s plan your
+                Let's plan your
                 <span className="block text-primary">rental.</span>
               </h2>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-white/60">
                 Choose the day and time that fits your needs, get a quick
-                estimate, then send us your request. We’ll confirm availability
+                estimate, then send us your request. We'll confirm availability
                 with you.
               </p>
 
@@ -212,16 +212,28 @@ Please confirm availability and final pricing.
               </div>
             </div>
 
-            {/* BOOKING CARD */}
+            {/* =====================================================
+                BOOKING CARD
+            ====================================================== */}
 
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              initial={{
+                opacity: 0,
+                y: 24,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.7,
+              }}
               className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl backdrop-blur-xl sm:p-7"
             >
-              {/* DAY */}
+              {/* DAY SELECTOR */}
 
               <div className="grid grid-cols-2 gap-2 rounded-2xl bg-black/20 p-2">
                 <button
@@ -356,16 +368,20 @@ Please confirm availability and final pricing.
                     "
                   />
 
-                  {/* 25+ GUEST MESSAGE */}
-
-                  {isLargeGroup && (
+                  {isSmallGroup && (
                     <motion.div
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{
+                        opacity: 0,
+                        y: -6,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
                       className="mt-2 flex items-center gap-2 text-xs font-semibold text-primary"
                     >
                       <CheckCircle2 size={15} />
-                      Groups of 25 guests or more:
+                      Groups of 25 guests or fewer:
                       <span className="font-black">$120/hour</span>
                     </motion.div>
                   )}
@@ -403,16 +419,16 @@ Please confirm availability and final pricing.
                       ${hourlyRate}/hr × {hours} hours
                     </p>
 
-                    {isLargeGroup && (
+                    {isSmallGroup && (
                       <p className="mt-1 text-[10px] font-bold uppercase tracking-wider opacity-60">
-                        Large group rate applied
+                        Group rate applied
                       </p>
                     )}
                   </div>
                 </div>
               </motion.div>
 
-              {/* BUTTONS */}
+              {/* ACTION BUTTONS */}
 
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <button
@@ -448,17 +464,29 @@ Please confirm availability and final pricing.
       <AnimatePresence>
         {showRequest && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
             className="fixed inset-0 z-[999] flex items-center justify-center p-4"
           >
             {/* BACKDROP */}
 
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               onClick={closeRequest}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
@@ -487,7 +515,7 @@ Please confirm availability and final pricing.
               }}
               className="relative z-10 max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/10 bg-neutral shadow-2xl"
             >
-              {/* HEADER */}
+              {/* MODAL HEADER */}
 
               <div className="sticky top-0 z-20 border-b border-white/10 bg-neutral/95 p-5 backdrop-blur-xl sm:p-7">
                 <div className="flex items-start justify-between gap-5">
@@ -517,11 +545,9 @@ Please confirm availability and final pricing.
                 </div>
               </div>
 
-              {/* BODY */}
+              {/* REQUEST SUMMARY */}
 
               <div className="p-5 sm:p-7">
-                {/* RENTAL SUMMARY */}
-
                 <div className="rounded-2xl border border-primary/20 bg-primary/10 p-5">
                   <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-primary">
                     <CheckCircle2 size={15} />
@@ -533,7 +559,6 @@ Please confirm availability and final pricing.
                       <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
                         Day
                       </p>
-
                       <p className="mt-1 font-bold text-white">
                         {day === "weekday" ? "Weekday" : "Weekend"}
                       </p>
@@ -543,7 +568,6 @@ Please confirm availability and final pricing.
                       <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
                         Time
                       </p>
-
                       <p className="mt-1 font-bold text-white">
                         {selected.label}
                       </p>
@@ -553,7 +577,6 @@ Please confirm availability and final pricing.
                       <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
                         Guests
                       </p>
-
                       <p className="mt-1 font-bold text-white">
                         {guestCount || "Not specified"}
                       </p>
@@ -563,29 +586,10 @@ Please confirm availability and final pricing.
                       <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
                         Estimate
                       </p>
-
                       <p className="mt-1 font-black text-primary">
                         ${estimate}
                       </p>
                     </div>
-                  </div>
-
-                  {/* SHOW RATE IN MODAL */}
-
-                  <div className="mt-4 border-t border-primary/10 pt-4">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-white/40">Hourly rate</span>
-
-                      <span className="font-black text-primary">
-                        ${hourlyRate}/hour
-                      </span>
-                    </div>
-
-                    {isLargeGroup && (
-                      <p className="mt-1 text-[10px] text-white/40">
-                        25+ guest rate applied
-                      </p>
-                    )}
                   </div>
                 </div>
 
@@ -743,7 +747,7 @@ Please confirm availability and final pricing.
                     />
                   </label>
 
-                  {/* SPECIAL REQUEST */}
+                  {/* MESSAGE */}
 
                   <label className="form-control">
                     <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
@@ -760,7 +764,7 @@ Please confirm availability and final pricing.
                     />
                   </label>
 
-                  {/* FINAL PRICE */}
+                  {/* PRICING INFO */}
 
                   <div className="rounded-2xl bg-white/5 p-5">
                     <div className="flex items-center justify-between gap-4">
@@ -778,8 +782,7 @@ Please confirm availability and final pricing.
                         <p>${hourlyRate}/hour</p>
 
                         <p>
-                          {hours} hour
-                          {hours !== 1 ? "s" : ""}
+                          {hours} hour{hours !== 1 ? "s" : ""}
                         </p>
                       </div>
                     </div>
@@ -800,6 +803,27 @@ Please confirm availability and final pricing.
                     Freedom Dance Studio will contact you to confirm
                     availability and final pricing.
                   </p>
+
+                  {submitted && (
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                        y: -5,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
+                      className="alert border-primary/20 bg-primary/10 text-primary"
+                    >
+                      <CheckCircle2 size={18} />
+
+                      <span>
+                        Your request is ready to send. Please complete the email
+                        that opens.
+                      </span>
+                    </motion.div>
+                  )}
                 </form>
               </div>
             </motion.div>

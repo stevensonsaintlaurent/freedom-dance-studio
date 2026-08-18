@@ -28,6 +28,7 @@ import {
   IndependentClasses,
   StudioRentalPricing,
 } from "./components";
+import RentalBooking from "./components/RequestAvailable";
 
 const router = createBrowserRouter([
   {
@@ -112,7 +113,11 @@ const router = createBrowserRouter([
       },
       {
         path: "studiopricing",
-        element: <StudioRental />,
+        element: <StudioRentals />,
+      },
+      {
+        path: "request",
+        element: <RentalBooking />,
       },
       {
         path: "info",
