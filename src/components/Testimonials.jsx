@@ -11,7 +11,6 @@ const Reviews = () => {
 
   // Only display the first 2 videos
   const reviewVideos = videos.slice(0, 2);
-  console.log(reviewVideos);
 
   // Autoplay first video when page loads
   useEffect(() => {
