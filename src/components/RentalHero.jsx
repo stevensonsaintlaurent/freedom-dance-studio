@@ -8,7 +8,8 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import heroImage from "../assets/recentClip1.jpeg";
+
+import heroImage from "../assets/rehearsal.jpeg";
 
 const highlights = [
   "Dance classes & private lessons",

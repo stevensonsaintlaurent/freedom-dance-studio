@@ -16,3 +16,4 @@ export { default as InfoContent } from "./InfoContent";
 export { default as Testimonials } from "./Testimonials";
 export { default as IndependentClasses } from "./IndependentClasses";
 export { default as StudioRentalPricing } from "./StudioRentalPricing";
+export { default as StudioRentals } from "./StudioRentals";

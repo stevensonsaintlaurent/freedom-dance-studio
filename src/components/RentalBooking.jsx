@@ -187,7 +187,7 @@ export default function RentalBooking() {
                       : "bg-white/5 text-white hover:bg-white/10"
                   }`}
                 >
-                  Weekday
+                  Week day
                 </button>
 
                 <button
@@ -418,7 +418,7 @@ export default function RentalBooking() {
                       </p>
 
                       <p className="mt-1 font-bold text-white">
-                        {day === "weekday" ? "Weekday" : "Weekend"}
+                        {day === "weekday" ? "Week day" : "Weekend"}
                       </p>
                     </div>
 
