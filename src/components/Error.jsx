@@ -1,8 +1,9 @@
-import { Link, useRouteError } from "react-router-dom";
+import { Link, useNavigate, useRouteError } from "react-router-dom";
 import { ArrowLeft, Home, Music2, Sparkles } from "lucide-react";
 
 const Error = () => {
   const error = useRouteError();
+  const navigate = useNavigate();
 
   const is404 = error?.status === 404;
 
@@ -52,7 +53,7 @@ const Error = () => {
           </Link>
 
           <button
-            onClick={() => window.history.back()}
+            onClick={() => navigate(-1)}
             className="btn btn-outline btn-lg gap-2"
           >
             <ArrowLeft className="w-5 h-5" />

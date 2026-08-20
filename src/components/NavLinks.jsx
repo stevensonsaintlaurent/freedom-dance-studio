@@ -48,12 +48,6 @@ const mainLinks = [
     text: "Upcoming Events",
     icon: PartyPopper,
   },
-  {
-    id: 6,
-    url: "/gallery",
-    text: "Gallery",
-    icon: Images,
-  },
 ];
 
 const classLinks = [
@@ -98,6 +92,12 @@ const moreLinks = [
   },
   {
     id: 10,
+    url: "/gallery",
+    text: "Gallery",
+    icon: Images,
+  },
+  {
+    id: 11,
     url: "/contact",
     text: "Contact",
     icon: Mail,
@@ -323,7 +323,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
   if (mobileMenu) {
     return (
       <nav
-        className="flex flex-col w-full gap-1.5"
+        className="flex flex-col w-full gap-1.5 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain pb-4 pr-1 lg:max-h-none lg:overflow-visible lg:overscroll-auto lg:pb-0 lg:pr-0"
         aria-label="Mobile navigation"
       >
         {mainLinks.map((link) => {
@@ -378,9 +378,11 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                       `
                       }
                     >
-                      <div>{classLink.text}</div>
+                      <div className="whitespace-normal break-words leading-tight">
+                        {classLink.text}
+                      </div>
 
-                      <div className="text-xs opacity-60 mt-0.5">
+                      <div className="text-xs opacity-60 mt-0.5 whitespace-normal break-words leading-relaxed">
                         {classLink.description}
                       </div>
                     </NavLink>
@@ -422,7 +424,9 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 className="shrink-0 transition-transform duration-300 group-hover:scale-110"
               />
 
-              <span>{link.text}</span>
+              <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
+                {link.text}
+              </span>
             </NavLink>
           );
         })}
@@ -474,7 +478,9 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 className="shrink-0 transition-transform duration-300 group-hover:scale-110"
               />
 
-              <span>{link.text}</span>
+              <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
+                {link.text}
+              </span>
             </NavLink>
           );
         })}
@@ -619,7 +625,9 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               className="transition-transform duration-300 group-hover:scale-110"
             />
 
-            <span>{link.text}</span>
+            <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
+              {link.text}
+            </span>
           </NavLink>
         );
       })}
@@ -704,7 +712,9 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     className="transition-transform duration-200 group-hover:scale-110"
                   />
 
-                  <span>{link.text}</span>
+                  <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
+                    {link.text}
+                  </span>
                 </NavLink>
               </li>
             );
