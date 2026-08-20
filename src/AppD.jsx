@@ -27,6 +27,8 @@ import {
   IndependentClasses,
   StudioRentalPricing,
   StudioRentals,
+  PrivacyPolicy,
+  TermsConditions,
 } from "./components";
 
 import RentalBooking from "./components/RequestAvailable";
@@ -138,6 +140,14 @@ const router = createBrowserRouter([
       {
         path: "events",
         element: <Events />,
+      },
+      {
+        path: "policy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "conditions",
+        element: <TermsConditions />,
       },
     ],
   },

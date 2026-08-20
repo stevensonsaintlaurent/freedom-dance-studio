@@ -17,3 +17,5 @@ export { default as Testimonials } from "./Testimonials";
 export { default as IndependentClasses } from "./IndependentClasses";
 export { default as StudioRentalPricing } from "./StudioRentalPricing";
 export { default as StudioRentals } from "./StudioRentals";
+export { default as PrivacyPolicy } from "./PrivacyPolicy";
+export { default as TermsConditions } from "./TermsConditions";

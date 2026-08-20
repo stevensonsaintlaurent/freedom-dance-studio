@@ -493,8 +493,8 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-wrap justify-center gap-5">
-            <a
-              href="#"
+            <Link
+              to="/policy"
               className="
                 link
                 link-hover
@@ -504,10 +504,10 @@ const Footer = () => {
               "
             >
               Privacy Policy
-            </a>
+            </Link>
 
-            <a
-              href="#"
+            <Link
+              to="/conditions"
               className="
                 link
                 link-hover
@@ -517,7 +517,7 @@ const Footer = () => {
               "
             >
               Terms & Conditions
-            </a>
+            </Link>
           </div>
         </div>
 
