@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
-import { IndependentClasses } from "../components";
 
 const classes = [
   {
@@ -371,14 +370,6 @@ export default function Classes() {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* =====================================================
-          INDEPENDENT CLASSES
-      ====================================================== */}
-
-      <div className="relative">
-        <IndependentClasses />
       </div>
     </section>
   );
