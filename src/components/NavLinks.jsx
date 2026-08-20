@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   ChevronDown,
   Home,
@@ -33,6 +33,7 @@ const mainLinks = [
     url: "/classes",
     text: "Classes",
     icon: Music2,
+    dropdown: true,
   },
   {
     id: 4,
@@ -51,6 +52,21 @@ const mainLinks = [
     url: "/gallery",
     text: "Gallery",
     icon: Images,
+  },
+];
+
+const classLinks = [
+  {
+    id: 1,
+    url: "/classes",
+    text: "Freedom Dance Classes",
+    description: "Classes offered by Freedom Dance Studio",
+  },
+  {
+    id: 2,
+    url: "/independent",
+    text: "Classes Hosted at Freedom",
+    description: "Classes from independent instructors",
   },
 ];
 
@@ -88,6 +104,11 @@ const moreLinks = [
 ];
 
 export const NavLinks = ({ mobileMenu = false, footer = false }) => {
+  const location = useLocation();
+
+  const isClassesActive =
+    location.pathname === "/classes" || location.pathname === "/hosted-classes";
+
   /* =====================================================
      FOOTER NAVIGATION
      ===================================================== */
@@ -96,10 +117,68 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
     return (
       <nav className="w-full" aria-label="Footer navigation">
         <div className="grid grid-cols-1 gap-1">
-          {/* Main Links */}
-
           {mainLinks.map((link) => {
             const Icon = link.icon;
+
+            /* Classes dropdown */
+            if (link.dropdown) {
+              return (
+                <div key={link.id} className="w-full">
+                  <div
+                    className={`
+                      flex
+                      items-center
+                      gap-3
+                      w-full
+                      rounded-xl
+                      px-3
+                      sm:px-4
+                      py-2.5
+                      sm:py-3
+                      text-sm
+                      sm:text-base
+                      font-medium
+                      ${
+                        isClassesActive
+                          ? "bg-primary/15 text-primary"
+                          : "text-white/65"
+                      }
+                    `}
+                  >
+                    <Icon size={17} />
+
+                    <span>Classes</span>
+                  </div>
+
+                  <div className="ml-8 mt-1 space-y-1">
+                    {classLinks.map((classLink) => (
+                      <NavLink
+                        key={classLink.id}
+                        to={classLink.url}
+                        className={({ isActive }) =>
+                          `
+                          block
+                          rounded-lg
+                          px-3
+                          py-2
+                          text-sm
+                          transition-all
+                          duration-200
+                          ${
+                            isActive
+                              ? "bg-primary/15 text-primary"
+                              : "text-white/50 hover:bg-white/5 hover:text-primary"
+                          }
+                        `
+                        }
+                      >
+                        {classLink.text}
+                      </NavLink>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
 
             return (
               <NavLink
@@ -126,41 +205,23 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
                   ${
                     isActive
-                      ? `
-                        bg-primary/15
-                        text-primary
-                        translate-x-1
-                      `
-                      : `
-                        text-white/65
-                        hover:bg-white/5
-                        hover:text-primary
-                        hover:translate-x-1
-                      `
+                      ? "bg-primary/15 text-primary translate-x-1"
+                      : "text-white/65 hover:bg-white/5 hover:text-primary hover:translate-x-1"
                   }
                 `
                 }
               >
                 {({ isActive }) => (
                   <>
-                    {/* Left side */}
-
                     <span className="flex items-center gap-3 min-w-0">
                       <Icon
                         size={17}
                         strokeWidth={2}
-                        className="
-                          shrink-0
-                          transition-all
-                          duration-300
-                          group-hover:scale-110
-                        "
+                        className="shrink-0 transition-all duration-300 group-hover:scale-110"
                       />
 
                       <span className="truncate">{link.text}</span>
                     </span>
-
-                    {/* Arrow */}
 
                     <span
                       className={`
@@ -213,17 +274,8 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
                   ${
                     isActive
-                      ? `
-                        bg-primary/15
-                        text-primary
-                        translate-x-1
-                      `
-                      : `
-                        text-white/65
-                        hover:bg-white/5
-                        hover:text-primary
-                        hover:translate-x-1
-                      `
+                      ? "bg-primary/15 text-primary translate-x-1"
+                      : "text-white/65 hover:bg-white/5 hover:text-primary hover:translate-x-1"
                   }
                 `
                 }
@@ -234,12 +286,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                       <Icon
                         size={17}
                         strokeWidth={2}
-                        className="
-                          shrink-0
-                          transition-all
-                          duration-300
-                          group-hover:scale-110
-                        "
+                        className="shrink-0 transition-all duration-300 group-hover:scale-110"
                       />
 
                       <span className="truncate">{link.text}</span>
@@ -283,6 +330,68 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         {mainLinks.map((link) => {
           const Icon = link.icon;
 
+          /* Classes selector */
+          if (link.dropdown) {
+            return (
+              <div key={link.id} className="w-full">
+                <div
+                  className={`
+                    flex
+                    items-center
+                    gap-4
+                    w-full
+                    rounded-2xl
+                    px-5
+                    py-3.5
+                    min-h-[52px]
+                    font-semibold
+                    ${
+                      isClassesActive
+                        ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
+                        : "text-base-content"
+                    }
+                  `}
+                >
+                  <Icon size={20} />
+
+                  <span>Classes</span>
+                </div>
+
+                <div className="ml-5 mt-1 pl-5 border-l border-base-content/10 space-y-1">
+                  {classLinks.map((classLink) => (
+                    <NavLink
+                      key={classLink.id}
+                      to={classLink.url}
+                      className={({ isActive }) =>
+                        `
+                        block
+                        rounded-xl
+                        px-4
+                        py-3
+                        text-sm
+                        font-medium
+                        transition-all
+                        duration-200
+                        ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-base-content/60 hover:bg-base-200 hover:text-primary"
+                        }
+                      `
+                      }
+                    >
+                      <div>{classLink.text}</div>
+
+                      <div className="text-xs opacity-60 mt-0.5">
+                        {classLink.description}
+                      </div>
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
+            );
+          }
+
           return (
             <NavLink
               key={link.id}
@@ -305,30 +414,15 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
                 ${
                   isActive
-                    ? `
-                      bg-primary
-                      text-primary-content
-                      shadow-lg
-                      shadow-primary/20
-                    `
-                    : `
-                      text-base-content
-                      hover:bg-base-200
-                      hover:text-primary
-                      hover:translate-x-1
-                    `
+                    ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
+                    : "text-base-content hover:bg-base-200 hover:text-primary hover:translate-x-1"
                 }
               `
               }
             >
               <Icon
                 size={20}
-                className="
-                  shrink-0
-                  transition-transform
-                  duration-300
-                  group-hover:scale-110
-                "
+                className="shrink-0 transition-transform duration-300 group-hover:scale-110"
               />
 
               <span>{link.text}</span>
@@ -375,30 +469,15 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
                 ${
                   isActive
-                    ? `
-                      bg-primary
-                      text-primary-content
-                      shadow-lg
-                      shadow-primary/20
-                    `
-                    : `
-                      text-base-content
-                      hover:bg-base-200
-                      hover:text-primary
-                      hover:translate-x-1
-                    `
+                    ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
+                    : "text-base-content hover:bg-base-200 hover:text-primary hover:translate-x-1"
                 }
               `
               }
             >
               <Icon
                 size={20}
-                className="
-                  shrink-0
-                  transition-transform
-                  duration-300
-                  group-hover:scale-110
-                "
+                className="shrink-0 transition-transform duration-300 group-hover:scale-110"
               />
 
               <span>{link.text}</span>
@@ -415,10 +494,105 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
   return (
     <div className="hidden lg:flex items-center gap-1">
-      {/* Main Links */}
-
       {mainLinks.map((link) => {
         const Icon = link.icon;
+
+        /* Classes Dropdown */
+        if (link.dropdown) {
+          return (
+            <div key={link.id} className="dropdown dropdown-hover dropdown-end">
+              <div
+                tabIndex={0}
+                role="button"
+                className={`
+                  group
+                  relative
+                  flex
+                  items-center
+                  gap-2
+                  rounded-xl
+                  px-4
+                  py-2.5
+                  font-semibold
+                  cursor-pointer
+                  transition-all
+                  duration-300
+                  ease-out
+                  hover:-translate-y-0.5
+
+                  ${
+                    isClassesActive
+                      ? "bg-primary text-primary-content shadow-lg"
+                      : "text-base-content hover:bg-base-200 hover:text-primary"
+                  }
+                `}
+              >
+                <Icon
+                  size={17}
+                  className="transition-transform duration-300 group-hover:scale-110"
+                />
+
+                <span>Classes</span>
+
+                <ChevronDown
+                  size={15}
+                  className="transition-transform duration-300 group-hover:rotate-180"
+                />
+              </div>
+
+              <ul
+                tabIndex={0}
+                className="
+                  dropdown-content
+                  menu
+                  mt-3
+                  w-80
+                  rounded-2xl
+                  bg-base-100
+                  p-2
+                  shadow-2xl
+                  border
+                  border-base-200
+                  z-[100]
+                "
+              >
+                {classLinks.map((classLink) => (
+                  <li key={classLink.id}>
+                    <NavLink
+                      to={classLink.url}
+                      className={({ isActive }) =>
+                        `
+                        group
+                        flex
+                        flex-col
+                        items-start
+                        gap-0.5
+                        rounded-xl
+                        px-4
+                        py-3
+                        transition-all
+                        duration-200
+
+                        ${
+                          isActive
+                            ? "bg-primary text-primary-content"
+                            : "hover:bg-primary/10 hover:text-primary"
+                        }
+                      `
+                      }
+                    >
+                      <span className="font-semibold">{classLink.text}</span>
+
+                      <span className="text-xs opacity-60 group-hover:opacity-80">
+                        {classLink.description}
+                      </span>
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          );
+        }
 
         return (
           <NavLink
@@ -451,11 +625,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           >
             <Icon
               size={17}
-              className="
-                transition-transform
-                duration-300
-                group-hover:scale-110
-              "
+              className="transition-transform duration-300 group-hover:scale-110"
             />
 
             <span>{link.text}</span>
@@ -488,22 +658,14 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         >
           <MoreHorizontal
             size={18}
-            className="
-              transition-transform
-              duration-300
-              group-hover:rotate-12
-            "
+            className="transition-transform duration-300 group-hover:rotate-12"
           />
 
           <span>More</span>
 
           <ChevronDown
             size={16}
-            className="
-              transition-transform
-              duration-300
-              group-hover:translate-y-0.5
-            "
+            className="transition-transform duration-300 group-hover:translate-y-0.5"
           />
         </div>
 
@@ -550,11 +712,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 >
                   <Icon
                     size={17}
-                    className="
-                      transition-transform
-                      duration-200
-                      group-hover:scale-110
-                    "
+                    className="transition-transform duration-200 group-hover:scale-110"
                   />
 
                   <span>{link.text}</span>
