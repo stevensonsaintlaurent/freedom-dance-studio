@@ -1,4 +1,5 @@
 import { NavLink, useLocation } from "react-router-dom";
+
 import {
   ChevronDown,
   Home,
@@ -44,7 +45,7 @@ const mainLinks = [
   {
     id: 5,
     url: "/events",
-    text: "Events",
+    text: "Upcoming Events",
     icon: PartyPopper,
   },
   {
@@ -109,6 +110,8 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
   const isClassesActive =
     location.pathname === "/classes" || location.pathname === "/hosted-classes";
 
+  const isEventsActive = location.pathname === "/events";
+
   /* =====================================================
      FOOTER NAVIGATION
      ===================================================== */
@@ -146,7 +149,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     `}
                   >
                     <Icon size={17} />
-
                     <span>Classes</span>
                   </div>
 
@@ -202,7 +204,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   transition-all
                   duration-300
                   ease-out
-
                   ${
                     isActive
                       ? "bg-primary/15 text-primary translate-x-1"
@@ -245,7 +246,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           })}
 
           {/* More Links */}
-
           {moreLinks.map((link) => {
             const Icon = link.icon;
 
@@ -271,7 +271,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   transition-all
                   duration-300
                   ease-out
-
                   ${
                     isActive
                       ? "bg-primary/15 text-primary translate-x-1"
@@ -353,7 +352,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   `}
                 >
                   <Icon size={20} />
-
                   <span>Classes</span>
                 </div>
 
@@ -411,7 +409,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 transition-all
                 duration-300
                 active:scale-[0.98]
-
                 ${
                   isActive
                     ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
@@ -431,7 +428,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         })}
 
         {/* Divider */}
-
         <div className="flex items-center gap-3 my-3 px-4">
           <div className="h-px flex-1 bg-base-content/10" />
 
@@ -443,7 +439,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         </div>
 
         {/* More Links */}
-
         {moreLinks.map((link) => {
           const Icon = link.icon;
 
@@ -466,7 +461,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 transition-all
                 duration-300
                 active:scale-[0.98]
-
                 ${
                   isActive
                     ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
@@ -519,7 +513,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   duration-300
                   ease-out
                   hover:-translate-y-0.5
-
                   ${
                     isClassesActive
                       ? "bg-primary text-primary-content shadow-lg"
@@ -572,7 +565,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                         py-3
                         transition-all
                         duration-200
-
                         ${
                           isActive
                             ? "bg-primary text-primary-content"
@@ -614,7 +606,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               duration-300
               ease-out
               hover:-translate-y-0.5
-
               ${
                 isActive
                   ? "bg-primary text-primary-content shadow-lg"
@@ -634,7 +625,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
       })}
 
       {/* More Dropdown */}
-
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}
@@ -701,7 +691,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     rounded-xl
                     transition-all
                     duration-200
-
                     ${
                       isActive
                         ? "bg-primary text-primary-content"

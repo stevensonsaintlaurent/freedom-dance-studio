@@ -24,9 +24,9 @@ const events = [
     date: "August 22, 2026",
     time: "2:00 PM – 4:00 PM",
     location: "Freedom Dance Studio",
-    price: "FREE",
+    price: "$25 Non-Members",
     priceDetails: "Members & Instructors",
-    extraPrice: "$25 Non-Members",
+    extraPrice: "",
     image: lady,
     description:
       "Ready to level up your Salsa On2? Join Instructor Sandra for an exciting ladies’ styling workshop designed to bring out your confidence, musicality, and personal style. Explore Mambo footwork, fusion, styling, choreography, and performance quality while building stronger foundations and learning how to truly express yourself on the dance floor. Come ready to move, learn, and shine!",

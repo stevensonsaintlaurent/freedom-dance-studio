@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import {
@@ -15,16 +14,90 @@ import {
 
 import heroImage from "../assets/recentClip1.jpeg";
 import septemberSocial from "../assets/septemberSocial.png";
-import workshop from "../assets/workshop.png";
+import workshop from "../assets/lady/sandra.jpg";
 import havasu from "../assets/havasu.png";
 
 /* =========================================================
    HERO DATA
-   Change your Hero content here.
-   There is NO slider and NO automatic changing.
+
+   EVENT RULE:
+   - eventStart determines whether an event is upcoming.
+   - Past events are automatically removed.
+   - The closest upcoming event is automatically displayed.
+   - You do NOT need to manually change the active Hero.
 ========================================================= */
 
 const HERO_DATA = {
+  workshop: {
+    type: "event",
+
+    eyebrow: "UPCOMING WORKSHOP • SALSA ON2",
+
+    title: "Salsa On2",
+
+    highlight: "Ladies Styling.",
+
+    description:
+      "Join Sandra for a special Salsa On2 Ladies Styling workshop focused on Mambo Footwork & Fusion, Ladies' Styling, Choreography and Performance Quality. Beginner / Level 1 friendly.",
+
+    eventStart: "2026-08-22",
+
+    date: "August 22, 2026",
+
+    time: "2:00 PM – 4:00 PM",
+
+    price: "$25",
+
+    priceLabel: "Non-Members",
+
+    secondaryPrice: "FREE",
+
+    secondaryPriceLabel: "Members & Instructors",
+
+    image: workshop,
+
+    button: "View Workshop",
+
+    link: "/events",
+
+    icon: Sparkles,
+
+    accent: "secondary",
+  },
+
+  havasu: {
+    type: "event",
+
+    eyebrow: "UPCOMING EVENT • DANCE • TRAVEL",
+
+    title: "SBK Lake Havasu",
+
+    highlight: "Trip.",
+
+    description:
+      "Travel, dance and connect with the Freedom Dance community. Join teachers and students for an unforgettable weekend together.",
+
+    eventStart: "2026-08-28",
+
+    date: "August 28–30, 2026",
+
+    time: "Friday – Sunday",
+
+    price: "Join Us",
+
+    priceLabel: "Trip",
+
+    image: havasu,
+
+    button: "View Trip",
+
+    link: "/events",
+
+    icon: Plane,
+
+    accent: "primary",
+  },
+
   social: {
     type: "event",
 
@@ -37,11 +110,15 @@ const HERO_DATA = {
     description:
       "Join us for a night of Salsa, Bachata and Kizomba. Enjoy a free Bachata and Kizomba class, a special Kizomba performance, and dance with the Freedom Dance community.",
 
+    eventStart: "2026-09-04",
+
     date: "September 4, 2026",
 
     time: "9:00 PM – 2:00 AM",
 
     price: "$20",
+
+    priceLabel: "Cover",
 
     image: septemberSocial,
 
@@ -50,64 +127,6 @@ const HERO_DATA = {
     link: "/book",
 
     icon: Music2,
-
-    accent: "primary",
-  },
-
-  workshop: {
-    type: "event",
-
-    eyebrow: "BACHATA • TRAINING • INTENSIVE",
-
-    title: "Bachata Weekend",
-
-    highlight: "Intensive.",
-
-    description:
-      "A full weekend dedicated to training, technique, musicality and improving your Bachata dancing.",
-
-    date: "August 14–16, 2026",
-
-    time: "Full Weekend",
-
-    price: "$129",
-
-    image: workshop,
-
-    button: "View Workshop",
-
-    link: "/book",
-
-    icon: Sparkles,
-
-    accent: "secondary",
-  },
-
-  havasu: {
-    type: "event",
-
-    eyebrow: "DANCE • TRAVEL • COMMUNITY",
-
-    title: "SBK Lake Havasu",
-
-    highlight: "Trip.",
-
-    description:
-      "Travel, dance and connect with the Freedom Dance community. Join teachers and students for an unforgettable weekend together.",
-
-    date: "August 28–30, 2026",
-
-    time: "Friday – Sunday",
-
-    price: "Join Us",
-
-    image: havasu,
-
-    button: "View Trip",
-
-    link: "/book",
-
-    icon: Plane,
 
     accent: "primary",
   },
@@ -183,21 +202,46 @@ const HERO_DATA = {
 };
 
 /* =========================================================
-   CHOOSE WHICH HERO YOU WANT TO DISPLAY
+   GET THE NEXT UPCOMING EVENT
+
+   Events are automatically sorted by date.
+
+   Example on August 20, 2026:
+
+   August 22 → Salsa On2 Ladies Styling
+   August 28 → SBK Lake Havasu
+   September 4 → Freedom Dance Social
+
+   Any event before today is ignored.
 ========================================================= */
 
-const activeHero = "community";
+const getUpcomingEvent = () => {
+  const today = new Date();
 
-// Examples:
-// const activeHero = "social";
-// const activeHero = "workshop";
-// const activeHero = "havasu";
-// const activeHero = "learn";
-// const activeHero = "studio";
-// const activeHero = "community";
+  today.setHours(0, 0, 0, 0);
+
+  const upcomingEvents = Object.values(HERO_DATA)
+    .filter((hero) => {
+      if (hero.type !== "event" || !hero.eventStart) {
+        return false;
+      }
+
+      const eventDate = new Date(`${hero.eventStart}T00:00:00`);
+
+      return eventDate >= today;
+    })
+    .sort((first, second) => {
+      const firstDate = new Date(`${first.eventStart}T00:00:00`);
+      const secondDate = new Date(`${second.eventStart}T00:00:00`);
+
+      return firstDate - secondDate;
+    });
+
+  return upcomingEvents[0] || HERO_DATA.community;
+};
 
 const HeroAnimation = () => {
-  const hero = HERO_DATA[activeHero];
+  const hero = getUpcomingEvent();
 
   const HeroIcon = hero.icon;
 
@@ -243,7 +287,7 @@ const HeroAnimation = () => {
                   <Sparkles size={12} className="shrink-0 text-primary" />
 
                   {hero.type === "event"
-                    ? "Upcoming at Freedom Dance"
+                    ? "Upcoming Event at Freedom Dance"
                     : "Las Vegas Dance Community"}
                 </div>
               </div>
@@ -288,7 +332,7 @@ const HeroAnimation = () => {
                 ================================================= */}
 
                 {hero.type === "event" && (
-                  <div className="mx-auto mt-5 grid max-w-[360px] grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-black/45 backdrop-blur-xl">
+                  <div className="mx-auto mt-5 grid max-w-[390px] grid-cols-3 overflow-hidden rounded-2xl border border-white/10 bg-black/45 backdrop-blur-xl">
                     {/* Date */}
 
                     <div className="p-2.5 text-center">
@@ -301,7 +345,7 @@ const HeroAnimation = () => {
                         Date
                       </p>
 
-                      <p className="mt-0.5 truncate text-[10px] font-bold text-white">
+                      <p className="mt-0.5 text-[10px] font-bold text-white">
                         {hero.date}
                       </p>
                     </div>
@@ -318,7 +362,7 @@ const HeroAnimation = () => {
                         Time
                       </p>
 
-                      <p className="mt-0.5 truncate text-[10px] font-bold text-white">
+                      <p className="mt-0.5 text-[10px] font-bold text-white">
                         {hero.time}
                       </p>
                     </div>
@@ -329,12 +373,40 @@ const HeroAnimation = () => {
                       <Ticket size={15} className="mx-auto mb-1 text-primary" />
 
                       <p className="text-[8px] font-bold uppercase tracking-wider text-white/40">
-                        Cover
+                        Price
                       </p>
 
-                      <p className="mt-0.5 truncate text-[10px] font-black text-primary">
-                        {hero.price}
-                      </p>
+                      {hero.secondaryPrice ? (
+                        <>
+                          <p className="mt-0.5 text-[9px] font-black text-primary">
+                            {hero.secondaryPrice}
+                          </p>
+
+                          <p className="text-[7px] text-white/50">
+                            {hero.secondaryPriceLabel}
+                          </p>
+
+                          <p className="mt-0.5 text-[9px] font-black text-primary">
+                            {hero.price}
+                          </p>
+
+                          <p className="text-[7px] text-white/50">
+                            {hero.priceLabel}
+                          </p>
+                        </>
+                      ) : (
+                        <>
+                          <p className="mt-0.5 text-[10px] font-black text-primary">
+                            {hero.price}
+                          </p>
+
+                          {hero.priceLabel && (
+                            <p className="text-[7px] text-white/50">
+                              {hero.priceLabel}
+                            </p>
+                          )}
+                        </>
+                      )}
                     </div>
                   </div>
                 )}
@@ -418,13 +490,35 @@ const HeroAnimation = () => {
                           </div>
 
                           <div className="hidden rounded-xl border border-white/10 bg-white/10 px-4 py-3 text-center sm:block">
-                            <p className="text-[9px] uppercase tracking-wider text-white/40">
-                              Cover
-                            </p>
+                            {hero.secondaryPrice ? (
+                              <>
+                                <p className="text-[9px] uppercase tracking-wider text-white/40">
+                                  Members
+                                </p>
 
-                            <p className="text-lg font-black text-primary">
-                              {hero.price}
-                            </p>
+                                <p className="text-lg font-black text-primary">
+                                  FREE
+                                </p>
+
+                                <p className="mt-1 text-[9px] uppercase tracking-wider text-white/40">
+                                  Non-Members
+                                </p>
+
+                                <p className="text-lg font-black text-primary">
+                                  {hero.price}
+                                </p>
+                              </>
+                            ) : (
+                              <>
+                                <p className="text-[9px] uppercase tracking-wider text-white/40">
+                                  {hero.priceLabel || "Cover"}
+                                </p>
+
+                                <p className="text-lg font-black text-primary">
+                                  {hero.price}
+                                </p>
+                              </>
+                            )}
                           </div>
                         </div>
                       </div>

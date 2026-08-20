@@ -7,6 +7,7 @@ const Booking = () => {
   const location = useLocation();
 
   const [confirm, setConfirm] = useState(location.state);
+  console.log("upcoming event", confirm);
 
   const {
     name,
