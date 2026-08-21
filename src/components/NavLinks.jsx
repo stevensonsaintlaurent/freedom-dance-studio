@@ -16,6 +16,10 @@ import {
   PartyPopper,
 } from "lucide-react";
 
+/* =====================================================
+   MAIN NAVIGATION
+===================================================== */
+
 const mainLinks = [
   {
     id: 1,
@@ -23,32 +27,34 @@ const mainLinks = [
     text: "Home",
     icon: Home,
   },
+
   {
     id: 2,
-    url: "/about",
-    text: "About",
-    icon: Info,
+    url: "/studiopricing",
+    text: "Studio Rental",
+    icon: Building2,
   },
+
   {
     id: 3,
-    url: "/classes",
-    text: "Classes",
-    icon: Music2,
-    dropdown: true,
-  },
-  {
-    id: 4,
-    url: "/schedule",
-    text: "Schedule",
-    icon: CalendarDays,
-  },
-  {
-    id: 5,
     url: "/events",
     text: "Upcoming Events",
     icon: PartyPopper,
   },
+
+  // Classes dropdown
+  {
+    id: 4,
+    url: "#",
+    text: "Classes",
+    icon: Music2,
+    dropdown: true,
+  },
 ];
+
+/* =====================================================
+   CLASS OPTIONS
+===================================================== */
 
 const classLinks = [
   {
@@ -65,18 +71,28 @@ const classLinks = [
   },
 ];
 
+/* =====================================================
+   MORE NAVIGATION
+===================================================== */
+
 const moreLinks = [
   {
+    id: 5,
+    url: "/schedule",
+    text: "Schedule",
+    icon: CalendarDays,
+  },
+  {
     id: 6,
-    url: "/membership",
-    text: "Prices",
-    icon: DollarSign,
+    url: "/about",
+    text: "About",
+    icon: Info,
   },
   {
     id: 7,
-    url: "/studiopricing",
-    text: "Studio Rental",
-    icon: Building2,
+    url: "/membership",
+    text: "Prices",
+    icon: DollarSign,
   },
   {
     id: 8,
@@ -104,26 +120,32 @@ const moreLinks = [
   },
 ];
 
+/* =====================================================
+   COMPONENT
+===================================================== */
+
 export const NavLinks = ({ mobileMenu = false, footer = false }) => {
   const location = useLocation();
 
   const isClassesActive =
-    location.pathname === "/classes" || location.pathname === "/hosted-classes";
-
-  const isEventsActive = location.pathname === "/events";
+    location.pathname === "/classes" || location.pathname === "/independent";
 
   /* =====================================================
      FOOTER NAVIGATION
-     ===================================================== */
+  ===================================================== */
 
   if (footer) {
     return (
       <nav className="w-full" aria-label="Footer navigation">
         <div className="grid grid-cols-1 gap-1">
+          {/* Main Links */}
           {mainLinks.map((link) => {
             const Icon = link.icon;
 
-            /* Classes dropdown */
+            /* ==========================
+               Classes Dropdown
+            ========================== */
+
             if (link.dropdown) {
               return (
                 <div key={link.id} className="w-full">
@@ -149,6 +171,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     `}
                   >
                     <Icon size={17} />
+
                     <span>Classes</span>
                   </div>
 
@@ -174,13 +197,21 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                         `
                         }
                       >
-                        {classLink.text}
+                        <div>{classLink.text}</div>
+
+                        <div className="text-xs opacity-60 mt-0.5">
+                          {classLink.description}
+                        </div>
                       </NavLink>
                     ))}
                   </div>
                 </div>
               );
             }
+
+            /* ==========================
+               Normal Main Link
+            ========================== */
 
             return (
               <NavLink
@@ -245,7 +276,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
             );
           })}
 
-          {/* More Links */}
+          {/* ==========================
+              More Links
+          ========================== */}
+
           {moreLinks.map((link) => {
             const Icon = link.icon;
 
@@ -318,18 +352,37 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
   /* =====================================================
      MOBILE NAVIGATION
-     ===================================================== */
+  ===================================================== */
 
   if (mobileMenu) {
     return (
       <nav
-        className="flex flex-col w-full gap-1.5 max-h-[calc(100dvh-5rem)] overflow-y-auto overscroll-contain pb-4 pr-1 lg:max-h-none lg:overflow-visible lg:overscroll-auto lg:pb-0 lg:pr-0"
+        className="
+          flex
+          flex-col
+          w-full
+          gap-1.5
+          max-h-[calc(100dvh-5rem)]
+          overflow-y-auto
+          overscroll-contain
+          pb-4
+          pr-1
+          lg:max-h-none
+          lg:overflow-visible
+          lg:overscroll-auto
+          lg:pb-0
+          lg:pr-0
+        "
         aria-label="Mobile navigation"
       >
+        {/* Main Links */}
         {mainLinks.map((link) => {
           const Icon = link.icon;
 
-          /* Classes selector */
+          /* ==========================
+             Classes Dropdown
+          ========================== */
+
           if (link.dropdown) {
             return (
               <div key={link.id} className="w-full">
@@ -337,6 +390,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   className={`
                     flex
                     items-center
+                    justify-between
                     gap-4
                     w-full
                     rounded-2xl
@@ -351,8 +405,13 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     }
                   `}
                 >
-                  <Icon size={20} />
-                  <span>Classes</span>
+                  <div className="flex items-center gap-4">
+                    <Icon size={20} />
+
+                    <span>Classes</span>
+                  </div>
+
+                  <ChevronDown size={18} />
                 </div>
 
                 <div className="ml-5 mt-1 pl-5 border-l border-base-content/10 space-y-1">
@@ -391,6 +450,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               </div>
             );
           }
+
+          /* ==========================
+             Normal Mobile Link
+          ========================== */
 
           return (
             <NavLink
@@ -490,14 +553,18 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
   /* =====================================================
      DESKTOP NAVIGATION
-     ===================================================== */
+  ===================================================== */
 
   return (
     <div className="hidden lg:flex items-center gap-1">
+      {/* Main Links */}
       {mainLinks.map((link) => {
         const Icon = link.icon;
 
-        /* Classes Dropdown */
+        /* ==========================
+           Classes Dropdown
+        ========================== */
+
         if (link.dropdown) {
           return (
             <div key={link.id} className="dropdown dropdown-hover dropdown-end">
@@ -592,6 +659,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           );
         }
 
+        /* ==========================
+           Normal Desktop Link
+        ========================== */
+
         return (
           <NavLink
             key={link.id}
@@ -632,7 +703,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         );
       })}
 
-      {/* More Dropdown */}
+      {/* =====================================================
+          MORE DROPDOWN
+      ===================================================== */}
+
       <div className="dropdown dropdown-end">
         <div
           tabIndex={0}

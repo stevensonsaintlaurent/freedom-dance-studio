@@ -32,7 +32,7 @@ const footerLinks = [
   },
   {
     name: "Studio Rental",
-    path: "/rentalStudio",
+    path: "/studiopricing",
     icon: Building2,
   },
   {
