@@ -10,9 +10,9 @@ import {
   FaArrowUp,
   FaHeart,
 } from "react-icons/fa";
-import { NavLinks } from "./NavLinks";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import FooterNavLinks from "./FooterNavlinks";
 
 const Footer = () => {
   // Scroll to top when the page changes
@@ -221,7 +221,7 @@ const Footer = () => {
             </div>
 
             <div className="w-full">
-              <NavLinks footer />
+              <FooterNavLinks />
             </div>
           </div>
 

@@ -21,7 +21,6 @@ const sections = [
       "Please provide accurate contact and booking information when submitting a reservation request.",
       "A booking may not be considered confirmed until any required payment, deposit, or confirmation has been received.",
     ],
-    url: "/studiopricing",
   },
   {
     icon: CreditCard,
@@ -40,7 +39,6 @@ const sections = [
       "Renters may be responsible for damages, excessive cleaning, lost equipment, or other costs resulting from misuse of the studio.",
       "The studio may establish specific rules regarding capacity, permitted activities, equipment, music volume, setup, cleanup, and operating hours.",
     ],
-    url: "studiopricing",
   },
   {
     icon: Camera,
@@ -61,7 +59,6 @@ const sections = [
       "Freedom Dance Studio may modify, postpone, or cancel a class or event when necessary.",
       "Participation in classes and events requires respectful behavior toward instructors, staff, students, and other guests.",
     ],
-    url: "/classes",
   },
   {
     icon: CheckCircle2,
@@ -71,7 +68,6 @@ const sections = [
       "Guests should arrive prepared and on time and should respect the studio, its equipment, and other participants.",
       "Freedom Dance Studio reserves the right to refuse service or ask a guest to leave when conduct is unsafe, disruptive, threatening, or inappropriate.",
     ],
-    url: "",
   },
   {
     icon: AlertCircle,
@@ -81,7 +77,6 @@ const sections = [
       "When a specific cancellation policy applies, that policy will take precedence over general booking terms.",
       "If you need to change or cancel a reservation, please contact Freedom Dance Studio as soon as possible.",
     ],
-    url: "",
   },
 ];
 
@@ -117,28 +112,42 @@ const TermsConditions = () => {
     <main className="min-h-screen bg-base-100">
       {/* ================= HERO ================= */}
       <section className="relative overflow-hidden bg-base-200">
-        <div className="absolute -right-28 -top-28 h-80 w-80 rounded-full bg-primary/10 blur-3xl" />
+        {/* Decorative background */}
+        <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-primary/10 blur-3xl sm:h-80 sm:w-80" />
 
-        <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-secondary/10 blur-3xl" />
+        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-secondary/10 blur-3xl sm:h-72 sm:w-72" />
 
-        <div className="relative mx-auto max-w-6xl px-6 py-20 sm:py-24 lg:px-8">
+        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-20 lg:px-8 lg:py-24">
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             className="max-w-3xl"
           >
+            {/* Back */}
             <Link
               to="/"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-base-content/60 transition hover:text-primary"
+              className="
+                mb-6
+                inline-flex
+                items-center
+                gap-2
+                text-sm
+                font-medium
+                text-base-content/60
+                transition
+                hover:text-primary
+                sm:mb-8
+              "
             >
               <ArrowLeft size={17} />
-              Back to Freedom Dance Studio
+              <span>Back to Freedom Dance Studio</span>
             </Link>
 
-            <div className="mb-5 flex items-center gap-3">
-              <div className="grid h-12 w-12 place-items-center rounded-2xl bg-primary text-primary-content shadow-lg">
-                <FileText size={24} />
+            {/* Badge */}
+            <div className="mb-5 flex flex-wrap items-center gap-3">
+              <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-primary text-primary-content shadow-lg sm:h-12 sm:w-12">
+                <FileText size={22} className="sm:h-6 sm:w-6" />
               </div>
 
               <span className="badge badge-primary badge-outline">
@@ -146,16 +155,19 @@ const TermsConditions = () => {
               </span>
             </div>
 
-            <h1 className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+            {/* Title */}
+            <h1 className="text-3xl font-black leading-tight tracking-tight sm:text-5xl lg:text-6xl">
               Terms & <span className="text-primary">Conditions</span>
             </h1>
 
-            <p className="mt-6 max-w-2xl text-base leading-7 text-base-content/65 sm:text-lg">
+            {/* Description */}
+            <p className="mt-5 max-w-2xl text-sm leading-7 text-base-content/65 sm:mt-6 sm:text-lg sm:leading-7">
               These terms help us create a safe, respectful, and enjoyable
               experience for everyone in the Freedom Dance Studio community.
             </p>
 
-            <div className="mt-6 text-sm text-base-content/50">
+            {/* Date */}
+            <div className="mt-5 text-xs text-base-content/50 sm:mt-6 sm:text-sm">
               Last updated: August 21, 2026
             </div>
           </motion.div>
@@ -163,8 +175,8 @@ const TermsConditions = () => {
       </section>
 
       {/* ================= CONTENT ================= */}
-      <section className="mx-auto max-w-6xl px-6 py-14 lg:px-8 lg:py-20">
-        <div className="grid gap-10 lg:grid-cols-[240px_1fr]">
+      <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20">
+        <div className="grid gap-8 lg:grid-cols-[240px_1fr] lg:gap-10">
           {/* ================= SIDEBAR ================= */}
           <motion.aside
             initial={{ opacity: 0, x: -20 }}
@@ -182,8 +194,18 @@ const TermsConditions = () => {
                 {sections.map((section) => (
                   <a
                     key={section.title}
-                    href={section.url}
-                    className="block rounded-lg px-3 py-2 text-sm text-base-content/60 transition hover:bg-base-200 hover:text-primary"
+                    href={`#${createId(section.title)}`}
+                    className="
+                      block
+                      rounded-lg
+                      px-3
+                      py-2
+                      text-sm
+                      text-base-content/60
+                      transition
+                      hover:bg-base-200
+                      hover:text-primary
+                    "
                   >
                     {section.title}
                   </a>
@@ -198,22 +220,30 @@ const TermsConditions = () => {
             initial="hidden"
             whileInView="show"
             viewport={{ once: true, amount: 0.08 }}
-            className="space-y-6"
+            className="space-y-5 sm:space-y-6"
           >
             {/* Welcome */}
             <motion.div
               variants={itemVariants}
-              className="rounded-3xl border border-base-300 bg-base-200/60 p-6 sm:p-8"
+              className="
+                rounded-2xl
+                border
+                border-base-300
+                bg-base-200/60
+                p-5
+                sm:rounded-3xl
+                sm:p-8
+              "
             >
-              <div className="flex items-start gap-4">
-                <FileText className="mt-1 shrink-0 text-primary" />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <FileText className="mt-1 h-5 w-5 shrink-0 text-primary sm:h-6 sm:w-6" />
 
-                <div>
-                  <h2 className="text-2xl font-bold">
+                <div className="min-w-0">
+                  <h2 className="text-xl font-bold leading-snug sm:text-2xl">
                     Welcome to Freedom Dance Studio
                   </h2>
 
-                  <p className="mt-4 leading-8 text-base-content/65">
+                  <p className="mt-3 text-sm leading-7 text-base-content/65 sm:mt-4 sm:text-base sm:leading-8">
                     By using our website, booking a class, participating in an
                     event, or renting our studio, you agree to follow the
                     applicable terms and guidelines described below.
@@ -231,23 +261,63 @@ const TermsConditions = () => {
                   key={section.title}
                   id={createId(section.title)}
                   variants={itemVariants}
-                  className="group scroll-mt-24 rounded-3xl border border-base-300 bg-base-100 p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-8"
+                  className="
+                    group
+                    scroll-mt-24
+                    rounded-2xl
+                    border
+                    border-base-300
+                    bg-base-100
+                    p-5
+                    shadow-sm
+                    transition
+                    duration-300
+                    hover:-translate-y-1
+                    hover:shadow-xl
+                    sm:rounded-3xl
+                    sm:p-8
+                  "
                 >
-                  <div className="flex items-start gap-5">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-primary/10 text-primary transition duration-300 group-hover:scale-110">
-                      <Icon size={23} />
+                  <div className="flex items-start gap-3 sm:gap-5">
+                    {/* Icon */}
+                    <div
+                      className="
+                        grid
+                        h-10
+                        w-10
+                        shrink-0
+                        place-items-center
+                        rounded-xl
+                        bg-primary/10
+                        text-primary
+                        transition
+                        duration-300
+                        group-hover:scale-110
+                        sm:h-12
+                        sm:w-12
+                        sm:rounded-2xl
+                      "
+                    >
+                      <Icon size={20} className="sm:h-[23px] sm:w-[23px]" />
                     </div>
 
-                    <div className="min-w-0">
-                      <h2 className="text-xl font-bold sm:text-2xl">
+                    {/* Content */}
+                    <div className="min-w-0 flex-1">
+                      <h2 className="text-lg font-bold leading-snug sm:text-2xl">
                         {section.title}
                       </h2>
 
-                      <div className="mt-4 space-y-4">
+                      <div className="mt-3 space-y-3 sm:mt-4 sm:space-y-4">
                         {section.content.map((paragraph, index) => (
                           <p
                             key={index}
-                            className="leading-8 text-base-content/65"
+                            className="
+                              text-sm
+                              leading-7
+                              text-base-content/65
+                              sm:text-base
+                              sm:leading-8
+                            "
                           >
                             {paragraph}
                           </p>
@@ -262,22 +332,35 @@ const TermsConditions = () => {
             {/* Important Notice */}
             <motion.div
               variants={itemVariants}
-              className="rounded-3xl border border-warning/20 bg-warning/10 p-7 sm:p-9"
+              className="
+                rounded-2xl
+                border
+                border-warning/20
+                bg-warning/10
+                p-5
+                sm:rounded-3xl
+                sm:p-9
+              "
             >
-              <div className="flex items-start gap-4">
-                <AlertCircle className="mt-1 shrink-0 text-warning" />
+              <div className="flex items-start gap-3 sm:gap-4">
+                <AlertCircle className="mt-1 h-5 w-5 shrink-0 text-warning sm:h-6 sm:w-6" />
 
-                <div>
-                  <h2 className="text-xl font-bold">Important Notice</h2>
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold sm:text-xl">
+                    Important Notice
+                  </h2>
 
-                  <p className="mt-3 leading-7 text-base-content/65">
+                  <p className="mt-2 text-sm leading-7 text-base-content/65 sm:mt-3 sm:text-base sm:leading-7">
                     These terms are intended to provide general guidelines for
                     using Freedom Dance Studio. Specific events, rentals,
                     classes, memberships, or promotions may have additional
                     terms that apply to that particular service.
                   </p>
 
-                  <Link to="/contact" className="btn btn-primary mt-5">
+                  <Link
+                    to="/contact"
+                    className="btn btn-primary btn-sm mt-4 sm:mt-5"
+                  >
                     Contact the Studio
                   </Link>
                 </div>
