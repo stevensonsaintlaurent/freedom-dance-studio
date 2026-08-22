@@ -1,8 +1,8 @@
 export const videos = [
   {
     id: 1,
-    title: "Konpa",
-    url: "https://youtu.be/EzxmYycrxXg",
+    title: "Interview",
+    url: "https://youtube.com/shorts/alXOnlKuZHM?si=i3cbDHCzh_7PK_EX",
   },
   {
     id: 2,
@@ -29,6 +29,11 @@ export const videos = [
     id: 6,
     title: "🔥 Salsa at Freedom Dance Studio 🔥",
     url: "https://youtu.be/XQZI_pEq8gY",
+  },
+  {
+    id: 7,
+    title: "Konpa",
+    url: "https://youtu.be/EzxmYycrxXg",
   },
 ];
 // https://youtu.be/beJArEtYd6Y
