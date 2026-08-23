@@ -2,6 +2,7 @@ import RentalHero from "./RentalHero";
 import StudioRentalPricing from "./StudioRentalPricing";
 import RentalFeatures from "./RentalFeatures";
 import RentalGallery from "./RentalGallery";
+import RentalVideo from "./RentalVideo";
 import RentalBooking from "./RentalBooking";
 
 export default function StudioRentals() {
@@ -14,6 +15,8 @@ export default function StudioRentals() {
       </div>
 
       <RentalFeatures />
+
+      <RentalVideo />
 
       <RentalGallery />
 

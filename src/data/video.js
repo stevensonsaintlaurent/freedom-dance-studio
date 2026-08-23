@@ -35,6 +35,17 @@ export const videos = [
     title: "Konpa",
     url: "https://youtu.be/EzxmYycrxXg",
   },
+
+  {
+    id: 8,
+    title: "Main room  event",
+    url: "https://youtu.be/pJqSAwVAjc8?si=HMF638V15AA001KV",
+  },
+  {
+    id: 9,
+    title: "Small Kizomba room",
+    url: "https://youtu.be/8ZKyjrjztQQ?si=5Xo2qh4gG_Jn3QO5",
+  },
 ];
 // https://youtu.be/beJArEtYd6Y
 
