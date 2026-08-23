@@ -34,7 +34,7 @@ const LARGE_GROUP_RATE = 120;
 const LARGE_GROUP_MIN = 25;
 
 export default function RentalBooking() {
-  const { onSubmit } = useOnSudmit();
+  const { onSubmit, hidden } = useOnSudmit();
 
   const [day, setDay] = useState("weekday");
   const [time, setTime] = useState(1);
@@ -693,7 +693,13 @@ export default function RentalBooking() {
                     className="btn btn-primary btn-lg w-full rounded-xl shadow-lg shadow-primary/20"
                   >
                     <Send size={18} />
-                    Send Rental Request
+                    {hidden ? (
+                      <span className="loading loading-spinner">
+                        Requesting...
+                      </span>
+                    ) : (
+                      "Send Rental Request"
+                    )}
                   </button>
 
                   <p className="text-center text-xs leading-5 text-white/30">

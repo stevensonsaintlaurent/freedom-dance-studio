@@ -1,5 +1,11 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { CalendarX2, AlertTriangle } from "lucide-react";
+import { motion } from "framer-motion";
+
+// ==============================
+// SERVICES
+// ==============================
 
 const services = [
   {
@@ -45,6 +51,10 @@ const services = [
     price: "Call for Quote",
   },
 ];
+
+// ==============================
+// WEEKLY SCHEDULE
+// ==============================
 
 const weeklySchedule = [
   {
@@ -134,7 +144,7 @@ const weeklySchedule = [
     time: "2:00 PM",
     dance: "Open Level Kizomba",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Open Level",
   },
   {
@@ -164,7 +174,20 @@ const weeklySchedule = [
     drop: 15,
     level: "Intermediate",
   },
+  {
+    id: 14,
+    day: "Saturday",
+    time: "5:00 PM",
+    dance: "Jazz Band ",
+    instructor: "Alain",
+    drop: "Free",
+    level: "All Levels",
+  },
 ];
+
+// ==============================
+// DAYS
+// ==============================
 
 const days = [
   "All",
@@ -175,6 +198,55 @@ const days = [
   "Friday",
   "Saturday",
 ];
+
+// ==================================================
+// CANCELLED DAYS
+// ==================================================
+//
+// To cancel an entire day, add it here.
+//
+// Example:
+// {
+//   day: "Thursday",
+//   date: "August 27, 2026",
+//   reason: "All classes are cancelled for this day.",
+// }
+//
+// When a day is added here:
+// 1. The cancellation announcement appears.
+// 2. All classes for that day disappear.
+// 3. Nobody can book a cancelled class.
+// 4. The other days continue normally.
+//
+// ==================================================
+
+const cancelledDays = [
+  {
+    day: "Friday",
+    date: "August 28, 2026",
+    title: "All Classes Cancelled",
+    reason:
+      "Our Freedom Dance Studio students and instructors will be traveling together for our Lake Havasu trip. All regular classes are cancelled while our community enjoys this special weekend together.",
+  },
+  {
+    day: "Saturday",
+    date: "August 29, 2026",
+    title: "All Classes Cancelled",
+    reason:
+      "Our Freedom Dance Studio students and instructors are away together for our Lake Havasu trip. Regular classes are cancelled so our community can enjoy this special weekend together.",
+  },
+  {
+    day: "Sunday",
+    date: "August 30, 2026",
+    title: "All Classes Cancelled",
+    reason:
+      "Our Freedom Dance Studio students and instructors are returning from our Lake Havasu trip. Regular classes are cancelled for the day.",
+  },
+];
+
+// ==============================
+// COMPONENT
+// ==============================
 
 export default function Schedule() {
   const navigate = useNavigate();
@@ -206,15 +278,47 @@ export default function Schedule() {
   };
 
   // ==============================
+  // CHECK IF DAY IS CANCELLED
+  // ==============================
+
+  const isDayCancelled = (day) => {
+    return cancelledDays.some((cancelled) => cancelled.day === day);
+  };
+
+  // ==============================
   // FILTER SCHEDULE
   // ==============================
 
   const filteredSchedule = useMemo(() => {
+    // Remove ALL cancelled days first.
+    const activeSchedule = weeklySchedule.filter(
+      (item) => !isDayCancelled(item.day),
+    );
+
+    // If "All Days" is selected,
+    // show all classes except cancelled days.
     if (selectedDay === "All") {
-      return weeklySchedule;
+      return activeSchedule;
     }
 
-    return weeklySchedule.filter((item) => item.day === selectedDay);
+    // If a cancelled day is selected,
+    // return nothing.
+    if (isDayCancelled(selectedDay)) {
+      return [];
+    }
+
+    // Otherwise show the selected day.
+    return activeSchedule.filter((item) => item.day === selectedDay);
+  }, [selectedDay]);
+
+  // ==============================
+  // CURRENT CANCELLATION
+  // ==============================
+
+  const visibleCancellations = useMemo(() => {
+    return cancelledDays.filter(
+      (cancelled) => selectedDay === "All" || cancelled.day === selectedDay,
+    );
   }, [selectedDay]);
 
   // ==============================
@@ -254,6 +358,181 @@ export default function Schedule() {
         </div>
 
         {/* ==============================
+            FULL DAY CANCELLATION
+        ============================== */}
+
+        {visibleCancellations.map((cancelled) => (
+          <motion.div
+            key={cancelled.date}
+            initial={{
+              opacity: 0,
+              y: -35,
+              scale: 0.96,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            transition={{
+              duration: 0.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="
+              relative
+              mb-8
+              overflow-hidden
+              rounded-3xl
+              border
+              border-error/30
+              bg-error/10
+              shadow-xl
+            "
+          >
+            {/* Animated glow */}
+
+            <motion.div
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.15, 0.3, 0.15],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+              className="
+                absolute
+                -right-20
+                -top-20
+                h-56
+                w-56
+                rounded-full
+                bg-error/30
+                blur-3xl
+              "
+            />
+
+            <motion.div
+              animate={{
+                scale: [1, 1.15, 1],
+                opacity: [0.1, 0.25, 0.1],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+              className="
+                absolute
+                -bottom-20
+                -left-20
+                h-56
+                w-56
+                rounded-full
+                bg-warning/20
+                blur-3xl
+              "
+            />
+
+            <div className="relative p-6 sm:p-8">
+              {/* Main announcement */}
+
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
+                {/* Icon */}
+
+                <motion.div
+                  animate={{
+                    rotate: [0, -8, 8, -5, 5, 0],
+                  }}
+                  transition={{
+                    duration: 1.2,
+                    delay: 0.3,
+                  }}
+                  className="
+                    flex
+                    h-16
+                    w-16
+                    shrink-0
+                    items-center
+                    justify-center
+                    rounded-2xl
+                    bg-error
+                    text-error-content
+                    shadow-lg
+                  "
+                >
+                  <CalendarX2 className="h-8 w-8" />
+                </motion.div>
+
+                {/* Text */}
+
+                <div className="flex-1">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <h2 className="text-2xl font-black sm:text-3xl">
+                      All Classes Cancelled
+                    </h2>
+
+                    <span className="badge badge-error font-bold">
+                      Important
+                    </span>
+                  </div>
+
+                  <p className="mt-2 text-base text-base-content/70">
+                    There will be no regular classes at Freedom Dance Studio on
+                    this day.
+                  </p>
+
+                  {/* Date */}
+
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <span className="badge badge-lg gap-2">
+                      📅 {cancelled.date}
+                    </span>
+
+                    <span className="badge badge-lg gap-2">🚫 All Day</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Warning message */}
+
+              <div
+                className="
+                  mt-6
+                  flex
+                  items-start
+                  gap-3
+                  rounded-2xl
+                  bg-warning/10
+                  p-4
+                "
+              >
+                <AlertTriangle
+                  className="
+                    mt-0.5
+                    h-5
+                    w-5
+                    shrink-0
+                    text-warning
+                  "
+                />
+
+                <div>
+                  <p className="font-bold">Please plan accordingly.</p>
+
+                  <p className="mt-1 text-sm text-base-content/70">
+                    {cancelled.reason} Our regular schedule will continue on the
+                    next scheduled day.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+
+        {/* ==============================
             DAY FILTER
         ============================== */}
 
@@ -280,84 +559,130 @@ export default function Schedule() {
         </div>
 
         {/* ==============================
+            CANCELLED DAY MESSAGE
+        ============================== */}
+
+        {selectedDay !== "All" && isDayCancelled(selectedDay) && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            className="mb-16"
+          >
+            <div className="alert alert-error shadow-xl rounded-2xl">
+              <CalendarX2 className="h-6 w-6" />
+
+              <div>
+                <h3 className="font-bold">No Classes on {selectedDay}</h3>
+
+                <p className="text-sm">
+                  All classes have been cancelled for this day.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ==============================
             DESKTOP TABLE
         ============================== */}
 
-        <div className="hidden md:block w-full max-w-full mb-16">
-          <div className="rounded-xl shadow-xl overflow-hidden">
-            <table className="table table-zebra bg-base-100 w-full">
-              <thead>
-                <tr>
-                  <th>Day</th>
-                  <th>Time</th>
-                  <th>Class</th>
-                  <th>Level</th>
-                  <th>Instructor</th>
-                  <th>Drop-In</th>
-                  <th></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {filteredSchedule.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="
-                      transition-all
-                      duration-300
-                      hover:bg-base-200
-                    "
-                  >
-                    <td className="font-semibold">{item.day}</td>
-
-                    <td>{item.time}</td>
-
-                    <td className="font-medium">{item.dance}</td>
-
-                    <td>
-                      <span className="badge badge-outline">{item.level}</span>
-                    </td>
-
-                    <td>{item.instructor}</td>
-
-                    <td>${item.drop}</td>
-
-                    <td>
-                      <button
-                        className="
-                          btn
-                          btn-primary
-                          btn-sm
-                          transition-all
-                          duration-300
-                          hover:scale-105
-                        "
-                        onClick={() => handleBooking(item.id)}
-                      >
-                        Book Now
-                      </button>
-                    </td>
+        {filteredSchedule.length > 0 && (
+          <div className="hidden md:block w-full max-w-full mb-16">
+            <div className="rounded-xl shadow-xl overflow-hidden">
+              <table className="table table-zebra bg-base-100 w-full">
+                <thead>
+                  <tr>
+                    <th>Day</th>
+                    <th>Time</th>
+                    <th>Class</th>
+                    <th>Level</th>
+                    <th>Instructor</th>
+                    <th>Drop-In</th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {filteredSchedule.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="
+                        transition-all
+                        duration-300
+                        hover:bg-base-200
+                      "
+                    >
+                      <td className="font-semibold">{item.day}</td>
+
+                      <td>{item.time}</td>
+
+                      <td className="font-medium">{item.dance}</td>
+
+                      <td>
+                        <span className="badge badge-outline">
+                          {item.level}
+                        </span>
+                      </td>
+
+                      <td>{item.instructor}</td>
+
+                      <td>${item.drop}</td>
+
+                      <td>
+                        <button
+                          className="
+                            btn
+                            btn-primary
+                            btn-sm
+                            transition-all
+                            duration-300
+                            hover:scale-105
+                          "
+                          onClick={() => handleBooking(item.id)}
+                        >
+                          Book Now
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* ==============================
             MOBILE SCHEDULE CARDS
         ============================== */}
 
         <div className="md:hidden space-y-4 mb-16">
-          {filteredSchedule.length === 0 ? (
-            <div className="alert alert-info">
-              <span>No classes scheduled for this day.</span>
-            </div>
-          ) : (
-            filteredSchedule.map((item, index) => (
-              <div
-                key={item.id}
-                className="
+          {filteredSchedule.length === 0
+            ? !isDayCancelled(selectedDay) && (
+                <div className="alert alert-info">
+                  <span>No classes scheduled for this day.</span>
+                </div>
+              )
+            : filteredSchedule.map((item, index) => (
+                <motion.div
+                  key={item.id}
+                  initial={{
+                    opacity: 0,
+                    y: 15,
+                  }}
+                  animate={{
+                    opacity: 1,
+                    y: 0,
+                  }}
+                  transition={{
+                    delay: index * 0.06,
+                  }}
+                  className="
                   card
                   bg-base-100
                   shadow-xl
@@ -368,43 +693,40 @@ export default function Schedule() {
                   hover:-translate-y-1
                   hover:shadow-2xl
                 "
-                style={{
-                  animationDelay: `${index * 80}ms`,
-                }}
-              >
-                <div className="card-body p-5">
-                  {/* Day + Time */}
+                >
+                  <div className="card-body p-5">
+                    {/* Day + Time */}
 
-                  <div className="flex items-center justify-between gap-3">
-                    <div>
-                      <p className="text-sm opacity-60">{item.day}</p>
+                    <div className="flex items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm opacity-60">{item.day}</p>
 
-                      <p className="text-xl font-bold">{item.time}</p>
+                        <p className="text-xl font-bold">{item.time}</p>
+                      </div>
+
+                      <span className="badge badge-primary">${item.drop}</span>
                     </div>
 
-                    <span className="badge badge-primary">${item.drop}</span>
-                  </div>
+                    <div className="divider my-1"></div>
 
-                  <div className="divider my-1"></div>
+                    {/* Class */}
 
-                  {/* Class */}
+                    <h3 className="text-xl font-bold">{item.dance}</h3>
 
-                  <h3 className="text-xl font-bold">{item.dance}</h3>
+                    {/* Details */}
 
-                  {/* Details */}
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      <span className="badge badge-outline">{item.level}</span>
 
-                  <div className="flex flex-wrap gap-2 mt-2">
-                    <span className="badge badge-outline">{item.level}</span>
+                      <span className="badge badge-ghost">
+                        👤 {item.instructor}
+                      </span>
+                    </div>
 
-                    <span className="badge badge-ghost">
-                      👤 {item.instructor}
-                    </span>
-                  </div>
+                    {/* Button */}
 
-                  {/* Button */}
-
-                  <button
-                    className="
+                    <button
+                      className="
                       btn
                       btn-primary
                       w-full
@@ -413,14 +735,13 @@ export default function Schedule() {
                       duration-300
                       hover:scale-[1.02]
                     "
-                    onClick={() => handleBooking(item.id)}
-                  >
-                    Book Now
-                  </button>
-                </div>
-              </div>
-            ))
-          )}
+                      onClick={() => handleBooking(item.id)}
+                    >
+                      Book Now
+                    </button>
+                  </div>
+                </motion.div>
+              ))}
         </div>
 
         {/* ==============================
