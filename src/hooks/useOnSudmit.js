@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 const useOnSudmit = () => {
   const [hidden, setHidden] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const textRef = useRef("");
 
   const setText = (message) => {
@@ -21,6 +22,7 @@ const useOnSudmit = () => {
     }
 
     setHidden(true);
+    setSubmitted(true);
 
     const formData = new FormData(form);
 
@@ -66,6 +68,7 @@ const useOnSudmit = () => {
     setText,
     hidden,
     onSubmit,
+    submitted,
   };
 };
 

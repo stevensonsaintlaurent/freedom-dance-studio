@@ -9,16 +9,19 @@ import {
   Sparkles,
   Phone,
 } from "lucide-react";
-import { Link } from "react-router-dom";
+
 import { BsInstagram } from "react-icons/bs";
+import { Link } from "react-router-dom";
+
+import InstructorClassModal from "./InstructorClassModal";
 
 // ====================== Pictures ======================
 import edourdo from "../assets/instructors/edourdo.jpg";
 import luis from "../assets/instructors/luis1.jpg";
 import luz from "../assets/instructors/luz.jpg";
-import rodolfo from "../assets/rodolfo.png";
+import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
 
-// ====================== Independent Classes ======================
+// ====================== Instructor / Independent Classes ======================
 const independentClasses = [
   {
     id: 1,
@@ -31,6 +34,8 @@ const independentClasses = [
 
     phone: "702-555-0101",
     instagram: "luisdance",
+
+    bio: "Luis brings high energy and passion to every class. His Reparto classes combine Cuban urban movement, musicality, and powerful combinations in a fun and welcoming environment.",
 
     description:
       "Bring your energy and learn Reparto with Luis in a fun and high-energy class.",
@@ -54,6 +59,8 @@ const independentClasses = [
     phone: "702-555-0102",
     instagram: "luzdance",
 
+    bio: "Luz creates an energetic and empowering environment where students can build confidence, learn new movements, and have fun through dance.",
+
     description:
       "Turn up the energy with Luz and learn confidence, movement, and powerful twerk combinations.",
 
@@ -69,11 +76,13 @@ const independentClasses = [
     date: "Every Saturday",
     title: "Reggaeton",
     time: "7:00 PM – 8:00 PM",
-    instructor: "Guest Instructor",
+    instructor: "Eduardo",
     category: "Urban / Reggaeton",
 
     phone: "702-555-0103",
     instagram: "reggaetoninstructor",
+
+    bio: "Eduardo brings rhythm, energy, and creativity to his classes. His goal is to help students feel comfortable moving to the music while learning fun and challenging Reggaeton combinations.",
 
     description:
       "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
@@ -90,11 +99,13 @@ const independentClasses = [
     date: "Every Sunday",
     title: "Hip-Hop",
     time: "6:30 PM",
-    instructor: "Guest Instructor",
+    instructor: "Eduardo",
     category: "Hip-Hop / Urban",
 
     phone: "702-555-0104",
     instagram: "hiphopinstructor",
+
+    bio: "Eduardo teaches Hip-Hop with a focus on musicality, confidence, fundamentals, combinations, and freestyle movement. His classes are designed to be fun and welcoming for dancers.",
 
     description:
       "Learn Hip-Hop fundamentals, combinations, and freestyle movement in a fun atmosphere.",
@@ -117,6 +128,8 @@ const independentClasses = [
     phone: "702-555-0101",
     instagram: "luisdance",
 
+    bio: "Luis brings high energy and passion to every class. His Reparto classes combine Cuban urban movement, musicality, and powerful combinations in a fun and welcoming environment.",
+
     description:
       "Bring your energy and learn Reparto with Luis in a fun and high-energy class.",
 
@@ -136,13 +149,16 @@ const independentClasses = [
     instructor: "Rodolfo",
     category: "Salsa / Latin",
 
-    phone: "",
-    instagram: "",
+    phone: "702 591 6499",
+
+    instagram: "https://www.instagram.com/law.soon7?igsi=MWd3OGFlMWwzaWdraw==",
+
+    bio: "Rodolfo specializes in Salsa Rueda de Casino and Cuban-style movement. His classes focus on partner patterns, timing, musicality, and energetic rueda combinations in a friendly environment.",
 
     description:
       "Join Rodolfo every Thursday for Salsa Rueda de Casino. Learn fun partner patterns, Cuban-style movements, and energetic rueda combinations in a welcoming and exciting class.",
 
-    image: rodolfo,
+    image: Rodolfo,
 
     // Keep the entire promotional poster visible.
     imageFit: "contain",
@@ -153,7 +169,7 @@ const independentClasses = [
 ];
 
 // ====================== Class Card ======================
-function ClassCard({ danceClass, onVideo }) {
+function ClassCard({ danceClass, onVideo, onLearnMore }) {
   const isContain = danceClass.imageFit === "contain";
 
   return (
@@ -174,12 +190,10 @@ function ClassCard({ danceClass, onVideo }) {
           }`}
         />
 
-        {/* Gradient only for normal photos */}
         {!isContain && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
         )}
 
-        {/* Poster overlay */}
         {isContain && (
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />
         )}
@@ -263,12 +277,16 @@ function ClassCard({ danceClass, onVideo }) {
 
             {danceClass.instagram && (
               <a
-                href={`https://instagram.com/${danceClass.instagram}`}
+                href={
+                  danceClass.instagram.startsWith("http")
+                    ? danceClass.instagram
+                    : `https://instagram.com/${danceClass.instagram}`
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-sm btn-outline gap-2"
               >
-                <BsInstagram size={15} />
+                <BsInstagram size={18} />
                 Instagram
               </a>
             )}
@@ -283,8 +301,9 @@ function ClassCard({ danceClass, onVideo }) {
             <span>Freedom Dance Studio</span>
           </div>
 
+          {/* IMPORTANT: Learn More opens instructor profile */}
           <button
-            onClick={() => onVideo(danceClass)}
+            onClick={() => onLearnMore(danceClass)}
             className="btn btn-primary btn-sm gap-2 w-full sm:w-auto"
           >
             Learn More
@@ -333,16 +352,19 @@ function VideoModal({ danceClass, onClose }) {
           <div className="flex flex-wrap gap-2 sm:gap-3 mt-3">
             <div className="badge badge-outline py-3 px-3">
               <CalendarDays size={14} className="mr-2 shrink-0" />
+
               {danceClass.date}
             </div>
 
             <div className="badge badge-outline py-3 px-3">
               <Clock size={14} className="mr-2 shrink-0" />
+
               {danceClass.time}
             </div>
 
             <div className="badge badge-outline py-3 px-3">
               <Users size={14} className="mr-2 shrink-0" />
+
               {danceClass.instructor}
             </div>
           </div>
@@ -370,18 +392,22 @@ function VideoModal({ danceClass, onClose }) {
 
               {danceClass.instagram && (
                 <a
-                  href={`https://instagram.com/${danceClass.instagram}`}
+                  href={
+                    danceClass.instagram.startsWith("http")
+                      ? danceClass.instagram
+                      : `https://instagram.com/${danceClass.instagram}`
+                  }
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline gap-2"
                 >
-                  <Instagram size={18} />@{danceClass.instagram}
+                  <Instagram size={18} />
+                  Instagram
                 </a>
               )}
             </div>
           </div>
 
-          {/* Notice */}
           <div className="alert alert-warning mt-5">
             <Sparkles size={20} className="shrink-0" />
 
@@ -408,9 +434,11 @@ function VideoModal({ danceClass, onClose }) {
 // ====================== Main Component ======================
 export default function IndependentClasses() {
   const [selectedClass, setSelectedClass] = useState(null);
+
+  const [selectedInstructor, setSelectedInstructor] = useState(null);
+
   const [filter, setFilter] = useState("All");
 
-  // Thursday was missing before.
   const filters = ["All", "Monday", "Thursday", "Friday", "Saturday", "Sunday"];
 
   const filteredClasses =
@@ -515,7 +543,11 @@ export default function IndependentClasses() {
                 animationFillMode: "both",
               }}
             >
-              <ClassCard danceClass={danceClass} onVideo={setSelectedClass} />
+              <ClassCard
+                danceClass={danceClass}
+                onVideo={setSelectedClass}
+                onLearnMore={setSelectedInstructor}
+              />
             </div>
           ))}
         </div>
@@ -557,6 +589,12 @@ export default function IndependentClasses() {
       <VideoModal
         danceClass={selectedClass}
         onClose={() => setSelectedClass(null)}
+      />
+
+      {/* ================= INSTRUCTOR MODAL ================= */}
+      <InstructorClassModal
+        danceClass={selectedInstructor}
+        onClose={() => setSelectedInstructor(null)}
       />
     </section>
   );
