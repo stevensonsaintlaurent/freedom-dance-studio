@@ -471,7 +471,16 @@ export default function RentalBooking() {
                 </div>
 
                 {/* FORM */}
-                <form onSubmit={onSubmit} className="mt-7 space-y-5">
+                <form
+                  onSubmit={(event) => {
+                    setText(
+                      "Thank you! Your studio rental request has been received. Freedom Dance Studio will contact you to confirm availability and final pricing.",
+                    );
+
+                    onSubmit(event);
+                  }}
+                  className="mt-7 space-y-5"
+                >
                   {/* RENTAL DATA SENT TO WEB3FORMS */}
                   <input
                     type="hidden"

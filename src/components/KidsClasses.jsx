@@ -1,6 +1,6 @@
 import React from "react";
 import kids from "../assets/hero5.jpg";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 const classes = [
   {
@@ -73,6 +73,12 @@ function KidsClasses() {
     navigate("/membersForm", { state: findPrice });
   };
 
+  function handleFreeTrialBookin(e) {
+    e.preventDefault();
+
+    navigate("/book");
+  }
+
   return (
     <section className="py-20 bg-base-200">
       <div className="max-w-7xl mx-auto px-6">
@@ -94,7 +100,10 @@ function KidsClasses() {
                 environment at Freedom Dance Studio.
               </p>
 
-              <button className="btn btn-secondary btn-lg">
+              <button
+                className="btn btn-secondary btn-lg"
+                onClick={handleFreeTrialBookin}
+              >
                 Book a Free Trial
               </button>
             </div>

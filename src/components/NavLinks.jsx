@@ -16,6 +16,8 @@ import {
   PartyPopper,
 } from "lucide-react";
 
+import { useState } from "react";
+
 /* =====================================================
    MAIN NAVIGATION
 ===================================================== */
@@ -42,7 +44,6 @@ const mainLinks = [
     icon: PartyPopper,
   },
 
-  // Classes dropdown
   {
     id: 4,
     url: "#",
@@ -63,6 +64,7 @@ const classLinks = [
     text: "Freedom Dance Classes",
     description: "Classes offered by Freedom Dance Studio",
   },
+
   {
     id: 2,
     url: "/independent",
@@ -82,36 +84,42 @@ const moreLinks = [
     text: "Schedule",
     icon: CalendarDays,
   },
+
   {
     id: 6,
     url: "/about",
     text: "About",
     icon: Info,
   },
+
   {
     id: 7,
     url: "/membership",
     text: "Prices",
     icon: DollarSign,
   },
+
   {
     id: 8,
     url: "/teachers",
     text: "Teachers",
     icon: Users,
   },
+
   {
     id: 9,
     url: "/reviews",
     text: "Testimonials",
     icon: Star,
   },
+
   {
     id: 10,
     url: "/gallery",
     text: "Gallery",
     icon: Images,
   },
+
   {
     id: 11,
     url: "/contact",
@@ -127,6 +135,9 @@ const moreLinks = [
 export const NavLinks = ({ mobileMenu = false, footer = false }) => {
   const location = useLocation();
 
+  const [classesOpen, setClassesOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+
   const isClassesActive =
     location.pathname === "/classes" || location.pathname === "/independent";
 
@@ -138,13 +149,8 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
     return (
       <nav className="w-full" aria-label="Footer navigation">
         <div className="grid grid-cols-1 gap-1">
-          {/* Main Links */}
           {mainLinks.map((link) => {
             const Icon = link.icon;
-
-            /* ==========================
-               Classes Dropdown
-            ========================== */
 
             if (link.dropdown) {
               return (
@@ -209,10 +215,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               );
             }
 
-            /* ==========================
-               Normal Main Link
-            ========================== */
-
             return (
               <NavLink
                 key={link.id}
@@ -234,7 +236,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   font-medium
                   transition-all
                   duration-300
-                  ease-out
                   ${
                     isActive
                       ? "bg-primary/15 text-primary translate-x-1"
@@ -246,11 +247,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 {({ isActive }) => (
                   <>
                     <span className="flex items-center gap-3 min-w-0">
-                      <Icon
-                        size={17}
-                        strokeWidth={2}
-                        className="shrink-0 transition-all duration-300 group-hover:scale-110"
-                      />
+                      <Icon size={17} className="shrink-0" />
 
                       <span className="truncate">{link.text}</span>
                     </span>
@@ -263,8 +260,8 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                         duration-300
                         ${
                           isActive
-                            ? "opacity-100 translate-x-0"
-                            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                            ? "opacity-100"
+                            : "opacity-0 group-hover:opacity-100"
                         }
                       `}
                     >
@@ -275,10 +272,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               </NavLink>
             );
           })}
-
-          {/* ==========================
-              More Links
-          ========================== */}
 
           {moreLinks.map((link) => {
             const Icon = link.icon;
@@ -304,7 +297,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   font-medium
                   transition-all
                   duration-300
-                  ease-out
                   ${
                     isActive
                       ? "bg-primary/15 text-primary translate-x-1"
@@ -316,11 +308,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                 {({ isActive }) => (
                   <>
                     <span className="flex items-center gap-3 min-w-0">
-                      <Icon
-                        size={17}
-                        strokeWidth={2}
-                        className="shrink-0 transition-all duration-300 group-hover:scale-110"
-                      />
+                      <Icon size={17} className="shrink-0" />
 
                       <span className="truncate">{link.text}</span>
                     </span>
@@ -333,8 +321,8 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                         duration-300
                         ${
                           isActive
-                            ? "opacity-100 translate-x-0"
-                            : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                            ? "opacity-100"
+                            : "opacity-0 group-hover:opacity-100"
                         }
                       `}
                     >
@@ -367,27 +355,30 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           overscroll-contain
           pb-4
           pr-1
-          lg:max-h-none
-          lg:overflow-visible
-          lg:overscroll-auto
-          lg:pb-0
-          lg:pr-0
         "
         aria-label="Mobile navigation"
       >
-        {/* Main Links */}
+        {/* ============================
+            MAIN LINKS
+        ============================ */}
+
         {mainLinks.map((link) => {
           const Icon = link.icon;
 
           /* ==========================
-             Classes Dropdown
+             CLASSES
           ========================== */
 
           if (link.dropdown) {
             return (
               <div key={link.id} className="w-full">
-                <div
+                <button
+                  type="button"
+                  onClick={() => setClassesOpen((previous) => !previous)}
+                  aria-expanded={classesOpen}
+                  aria-controls="mobile-classes-menu"
                   className={`
+                    group
                     flex
                     items-center
                     justify-between
@@ -398,61 +389,87 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     py-3.5
                     min-h-[52px]
                     font-semibold
+                    transition-all
+                    duration-300
                     ${
                       isClassesActive
                         ? "bg-primary text-primary-content shadow-lg shadow-primary/20"
-                        : "text-base-content"
+                        : "text-base-content hover:bg-base-200 hover:text-primary"
                     }
                   `}
                 >
-                  <div className="flex items-center gap-4">
-                    <Icon size={20} />
+                  <span className="flex items-center gap-4">
+                    <Icon size={20} className="shrink-0" />
 
                     <span>Classes</span>
-                  </div>
+                  </span>
 
-                  <ChevronDown size={18} />
-                </div>
+                  <ChevronDown
+                    size={18}
+                    className={`
+                      shrink-0
+                      transition-transform
+                      duration-300
+                      ${classesOpen ? "rotate-180" : "rotate-0"}
+                    `}
+                  />
+                </button>
 
-                <div className="ml-5 mt-1 pl-5 border-l border-base-content/10 space-y-1">
-                  {classLinks.map((classLink) => (
-                    <NavLink
-                      key={classLink.id}
-                      to={classLink.url}
-                      className={({ isActive }) =>
+                {/* CLASS OPTIONS */}
+
+                <div
+                  id="mobile-classes-menu"
+                  className={`
+                    overflow-hidden
+                    transition-all
+                    duration-300
+                    ease-out
+                    ${
+                      classesOpen
+                        ? "max-h-60 opacity-100 mt-1"
+                        : "max-h-0 opacity-0"
+                    }
+                  `}
+                >
+                  <div className="ml-5 pl-5 border-l border-base-content/10 space-y-1">
+                    {classLinks.map((classLink) => (
+                      <NavLink
+                        key={classLink.id}
+                        to={classLink.url}
+                        onClick={() => setClassesOpen(false)}
+                        className={({ isActive }) =>
+                          `
+                          block
+                          rounded-xl
+                          px-4
+                          py-3
+                          text-sm
+                          font-medium
+                          transition-all
+                          duration-200
+                          ${
+                            isActive
+                              ? "bg-primary/10 text-primary"
+                              : "text-base-content/60 hover:bg-base-200 hover:text-primary"
+                          }
                         `
-                        block
-                        rounded-xl
-                        px-4
-                        py-3
-                        text-sm
-                        font-medium
-                        transition-all
-                        duration-200
-                        ${
-                          isActive
-                            ? "bg-primary/10 text-primary"
-                            : "text-base-content/60 hover:bg-base-200 hover:text-primary"
                         }
-                      `
-                      }
-                    >
-                      <div className="whitespace-normal break-words leading-tight">
-                        {classLink.text}
-                      </div>
+                      >
+                        <div className="leading-tight">{classLink.text}</div>
 
-                      <div className="text-xs opacity-60 mt-0.5 whitespace-normal break-words leading-relaxed">
-                        {classLink.description}
-                      </div>
-                    </NavLink>
-                  ))}
+                        <div className="mt-1 text-xs opacity-60 leading-relaxed">
+                          {classLink.description}
+                        </div>
+                      </NavLink>
+                    ))}
+                  </div>
                 </div>
               </div>
             );
           }
 
           /* ==========================
-             Normal Mobile Link
+             NORMAL MOBILE LINK
           ========================== */
 
           return (
@@ -482,10 +499,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               `
               }
             >
-              <Icon
-                size={20}
-                className="shrink-0 transition-transform duration-300 group-hover:scale-110"
-              />
+              <Icon size={20} className="shrink-0" />
 
               <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
                 {link.text}
@@ -494,7 +508,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           );
         })}
 
-        {/* Divider */}
+        {/* ============================
+            DIVIDER
+        ============================ */}
+
         <div className="flex items-center gap-3 my-3 px-4">
           <div className="h-px flex-1 bg-base-content/10" />
 
@@ -505,7 +522,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           <div className="h-px flex-1 bg-base-content/10" />
         </div>
 
-        {/* More Links */}
+        {/* ============================
+            MORE LINKS
+        ============================ */}
+
         {moreLinks.map((link) => {
           const Icon = link.icon;
 
@@ -536,10 +556,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               `
               }
             >
-              <Icon
-                size={20}
-                className="shrink-0 transition-transform duration-300 group-hover:scale-110"
-              />
+              <Icon size={20} className="shrink-0" />
 
               <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
                 {link.text}
@@ -557,12 +574,15 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
   return (
     <div className="hidden lg:flex items-center gap-1">
-      {/* Main Links */}
+      {/* ============================
+          MAIN LINKS
+      ============================ */}
+
       {mainLinks.map((link) => {
         const Icon = link.icon;
 
         /* ==========================
-           Classes Dropdown
+           DESKTOP CLASSES DROPDOWN
         ========================== */
 
         if (link.dropdown) {
@@ -584,7 +604,6 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   cursor-pointer
                   transition-all
                   duration-300
-                  ease-out
                   hover:-translate-y-0.5
                   ${
                     isClassesActive
@@ -648,7 +667,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     >
                       <span className="font-semibold">{classLink.text}</span>
 
-                      <span className="text-xs opacity-60 group-hover:opacity-80">
+                      <span className="text-xs opacity-60">
                         {classLink.description}
                       </span>
                     </NavLink>
@@ -660,7 +679,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         }
 
         /* ==========================
-           Normal Desktop Link
+           NORMAL DESKTOP LINK
         ========================== */
 
         return (
@@ -678,10 +697,8 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               px-4
               py-2.5
               font-semibold
-              capitalize
               transition-all
               duration-300
-              ease-out
               hover:-translate-y-0.5
               ${
                 isActive
@@ -703,9 +720,9 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
         );
       })}
 
-      {/* =====================================================
+      {/* ============================
           MORE DROPDOWN
-      ===================================================== */}
+      ============================ */}
 
       <div className="dropdown dropdown-end">
         <div
