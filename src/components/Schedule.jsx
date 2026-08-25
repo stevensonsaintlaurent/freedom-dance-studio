@@ -72,7 +72,7 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Ladies Styling Bachata",
     instructor: "Luna",
-    drop: 15,
+    drop: "$15",
     level: "Beginner",
   },
   {
@@ -81,7 +81,7 @@ const weeklySchedule = [
     time: "7:00 PM",
     dance: "Beginner Bachata",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Beginner",
   },
   {
@@ -90,7 +90,7 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Beginner Salsa",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Beginner",
   },
   {
@@ -99,7 +99,7 @@ const weeklySchedule = [
     time: "7:00 PM",
     dance: "Beginner Bachata",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Beginner",
   },
   {
@@ -108,7 +108,7 @@ const weeklySchedule = [
     time: "8:00 PM",
     dance: "Konpa",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Open Level",
   },
   {
@@ -117,7 +117,7 @@ const weeklySchedule = [
     time: "6:00 PM",
     dance: "Intermediate Kizomba",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Intermediate",
   },
   {
@@ -126,7 +126,7 @@ const weeklySchedule = [
     time: "7:00 PM",
     dance: "Intermediate Bachata Sensual",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Intermediate",
   },
   {
@@ -135,7 +135,7 @@ const weeklySchedule = [
     time: "6:30 PM",
     dance: "Ladies Styling Bachata",
     instructor: "Zagir",
-    drop: 15,
+    drop: "$15",
     level: "Beginner",
   },
   {
@@ -153,7 +153,7 @@ const weeklySchedule = [
     time: "3:00 PM",
     dance: "Open Level Bachata",
     instructor: "Stevenson",
-    drop: 15,
+    drop: "$15",
     level: "Open Level",
   },
   {
@@ -162,7 +162,7 @@ const weeklySchedule = [
     time: "4:00 PM",
     dance: "Beginner Salsa",
     instructor: "Desmond",
-    drop: 15,
+    drop: "$15",
     level: "Beginner",
   },
   {
@@ -171,7 +171,7 @@ const weeklySchedule = [
     time: "5:00 PM",
     dance: "Intermediate Salsa",
     instructor: "Desmond",
-    drop: 15,
+    drop: "$15",
     level: "Intermediate",
   },
   {
@@ -632,7 +632,7 @@ export default function Schedule() {
 
                       <td>{item.instructor}</td>
 
-                      <td>${item.drop}</td>
+                      <td>{item.drop}</td>
 
                       <td>
                         <button

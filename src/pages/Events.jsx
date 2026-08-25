@@ -14,25 +14,27 @@ import lady from "../assets/lady/sandra.jpg";
 import septemberSocial from "../assets/septemberSocial.png";
 import workshop from "../assets/workshop.png";
 import havasu from "../assets/havasu.png";
+import karol_profil3 from "../public/images/4.jpeg";
+import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
 
 const events = [
-  {
-    id: 1,
-    type: "WORKSHOP",
-    title: "Salsa On2 Ladies Styling",
-    instructor: "with Instructor Sandra",
-    date: "August 22, 2026",
-    time: "2:00 PM – 4:00 PM",
-    location: "Freedom Dance Studio",
-    price: "$25 Non-Members",
-    priceDetails: "Members & Instructors",
-    extraPrice: "",
-    image: lady,
-    description:
-      "Ready to level up your Salsa On2? Join Instructor Sandra for an exciting ladies’ styling workshop designed to bring out your confidence, musicality, and personal style. Explore Mambo footwork, fusion, styling, choreography, and performance quality while building stronger foundations and learning how to truly express yourself on the dance floor. Come ready to move, learn, and shine!",
-    button: "Register Now",
-    featured: true,
-  },
+  // {
+  //   id: 1,
+  //   type: "WORKSHOP",
+  //   title: "Salsa On2 Ladies Styling",
+  //   instructor: "with Instructor Sandra",
+  //   date: "August 22, 2026",
+  //   time: "2:00 PM – 4:00 PM",
+  //   location: "Freedom Dance Studio",
+  //   price: "$25 Non-Members",
+  //   priceDetails: "Members & Instructors",
+  //   extraPrice: "",
+  //   image: lady,
+  //   description:
+  //     "Ready to level up your Salsa On2? Join Instructor Sandra for an exciting ladies’ styling workshop designed to bring out your confidence, musicality, and personal style. Explore Mambo footwork, fusion, styling, choreography, and performance quality while building stronger foundations and learning how to truly express yourself on the dance floor. Come ready to move, learn, and shine!",
+  //   button: "Register Now",
+  //   featured: true,
+  // },
 
   {
     id: 2,
@@ -83,6 +85,45 @@ const events = [
     description:
       "Join our Freedom Dance Studio family for an unforgettable weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
     button: "Join the Trip",
+  },
+
+  {
+    id: 6,
+    day: "Thursday",
+    date: "Every Thursday",
+    title: "Salsa Rueda de Casino",
+    time: "6:30 PM – 7:30 PM",
+    instructor: "Rodolfo",
+    category: "Salsa / Latin",
+    phone: "702-591-6499",
+    location: "Freedom Dance Studio",
+    price: "Free",
+    instagram: "https://www.instagram.com/law.soon7?igsi=MWd3OGFlMWwzaWdraw==",
+    description:
+      "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
+    image: Rodolfo,
+    video:
+      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
+    button: "Register Now",
+  },
+
+  {
+    id: 7,
+    day: "Friday",
+    date: "Starting September 11, 2026",
+    title: "Kids Acting Classes",
+    time: "4:00 PM – 5:00 PM",
+    instructor: "Karol Di Nassif",
+    category: "Acting / Kids",
+    location: "Freedom Dance Studio",
+    price: "$25-$80",
+    phone: "702-496-7934",
+    instagram: "",
+    description:
+      "A creative acting experience for children ages 6–12 designed to build confidence, self-expression, storytelling, improvisation, camera skills, audition techniques, and performance skills. Learn from professional actress, TV presenter, stage performer, and acting coach Karol Di Nassif.",
+    image: karol_profil3,
+    video: "",
+    button: "Register Now",
   },
 ];
 
