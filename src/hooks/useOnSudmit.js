@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 const useOnSudmit = () => {
   const [hidden, setHidden] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
   const textRef = useRef("");
 
   const setText = (message) => {
@@ -17,12 +18,17 @@ const useOnSudmit = () => {
 
     if (!import.meta.env.VITE_ACCESS_KEY) {
       console.error("VITE_ACCESS_KEY is missing.");
+
       toast.error("Form configuration error. Please try again later.");
-      return;
+
+      return {
+        success: false,
+        error: "Missing Web3Forms access key",
+      };
     }
 
     setHidden(true);
-    setSubmitted(true);
+    setSubmitted(false);
 
     const formData = new FormData(form);
 
@@ -41,26 +47,54 @@ const useOnSudmit = () => {
       const data = await response.json();
 
       if (data.success) {
+        setSubmitted(true);
+
         toast.success(
           textRef.current ||
             "Thank you! Your request has been submitted successfully.",
         );
 
+        /*
+         * Reset the form after Web3Forms confirms
+         * the submission was successful.
+         */
         form.reset();
-        setHidden(false);
-      } else {
-        console.error("Web3Forms error:", data);
-
-        toast.error(data.message || "Something went wrong. Please try again.");
 
         setHidden(false);
+
+        /*
+         * IMPORTANT:
+         * Return success to the component that called the hook.
+         */
+        return {
+          success: true,
+          data,
+        };
       }
+
+      console.error("Web3Forms error:", data);
+
+      toast.error(data.message || "Something went wrong. Please try again.");
+
+      setHidden(false);
+      setSubmitted(false);
+
+      return {
+        success: false,
+        data,
+      };
     } catch (error) {
       console.error("Web3Forms submission error:", error);
 
       toast.error("Something went wrong. Please try again later.");
 
       setHidden(false);
+      setSubmitted(false);
+
+      return {
+        success: false,
+        error,
+      };
     }
   };
 

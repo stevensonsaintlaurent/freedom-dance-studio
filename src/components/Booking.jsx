@@ -1,13 +1,22 @@
-import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+import {
+  CheckCircle2,
+  CalendarDays,
+  Clock3,
+  UserRound,
+  MapPin,
+} from "lucide-react";
 import useOnSudmit from "../hooks/useOnSudmit";
 
 const Booking = () => {
   const { setText, onSubmit } = useOnSudmit();
   const location = useLocation();
 
-  const [confirm, setConfirm] = useState(location.state);
-  console.log("upcoming event", confirm);
+  const [confirm] = useState(location.state || {});
+  const [bookingConfirmed, setBookingConfirmed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [bookingReference, setBookingReference] = useState("");
 
   const {
     name,
@@ -25,120 +34,337 @@ const Booking = () => {
     extraPrice,
   } = confirm;
 
-  const handleChange = (e) => {
-    e.target.value;
+  const className = dance || title || name || "Dance Class";
+  const classDate = day || date || "Date not specified";
+
+  const classPrice =
+    drop || price || (price && priceDetails && extraPrice) || "Contact Studio";
+
+  const handleChange = () => {
+    // Form values are handled directly by the form.
   };
 
+  /*
+   * =========================================================
+   * SUBMIT BOOKING
+   * =========================================================
+   */
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await onSubmit(e);
+
+      /*
+       * ONLY show "Booking Confirmed"
+       * if Web3Forms says the submission was successful.
+       */
+
+      if (result?.success) {
+        const reference = `FDS-${Date.now().toString().slice(-6)}`;
+
+        setBookingReference(reference);
+
+        setText(
+          `Your class has been booked successfully with ${
+            instructor || "Freedom Dance Studio"
+          }.`,
+        );
+
+        setBookingConfirmed(true);
+      }
+    } catch (error) {
+      console.error("Booking failed:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  /*
+   * =========================================================
+   * SUCCESS SCREEN
+   * =========================================================
+   */
+
+  if (bookingConfirmed) {
+    return (
+      <section className="min-h-screen bg-base-200 px-5 py-16 flex items-center">
+        <div className="max-w-3xl w-full mx-auto">
+          <div className="card bg-base-100 shadow-2xl">
+            <div className="card-body items-center text-center p-8 md:p-12">
+              {/* SUCCESS ICON */}
+
+              <div className="mb-6">
+                <CheckCircle2
+                  size={90}
+                  className="text-success"
+                  strokeWidth={1.5}
+                />
+              </div>
+
+              {/* TITLE */}
+
+              <h1 className="text-4xl md:text-5xl font-bold text-success">
+                Booking Confirmed!
+              </h1>
+
+              <p className="text-lg mt-4 max-w-xl">
+                Thank you for booking with Freedom Dance Studio. Your
+                registration has been successfully submitted.
+              </p>
+
+              {/* BOOKING NUMBER */}
+
+              <div className="badge badge-primary badge-lg mt-5 p-4">
+                Booking #{bookingReference}
+              </div>
+
+              {/* DETAILS */}
+
+              <div className="w-full mt-10">
+                <div className="card bg-base-200">
+                  <div className="card-body text-left">
+                    <h2 className="text-2xl font-bold mb-5 text-center">
+                      Your Booking Details
+                    </h2>
+
+                    <div className="grid gap-5">
+                      {/* CLASS */}
+
+                      <div className="flex items-center gap-4">
+                        <CalendarDays className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Class</p>
+
+                          <p className="font-bold text-lg">{className}</p>
+                        </div>
+                      </div>
+
+                      {/* INSTRUCTOR */}
+
+                      <div className="flex items-center gap-4">
+                        <UserRound className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Instructor</p>
+
+                          <p className="font-bold text-lg">
+                            {instructor || "Freedom Dance Studio"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* DATE */}
+
+                      <div className="flex items-center gap-4">
+                        <CalendarDays className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Date</p>
+
+                          <p className="font-bold text-lg">{classDate}</p>
+                        </div>
+                      </div>
+
+                      {/* TIME */}
+
+                      <div className="flex items-center gap-4">
+                        <Clock3 className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Time</p>
+
+                          <p className="font-bold text-lg">
+                            {time || "Time not specified"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* LOCATION */}
+
+                      <div className="flex items-center gap-4">
+                        <MapPin className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Location</p>
+
+                          <p className="font-bold text-lg">
+                            Freedom Dance Studio
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="divider"></div>
+
+                      {/* PRICE */}
+
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold">Price</span>
+
+                        <span className="text-success text-xl font-bold">
+                          {classPrice}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* EMAIL MESSAGE */}
+
+              <div className="alert alert-info mt-8 text-left">
+                <span>
+                  📧 Your booking has been received successfully. Please save
+                  your booking details above for your records.
+                </span>
+              </div>
+
+              {/* BUTTONS */}
+
+              <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full">
+                <Link to="/schedule" className="btn btn-primary flex-1">
+                  View Schedule
+                </Link>
+
+                <Link to="/" className="btn btn-outline flex-1">
+                  Back to Home
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  /*
+   * =========================================================
+   * BOOKING FORM
+   * =========================================================
+   */
+
   return (
-    <section className="bg-base-200 py-16 px-5">
+    <section className="bg-base-200 py-16 px-5 min-h-screen">
       <div className="max-w-7xl mx-auto">
+        {/* HEADER */}
+
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-primary">
             Confirm Your Booking
           </h1>
+
           <p className="mt-4 text-lg">
             Review your class information and complete your registration.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-10">
-          {/* Booking Summary */}
+          {/* =====================================================
+              BOOKING SUMMARY
+          ===================================================== */}
 
           <div className="card bg-base-100 shadow-2xl">
             <div className="card-body">
               <h2 className="card-title text-3xl mb-6">Booking Summary</h2>
 
-              <div className="space-y-4 ">
-                <div className="flex justify-between ">
-                  <span className="font-bold flex justify-between items-center">
-                    Class
-                  </span>
+              <div className="space-y-4">
+                {/* CLASS */}
+
+                <div className="flex justify-between gap-4">
+                  <span className="font-bold">Class</span>
+
                   <input
                     type="text"
-                    className="input input-bordered w-full border-0  text-cyan-500"
-                    name="dance"
-                    value={dance || title || name}
-                    onChange={handleChange}
-                    required
+                    className="input input-bordered w-full border-0 text-cyan-500"
+                    value={className}
+                    readOnly
                   />
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="font-bold flex justify-between items-center">
-                    Instructor
-                  </span>
+                {/* INSTRUCTOR */}
+
+                <div className="flex justify-between gap-4">
+                  <span className="font-bold">Instructor</span>
+
                   <input
                     type="text"
-                    className="input input-bordered w-full  border-0  text-cyan-500"
-                    name="instructor"
-                    value={instructor}
-                    onChange={handleChange}
-                    required
+                    className="input input-bordered w-full border-0 text-cyan-500"
+                    value={instructor || ""}
+                    readOnly
                   />
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="font-bold flex justify-between items-center">
-                    Day
-                  </span>
+                {/* DAY */}
+
+                <div className="flex justify-between gap-4">
+                  <span className="font-bold">Day</span>
+
                   <input
                     type="text"
-                    className="input input-bordered w-full  border-0  text-cyan-500"
-                    name="day"
-                    value={day || date}
-                    onChange={handleChange}
-                    required
+                    className="input input-bordered w-full border-0 text-cyan-500"
+                    value={classDate}
+                    readOnly
                   />
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="font-bold flex justify-between items-center">
-                    Time
-                  </span>
+                {/* TIME */}
+
+                <div className="flex justify-between gap-4">
+                  <span className="font-bold">Time</span>
+
                   <input
                     type="text"
-                    className="input input-bordered w-full  border-0  text-cyan-500"
-                    name="time"
-                    value={time}
-                    onChange={handleChange}
-                    required
+                    className="input input-bordered w-full border-0 text-cyan-500"
+                    value={time || ""}
+                    readOnly
                   />
                 </div>
 
-                <div className="flex justify-between">
-                  <span className="font-bold flex justify-between items-center">
-                    Location
-                  </span>
-                  <span className=" text-cyan-500">Freedom Dance Studio</span>
-                </div>
+                {/* LOCATION */}
 
                 <div className="flex justify-between">
-                  <span className="font-bold flex ">Drop-in Price</span>
+                  <span className="font-bold">Location</span>
+
+                  <span className="text-cyan-500">Freedom Dance Studio</span>
+                </div>
+
+                {/* PRICE */}
+
+                <div className="flex justify-between">
+                  <span className="font-bold">Drop-in Price</span>
+
                   <span className="text-success text-xl font-bold">
-                    {drop || price || (price && priceDetails && extraPrice)}
+                    {classPrice}
                   </span>
                 </div>
 
                 <div className="divider"></div>
 
                 <p>✔ Beginner Friendly</p>
-
                 <p>✔ No Partner Required</p>
-
                 <p>✔ Free Parking Available</p>
-
                 <p>✔ Comfortable Clothing Recommended</p>
               </div>
             </div>
           </div>
 
-          {/* Personal Information */}
+          {/* =====================================================
+              PERSONAL INFORMATION
+          ===================================================== */}
 
           <div className="card bg-base-100 shadow-2xl">
             <div className="card-body">
               <h2 className="card-title text-3xl mb-6">Personal Information</h2>
 
-              <form onSubmit={onSubmit} className="space-y-5">
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* NAME */}
+
                 <input
                   type="text"
                   placeholder="Full Name"
@@ -146,6 +372,8 @@ const Booking = () => {
                   name="fullName"
                   required
                 />
+
+                {/* EMAIL */}
 
                 <input
                   type="email"
@@ -155,6 +383,8 @@ const Booking = () => {
                   required
                 />
 
+                {/* PHONE */}
+
                 <input
                   type="tel"
                   placeholder="Phone Number"
@@ -163,33 +393,41 @@ const Booking = () => {
                   required
                 />
 
+                {/* LEVEL */}
+
                 <input
                   className="input input-bordered w-full"
                   name="level"
-                  value={level || age}
+                  value={level || age || ""}
                   onChange={handleChange}
-                  placeholder={level}
+                  placeholder="Dance Level"
                 />
 
-                {/* ====================== data form summary to us ============================ */}
-                <input className="hidden" name="day" value={day} readOnly />
-                <input className="hidden" name="time" value={time} readOnly />
+                {/* HIDDEN BOOKING INFORMATION */}
+
+                <input type="hidden" name="day" value={classDate} readOnly />
+
+                <input type="hidden" name="time" value={time || ""} readOnly />
+
+                <input type="hidden" name="dance" value={className} readOnly />
+
                 <input
-                  className="hidden"
-                  name="dance"
-                  value={dance || title}
+                  type="hidden"
+                  name="instructor"
+                  value={instructor || ""}
                   readOnly
                 />
 
-                {/* ====================== text message  ============================ */}
+                {/* SPECIAL REQUEST */}
 
                 <textarea
                   className="textarea textarea-bordered w-full"
                   rows="4"
                   placeholder="Special Requests"
                   name="message"
-                  onChange={handleChange}
                 ></textarea>
+
+                {/* TERMS */}
 
                 <label className="label cursor-pointer justify-start gap-3">
                   <input
@@ -197,21 +435,27 @@ const Booking = () => {
                     className="checkbox checkbox-primary"
                     required
                   />
+
                   <span>
                     I agree to the studio policies and cancellation terms.
                   </span>
                 </label>
 
+                {/* SUBMIT BUTTON */}
+
                 <button
                   className="btn btn-primary w-full text-lg"
-                  onClick={() =>
-                    setText(
-                      `Your class has been booked successfully! with ${instructor}`,
-                    )
-                  }
                   type="submit"
+                  disabled={isSubmitting}
                 >
-                  Confirm Booking
+                  {isSubmitting ? (
+                    <>
+                      <span className="loading loading-spinner"></span>
+                      Processing Booking...
+                    </>
+                  ) : (
+                    "Confirm Booking"
+                  )}
                 </button>
               </form>
             </div>
