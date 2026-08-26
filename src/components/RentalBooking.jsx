@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Clock3,
   Mail,
+  MapPin,
   MessageCircle,
   Phone,
   Send,
@@ -15,32 +16,238 @@ import {
   X,
 } from "lucide-react";
 import useOnSudmit from "../hooks/useOnSudmit";
-import { useFormAction, useSubmit } from "react-router-dom";
+
+/*
+=========================================================
+RENTAL RATES
+=========================================================
+
+Weekday:
+9 AM - 12 PM   = $20/hr
+12 PM - 6 PM   = $30/hr
+6 PM - 9 PM    = $50/hr
+
+Weekend:
+9 AM - 12 PM   = $30/hr
+12 PM - 6 PM   = $40/hr
+6 PM - 9 PM    = $70/hr
+
+25+ guests = $120/hr
+*/
 
 const rates = {
   weekday: [
-    { label: "9:00 AM – 12:00 PM", rate: 20 },
-    { label: "12:00 PM – 6:00 PM", rate: 30 },
-    { label: "6:00 PM – 9:00 PM", rate: 50 },
+    {
+      start: 9 * 60,
+      end: 12 * 60,
+      rate: 20,
+      label: "9:00 AM – 12:00 PM",
+    },
+    {
+      start: 12 * 60,
+      end: 18 * 60,
+      rate: 30,
+      label: "12:00 PM – 6:00 PM",
+    },
+    {
+      start: 18 * 60,
+      end: 21 * 60,
+      rate: 50,
+      label: "6:00 PM – 9:00 PM",
+    },
   ],
+
   weekend: [
-    { label: "9:00 AM – 12:00 PM", rate: 30 },
-    { label: "12:00 PM – 6:00 PM", rate: 40 },
-    { label: "6:00 PM – 9:00 PM", rate: 70 },
+    {
+      start: 9 * 60,
+      end: 12 * 60,
+      rate: 30,
+      label: "9:00 AM – 12:00 PM",
+    },
+    {
+      start: 12 * 60,
+      end: 18 * 60,
+      rate: 40,
+      label: "12:00 PM – 6:00 PM",
+    },
+    {
+      start: 18 * 60,
+      end: 21 * 60,
+      rate: 70,
+      label: "6:00 PM – 9:00 PM",
+    },
   ],
 };
 
 const LARGE_GROUP_RATE = 120;
 const LARGE_GROUP_MIN = 25;
 
+const OPENING_TIME = 9 * 60;
+const CLOSING_TIME = 21 * 60;
+
+/*
+=========================================================
+HELPER FUNCTIONS
+=========================================================
+*/
+
+const timeToMinutes = (time) => {
+  if (!time) return 0;
+
+  const [hours, minutes] = time.split(":").map(Number);
+
+  return hours * 60 + minutes;
+};
+
+const minutesToTime = (minutes) => {
+  const hours = Math.floor(minutes / 60);
+  const mins = minutes % 60;
+
+  return `${String(hours).padStart(2, "0")}:${String(mins).padStart(2, "0")}`;
+};
+
+const formatTime = (time) => {
+  if (!time) return "";
+
+  const [hourString, minuteString] = time.split(":");
+
+  let hour = Number(hourString);
+  const minute = minuteString;
+
+  const suffix = hour >= 12 ? "PM" : "AM";
+
+  if (hour === 0) hour = 12;
+  if (hour > 12) hour -= 12;
+
+  return `${hour}:${minute} ${suffix}`;
+};
+
+const formatHours = (minutes) => {
+  const hours = minutes / 60;
+
+  return Number.isInteger(hours) ? hours : hours.toFixed(2);
+};
+
+const formatRequestedDate = (dateValue) => {
+  if (!dateValue) return "Date not selected";
+
+  const date = new Date(`${dateValue}T00:00:00`);
+
+  if (Number.isNaN(date.getTime())) {
+    return dateValue;
+  }
+
+  return date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+};
+
+/*
+=========================================================
+CALCULATE RENTAL PRICE
+=========================================================
+*/
+
+const calculateRental = ({ day, startTime, endTime, guestCount }) => {
+  const start = timeToMinutes(startTime);
+  const end = timeToMinutes(endTime);
+
+  if (!startTime || !endTime || end <= start) {
+    return {
+      minutes: 0,
+      hours: 0,
+      total: 0,
+      effectiveRate: 0,
+      breakdown: [],
+    };
+  }
+
+  const duration = end - start;
+
+  /*
+   * 25+ guests always use $120/hour.
+   */
+  if (guestCount >= LARGE_GROUP_MIN) {
+    return {
+      minutes: duration,
+      hours: duration / 60,
+      total: (duration / 60) * LARGE_GROUP_RATE,
+      effectiveRate: LARGE_GROUP_RATE,
+      breakdown: [
+        {
+          start,
+          end,
+          minutes: duration,
+          rate: LARGE_GROUP_RATE,
+          amount: (duration / 60) * LARGE_GROUP_RATE,
+        },
+      ],
+    };
+  }
+
+  const dayRates = rates[day];
+
+  let total = 0;
+  const breakdown = [];
+
+  for (const period of dayRates) {
+    const overlapStart = Math.max(start, period.start);
+    const overlapEnd = Math.min(end, period.end);
+
+    if (overlapEnd > overlapStart) {
+      const minutes = overlapEnd - overlapStart;
+      const amount = (minutes / 60) * period.rate;
+
+      total += amount;
+
+      breakdown.push({
+        start: overlapStart,
+        end: overlapEnd,
+        minutes,
+        rate: period.rate,
+        amount,
+      });
+    }
+  }
+
+  return {
+    minutes: duration,
+    hours: duration / 60,
+    total,
+    effectiveRate: duration > 0 ? total / (duration / 60) : 0,
+    breakdown,
+  };
+};
+
+/*
+=========================================================
+COMPONENT
+=========================================================
+*/
+
 export default function RentalBooking() {
-  const { onSubmit, hidden } = useOnSudmit();
+  const { onSubmit, hidden, setText } = useOnSudmit();
 
   const [day, setDay] = useState("weekday");
-  const [time, setTime] = useState(1);
-  const [hours, setHours] = useState(2);
+
+  /*
+   * Customer chooses their own time.
+   */
+  const [startTime, setStartTime] = useState("12:00");
+  const [endTime, setEndTime] = useState("14:00");
+
   const [guests, setGuests] = useState("");
+
   const [showRequest, setShowRequest] = useState(false);
+
+  /*
+   * Confirmation state.
+   */
+  const [rentalConfirmed, setRentalConfirmed] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [rentalReference, setRentalReference] = useState("");
 
   const [form, setForm] = useState({
     name: "",
@@ -51,20 +258,61 @@ export default function RentalBooking() {
     message: "",
   });
 
-  const selected = rates[day][time];
   const guestCount = Number(guests) || 0;
 
-  // 25 guests or more = $120/hour
   const isLargeGroup = guestCount >= LARGE_GROUP_MIN;
 
-  const hourlyRate = isLargeGroup ? LARGE_GROUP_RATE : selected.rate;
+  /*
+   * Calculate automatically whenever
+   * the user changes time/day/guests.
+   */
+  const rental = useMemo(
+    () =>
+      calculateRental({
+        day,
+        startTime,
+        endTime,
+        guestCount,
+      }),
+    [day, startTime, endTime, guestCount],
+  );
 
-  const estimate = useMemo(() => hourlyRate * hours, [hourlyRate, hours]);
+  const estimate = rental.total;
+
+  const hourlyRate = rental.effectiveRate;
+
+  /*
+   * =========================================================
+   * TIME / FORM HANDLERS
+   * =========================================================
+   */
 
   const handleDayChange = (newDay) => {
     setDay(newDay);
+  };
 
-    setTime((currentTime) => Math.min(currentTime, rates[newDay].length - 1));
+  const handleStartTimeChange = (e) => {
+    const newStart = e.target.value;
+
+    setStartTime(newStart);
+
+    const startMinutes = timeToMinutes(newStart);
+    const currentEndMinutes = timeToMinutes(endTime);
+
+    /*
+     * Automatically move end time forward if needed.
+     */
+    if (currentEndMinutes <= startMinutes) {
+      const suggestedEnd = Math.min(startMinutes + 60, CLOSING_TIME);
+
+      if (suggestedEnd > startMinutes) {
+        setEndTime(minutesToTime(suggestedEnd));
+      }
+    }
+  };
+
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
   };
 
   const handleGuestsChange = (e) => {
@@ -78,12 +326,6 @@ export default function RentalBooking() {
     setGuests(Math.max(1, Number(value) || 1));
   };
 
-  const handleHoursChange = (e) => {
-    const value = Number(e.target.value) || 1;
-
-    setHours(Math.max(1, Math.min(12, value)));
-  };
-
   const handleFormChange = (e) => {
     const { name, value } = e.target;
 
@@ -92,6 +334,12 @@ export default function RentalBooking() {
       [name]: value,
     }));
   };
+
+  /*
+   * =========================================================
+   * MODAL
+   * =========================================================
+   */
 
   const openRequest = () => {
     setShowRequest(true);
@@ -103,19 +351,357 @@ export default function RentalBooking() {
     document.body.style.overflow = "";
   };
 
+  /*
+   * =========================================================
+   * VALIDATION
+   * =========================================================
+   */
+
+  const invalidTime =
+    !startTime ||
+    !endTime ||
+    timeToMinutes(endTime) <= timeToMinutes(startTime);
+
+  const outsideHours =
+    timeToMinutes(startTime) < OPENING_TIME ||
+    timeToMinutes(endTime) > CLOSING_TIME;
+
+  const canRequest = !invalidTime && !outsideHours && rental.minutes > 0;
+
+  /*
+   * =========================================================
+   * SUBMIT RENTAL REQUEST
+   * =========================================================
+   */
+
+  const handleRentalSubmit = async (event) => {
+    event.preventDefault();
+
+    if (isSubmitting) return;
+
+    if (!canRequest) return;
+
+    setIsSubmitting(true);
+
+    /*
+     * This message is used by your existing
+     * useOnSudmit toast system.
+     */
+    setText(
+      "Your studio rental request has been received successfully. We will contact you to confirm availability and final pricing.",
+    );
+
+    try {
+      const result = await onSubmit(event);
+
+      /*
+       * ONLY show confirmation if Web3Forms
+       * actually confirms success.
+       */
+      if (result?.success) {
+        /*
+         * Generate random confirmation code.
+         */
+        const reference = `FDS-${Math.floor(100000 + Math.random() * 900000)}`;
+
+        setRentalReference(reference);
+
+        /*
+         * Close modal.
+         */
+        setShowRequest(false);
+
+        document.body.style.overflow = "";
+
+        /*
+         * Show confirmation window.
+         */
+        setRentalConfirmed(true);
+      }
+    } catch (error) {
+      console.error("Rental request failed:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  /*
+   * =========================================================
+   * RENT AGAIN
+   * =========================================================
+   */
+
+  const handleRentAgain = () => {
+    setRentalConfirmed(false);
+
+    setRentalReference("");
+
+    setDay("weekday");
+
+    setStartTime("12:00");
+
+    setEndTime("14:00");
+
+    setGuests("");
+
+    setForm({
+      name: "",
+      email: "",
+      phone: "",
+      eventType: "",
+      date: "",
+      message: "",
+    });
+
+    setShowRequest(false);
+
+    document.body.style.overflow = "";
+  };
+
+  /*
+   * =========================================================
+   * CONFIRMATION SCREEN
+   * =========================================================
+   */
+
+  if (rentalConfirmed) {
+    return (
+      <section className="min-h-screen bg-base-200 px-5 py-16 flex items-center">
+        <div className="max-w-4xl w-full mx-auto">
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 25,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            className="card bg-base-100 shadow-2xl"
+          >
+            <div className="card-body items-center text-center p-8 md:p-12">
+              {/* SUCCESS ICON */}
+
+              <div className="mb-6">
+                <CheckCircle2
+                  size={90}
+                  className="text-success"
+                  strokeWidth={1.5}
+                />
+              </div>
+
+              {/* TITLE */}
+
+              <h1 className="text-4xl md:text-5xl font-bold text-success">
+                Rental Request Received!
+              </h1>
+
+              <p className="text-lg mt-4 max-w-2xl">
+                Thank you for requesting Freedom Dance Studio. We received your
+                rental request successfully.
+              </p>
+
+              {/* RANDOM CODE */}
+
+              <div className="badge badge-primary badge-lg mt-5 p-4 text-base">
+                Confirmation #{rentalReference}
+              </div>
+
+              {/* REQUEST DETAILS */}
+
+              <div className="w-full mt-10">
+                <div className="card bg-base-200">
+                  <div className="card-body text-left">
+                    <h2 className="text-2xl font-bold mb-6 text-center">
+                      Your Rental Request
+                    </h2>
+
+                    <div className="grid gap-5">
+                      {/* DATE */}
+
+                      <div className="flex items-center gap-4">
+                        <CalendarDays className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Requested Date</p>
+
+                          <p className="font-bold text-lg">
+                            {formatRequestedDate(form.date)}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* DAY */}
+
+                      <div className="flex items-center gap-4">
+                        <CalendarDays className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Rental Type</p>
+
+                          <p className="font-bold text-lg">
+                            {day === "weekday" ? "Weekday" : "Weekend"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* TIME */}
+
+                      <div className="flex items-center gap-4">
+                        <Clock3 className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Requested Time</p>
+
+                          <p className="font-bold text-lg">
+                            {formatTime(startTime)} – {formatTime(endTime)}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* DURATION */}
+
+                      <div className="flex items-center gap-4">
+                        <Clock3 className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Duration</p>
+
+                          <p className="font-bold text-lg">
+                            {formatHours(rental.minutes)} hour
+                            {rental.minutes !== 60 ? "s" : ""}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* GUESTS */}
+
+                      <div className="flex items-center gap-4">
+                        <Users className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Guests</p>
+
+                          <p className="font-bold text-lg">
+                            {guestCount || "Not specified"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* EVENT TYPE */}
+
+                      <div className="flex items-center gap-4">
+                        <Sparkles className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Event Type</p>
+
+                          <p className="font-bold text-lg">
+                            {form.eventType || "Not specified"}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* LOCATION */}
+
+                      <div className="flex items-center gap-4">
+                        <MapPin className="text-primary" size={25} />
+
+                        <div>
+                          <p className="text-sm opacity-60">Location</p>
+
+                          <p className="font-bold text-lg">
+                            Freedom Dance Studio
+                          </p>
+                        </div>
+                      </div>
+
+                      <div className="divider"></div>
+
+                      {/* RATE */}
+
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold">Hourly Rate</span>
+
+                        <span className="text-primary text-lg font-bold">
+                          ${hourlyRate.toFixed(2)}/hr
+                        </span>
+                      </div>
+
+                      {/* TOTAL */}
+
+                      <div className="flex justify-between items-center">
+                        <span className="font-bold">Estimated Total</span>
+
+                        <span className="text-success text-2xl font-bold">
+                          ${estimate.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* IMPORTANT MESSAGE */}
+
+              <div className="alert alert-info mt-8 text-left">
+                <span>
+                  📧 Your rental request has been received successfully. Please
+                  save your confirmation number. This request does not
+                  automatically confirm your reservation. Freedom Dance Studio
+                  will contact you to confirm availability and final pricing.
+                </span>
+              </div>
+
+              {/* BUTTONS */}
+
+              <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full">
+                <a href="/" className="btn btn-primary flex-1">
+                  Back to Home
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleRentAgain}
+                  className="btn btn-outline flex-1"
+                >
+                  Rent the Studio Again
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    );
+  }
+
+  /*
+   * =========================================================
+   * RENTAL PAGE
+   * =========================================================
+   */
+
   return (
     <>
-      {/* RENTAL BOOKING */}
+      {/* =====================================================
+          RENTAL BOOKING
+      ===================================================== */}
+
       <section
         id="booking"
         className="relative overflow-hidden bg-neutral py-20 text-neutral-content sm:py-24 lg:py-28"
       >
         <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
+
         <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
             {/* LEFT SIDE */}
+
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">
                 Ready to book?
@@ -127,9 +713,9 @@ export default function RentalBooking() {
               </h2>
 
               <p className="mt-5 max-w-xl text-base leading-7 text-white/60">
-                Choose the day and time that fits your needs, get a quick
-                estimate, then send us your request. We’ll confirm availability
-                with you.
+                Choose your day, your exact start and end time, and the number
+                of guests. We'll calculate your estimated rental price
+                automatically.
               </p>
 
               <div className="mt-8 space-y-3 text-sm text-white/75">
@@ -140,7 +726,7 @@ export default function RentalBooking() {
 
                 <div className="flex items-center gap-3">
                   <Clock3 size={18} className="text-primary" />
-                  Flexible hourly rentals
+                  Choose your exact rental time
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -169,14 +755,26 @@ export default function RentalBooking() {
             </div>
 
             {/* BOOKING CARD */}
+
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              initial={{
+                opacity: 0,
+                y: 24,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.7,
+              }}
               className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl backdrop-blur-xl sm:p-7"
             >
               {/* DAY */}
+
               <div className="grid grid-cols-2 gap-2 rounded-2xl bg-black/20 p-2">
                 <button
                   type="button"
@@ -203,51 +801,54 @@ export default function RentalBooking() {
                 </button>
               </div>
 
-              {/* FORM OPTIONS */}
+              {/* TIME */}
+
               <div className="mt-6 grid gap-5 sm:grid-cols-2">
-                {/* TIME */}
                 <label className="form-control">
                   <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
-                    Time
-                  </span>
-
-                  <select
-                    value={time}
-                    onChange={(e) => setTime(Number(e.target.value))}
-                    className="select select-bordered w-full rounded-xl border-white/10 bg-white/10 text-white outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
-                  >
-                    {rates[day].map((item, index) => (
-                      <option
-                        key={item.label}
-                        value={index}
-                        className="bg-neutral text-white"
-                      >
-                        {item.label} • ${item.rate}/hr
-                      </option>
-                    ))}
-                  </select>
-                </label>
-
-                {/* HOURS */}
-                <label className="form-control">
-                  <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
-                    Hours
+                    Start Time
                   </span>
 
                   <input
-                    type="number"
-                    min="1"
-                    max="12"
-                    value={hours}
-                    onChange={handleHoursChange}
-                    className="input input-bordered rounded-xl border-white/10 bg-white/10 text-white outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                    type="time"
+                    min="09:00"
+                    max="20:00"
+                    step="1800"
+                    value={startTime}
+                    onChange={handleStartTimeChange}
+                    className="input input-bordered w-full rounded-xl border-white/10 bg-white/10 text-white outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                   />
+
+                  <span className="mt-2 text-xs text-white/40">
+                    {formatTime(startTime)}
+                  </span>
+                </label>
+
+                <label className="form-control">
+                  <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
+                    End Time
+                  </span>
+
+                  <input
+                    type="time"
+                    min="10:00"
+                    max="21:00"
+                    step="1800"
+                    value={endTime}
+                    onChange={handleEndTimeChange}
+                    className="input input-bordered w-full rounded-xl border-white/10 bg-white/10 text-white outline-none transition-all duration-300 hover:border-primary/40 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  />
+
+                  <span className="mt-2 text-xs text-white/40">
+                    {formatTime(endTime)}
+                  </span>
                 </label>
 
                 {/* GUESTS */}
+
                 <label className="form-control sm:col-span-2">
                   <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
-                    Estimated guests
+                    Estimated Guests
                   </span>
 
                   <input
@@ -261,8 +862,14 @@ export default function RentalBooking() {
 
                   {isLargeGroup && (
                     <motion.div
-                      initial={{ opacity: 0, y: -6 }}
-                      animate={{ opacity: 1, y: 0 }}
+                      initial={{
+                        opacity: 0,
+                        y: -6,
+                      }}
+                      animate={{
+                        opacity: 1,
+                        y: 0,
+                      }}
                       className="mt-2 flex items-center gap-2 text-xs font-semibold text-primary"
                     >
                       <CheckCircle2 size={15} />
@@ -273,43 +880,117 @@ export default function RentalBooking() {
                 </label>
               </div>
 
-              {/* ESTIMATE */}
+              {/* VALIDATION */}
+
+              {invalidTime && (
+                <div className="alert alert-error mt-5 text-sm">
+                  <Clock3 size={18} />
+
+                  <span>End time must be later than the start time.</span>
+                </div>
+              )}
+
+              {outsideHours && !invalidTime && (
+                <div className="alert alert-warning mt-5 text-sm">
+                  <Clock3 size={18} />
+
+                  <span>
+                    Studio rentals are available between 9:00 AM and 9:00 PM.
+                  </span>
+                </div>
+              )}
+
+              {/* PRICE */}
+
               <motion.div
-                key={`${day}-${time}-${hours}-${guestCount}`}
-                initial={{ opacity: 0.6, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.25 }}
+                key={`${day}-${startTime}-${endTime}-${guestCount}`}
+                initial={{
+                  opacity: 0.6,
+                  scale: 0.98,
+                }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                }}
+                transition={{
+                  duration: 0.25,
+                }}
                 className="mt-6 rounded-2xl bg-primary p-6 text-primary-content"
               >
                 <div className="flex items-end justify-between gap-4">
                   <div>
                     <p className="text-xs font-black uppercase tracking-[0.18em] opacity-70">
-                      Estimated rental
+                      Estimated Rental
                     </p>
 
-                    <p className="mt-1 text-4xl font-black">${estimate}</p>
+                    <p className="mt-1 text-4xl font-black">
+                      ${estimate.toFixed(2)}
+                    </p>
                   </div>
 
                   <div className="text-right">
                     <p className="text-xs opacity-70">
-                      ${hourlyRate}/hr × {hours} hours
+                      {formatTime(startTime)} – {formatTime(endTime)}
                     </p>
 
-                    {isLargeGroup && (
-                      <p className="mt-1 text-[10px] font-bold uppercase tracking-wider opacity-60">
-                        Large group rate applied
-                      </p>
-                    )}
+                    <p className="mt-1 text-xs opacity-70">
+                      {formatHours(rental.minutes)} hour
+                      {rental.minutes !== 60 ? "s" : ""}
+                    </p>
                   </div>
                 </div>
+
+                {/* BREAKDOWN */}
+
+                {rental.breakdown.length > 0 && (
+                  <div className="mt-5 border-t border-white/20 pt-4">
+                    <p className="mb-2 text-[10px] font-black uppercase tracking-wider opacity-60">
+                      Price Breakdown
+                    </p>
+
+                    <div className="space-y-1">
+                      {rental.breakdown.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between gap-4 text-xs"
+                        >
+                          <span>
+                            {formatTime(
+                              minutesToTime(
+                                item.start ?? timeToMinutes(startTime),
+                              ),
+                            )}
+                            {" – "}
+                            {formatTime(
+                              minutesToTime(item.end ?? timeToMinutes(endTime)),
+                            )}
+                          </span>
+
+                          <span className="font-bold">
+                            {item.minutes / 60} hr × ${item.rate} = $
+                            {item.amount.toFixed(2)}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {isLargeGroup && (
+                  <p className="mt-3 text-[10px] font-bold uppercase tracking-wider opacity-60">
+                    25+ guest rate applied: $120/hour
+                  </p>
+                )}
               </motion.div>
 
               {/* BUTTONS */}
+
               <div className="mt-5 grid gap-3 sm:grid-cols-2">
                 <button
                   type="button"
                   onClick={openRequest}
-                  className="btn btn-primary rounded-xl"
+                  disabled={!canRequest}
+                  className="btn btn-primary rounded-xl disabled:opacity-40"
                 >
                   Request Availability
                   <ArrowRight size={17} />
@@ -332,25 +1013,42 @@ export default function RentalBooking() {
         </div>
       </section>
 
-      {/* REQUEST AVAILABILITY MODAL */}
+      {/* =====================================================
+          REQUEST AVAILABILITY MODAL
+      ===================================================== */}
+
       <AnimatePresence>
         {showRequest && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
             className="fixed inset-0 z-[999] flex items-center justify-center p-4"
           >
             {/* BACKDROP */}
+
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
+              initial={{
+                opacity: 0,
+              }}
+              animate={{
+                opacity: 1,
+              }}
+              exit={{
+                opacity: 0,
+              }}
               onClick={closeRequest}
               className="absolute inset-0 bg-black/80 backdrop-blur-md"
             />
 
             {/* MODAL */}
+
             <motion.div
               initial={{
                 opacity: 0,
@@ -374,6 +1072,7 @@ export default function RentalBooking() {
               className="relative z-10 max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-[2rem] border border-white/10 bg-neutral shadow-2xl"
             >
               {/* HEADER */}
+
               <div className="sticky top-0 z-20 border-b border-white/10 bg-neutral/95 p-5 backdrop-blur-xl sm:p-7">
                 <div className="flex items-start justify-between gap-5">
                   <div>
@@ -403,32 +1102,65 @@ export default function RentalBooking() {
               </div>
 
               {/* BODY */}
+
               <div className="p-5 sm:p-7">
-                {/* RENTAL SUMMARY */}
+                {/* SUMMARY */}
+
                 <div className="rounded-2xl border border-primary/20 bg-primary/10 p-5">
                   <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-primary">
                     <CheckCircle2 size={15} />
                     Your Rental Selection
                   </div>
 
-                  <div className="mt-4 grid gap-4 sm:grid-cols-4">
+                  <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
+                        Requested Date
+                      </p>
+
+                      <p className="mt-1 font-bold text-white">
+                        {formatRequestedDate(form.date)}
+                      </p>
+                    </div>
+
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
                         Day
                       </p>
 
                       <p className="mt-1 font-bold text-white">
-                        {day === "weekday" ? "Week day" : "Weekend"}
+                        {day === "weekday" ? "Weekday" : "Weekend"}
                       </p>
                     </div>
 
                     <div>
                       <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
-                        Time
+                        Start Time
                       </p>
 
                       <p className="mt-1 font-bold text-white">
-                        {selected.label}
+                        {formatTime(startTime)}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
+                        End Time
+                      </p>
+
+                      <p className="mt-1 font-bold text-white">
+                        {formatTime(endTime)}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
+                        Duration
+                      </p>
+
+                      <p className="mt-1 font-bold text-white">
+                        {formatHours(rental.minutes)} hour
+                        {rental.minutes !== 60 ? "s" : ""}
                       </p>
                     </div>
 
@@ -441,66 +1173,34 @@ export default function RentalBooking() {
                         {guestCount || "Not specified"}
                       </p>
                     </div>
-
-                    <div>
-                      <p className="text-[10px] font-bold uppercase tracking-wider text-white/35">
-                        Estimate
-                      </p>
-
-                      <p className="mt-1 font-black text-primary">
-                        ${estimate}
-                      </p>
-                    </div>
                   </div>
 
-                  <div className="mt-4 border-t border-primary/10 pt-4">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="text-white/40">Hourly rate</span>
+                  <div className="mt-5 border-t border-primary/10 pt-5">
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm text-white/40">
+                        Estimated Total
+                      </span>
 
-                      <span className="font-black text-primary">
-                        ${hourlyRate}/hour
+                      <span className="text-2xl font-black text-primary">
+                        ${estimate.toFixed(2)}
                       </span>
                     </div>
-
-                    {isLargeGroup && (
-                      <p className="mt-1 text-[10px] text-white/40">
-                        25+ guest rate applied
-                      </p>
-                    )}
                   </div>
                 </div>
 
                 {/* FORM */}
-                <form
-                  onSubmit={(event) => {
-                    setText(
-                      "Thank you! Your studio rental request has been received. Freedom Dance Studio will contact you to confirm availability and final pricing.",
-                    );
 
-                    onSubmit(event);
-                  }}
-                  className="mt-7 space-y-5"
-                >
-                  {/* RENTAL DATA SENT TO WEB3FORMS */}
-                  <input
-                    type="hidden"
-                    name="rentalDay"
-                    value={day === "weekday" ? "Weekday" : "Weekend"}
-                  />
+                <form onSubmit={handleRentalSubmit} className="mt-7 space-y-5">
+                  {/* RENTAL DATA */}
 
                   <input
                     type="hidden"
-                    name="rentalTime"
-                    value={selected.label}
+                    name="subject"
+                    value={`New Studio Rental Request - ${
+                      form.name || "Customer"
+                    }`}
+                    readOnly
                   />
-
-                  <input type="hidden" name="hours" value={hours} />
-
-                  <input type="hidden" name="guests" value={guestCount} />
-
-                  <input type="hidden" name="hourlyRate" value={hourlyRate} />
-
-                  <input type="hidden" name="estimatedTotal" value={estimate} />
 
                   <input
                     type="hidden"
@@ -508,7 +1208,58 @@ export default function RentalBooking() {
                     value="Studio Rental"
                   />
 
+                  <input
+                    type="hidden"
+                    name="rentalDay"
+                    value={day === "weekday" ? "Weekday" : "Weekend"}
+                  />
+
+                  <input type="hidden" name="requestedDate" value={form.date} />
+
+                  <input
+                    type="hidden"
+                    name="startTime"
+                    value={formatTime(startTime)}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="endTime"
+                    value={formatTime(endTime)}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="requestedTime"
+                    value={`${formatTime(startTime)} - ${formatTime(endTime)}`}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="hours"
+                    value={formatHours(rental.minutes)}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="guestCount"
+                    value={guestCount || "Not specified"}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="hourlyRate"
+                    value={hourlyRate.toFixed(2)}
+                  />
+
+                  <input
+                    type="hidden"
+                    name="estimatedTotal"
+                    value={estimate.toFixed(2)}
+                  />
+
                   {/* NAME + PHONE */}
+
                   <div className="grid gap-5 sm:grid-cols-2">
                     <label className="form-control">
                       <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
@@ -557,7 +1308,8 @@ export default function RentalBooking() {
                     </label>
                   </div>
 
-                  {/* EMAIL + EVENT TYPE */}
+                  {/* EMAIL + EVENT */}
+
                   <div className="grid gap-5 sm:grid-cols-2">
                     <label className="form-control">
                       <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
@@ -641,6 +1393,7 @@ export default function RentalBooking() {
                   </div>
 
                   {/* DATE */}
+
                   <label className="form-control">
                     <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                       Requested Date
@@ -656,7 +1409,8 @@ export default function RentalBooking() {
                     />
                   </label>
 
-                  {/* SPECIAL REQUEST */}
+                  {/* MESSAGE */}
+
                   <label className="form-control">
                     <span className="mb-2 text-xs font-black uppercase tracking-wider text-white/40">
                       Special Request / Additional Details
@@ -672,7 +1426,8 @@ export default function RentalBooking() {
                     />
                   </label>
 
-                  {/* FINAL PRICE */}
+                  {/* FINAL TOTAL */}
+
                   <div className="rounded-2xl bg-white/5 p-5">
                     <div className="flex items-center justify-between gap-4">
                       <div>
@@ -681,33 +1436,40 @@ export default function RentalBooking() {
                         </p>
 
                         <p className="mt-1 text-3xl font-black text-primary">
-                          ${estimate}
+                          ${estimate.toFixed(2)}
                         </p>
                       </div>
 
                       <div className="text-right text-xs text-white/40">
-                        <p>${hourlyRate}/hour</p>
+                        <p>
+                          {formatTime(startTime)} – {formatTime(endTime)}
+                        </p>
 
                         <p>
-                          {hours} hour
-                          {hours !== 1 ? "s" : ""}
+                          {formatHours(rental.minutes)} hour
+                          {rental.minutes !== 60 ? "s" : ""}
                         </p>
                       </div>
                     </div>
                   </div>
 
                   {/* SUBMIT */}
+
                   <button
                     type="submit"
-                    className="btn btn-primary btn-lg w-full rounded-xl shadow-lg shadow-primary/20"
+                    disabled={hidden || isSubmitting || !canRequest}
+                    className="btn btn-primary btn-lg w-full rounded-xl shadow-lg shadow-primary/20 disabled:opacity-40"
                   >
-                    <Send size={18} />
-                    {hidden ? (
-                      <span className="loading loading-spinner">
-                        Requesting...
-                      </span>
+                    {hidden || isSubmitting ? (
+                      <>
+                        <span className="loading loading-spinner"></span>
+                        Sending Request...
+                      </>
                     ) : (
-                      "Send Rental Request"
+                      <>
+                        <Send size={18} />
+                        Send Rental Request
+                      </>
                     )}
                   </button>
 
