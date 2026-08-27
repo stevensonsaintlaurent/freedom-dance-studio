@@ -21,18 +21,6 @@ import useOnSudmit from "../hooks/useOnSudmit";
 =========================================================
 RENTAL RATES
 =========================================================
-
-Weekday:
-9 AM - 12 PM   = $20/hr
-12 PM - 6 PM   = $30/hr
-6 PM - 9 PM    = $50/hr
-
-Weekend:
-9 AM - 12 PM   = $30/hr
-12 PM - 6 PM   = $40/hr
-6 PM - 9 PM    = $70/hr
-
-25+ guests = $120/hr
 */
 
 const rates = {
@@ -87,7 +75,7 @@ const CLOSING_TIME = 21 * 60;
 
 /*
 =========================================================
-HELPER FUNCTIONS
+HELPERS
 =========================================================
 */
 
@@ -146,7 +134,7 @@ const formatRequestedDate = (dateValue) => {
 
 /*
 =========================================================
-CALCULATE RENTAL PRICE
+CALCULATE RENTAL
 =========================================================
 */
 
@@ -167,7 +155,7 @@ const calculateRental = ({ day, startTime, endTime, guestCount }) => {
   const duration = end - start;
 
   /*
-   * 25+ guests always use $120/hour.
+   * 25+ guests = $120/hour
    */
   if (guestCount >= LARGE_GROUP_MIN) {
     return {
@@ -227,244 +215,38 @@ COMPONENT
 =========================================================
 */
 
-export default function RentalBooking() {
+export default function RentalBooking({
+  onRentalConfirmed,
+  isConfirmationOnly = false,
+  confirmationData = null,
+  onRentAgain,
+}) {
   const { onSubmit, hidden, setText } = useOnSudmit();
 
-  const [day, setDay] = useState("weekday");
-
-  /*
-   * Customer chooses their own time.
-   */
-  const [startTime, setStartTime] = useState("12:00");
-  const [endTime, setEndTime] = useState("14:00");
-
-  const [guests, setGuests] = useState("");
-
-  const [showRequest, setShowRequest] = useState(false);
-
-  /*
-   * Confirmation state.
-   */
-  const [rentalConfirmed, setRentalConfirmed] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [rentalReference, setRentalReference] = useState("");
-
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    eventType: "",
-    date: "",
-    message: "",
-  });
-
-  const guestCount = Number(guests) || 0;
-
-  const isLargeGroup = guestCount >= LARGE_GROUP_MIN;
-
-  /*
-   * Calculate automatically whenever
-   * the user changes time/day/guests.
-   */
-  const rental = useMemo(
-    () =>
-      calculateRental({
-        day,
-        startTime,
-        endTime,
-        guestCount,
-      }),
-    [day, startTime, endTime, guestCount],
-  );
-
-  const estimate = rental.total;
-
-  const hourlyRate = rental.effectiveRate;
-
   /*
    * =========================================================
-   * TIME / FORM HANDLERS
+   * CONFIRMATION-ONLY MODE
+   *
+   * This is rendered by StudioRentals after successful submit.
+   * Because StudioRentals returns this component instead of
+   * the rest of the rental page, the entire rental page
+   * disappears.
    * =========================================================
    */
 
-  const handleDayChange = (newDay) => {
-    setDay(newDay);
-  };
+  if (isConfirmationOnly && confirmationData) {
+    const {
+      reference,
+      form,
+      day,
+      startTime,
+      endTime,
+      guestCount,
+      rental,
+      estimate,
+      hourlyRate,
+    } = confirmationData;
 
-  const handleStartTimeChange = (e) => {
-    const newStart = e.target.value;
-
-    setStartTime(newStart);
-
-    const startMinutes = timeToMinutes(newStart);
-    const currentEndMinutes = timeToMinutes(endTime);
-
-    /*
-     * Automatically move end time forward if needed.
-     */
-    if (currentEndMinutes <= startMinutes) {
-      const suggestedEnd = Math.min(startMinutes + 60, CLOSING_TIME);
-
-      if (suggestedEnd > startMinutes) {
-        setEndTime(minutesToTime(suggestedEnd));
-      }
-    }
-  };
-
-  const handleEndTimeChange = (e) => {
-    setEndTime(e.target.value);
-  };
-
-  const handleGuestsChange = (e) => {
-    const value = e.target.value;
-
-    if (value === "") {
-      setGuests("");
-      return;
-    }
-
-    setGuests(Math.max(1, Number(value) || 1));
-  };
-
-  const handleFormChange = (e) => {
-    const { name, value } = e.target;
-
-    setForm((previous) => ({
-      ...previous,
-      [name]: value,
-    }));
-  };
-
-  /*
-   * =========================================================
-   * MODAL
-   * =========================================================
-   */
-
-  const openRequest = () => {
-    setShowRequest(true);
-    document.body.style.overflow = "hidden";
-  };
-
-  const closeRequest = () => {
-    setShowRequest(false);
-    document.body.style.overflow = "";
-  };
-
-  /*
-   * =========================================================
-   * VALIDATION
-   * =========================================================
-   */
-
-  const invalidTime =
-    !startTime ||
-    !endTime ||
-    timeToMinutes(endTime) <= timeToMinutes(startTime);
-
-  const outsideHours =
-    timeToMinutes(startTime) < OPENING_TIME ||
-    timeToMinutes(endTime) > CLOSING_TIME;
-
-  const canRequest = !invalidTime && !outsideHours && rental.minutes > 0;
-
-  /*
-   * =========================================================
-   * SUBMIT RENTAL REQUEST
-   * =========================================================
-   */
-
-  const handleRentalSubmit = async (event) => {
-    event.preventDefault();
-
-    if (isSubmitting) return;
-
-    if (!canRequest) return;
-
-    setIsSubmitting(true);
-
-    /*
-     * This message is used by your existing
-     * useOnSudmit toast system.
-     */
-    setText(
-      "Your studio rental request has been received successfully. We will contact you to confirm availability and final pricing.",
-    );
-
-    try {
-      const result = await onSubmit(event);
-
-      /*
-       * ONLY show confirmation if Web3Forms
-       * actually confirms success.
-       */
-      if (result?.success) {
-        /*
-         * Generate random confirmation code.
-         */
-        const reference = `FDS-${Math.floor(100000 + Math.random() * 900000)}`;
-
-        setRentalReference(reference);
-
-        /*
-         * Close modal.
-         */
-        setShowRequest(false);
-
-        document.body.style.overflow = "";
-
-        /*
-         * Show confirmation window.
-         */
-        setRentalConfirmed(true);
-      }
-    } catch (error) {
-      console.error("Rental request failed:", error);
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  /*
-   * =========================================================
-   * RENT AGAIN
-   * =========================================================
-   */
-
-  const handleRentAgain = () => {
-    setRentalConfirmed(false);
-
-    setRentalReference("");
-
-    setDay("weekday");
-
-    setStartTime("12:00");
-
-    setEndTime("14:00");
-
-    setGuests("");
-
-    setForm({
-      name: "",
-      email: "",
-      phone: "",
-      eventType: "",
-      date: "",
-      message: "",
-    });
-
-    setShowRequest(false);
-
-    document.body.style.overflow = "";
-  };
-
-  /*
-   * =========================================================
-   * CONFIRMATION SCREEN
-   * =========================================================
-   */
-
-  if (rentalConfirmed) {
     return (
       <section className="min-h-screen bg-base-200 px-5 py-16 flex items-center">
         <div className="max-w-4xl w-full mx-auto">
@@ -504,10 +286,10 @@ export default function RentalBooking() {
                 rental request successfully.
               </p>
 
-              {/* RANDOM CODE */}
+              {/* CONFIRMATION CODE */}
 
               <div className="badge badge-primary badge-lg mt-5 p-4 text-base">
-                Confirmation #{rentalReference}
+                Confirmation #{reference}
               </div>
 
               {/* REQUEST DETAILS */}
@@ -534,7 +316,7 @@ export default function RentalBooking() {
                         </div>
                       </div>
 
-                      {/* DAY */}
+                      {/* RENTAL TYPE */}
 
                       <div className="flex items-center gap-4">
                         <CalendarDays className="text-primary" size={25} />
@@ -665,7 +447,7 @@ export default function RentalBooking() {
 
                 <button
                   type="button"
-                  onClick={handleRentAgain}
+                  onClick={onRentAgain}
                   className="btn btn-outline flex-1"
                 >
                   Rent the Studio Again
@@ -680,16 +462,206 @@ export default function RentalBooking() {
 
   /*
    * =========================================================
+   * NORMAL BOOKING MODE
+   * =========================================================
+   */
+
+  const [day, setDay] = useState("weekday");
+
+  const [startTime, setStartTime] = useState("12:00");
+  const [endTime, setEndTime] = useState("14:00");
+
+  const [guests, setGuests] = useState("");
+
+  const [showRequest, setShowRequest] = useState(false);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    eventType: "",
+    date: "",
+    message: "",
+  });
+
+  const guestCount = Number(guests) || 0;
+
+  const isLargeGroup = guestCount >= LARGE_GROUP_MIN;
+
+  const rental = useMemo(
+    () =>
+      calculateRental({
+        day,
+        startTime,
+        endTime,
+        guestCount,
+      }),
+    [day, startTime, endTime, guestCount],
+  );
+
+  const estimate = rental.total;
+
+  const hourlyRate = rental.effectiveRate;
+
+  /*
+   * =========================================================
+   * TIME / FORM HANDLERS
+   * =========================================================
+   */
+
+  const handleDayChange = (newDay) => {
+    setDay(newDay);
+  };
+
+  const handleStartTimeChange = (e) => {
+    const newStart = e.target.value;
+
+    setStartTime(newStart);
+
+    const startMinutes = timeToMinutes(newStart);
+
+    const currentEndMinutes = timeToMinutes(endTime);
+
+    if (currentEndMinutes <= startMinutes) {
+      const suggestedEnd = Math.min(startMinutes + 60, CLOSING_TIME);
+
+      if (suggestedEnd > startMinutes) {
+        setEndTime(minutesToTime(suggestedEnd));
+      }
+    }
+  };
+
+  const handleEndTimeChange = (e) => {
+    setEndTime(e.target.value);
+  };
+
+  const handleGuestsChange = (e) => {
+    const value = e.target.value;
+
+    if (value === "") {
+      setGuests("");
+      return;
+    }
+
+    setGuests(Math.max(1, Number(value) || 1));
+  };
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm((previous) => ({
+      ...previous,
+      [name]: value,
+    }));
+  };
+
+  /*
+   * =========================================================
+   * MODAL
+   * =========================================================
+   */
+
+  const openRequest = () => {
+    setShowRequest(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  const closeRequest = () => {
+    setShowRequest(false);
+    document.body.style.overflow = "";
+  };
+
+  /*
+   * =========================================================
+   * VALIDATION
+   * =========================================================
+   */
+
+  const invalidTime =
+    !startTime ||
+    !endTime ||
+    timeToMinutes(endTime) <= timeToMinutes(startTime);
+
+  const outsideHours =
+    timeToMinutes(startTime) < OPENING_TIME ||
+    timeToMinutes(endTime) > CLOSING_TIME;
+
+  const canRequest = !invalidTime && !outsideHours && rental.minutes > 0;
+
+  /*
+   * =========================================================
+   * SUBMIT
+   * =========================================================
+   */
+
+  const handleRentalSubmit = async (event) => {
+    event.preventDefault();
+
+    if (isSubmitting) return;
+
+    if (!canRequest) return;
+
+    setIsSubmitting(true);
+
+    setText(
+      "Your studio rental request has been received successfully. We will contact you to confirm availability and final pricing.",
+    );
+
+    try {
+      const result = await onSubmit(event);
+
+      if (result?.success) {
+        const reference = `FDS-${Math.floor(100000 + Math.random() * 900000)}`;
+
+        /*
+         * Close modal.
+         */
+
+        setShowRequest(false);
+
+        document.body.style.overflow = "";
+
+        /*
+         * IMPORTANT:
+         *
+         * Instead of setting confirmation locally,
+         * tell StudioRentals that the request succeeded.
+         *
+         * StudioRentals will then completely replace
+         * the RentalStudio page with the confirmation screen.
+         */
+
+        if (onRentalConfirmed) {
+          onRentalConfirmed({
+            reference,
+            form,
+            day,
+            startTime,
+            endTime,
+            guestCount,
+            rental,
+            estimate,
+            hourlyRate,
+          });
+        }
+      }
+    } catch (error) {
+      console.error("Rental request failed:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  /*
+   * =========================================================
    * RENTAL PAGE
    * =========================================================
    */
 
   return (
     <>
-      {/* =====================================================
-          RENTAL BOOKING
-      ===================================================== */}
-
       <section
         id="booking"
         className="relative overflow-hidden bg-neutral py-20 text-neutral-content sm:py-24 lg:py-28"
@@ -700,7 +672,7 @@ export default function RentalBooking() {
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
           <div className="grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-            {/* LEFT SIDE */}
+            {/* LEFT */}
 
             <div>
               <p className="text-xs font-black uppercase tracking-[0.2em] text-primary">
@@ -885,7 +857,6 @@ export default function RentalBooking() {
               {invalidTime && (
                 <div className="alert alert-error mt-5 text-sm">
                   <Clock3 size={18} />
-
                   <span>End time must be later than the start time.</span>
                 </div>
               )}
@@ -893,7 +864,6 @@ export default function RentalBooking() {
               {outsideHours && !invalidTime && (
                 <div className="alert alert-warning mt-5 text-sm">
                   <Clock3 size={18} />
-
                   <span>
                     Studio rentals are available between 9:00 AM and 9:00 PM.
                   </span>
@@ -1013,9 +983,7 @@ export default function RentalBooking() {
         </div>
       </section>
 
-      {/* =====================================================
-          REQUEST AVAILABILITY MODAL
-      ===================================================== */}
+      {/* REQUEST MODAL */}
 
       <AnimatePresence>
         {showRequest && (
@@ -1191,8 +1159,6 @@ export default function RentalBooking() {
                 {/* FORM */}
 
                 <form onSubmit={handleRentalSubmit} className="mt-7 space-y-5">
-                  {/* RENTAL DATA */}
-
                   <input
                     type="hidden"
                     name="subject"
@@ -1426,7 +1392,7 @@ export default function RentalBooking() {
                     />
                   </label>
 
-                  {/* FINAL TOTAL */}
+                  {/* TOTAL */}
 
                   <div className="rounded-2xl bg-white/5 p-5">
                     <div className="flex items-center justify-between gap-4">
