@@ -6,6 +6,7 @@ import {
   Clock3,
   UserRound,
   MapPin,
+  Camera,
 } from "lucide-react";
 import useOnSudmit from "../hooks/useOnSudmit";
 
@@ -427,21 +428,146 @@ const Booking = () => {
                   name="message"
                 ></textarea>
 
-                {/* TERMS */}
+                {/* =====================================================
+                    STUDIO POLICIES
+                ===================================================== */}
 
-                <label className="label cursor-pointer justify-start gap-3">
-                  <input
-                    type="checkbox"
-                    className="checkbox checkbox-primary"
-                    required
-                  />
+                <div className="rounded-xl border border-base-300 bg-base-200 p-4">
+                  <label className="label cursor-pointer justify-start gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary mt-1"
+                      name="studioPoliciesAgreement"
+                      value="Agreed"
+                      required
+                    />
 
-                  <span>
-                    I agree to the studio policies and cancellation terms.
-                  </span>
-                </label>
+                    <span className="text-sm leading-relaxed">
+                      I agree to the Freedom Dance Studio policies and
+                      cancellation terms.
+                    </span>
+                  </label>
+                </div>
 
-                {/* SUBMIT BUTTON */}
+                {/* =====================================================
+                    PHOTO & VIDEO RELEASE
+                ===================================================== */}
+
+                <div className="rounded-xl border border-primary/30 bg-primary/5 p-4">
+                  <div className="flex items-center gap-3 mb-3">
+                    <Camera className="text-primary" size={24} />
+
+                    <h3 className="font-bold text-lg">Photo & Video Release</h3>
+                  </div>
+
+                  <p className="text-sm leading-relaxed mb-4">
+                    Freedom Dance Studio may take photographs and/or videos
+                    during classes, workshops, socials, events, and other studio
+                    activities. These may be used to promote the studio and its
+                    dance programs.
+                  </p>
+
+                  {/* EXPANDABLE FULL POLICY */}
+
+                  <details className="mb-4">
+                    <summary className="cursor-pointer font-semibold text-primary">
+                      Read the full Photo & Video Release Policy
+                    </summary>
+
+                    <div className="mt-4 text-sm leading-relaxed space-y-3">
+                      <p>
+                        By agreeing to this Photo & Video Release, I acknowledge
+                        that Freedom Dance Studio may photograph, video record,
+                        or otherwise capture my image, likeness, voice, or
+                        participation during studio classes, workshops, socials,
+                        events, performances, and other activities organized or
+                        hosted by Freedom Dance Studio.
+                      </p>
+
+                      <p>
+                        I give Freedom Dance Studio permission to use these
+                        photographs and/or recordings for legitimate studio
+                        promotional and marketing purposes, including but not
+                        limited to:
+                      </p>
+
+                      <ul className="list-disc list-inside space-y-1">
+                        <li>Instagram</li>
+                        <li>TikTok</li>
+                        <li>Facebook</li>
+                        <li>YouTube</li>
+                        <li>Freedom Dance Studio website</li>
+                        <li>Online advertisements</li>
+                        <li>Promotional videos</li>
+                        <li>Flyers and digital promotional materials</li>
+                        <li>Social media posts and stories</li>
+                        <li>Other studio marketing materials</li>
+                      </ul>
+
+                      <p>
+                        I understand that these materials may be edited,
+                        reproduced, published, displayed, distributed, and
+                        shared in connection with the promotion of Freedom Dance
+                        Studio and its programs.
+                      </p>
+
+                      <p>
+                        I understand that I will not receive payment or other
+                        compensation for the use of photographs or recordings
+                        covered by this release.
+                      </p>
+
+                      <p>
+                        I understand that Freedom Dance Studio will make
+                        reasonable efforts to use images and recordings in a
+                        respectful and appropriate manner and will not
+                        intentionally use them in a defamatory, misleading, or
+                        inappropriate context.
+                      </p>
+
+                      <p>
+                        If I do not wish to be photographed or recorded, I may
+                        notify Freedom Dance Studio staff before or during the
+                        activity whenever reasonably possible. I understand that
+                        because classes and events may involve group photography
+                        or video, Freedom Dance Studio cannot guarantee that
+                        every incidental appearance can be identified or removed
+                        immediately.
+                      </p>
+
+                      <p>
+                        For questions regarding this Photo & Video Release,
+                        participants may contact Freedom Dance Studio directly.
+                      </p>
+                    </div>
+                  </details>
+
+                  {/* REQUIRED PHOTO/VIDEO CONSENT */}
+
+                  <label className="label cursor-pointer justify-start gap-3 items-start">
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-primary mt-1"
+                      name="photoVideoRelease"
+                      value="Agreed"
+                      required
+                    />
+
+                    <span className="text-sm leading-relaxed">
+                      <strong>
+                        I agree to the Photo & Video Release Policy
+                      </strong>{" "}
+                      and give Freedom Dance Studio permission to use my
+                      photographs and/or video recordings for studio promotional
+                      and marketing purposes, including social media such as
+                      Instagram and TikTok.
+                    </span>
+                  </label>
+                </div>
+
+                {/* =====================================================
+                    SUBMIT BUTTON
+                ===================================================== */}
 
                 <button
                   className="btn btn-primary w-full text-lg"
@@ -457,6 +583,12 @@ const Booking = () => {
                     "Confirm Booking"
                   )}
                 </button>
+
+                <p className="text-xs text-center opacity-60">
+                  By submitting this form, you confirm that the information
+                  provided is accurate and that you have agreed to the required
+                  studio policies and Photo & Video Release.
+                </p>
               </form>
             </div>
           </div>
