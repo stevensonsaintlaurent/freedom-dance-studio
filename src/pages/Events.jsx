@@ -11,8 +11,8 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 
 import lady from "../assets/lady/sandra.jpg";
-import septemberSocial from "../assets/septemberSocial.png";
-import workshop from "../assets/workshop.png";
+import septemberSocial from "../assets/freeman.jpeg";
+import workshop from "../assets/sofi.jpeg";
 import havasu from "../assets/havasu.png";
 import karol_profil3 from "../public/images/4.jpeg";
 import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
@@ -42,7 +42,22 @@ const events = [
     title: "Freedom Dance Social",
     instructor: "Salsa • Bachata • Kizomba • More",
     date: "September 4, 2026",
-    time: "9:00 PM – 2:00 AM",
+
+    workshop: {
+      title: "Salsa on 2 Workshop",
+      instructor: "Freeman",
+      time: "8:00 PM – 10:00 PM",
+      earlyBird: "$25",
+      membersAndInstructors: "FREE",
+      doorPrice: "$35 at the door",
+    },
+
+    social: {
+      title: "Freedom Dance Social",
+      time: "10:00 PM – 2:00 AM",
+      musicBy: "Maximo",
+    },
+
     location: "Freedom Dance Studio",
     price: "$20",
     priceDetails: "Admission",
@@ -52,60 +67,61 @@ const events = [
     imageFit: "contain",
 
     description:
-      "Join us for a night of Salsa, Bachata, and Kizomba! Enjoy free Bachata and Kizomba classes, a special Kizomba performance, great music, and an amazing night with the Freedom Dance community.",
+      "Join us for a Salsa on 2 workshop with Freeman from 8:00 PM–10:00 PM, followed by the Freedom Dance Social from 10:00 PM–2:00 AM with music by Maximo. Early bird workshop price is $25. Free for members and instructors. $35 at the door.",
+
     button: "Get Your Ticket",
   },
 
+  {
+    id: 3,
+    type: "WEEKEND INTENSIVE",
+    title: "Bachata Weekend Intensive",
+    instructor: "Training • Technique • Musicality",
+    date: "September 11–13, 2026",
+    time: "Full Weekend",
+    location: "Freedom Dance Studio",
+    price: "$99",
+    priceDetails: "Early Bird Weekend Pass",
+    image: workshop,
+    description:
+      "A complete Bachata weekend designed to help you improve your technique, musicality, connection, body movement, and confidence.",
+    button: "Register Now",
+    featured: true,
+  },
+
   // {
-  //   id: 3,
-  //   type: "WEEKEND INTENSIVE",
-  //   title: "Bachata Weekend Intensive",
-  //   instructor: "Training • Technique • Musicality",
-  //   date: "August 14–16, 2026",
-  //   time: "Full Weekend",
-  //   location: "Freedom Dance Studio",
-  //   price: "$129",
-  //   priceDetails: "Weekend Pass",
-  //   image: workshop,
+  //   id: 4,
+  //   type: "TRIP",
+  //   title: "SBK Lake Havasu Trip",
+  //   instructor: "Teachers & Students",
+  //   date: "August 28–30, 2026",
+  //   time: "Friday–Sunday",
+  //   location: "Lake Havasu City, Arizona",
+  //   image: havasu,
   //   description:
-  //     "A complete Bachata weekend designed to help you improve your technique, musicality, connection, body movement, and confidence.",
-  //   button: "Register Now",
-  //   featured: true,
+  //     "Join our Freedom Dance Studio family for an unforgettable weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
+  //   button: "Join the Trip",
   // },
 
-  {
-    id: 4,
-    type: "TRIP",
-    title: "SBK Lake Havasu Trip",
-    instructor: "Teachers & Students",
-    date: "August 28–30, 2026",
-    time: "Friday–Sunday",
-    location: "Lake Havasu City, Arizona",
-    image: havasu,
-    description:
-      "Join our Freedom Dance Studio family for an unforgettable weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
-    button: "Join the Trip",
-  },
-
-  {
-    id: 6,
-    day: "Thursday",
-    date: "Every Thursday",
-    title: "Salsa Rueda de Casino",
-    time: "6:30 PM – 7:30 PM",
-    instructor: "Rodolfo",
-    category: "Salsa / Latin",
-    phone: "702-591-6499",
-    location: "Freedom Dance Studio",
-    price: "Free",
-    instagram: "https://www.instagram.com/law.soon7?igsi=MWd3OGFlMWwzaWdraw==",
-    description:
-      "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
-    image: Rodolfo,
-    video:
-      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
-    button: "Register Now",
-  },
+  // {
+  //   id: 6,
+  //   day: "Thursday",
+  //   date: "Every Thursday",
+  //   title: "Salsa Rueda de Casino",
+  //   time: "6:30 PM – 7:30 PM",
+  //   instructor: "Rodolfo",
+  //   category: "Salsa / Latin",
+  //   phone: "702-591-6499",
+  //   location: "Freedom Dance Studio",
+  //   price: "Free",
+  //   instagram: "https://www.instagram.com/law.soon7?igsi=MWd3OGFlMWwzaWdraw==",
+  //   description:
+  //     "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
+  //   image: Rodolfo,
+  //   video:
+  //     "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
+  //   button: "Register Now",
+  // },
 
   {
     id: 7,
