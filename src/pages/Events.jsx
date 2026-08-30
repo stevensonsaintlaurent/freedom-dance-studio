@@ -300,96 +300,273 @@ const Events = () => {
                   {event.description}
                 </p>
 
-                {/* ================= DETAILS ================= */}
+                {/* ================= ALL EVENT DETAILS ================= */}
 
-                <div className="mt-5 space-y-3">
-                  {/* DATE */}
+                <div className="mt-6 space-y-4">
+                  {/* CORE DETAILS */}
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {event.date && (
+                      <div className="rounded-2xl bg-base-200 p-4">
+                        <div className="flex items-start gap-3">
+                          <CalendarDays className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
+                              Date
+                            </p>
+                            <p className="mt-1 break-words text-sm font-bold">
+                              {event.date}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
-                      <CalendarDays className="h-5 w-5" />
-                    </div>
+                    {event.time && (
+                      <div className="rounded-2xl bg-base-200 p-4">
+                        <div className="flex items-start gap-3">
+                          <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
+                              Time
+                            </p>
+                            <p className="mt-1 break-words text-sm font-bold">
+                              {event.time}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
-                        Date
-                      </p>
+                    {event.location && (
+                      <div className="rounded-2xl bg-base-200 p-4">
+                        <div className="flex items-start gap-3">
+                          <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
+                              Location
+                            </p>
+                            <p className="mt-1 break-words text-sm font-bold">
+                              {event.location}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
-                      <p className="text-sm font-bold">{event.date}</p>
-                    </div>
+                    {event.instructor && (
+                      <div className="rounded-2xl bg-base-200 p-4">
+                        <div className="flex items-start gap-3">
+                          <Users className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
+                          <div className="min-w-0">
+                            <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
+                              Instructor
+                            </p>
+                            <p className="mt-1 break-words text-sm font-bold">
+                              {event.instructor}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {event.day && (
+                      <div className="rounded-2xl bg-base-200 p-4">
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
+                            Day
+                          </p>
+                          <p className="mt-1 break-words text-sm font-bold">
+                            {event.day}
+                          </p>
+                        </div>
+                      </div>
+                    )}
+
+                    {event.category && (
+                      <div className="rounded-2xl bg-base-200 p-4">
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
+                            Category
+                          </p>
+                          <p className="mt-1 break-words text-sm font-bold">
+                            {event.category}
+                          </p>
+                        </div>
+                      </div>
+                    )}
                   </div>
 
-                  {/* TIME */}
+                  {/* SOCIAL / WORKSHOP DETAILS */}
+                  {(event.workshop || event.social) && (
+                    <div className="grid gap-4 md:grid-cols-2">
+                      {event.workshop && (
+                        <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
+                          <div className="mb-4 flex items-center gap-2">
+                            <Sparkles className="h-5 w-5 text-primary" />
+                            <h4 className="text-lg font-black">
+                              {event.workshop.title || "Workshop"}
+                            </h4>
+                          </div>
 
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
-                      <Clock3 className="h-5 w-5" />
+                          <div className="space-y-2 text-sm">
+                            {event.workshop.instructor && (
+                              <p>
+                                <span className="font-bold">Instructor:</span>{" "}
+                                {event.workshop.instructor}
+                              </p>
+                            )}
+
+                            {event.workshop.time && (
+                              <p>
+                                <span className="font-bold">Time:</span>{" "}
+                                {event.workshop.time}
+                              </p>
+                            )}
+
+                            {event.workshop.earlyBird && (
+                              <p>
+                                <span className="font-bold">Early Bird:</span>{" "}
+                                {event.workshop.earlyBird}
+                              </p>
+                            )}
+
+                            {event.workshop.membersAndInstructors && (
+                              <p>
+                                <span className="font-bold">
+                                  Members & Instructors:
+                                </span>{" "}
+                                {event.workshop.membersAndInstructors}
+                              </p>
+                            )}
+
+                            {event.workshop.doorPrice && (
+                              <p>
+                                <span className="font-bold">At the Door:</span>{" "}
+                                {event.workshop.doorPrice}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
+                      {event.social && (
+                        <div className="rounded-2xl border border-secondary/20 bg-secondary/5 p-5">
+                          <div className="mb-4 flex items-center gap-2">
+                            <Music2 className="h-5 w-5 text-primary" />
+                            <h4 className="text-lg font-black">
+                              {event.social.title || "Social"}
+                            </h4>
+                          </div>
+
+                          <div className="space-y-2 text-sm">
+                            {event.social.time && (
+                              <p>
+                                <span className="font-bold">Time:</span>{" "}
+                                {event.social.time}
+                              </p>
+                            )}
+
+                            {event.social.musicBy && (
+                              <p>
+                                <span className="font-bold">Music By:</span>{" "}
+                                {event.social.musicBy}
+                              </p>
+                            )}
+
+                            {event.social.admission && (
+                              <p>
+                                <span className="font-bold">Admission:</span>{" "}
+                                {event.social.admission}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+                      )}
                     </div>
+                  )}
 
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
-                        Time
+                  {/* PRICE */}
+                  {(event.price || event.priceDetails || event.extraPrice) && (
+                    <div className="rounded-2xl bg-base-200 p-5">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold uppercase tracking-widest text-base-content/40">
+                            Admission / Pricing
+                          </p>
+
+                          {event.price && (
+                            <p className="mt-1 break-words text-2xl font-black text-primary">
+                              {event.price}
+                            </p>
+                          )}
+
+                          {event.priceDetails && (
+                            <p className="mt-1 break-words text-sm text-base-content/60">
+                              {event.priceDetails}
+                            </p>
+                          )}
+
+                          {event.extraPrice && (
+                            <p className="mt-1 break-words text-sm font-semibold">
+                              {event.extraPrice}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary sm:grid">
+                          {event.type === "SOCIAL" ? (
+                            <Music2 className="h-6 w-6" />
+                          ) : event.type === "BOOTCAMP" ? (
+                            <Users className="h-6 w-6" />
+                          ) : (
+                            <Sparkles className="h-6 w-6" />
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* CONTACT / SOCIAL LINKS */}
+                  {(event.phone || event.instagram) && (
+                    <div className="rounded-2xl border border-base-300 bg-base-100 p-5">
+                      <p className="mb-3 text-xs font-bold uppercase tracking-widest text-base-content/40">
+                        Contact & Social
                       </p>
 
-                      <p className="text-sm font-bold">{event.time}</p>
+                      <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-5">
+                        {event.phone && (
+                          <a
+                            href={`tel:${event.phone}`}
+                            className="font-bold text-primary hover:underline"
+                          >
+                            📞 {event.phone}
+                          </a>
+                        )}
+
+                        {event.instagram && (
+                          <a
+                            href={event.instagram}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="max-w-full break-all font-bold text-primary hover:underline"
+                          >
+                            Instagram
+                          </a>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  )}
 
-                  {/* LOCATION */}
-
-                  <div className="flex items-center gap-3">
-                    <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
-                      <MapPin className="h-5 w-5" />
+                  {/* VIDEO */}
+                  {event.video && (
+                    <div className="overflow-hidden rounded-2xl border border-base-300">
+                      <video
+                        src={event.video}
+                        controls
+                        className="h-auto max-h-96 w-full bg-black object-contain"
+                      />
                     </div>
-
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
-                        Location
-                      </p>
-
-                      <p className="text-sm font-bold">{event.location}</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* ================= PRICE BOX ================= */}
-
-                <div className="mt-6 rounded-2xl bg-base-200 p-5">
-                  <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <p className="text-xs font-bold uppercase tracking-widest text-base-content/40">
-                        Admission
-                      </p>
-
-                      {event.price && (
-                        <p className="mt-1 text-2xl font-black text-primary">
-                          {event.price}
-                        </p>
-                      )}
-
-                      {event.priceDetails && (
-                        <p className="text-sm text-base-content/60">
-                          {event.priceDetails}
-                        </p>
-                      )}
-
-                      {event.extraPrice && (
-                        <p className="mt-1 text-sm font-semibold">
-                          {event.extraPrice}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="hidden h-12 w-12 place-items-center rounded-full bg-primary/10 text-primary sm:grid">
-                      {event.type === "SOCIAL" ? (
-                        <Music2 className="h-6 w-6" />
-                      ) : event.type === "BOOTCAMP" ? (
-                        <Users className="h-6 w-6" />
-                      ) : (
-                        <Sparkles className="h-6 w-6" />
-                      )}
-                    </div>
-                  </div>
+                  )}
                 </div>
 
                 {/* ================= REGISTER ================= */}

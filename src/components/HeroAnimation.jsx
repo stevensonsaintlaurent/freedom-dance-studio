@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 import heroImage from "../assets/recentClip1.jpeg";
-import septemberSocial from "../assets/septemberSocial.png";
+import septemberSocial from "../assets/freeman.jpeg";
 import workshop from "../assets/lady/sandra.jpg";
 import havasu from "../assets/havasu.png";
 
@@ -122,7 +122,7 @@ const HERO_DATA = {
 
     image: septemberSocial,
 
-    button: "View Social",
+    button: "Register Now",
 
     link: "/book",
 
