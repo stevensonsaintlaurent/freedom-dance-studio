@@ -20,6 +20,7 @@ import {
   StudioRentals,
   PrivacyPolicy,
   TermsConditions,
+  RentalAgreementConfirmation,
 } from "./components";
 
 import RentalBooking from "./components/RequestAvailable";
@@ -112,6 +113,10 @@ const router = createBrowserRouter([
       {
         path: "request",
         element: <RentalBooking />,
+      },
+      {
+        path: "confirmation",
+        element: <RentalAgreementConfirmation />,
       },
       {
         path: "info",
