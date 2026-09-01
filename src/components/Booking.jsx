@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import {
   CheckCircle2,
@@ -6,6 +6,8 @@ import {
   Clock3,
   UserRound,
   MapPin,
+  Ticket,
+  Info,
 } from "lucide-react";
 import useOnSudmit from "../hooks/useOnSudmit";
 
@@ -13,10 +15,67 @@ const Booking = () => {
   const { setText, onSubmit } = useOnSudmit();
   const location = useLocation();
 
+  /*
+   * =========================================================
+   * BOOKING DATA
+   * =========================================================
+   */
+
   const [confirm] = useState(location.state || {});
+
+  const bookingData = confirm.bookingData || {};
+
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingReference, setBookingReference] = useState("");
+
+  /*
+   * =========================================================
+   * SCROLL TO TOP
+   *
+   * IMPORTANT:
+   * This runs again when bookingConfirmed changes to true.
+   * The previous version only ran once when the component loaded.
+   * =========================================================
+   */
+
+  useEffect(() => {
+    if (bookingConfirmed) {
+      // Wait until React has rendered the confirmation screen.
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Extra protection for browsers / router scroll restoration.
+      setTimeout(() => {
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        });
+      }, 100);
+    }
+  }, [bookingConfirmed]);
+
+  /*
+   * =========================================================
+   * INITIAL PAGE SCROLL
+   * =========================================================
+   */
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  /*
+   * =========================================================
+   * NORMALIZE BOOKING INFORMATION
+   * =========================================================
+   */
 
   const {
     name,
@@ -34,11 +93,89 @@ const Booking = () => {
     extraPrice,
   } = confirm;
 
-  const className = dance || title || name || "Dance Class";
-  const classDate = day || date || "Date not specified";
+  /*
+   * =========================================================
+   * EVENT INFORMATION
+   * =========================================================
+   */
 
-  const classPrice =
-    drop || price || (price && priceDetails && extraPrice) || "Contact Studio";
+  const eventTitle = bookingData.event || "";
+  const eventHighlight = bookingData.highlight || "";
+  const eventDescription = bookingData.description || "";
+  const eventDate = bookingData.date || "";
+  const eventTime = bookingData.time || "";
+  const eventPrice = bookingData.price || "";
+  const eventPriceLabel = bookingData.priceLabel || "";
+  const eventLocation = bookingData.location || "Freedom Dance Studio";
+
+  const isEventBooking = Boolean(bookingData.event);
+
+  /*
+   * =========================================================
+   * EVENT / CLASS TITLE
+   * =========================================================
+   */
+
+  const className = isEventBooking
+    ? `${eventTitle}${eventHighlight ? ` ${eventHighlight}` : ""}`
+    : dance || title || name || "Dance Class";
+
+  /*
+   * =========================================================
+   * DATE
+   * =========================================================
+   */
+
+  const classDate = isEventBooking
+    ? eventDate || "Date not specified"
+    : day || date || "Date not specified";
+
+  /*
+   * =========================================================
+   * TIME
+   * =========================================================
+   */
+
+  const classTime = isEventBooking
+    ? eventTime || "Time not specified"
+    : time || "Time not specified";
+
+  /*
+   * =========================================================
+   * PRICE
+   * =========================================================
+   */
+
+  const classPrice = isEventBooking
+    ? eventPrice || "Contact Studio"
+    : drop ||
+      price ||
+      (price && priceDetails && extraPrice) ||
+      "Contact Studio";
+
+  /*
+   * =========================================================
+   * INSTRUCTOR
+   * =========================================================
+   */
+
+  const classInstructor = isEventBooking
+    ? "Freedom Dance Studio"
+    : instructor || "Freedom Dance Studio";
+
+  /*
+   * =========================================================
+   * LOCATION
+   * =========================================================
+   */
+
+  const classLocation = isEventBooking ? eventLocation : "Freedom Dance Studio";
+
+  /*
+   * =========================================================
+   * HANDLE FORM CHANGES
+   * =========================================================
+   */
 
   const handleChange = () => {
     // Form values are handled directly by the form.
@@ -61,8 +198,8 @@ const Booking = () => {
       const result = await onSubmit(e);
 
       /*
-       * ONLY show "Booking Confirmed"
-       * if Web3Forms says the submission was successful.
+       * ONLY show confirmation if Web3Forms
+       * reports a successful submission.
        */
 
       if (result?.success) {
@@ -71,11 +208,15 @@ const Booking = () => {
         setBookingReference(reference);
 
         setText(
-          `Your class has been booked successfully with ${
-            instructor || "Freedom Dance Studio"
-          }.`,
+          isEventBooking
+            ? `Your registration for ${className} has been submitted successfully.`
+            : `Your class has been booked successfully with ${classInstructor}.`,
         );
 
+        /*
+         * This triggers the confirmation screen AND
+         * the scroll-to-top useEffect above.
+         */
         setBookingConfirmed(true);
       }
     } catch (error) {
@@ -87,13 +228,16 @@ const Booking = () => {
 
   /*
    * =========================================================
-   * SUCCESS SCREEN
+   * SUCCESS / CONFIRMATION SCREEN
    * =========================================================
    */
 
   if (bookingConfirmed) {
     return (
-      <section className="min-h-screen w-full overflow-x-hidden bg-base-200 px-4 sm:px-5 py-12 sm:py-16 flex items-center">
+      <section
+        className="min-h-screen w-full overflow-x-hidden bg-base-200 px-4 py-8 sm:px-5 sm:py-10"
+        style={{ scrollMarginTop: 0 }}
+      >
         <div className="max-w-3xl w-full min-w-0 mx-auto">
           <div className="card bg-base-100 shadow-2xl w-full min-w-0 overflow-hidden">
             <div className="card-body items-center text-center p-6 sm:p-8 md:p-12 min-w-0">
@@ -110,12 +254,15 @@ const Booking = () => {
               {/* TITLE */}
 
               <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-success break-words">
-                Booking Confirmed!
+                {isEventBooking
+                  ? "Registration Submitted!"
+                  : "Booking Confirmed!"}
               </h1>
 
               <p className="text-base sm:text-lg mt-4 max-w-xl break-words">
-                Thank you for booking with Freedom Dance Studio. Your
-                registration has been successfully submitted.
+                Thank you for booking with Freedom Dance Studio. Your{" "}
+                {isEventBooking ? "registration" : "booking"} has been
+                successfully submitted.
               </p>
 
               {/* BOOKING NUMBER */}
@@ -130,11 +277,13 @@ const Booking = () => {
                 <div className="card bg-base-200 w-full min-w-0 overflow-hidden">
                   <div className="card-body text-left p-5 sm:p-6 min-w-0">
                     <h2 className="text-xl sm:text-2xl font-bold mb-5 text-center break-words">
-                      Your Booking Details
+                      {isEventBooking
+                        ? "Your Registration Details"
+                        : "Your Booking Details"}
                     </h2>
 
                     <div className="grid gap-5 min-w-0">
-                      {/* CLASS */}
+                      {/* EVENT / CLASS */}
 
                       <div className="flex items-start gap-4 min-w-0">
                         <CalendarDays
@@ -143,7 +292,9 @@ const Booking = () => {
                         />
 
                         <div className="min-w-0">
-                          <p className="text-sm opacity-60">Class</p>
+                          <p className="text-sm opacity-60">
+                            {isEventBooking ? "Event" : title || "Class"}
+                          </p>
 
                           <p className="font-bold text-lg break-words">
                             {className}
@@ -160,10 +311,12 @@ const Booking = () => {
                         />
 
                         <div className="min-w-0">
-                          <p className="text-sm opacity-60">Instructor</p>
+                          <p className="text-sm opacity-60">
+                            Instructor / Host
+                          </p>
 
                           <p className="font-bold text-lg break-words">
-                            {instructor || "Freedom Dance Studio"}
+                            {classInstructor}
                           </p>
                         </div>
                       </div>
@@ -197,7 +350,7 @@ const Booking = () => {
                           <p className="text-sm opacity-60">Time</p>
 
                           <p className="font-bold text-lg break-words">
-                            {time || "Time not specified"}
+                            {classTime}
                           </p>
                         </div>
                       </div>
@@ -214,7 +367,7 @@ const Booking = () => {
                           <p className="text-sm opacity-60">Location</p>
 
                           <p className="font-bold text-lg break-words">
-                            Freedom Dance Studio
+                            {classLocation}
                           </p>
                         </div>
                       </div>
@@ -224,7 +377,11 @@ const Booking = () => {
                       {/* PRICE */}
 
                       <div className="flex flex-wrap justify-between items-center gap-3">
-                        <span className="font-bold">Price</span>
+                        <span className="font-bold">
+                          {isEventBooking
+                            ? eventPriceLabel || "Registration Price"
+                            : "Price"}
+                        </span>
 
                         <span className="text-success text-xl font-bold break-words">
                           {classPrice}
@@ -238,9 +395,11 @@ const Booking = () => {
               {/* EMAIL MESSAGE */}
 
               <div className="alert alert-info mt-8 text-left w-full min-w-0 overflow-hidden">
+                <Info size={20} className="flex-shrink-0" />
+
                 <span className="break-words">
-                  📧 Your booking has been received successfully. Please save
-                  your booking details above for your records.
+                  📧 Your registration has been received successfully. Please
+                  save your booking details and booking number for your records.
                 </span>
               </div>
 
@@ -275,11 +434,15 @@ const Booking = () => {
 
         <div className="text-center mb-8 sm:mb-12 min-w-0">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primary break-words">
-            Confirm Your Booking
+            {isEventBooking
+              ? "Register for This Event"
+              : "Confirm Your Booking"}
           </h1>
 
           <p className="mt-4 text-base sm:text-lg break-words">
-            Review your class information and complete your registration.
+            {isEventBooking
+              ? "Review the event details below and complete your registration."
+              : "Review your class information and complete your registration."}
           </p>
         </div>
 
@@ -290,91 +453,140 @@ const Booking = () => {
 
           <div className="card bg-base-100 shadow-2xl w-full min-w-0 overflow-hidden">
             <div className="card-body min-w-0 p-5 sm:p-6">
-              <h2 className="card-title text-2xl sm:text-3xl mb-6 break-words">
-                Booking Summary
-              </h2>
+              <div className="flex items-center gap-3 mb-6">
+                <Ticket size={28} className="text-primary flex-shrink-0" />
 
-              <div className="space-y-4 min-w-0">
-                {/* CLASS */}
+                <h2 className="card-title text-2xl sm:text-3xl break-words">
+                  {isEventBooking ? "Event Summary" : "Booking Summary"}
+                </h2>
+              </div>
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 min-w-0">
-                  <span className="font-bold flex-shrink-0">Class</span>
+              {/* EVENT DESCRIPTION */}
 
-                  <input
-                    type="text"
-                    className="input input-bordered w-full min-w-0 border-0 text-cyan-500"
-                    value={className}
-                    readOnly
-                  />
+              {isEventBooking && eventDescription && (
+                <div className="alert alert-info mb-6">
+                  <Info size={20} className="flex-shrink-0" />
+
+                  <p className="text-sm leading-relaxed">{eventDescription}</p>
+                </div>
+              )}
+
+              <div className="space-y-5 min-w-0">
+                {/* EVENT / CLASS */}
+
+                <div className="rounded-2xl bg-base-200 p-4">
+                  <p className="text-xs font-bold uppercase tracking-wider opacity-60 mb-1">
+                    {isEventBooking ? "Event" : "Class"}
+                  </p>
+
+                  <p className="text-lg sm:text-xl font-black break-words">
+                    {className}
+                  </p>
                 </div>
 
                 {/* INSTRUCTOR */}
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 min-w-0">
-                  <span className="font-bold flex-shrink-0">Instructor</span>
-
-                  <input
-                    type="text"
-                    className="input input-bordered w-full min-w-0 border-0 text-cyan-500"
-                    value={instructor || ""}
-                    readOnly
+                <div className="flex items-start gap-4 min-w-0">
+                  <UserRound
+                    className="text-primary flex-shrink-0 mt-1"
+                    size={22}
                   />
+
+                  <div className="min-w-0">
+                    <p className="text-sm opacity-60">
+                      {isEventBooking ? "Hosted By" : "Instructor"}
+                    </p>
+
+                    <p className="font-bold text-lg break-words">
+                      {classInstructor}
+                    </p>
+                  </div>
                 </div>
 
-                {/* DAY */}
+                {/* DATE */}
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 min-w-0">
-                  <span className="font-bold flex-shrink-0">Day</span>
-
-                  <input
-                    type="text"
-                    className="input input-bordered w-full min-w-0 border-0 text-cyan-500"
-                    value={classDate}
-                    readOnly
+                <div className="flex items-start gap-4 min-w-0">
+                  <CalendarDays
+                    className="text-primary flex-shrink-0 mt-1"
+                    size={22}
                   />
+
+                  <div className="min-w-0">
+                    <p className="text-sm opacity-60">Date</p>
+
+                    <p className="font-bold text-lg break-words">{classDate}</p>
+                  </div>
                 </div>
 
                 {/* TIME */}
 
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 min-w-0">
-                  <span className="font-bold flex-shrink-0">Time</span>
-
-                  <input
-                    type="text"
-                    className="input input-bordered w-full min-w-0 border-0 text-cyan-500"
-                    value={time || ""}
-                    readOnly
+                <div className="flex items-start gap-4 min-w-0">
+                  <Clock3
+                    className="text-primary flex-shrink-0 mt-1"
+                    size={22}
                   />
+
+                  <div className="min-w-0">
+                    <p className="text-sm opacity-60">Time</p>
+
+                    <p className="font-bold text-lg break-words">{classTime}</p>
+                  </div>
                 </div>
 
                 {/* LOCATION */}
 
-                <div className="flex flex-wrap justify-between gap-2 min-w-0">
-                  <span className="font-bold">Location</span>
+                <div className="flex items-start gap-4 min-w-0">
+                  <MapPin
+                    className="text-primary flex-shrink-0 mt-1"
+                    size={22}
+                  />
 
-                  <span className="text-cyan-500 break-words">
-                    Freedom Dance Studio
-                  </span>
-                </div>
+                  <div className="min-w-0">
+                    <p className="text-sm opacity-60">Location</p>
 
-                {/* PRICE */}
-
-                <div className="flex flex-wrap justify-between gap-2 min-w-0">
-                  <span className="font-bold">Drop-in Price</span>
-
-                  <span className="text-success text-xl font-bold break-words">
-                    {classPrice}
-                  </span>
+                    <p className="font-bold text-lg break-words">
+                      {classLocation}
+                    </p>
+                  </div>
                 </div>
 
                 <div className="divider"></div>
 
-                <p className="break-words">✔ Beginner Friendly</p>
-                <p className="break-words">✔ No Partner Required</p>
-                <p className="break-words">✔ Free Parking Available</p>
-                <p className="break-words">
-                  ✔ Comfortable Clothing Recommended
-                </p>
+                {/* PRICE */}
+
+                <div className="rounded-2xl bg-primary/10 border border-primary/20 p-5">
+                  <div className="flex flex-wrap justify-between items-center gap-3">
+                    <div>
+                      <p className="text-sm opacity-60">
+                        {isEventBooking
+                          ? eventPriceLabel || "Registration Price"
+                          : "Drop-in Price"}
+                      </p>
+
+                      <p className="text-2xl sm:text-3xl font-black text-success">
+                        {classPrice}
+                      </p>
+                    </div>
+
+                    <Ticket size={32} className="text-primary" />
+                  </div>
+                </div>
+
+                {!isEventBooking && (
+                  <>
+                    <div className="divider"></div>
+
+                    <p className="break-words">✔ Beginner Friendly</p>
+
+                    <p className="break-words">✔ No Partner Required</p>
+
+                    <p className="break-words">✔ Free Parking Available</p>
+
+                    <p className="break-words">
+                      ✔ Comfortable Clothing Recommended
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -428,7 +640,7 @@ const Booking = () => {
                 <input
                   className="input input-bordered w-full min-w-0"
                   name="level"
-                  value={level || age || ""}
+                  defaultValue={level || age || ""}
                   onChange={handleChange}
                   placeholder="Dance Level"
                 />
@@ -437,14 +649,57 @@ const Booking = () => {
 
                 <input type="hidden" name="day" value={classDate} readOnly />
 
-                <input type="hidden" name="time" value={time || ""} readOnly />
+                <input type="hidden" name="date" value={classDate} readOnly />
+
+                <input type="hidden" name="time" value={classTime} readOnly />
 
                 <input type="hidden" name="dance" value={className} readOnly />
+
+                <input type="hidden" name="event" value={eventTitle} readOnly />
+
+                <input
+                  type="hidden"
+                  name="eventHighlight"
+                  value={eventHighlight}
+                  readOnly
+                />
+
+                <input
+                  type="hidden"
+                  name="eventDescription"
+                  value={eventDescription}
+                  readOnly
+                />
+
+                <input
+                  type="hidden"
+                  name="eventPrice"
+                  value={classPrice}
+                  readOnly
+                />
+
+                <input
+                  type="hidden"
+                  name="location"
+                  value={classLocation}
+                  readOnly
+                />
 
                 <input
                   type="hidden"
                   name="instructor"
-                  value={instructor || ""}
+                  value={classInstructor}
+                  readOnly
+                />
+
+                <input
+                  type="hidden"
+                  name="bookingType"
+                  value={
+                    isEventBooking
+                      ? "Event Registration"
+                      : "Dance Class Booking"
+                  }
                   readOnly
                 />
 
@@ -452,6 +707,7 @@ const Booking = () => {
                   type="hidden"
                   name="bookingReference"
                   value={bookingReference}
+                  readOnly
                 />
 
                 {/* SPECIAL REQUEST */}
@@ -459,13 +715,15 @@ const Booking = () => {
                 <textarea
                   className="textarea textarea-bordered w-full min-w-0"
                   rows="4"
-                  placeholder="Special Requests"
+                  placeholder={
+                    isEventBooking
+                      ? "Anything we should know about your registration?"
+                      : "Special Requests"
+                  }
                   name="message"
                 ></textarea>
 
-                {/* =====================================================
-                    STUDIO POLICIES
-                ===================================================== */}
+                {/* STUDIO POLICIES */}
 
                 <div className="divider"></div>
 
@@ -483,9 +741,7 @@ const Booking = () => {
                   </span>
                 </label>
 
-                {/* =====================================================
-                    PHOTO & VIDEO RELEASE
-                ===================================================== */}
+                {/* PHOTO & VIDEO RELEASE */}
 
                 <div className="w-full min-w-0 overflow-hidden">
                   <h3 className="font-semibold text-base mb-2 break-words">
@@ -578,8 +834,10 @@ const Booking = () => {
                   {isSubmitting ? (
                     <>
                       <span className="loading loading-spinner"></span>
-                      Processing Booking...
+                      Processing Registration...
                     </>
+                  ) : isEventBooking ? (
+                    "Complete Registration"
                   ) : (
                     "Confirm Booking"
                   )}

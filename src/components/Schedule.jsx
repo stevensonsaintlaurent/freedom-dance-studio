@@ -220,29 +220,30 @@ const days = [
 //
 // ==================================================
 
-const cancelledDays = [
-  {
-    day: "Friday",
-    date: "August 28, 2026",
-    title: "All Classes Cancelled",
-    reason:
-      "Our Freedom Dance Studio students and instructors will be traveling together for our Lake Havasu trip. All regular classes are cancelled while our community enjoys this special weekend together.",
-  },
-  {
-    day: "Saturday",
-    date: "August 29, 2026",
-    title: "All Classes Cancelled",
-    reason:
-      "Our Freedom Dance Studio students and instructors are away together for our Lake Havasu trip. Regular classes are cancelled so our community can enjoy this special weekend together.",
-  },
-  {
-    day: "Sunday",
-    date: "August 30, 2026",
-    title: "All Classes Cancelled",
-    reason:
-      "Our Freedom Dance Studio students and instructors are returning from our Lake Havasu trip. Regular classes are cancelled for the day.",
-  },
-];
+// const cancelledDays = [
+//   {
+//     day: "Friday",
+//     date: "August 28, 2026",
+//     title: "All Classes Cancelled",
+//     reason:
+//       "Our Freedom Dance Studio students and instructors will be traveling together for our Lake Havasu trip. All regular classes are cancelled while our community enjoys this special weekend together.",
+//   },
+//   {
+//     day: "Saturday",
+//     date: "August 29, 2026",
+//     title: "All Classes Cancelled",
+//     reason:
+//       "Our Freedom Dance Studio students and instructors are away together for our Lake Havasu trip. Regular classes are cancelled so our community can enjoy this special weekend together.",
+//   },
+//   {
+//     day: "Sunday",
+//     date: "August 30, 2026",
+//     title: "All Classes Cancelled",
+//     reason:
+//       "Our Freedom Dance Studio students and instructors are returning from our Lake Havasu trip. Regular classes are cancelled for the day.",
+//   },
+// ];
+const cancelledDays = [];
 
 // ==============================
 // COMPONENT

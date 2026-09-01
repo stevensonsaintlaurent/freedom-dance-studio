@@ -103,9 +103,9 @@ const HERO_DATA = {
 
     eyebrow: "UPCOMING EVENT • FREEDOM DANCE",
 
-    title: "Freedom Dance",
+    title: "SBK Social",
 
-    highlight: "Social.",
+    highlight: "Night.",
 
     description:
       "Join us for a night of Salsa, Bachata and Kizomba. Enjoy a free Bachata and Kizomba class, a special Kizomba performance, and dance with the Freedom Dance community.",
@@ -238,6 +238,10 @@ const getUpcomingEvent = () => {
     });
 
   return upcomingEvents[0] || HERO_DATA.community;
+};
+
+const handleClick = (link) => {
+  window.location.href = link;
 };
 
 const HeroAnimation = () => {
@@ -418,6 +422,21 @@ const HeroAnimation = () => {
                 <div className="mt-5 flex flex-col gap-2.5 sm:mt-6 sm:flex-row sm:justify-center lg:justify-start">
                   <Link
                     to={hero.link}
+                    state={{
+                      bookingData: {
+                        type: hero.type,
+                        event: hero.title,
+                        highlight: hero.highlight,
+                        description: hero.description,
+                        date: hero.date,
+                        time: hero.time,
+                        price: hero.price,
+                        priceLabel: hero.priceLabel,
+                        secondaryPrice: hero.secondaryPrice,
+                        secondaryPriceLabel: hero.secondaryPriceLabel,
+                        location: "Freedom Dance Studio",
+                      },
+                    }}
                     className="btn btn-primary btn-md w-full rounded-full px-6 shadow-2xl shadow-primary/25 sm:btn-lg sm:w-auto sm:px-8"
                   >
                     <HeroIcon size={18} />
