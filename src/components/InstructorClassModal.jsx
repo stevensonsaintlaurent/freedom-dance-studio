@@ -336,15 +336,50 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                   <div>
                     <h4 className="font-bold text-lg">Policies & Waivers</h4>
                     <p className="text-sm text-base-content/60 mt-1">
-                      Please review and agree to the following before submitting
-                      your booking request.
+                      Please click each section below to read the full policy
+                      before agreeing.
                     </p>
+                  </div>
+
+                  <div className="rounded-xl border border-base-300 bg-base-100 overflow-hidden">
+                    <details className="group">
+                      <summary className="cursor-pointer list-none p-4 font-semibold flex items-center justify-between gap-3">
+                        <span>Class Booking Terms & Policies</span>
+                        <span className="text-primary text-sm group-open:hidden">
+                          Read More
+                        </span>
+                        <span className="text-primary text-sm hidden group-open:inline">
+                          Read Less
+                        </span>
+                      </summary>
+                      <div className="px-4 pb-4 text-sm leading-relaxed text-base-content/70 space-y-2">
+                        <p>
+                          This booking is for an independent class hosted at
+                          Freedom Dance Studio. The independent instructor is
+                          responsible for registration, pricing, payment
+                          collection, cancellations, refunds, attendance, and
+                          class-specific rules.
+                        </p>
+                        <p>
+                          Submitting this form sends a booking request only. It
+                          does not guarantee a place in the class. Your
+                          registration is confirmed only after the independent
+                          instructor confirms your participation and provides
+                          any required payment or registration instructions.
+                        </p>
+                        <p>
+                          By booking, you agree to follow the reasonable rules
+                          and instructions of both the instructor and Freedom
+                          Dance Studio while using the facility.
+                        </p>
+                      </div>
+                    </details>
                   </div>
 
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary mt-0.5"
+                      className="checkbox checkbox-primary mt-0.5 shrink-0"
                       checked={agreements.terms}
                       onChange={(e) =>
                         setAgreements((prev) => ({
@@ -355,20 +390,51 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                       required
                     />
                     <span className="text-sm leading-relaxed">
-                      I agree to the{" "}
-                      <strong>Class Booking Terms & Policies</strong>. I
-                      understand that this is an independent class, and the
-                      independent instructor is responsible for registration,
-                      pricing, payments, cancellations, refunds, and
-                      class-specific policies. My booking request is not a
-                      guarantee of admission until the instructor confirms it.
+                      I have read and agree to the{" "}
+                      <strong>Class Booking Terms & Policies</strong>.
                     </span>
                   </label>
+
+                  <div className="rounded-xl border border-base-300 bg-base-100 overflow-hidden">
+                    <details className="group">
+                      <summary className="cursor-pointer list-none p-4 font-semibold flex items-center justify-between gap-3">
+                        <span>Participation & Liability Waiver</span>
+                        <span className="text-primary text-sm group-open:hidden">
+                          Read More
+                        </span>
+                        <span className="text-primary text-sm hidden group-open:inline">
+                          Read Less
+                        </span>
+                      </summary>
+                      <div className="px-4 pb-4 text-sm leading-relaxed text-base-content/70 space-y-2">
+                        <p>
+                          I understand that dance is a physical activity and
+                          that participation may involve risks, including slips,
+                          trips, falls, strains, sprains, collisions, or other
+                          injuries.
+                        </p>
+                        <p>
+                          I voluntarily choose to participate and agree to use
+                          reasonable care, follow the instructor's directions,
+                          respect other participants, and follow Freedom Dance
+                          Studio's safety and facility rules.
+                        </p>
+                        <p>
+                          I understand that Freedom Dance Studio is providing
+                          the facility and that this independent class is
+                          operated by the independent instructor. To the extent
+                          permitted by applicable law, I accept responsibility
+                          for my own participation and assume the ordinary risks
+                          associated with dance activities.
+                        </p>
+                      </div>
+                    </details>
+                  </div>
 
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary mt-0.5"
+                      className="checkbox checkbox-primary mt-0.5 shrink-0"
                       checked={agreements.liability}
                       onChange={(e) =>
                         setAgreements((prev) => ({
@@ -379,24 +445,58 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                       required
                     />
                     <span className="text-sm leading-relaxed">
-                      I acknowledge the{" "}
-                      <strong>Participation & Liability Waiver</strong>. I
-                      voluntarily participate in dance activities and understand
-                      that dance involves physical activity and possible risks,
-                      including slips, falls, strains, or other injuries. I
-                      agree to participate responsibly, follow studio and
-                      instructor instructions, and accept responsibility for my
-                      own participation to the extent permitted by law. I
-                      understand that Freedom Dance Studio is providing the
-                      facility and that this independent class is operated by
-                      the instructor.
+                      I have read and agree to the{" "}
+                      <strong>Participation & Liability Waiver</strong>.
                     </span>
                   </label>
+
+                  <div className="rounded-xl border border-base-300 bg-base-100 overflow-hidden">
+                    <details className="group">
+                      <summary className="cursor-pointer list-none p-4 font-semibold flex items-center justify-between gap-3">
+                        <span>Photo & Video Marketing Release</span>
+                        <span className="text-primary text-sm group-open:hidden">
+                          Read More
+                        </span>
+                        <span className="text-primary text-sm hidden group-open:inline">
+                          Read Less
+                        </span>
+                      </summary>
+                      <div className="px-4 pb-4 text-sm leading-relaxed text-base-content/70 space-y-2">
+                        <p>
+                          I understand that Freedom Dance Studio and/or its
+                          authorized representatives may photograph, film, or
+                          otherwise record me during classes, workshops,
+                          socials, events, and other activities at the studio.
+                        </p>
+                        <p>
+                          I give Freedom Dance Studio permission to use my
+                          photograph, video, image, likeness, and/or voice for
+                          the studio's marketing, advertising, promotional,
+                          social media, website, and other business-related
+                          promotional purposes.
+                        </p>
+                        <p>
+                          This may include use on Freedom Dance Studio's
+                          Instagram, Facebook, TikTok, YouTube, website,
+                          advertisements, flyers, promotional materials, and
+                          other studio marketing channels. I understand that I
+                          will not receive payment or other compensation for
+                          this use.
+                        </p>
+                        <p>
+                          If I have questions or concerns about being
+                          photographed or recorded, I will speak with the
+                          instructor or Freedom Dance Studio before
+                          participating.
+                        </p>
+                      </div>
+                    </details>
+                  </div>
 
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary mt-0.5"
+                      className="checkbox checkbox-primary mt-0.5 shrink-0"
                       checked={agreements.media}
                       onChange={(e) =>
                         setAgreements((prev) => ({
@@ -407,40 +507,20 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                       required
                     />
                     <span className="text-sm leading-relaxed">
-                      I agree to the{" "}
-                      <strong>
-                        Freedom Dance Studio Photo & Video Marketing Release
-                      </strong>
-                      . I understand that Freedom Dance Studio and/or its
-                      authorized representatives may photograph, film, or
-                      otherwise record me during classes, workshops, socials,
-                      events, and activities at the studio. I give Freedom Dance
-                      Studio permission to use my photograph, video, image,
-                      likeness, and/or voice for the studio's{" "}
-                      <strong>
-                        marketing, advertising, promotional, social media,
-                        website, and other business-related promotional purposes
-                      </strong>
-                      . I understand that these photos and videos may be posted
-                      on Freedom Dance Studio's website, Instagram, Facebook,
-                      TikTok, YouTube, advertisements, promotional materials,
-                      and other studio marketing channels. I understand that I
-                      will not receive payment or other compensation for the use
-                      of these photos or videos.
+                      I have read and agree to the{" "}
+                      <strong>Photo & Video Marketing Release</strong>.
                     </span>
                   </label>
 
                   <div className="alert alert-info">
                     <Sparkles size={18} className="shrink-0" />
                     <span className="text-xs leading-relaxed">
-                      Photos and videos may be captured during studio activities
-                      for Freedom Dance Studio marketing and promotion. If you
-                      do not agree to this release, please speak with the
-                      instructor or Freedom Dance Studio before participating.
+                      Please click <strong>Read More</strong> on each policy
+                      above before checking the agreement boxes. All three
+                      agreements are required to submit your booking.
                     </span>
                   </div>
 
-                  {/* Explicit values sent to Web3Forms */}
                   <input
                     type="hidden"
                     name="booking_terms_agreed"
