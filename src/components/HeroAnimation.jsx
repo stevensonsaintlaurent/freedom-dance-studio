@@ -114,7 +114,7 @@ const HERO_DATA = {
 
     date: "September 4, 2026",
 
-    time: "9:00 PM – 2:00 AM",
+    time: "8:00 PM – 2:00 AM",
 
     price: "$20",
 
