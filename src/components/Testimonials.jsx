@@ -2,9 +2,11 @@ import { useState } from "react";
 import { testimonials } from "../data/data";
 import { FaStar } from "react-icons/fa";
 import { motion, useReducedMotion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import { videos } from "../data/video";
 
 const Reviews = () => {
+  const { t } = useTranslation();
   const [expandedReviews, setExpandedReviews] = useState({});
   const shouldReduceMotion = useReducedMotion();
 
@@ -149,7 +151,7 @@ const Reviews = () => {
               ease: "easeOut",
             }}
           >
-            What Our Students Say
+            {t("testimonials.title")}
           </motion.h2>
 
           <motion.p
@@ -170,8 +172,7 @@ const Reviews = () => {
               ease: "easeOut",
             }}
           >
-            Discover why dancers, musicians, families, and event organizers love
-            Freedom Dance Studio.
+            {t("testimonials.subtitle")}
           </motion.p>
         </div>
 
@@ -209,7 +210,7 @@ const Reviews = () => {
                   <figure className="overflow-hidden">
                     <img
                       src={review.image}
-                      alt={`${review.name || "Student"} testimonial`}
+                      alt={`${review.name || t("testimonials.student")} ${t("testimonials.testimonial")}`}
                       className="
                         h-64
                         sm:h-72
@@ -229,7 +230,7 @@ const Reviews = () => {
                   {/* STARS */}
                   <div
                     className="flex gap-1 mb-2"
-                    aria-label={`${review.rating || 5} out of 5 stars`}
+                    aria-label={`${review.rating || 5} ${t("testimonials.outOfFiveStars")}`}
                   >
                     {Array.from({
                       length: Math.min(Math.max(review.rating || 5, 0), 5),
@@ -243,7 +244,7 @@ const Reviews = () => {
 
                   {/* NAME */}
                   <h3 className="font-bold text-lg md:text-xl">
-                    {review.name || "Freedom Dance Student"}
+                    {review.name || t("testimonials.defaultStudent")}
                   </h3>
 
                   {/* TITLE */}
@@ -277,7 +278,9 @@ const Reviews = () => {
                         transition-transform
                       "
                     >
-                      {isExpanded ? "Read less" : "Read more"}
+                      {isExpanded
+                        ? t("testimonials.readLess")
+                        : t("testimonials.readMore")}
                     </button>
                   )}
                 </div>
@@ -308,7 +311,7 @@ const Reviews = () => {
                 ease: "easeOut",
               }}
             >
-              Video Testimonials
+              {t("testimonials.videoTitle")}
             </motion.h2>
 
             <div className="grid md:grid-cols-2 gap-6 md:gap-10">
@@ -337,8 +340,7 @@ const Reviews = () => {
                           className="absolute inset-0 w-full h-full"
                           src={`https://www.youtube.com/embed/${youtubeId}`}
                           title={
-                            video.title ||
-                            "Freedom Dance Studio video testimonial"
+                            video.title || t("testimonials.videoIframeTitle")
                           }
                           loading="lazy"
                           allow="
@@ -357,7 +359,7 @@ const Reviews = () => {
                     ) : (
                       <div className="aspect-video flex items-center justify-center bg-base-300">
                         <p className="text-base-content/60">
-                          Video unavailable
+                          {t("testimonials.videoUnavailable")}
                         </p>
                       </div>
                     )}
@@ -365,12 +367,11 @@ const Reviews = () => {
                     {/* VIDEO INFORMATION */}
                     <div className="card-body p-5 md:p-6">
                       <h3 className="card-title text-lg md:text-xl">
-                        {video.title || "Freedom Dance Studio Testimonial"}
+                        {video.title || t("testimonials.defaultVideoTitle")}
                       </h3>
 
                       <p className="text-base-content/70 text-sm md:text-base">
-                        Watch and experience the energy, community, and
-                        atmosphere of Freedom Dance Studio.
+                        {t("testimonials.videoDescription")}
                       </p>
 
                       {video.url && (
@@ -386,7 +387,7 @@ const Reviews = () => {
                             sm:w-auto
                           "
                         >
-                          Watch on YouTube
+                          {t("testimonials.watchYoutube")}
                         </a>
                       )}
                     </div>
@@ -418,7 +419,7 @@ const Reviews = () => {
               ease: "easeOut",
             }}
           >
-            Why People Love Freedom Dance Studio
+            {t("testimonials.whyTitle")}
           </motion.h2>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -437,13 +438,10 @@ const Reviews = () => {
             >
               <div className="card-body">
                 <h3 className="text-xl md:text-2xl font-bold">
-                  Amazing Classes
+                  {t("testimonials.cards.classes.title")}
                 </h3>
 
-                <p>
-                  Salsa, Bachata, Urban Kiz, Konpa, Kids Dance, Ballet, Hip-Hop,
-                  Yoga, and more.
-                </p>
+                <p>{t("testimonials.cards.classes.description")}</p>
               </div>
             </motion.div>
 
@@ -462,13 +460,10 @@ const Reviews = () => {
             >
               <div className="card-body">
                 <h3 className="text-xl md:text-2xl font-bold">
-                  Professional Instructors
+                  {t("testimonials.cards.instructors.title")}
                 </h3>
 
-                <p>
-                  Friendly teachers focused on helping every student grow from
-                  beginner to advanced.
-                </p>
+                <p>{t("testimonials.cards.instructors.description")}</p>
               </div>
             </motion.div>
 
@@ -486,12 +481,11 @@ const Reviews = () => {
               {...getCardAnimation(2)}
             >
               <div className="card-body">
-                <h3 className="text-xl md:text-2xl font-bold">Live Music</h3>
+                <h3 className="text-xl md:text-2xl font-bold">
+                  {t("testimonials.cards.liveMusic.title")}
+                </h3>
 
-                <p>
-                  Dance with live bands and musicians during special events and
-                  socials.
-                </p>
+                <p>{t("testimonials.cards.liveMusic.description")}</p>
               </div>
             </motion.div>
 
@@ -510,13 +504,10 @@ const Reviews = () => {
             >
               <div className="card-body">
                 <h3 className="text-xl md:text-2xl font-bold">
-                  Beautiful Dance Floor
+                  {t("testimonials.cards.floor.title")}
                 </h3>
 
-                <p>
-                  Spacious dance rooms with professional flooring, mirrors, and
-                  lighting.
-                </p>
+                <p>{t("testimonials.cards.floor.description")}</p>
               </div>
             </motion.div>
 
@@ -534,12 +525,11 @@ const Reviews = () => {
               {...getCardAnimation(4)}
             >
               <div className="card-body">
-                <h3 className="text-xl md:text-2xl font-bold">Event Rentals</h3>
+                <h3 className="text-xl md:text-2xl font-bold">
+                  {t("testimonials.cards.rentals.title")}
+                </h3>
 
-                <p>
-                  Perfect for birthdays, weddings, rehearsals, workshops,
-                  private classes, and celebrations.
-                </p>
+                <p>{t("testimonials.cards.rentals.description")}</p>
               </div>
             </motion.div>
 
@@ -557,13 +547,10 @@ const Reviews = () => {
             >
               <div className="card-body">
                 <h3 className="text-xl md:text-2xl font-bold">
-                  Friendly Community
+                  {t("testimonials.cards.community.title")}
                 </h3>
 
-                <p>
-                  Join a welcoming family where everyone supports each other's
-                  dance journey.
-                </p>
+                <p>{t("testimonials.cards.community.description")}</p>
               </div>
             </motion.div>
           </div>

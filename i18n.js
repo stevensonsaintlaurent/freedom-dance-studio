@@ -109,6 +109,68 @@ const resources = {
           button: "Join Our Community",
         },
       },
+
+      testimonials: {
+        title: "What Our Students Say",
+        subtitle:
+          "Discover why dancers, musicians, families, and event organizers love Freedom Dance Studio.",
+
+        student: "Student",
+        testimonial: "testimonial",
+        defaultStudent: "Freedom Dance Student",
+        outOfFiveStars: "out of 5 stars",
+
+        readMore: "Read more",
+        readLess: "Read less",
+
+        videoTitle: "Video Testimonials",
+        videoIframeTitle: "Freedom Dance Studio video testimonial",
+        videoUnavailable: "Video unavailable",
+        defaultVideoTitle: "Freedom Dance Studio Testimonial",
+        videoDescription:
+          "Watch and experience the energy, community, and atmosphere of Freedom Dance Studio.",
+        watchYoutube: "Watch on YouTube",
+
+        whyTitle: "Why People Love Freedom Dance Studio",
+
+        cards: {
+          classes: {
+            title: "Amazing Classes",
+            description:
+              "Salsa, Bachata, Urban Kiz, Konpa, Kids Dance, Ballet, Hip-Hop, Yoga, and more.",
+          },
+
+          instructors: {
+            title: "Professional Instructors",
+            description:
+              "Friendly teachers focused on helping every student grow from beginner to advanced.",
+          },
+
+          liveMusic: {
+            title: "Live Music",
+            description:
+              "Dance with live bands and musicians during special events and socials.",
+          },
+
+          floor: {
+            title: "Beautiful Dance Floor",
+            description:
+              "Spacious dance rooms with professional flooring, mirrors, and lighting.",
+          },
+
+          rentals: {
+            title: "Event Rentals",
+            description:
+              "Perfect for birthdays, weddings, rehearsals, workshops, private classes, and celebrations.",
+          },
+
+          community: {
+            title: "Friendly Community",
+            description:
+              "Join a welcoming family where everyone supports each other's dance journey.",
+          },
+        },
+      },
     },
   },
 
@@ -217,6 +279,68 @@ const resources = {
           description:
             "Conoce bailarines, haz amigos, aprende nuevos estilos y forma parte de una comunidad en crecimiento que ama bailar.",
           button: "Únete a nuestra comunidad",
+        },
+      },
+
+      testimonials: {
+        title: "Lo Que Dicen Nuestros Estudiantes",
+        subtitle:
+          "Descubre por qué bailarines, músicos, familias y organizadores de eventos aman Freedom Dance Studio.",
+
+        student: "Estudiante",
+        testimonial: "testimonio",
+        defaultStudent: "Estudiante de Freedom Dance",
+        outOfFiveStars: "de 5 estrellas",
+
+        readMore: "Leer más",
+        readLess: "Leer menos",
+
+        videoTitle: "Testimonios en Video",
+        videoIframeTitle: "Testimonio en video de Freedom Dance Studio",
+        videoUnavailable: "Video no disponible",
+        defaultVideoTitle: "Testimonio de Freedom Dance Studio",
+        videoDescription:
+          "Mira y experimenta la energía, la comunidad y el ambiente de Freedom Dance Studio.",
+        watchYoutube: "Ver en YouTube",
+
+        whyTitle: "Por Qué la Gente Ama Freedom Dance Studio",
+
+        cards: {
+          classes: {
+            title: "Clases Increíbles",
+            description:
+              "Salsa, Bachata, Urban Kiz, Konpa, baile infantil, Ballet, Hip-Hop, Yoga y más.",
+          },
+
+          instructors: {
+            title: "Instructores Profesionales",
+            description:
+              "Profesores amigables enfocados en ayudar a cada estudiante a crecer desde principiante hasta avanzado.",
+          },
+
+          liveMusic: {
+            title: "Música en Vivo",
+            description:
+              "Baila con bandas y músicos en vivo durante eventos especiales y sociales.",
+          },
+
+          floor: {
+            title: "Hermosa Pista de Baile",
+            description:
+              "Amplias salas de baile con piso profesional, espejos e iluminación.",
+          },
+
+          rentals: {
+            title: "Alquiler para Eventos",
+            description:
+              "Perfecto para cumpleaños, bodas, ensayos, talleres, clases privadas y celebraciones.",
+          },
+
+          community: {
+            title: "Comunidad Amigable",
+            description:
+              "Únete a una familia acogedora donde todos apoyan el crecimiento de los demás en el baile.",
+          },
         },
       },
     },
@@ -330,6 +454,68 @@ const resources = {
           button: "Rejoindre notre communauté",
         },
       },
+
+      testimonials: {
+        title: "Ce Que Disent Nos Élèves",
+        subtitle:
+          "Découvrez pourquoi les danseurs, musiciens, familles et organisateurs d'événements aiment Freedom Dance Studio.",
+
+        student: "Élève",
+        testimonial: "témoignage",
+        defaultStudent: "Élève de Freedom Dance",
+        outOfFiveStars: "sur 5 étoiles",
+
+        readMore: "Lire plus",
+        readLess: "Lire moins",
+
+        videoTitle: "Témoignages Vidéo",
+        videoIframeTitle: "Témoignage vidéo de Freedom Dance Studio",
+        videoUnavailable: "Vidéo indisponible",
+        defaultVideoTitle: "Témoignage Freedom Dance Studio",
+        videoDescription:
+          "Découvrez l'énergie, la communauté et l'ambiance de Freedom Dance Studio.",
+        watchYoutube: "Regarder sur YouTube",
+
+        whyTitle: "Pourquoi les Gens Aiment Freedom Dance Studio",
+
+        cards: {
+          classes: {
+            title: "Cours Exceptionnels",
+            description:
+              "Salsa, Bachata, Urban Kiz, Konpa, danse pour enfants, Ballet, Hip-Hop, Yoga et plus encore.",
+          },
+
+          instructors: {
+            title: "Professeurs Professionnels",
+            description:
+              "Des professeurs accueillants qui aident chaque élève à progresser du niveau débutant au niveau avancé.",
+          },
+
+          liveMusic: {
+            title: "Musique Live",
+            description:
+              "Dansez avec des groupes et musiciens live lors d'événements spéciaux et de soirées sociales.",
+          },
+
+          floor: {
+            title: "Belle Piste de Danse",
+            description:
+              "De grandes salles de danse avec sol professionnel, miroirs et éclairage.",
+          },
+
+          rentals: {
+            title: "Location pour Événements",
+            description:
+              "Parfait pour les anniversaires, mariages, répétitions, ateliers, cours privés et célébrations.",
+          },
+
+          community: {
+            title: "Communauté Accueillante",
+            description:
+              "Rejoignez une famille accueillante où chacun soutient le parcours de danse des autres.",
+          },
+        },
+      },
     },
   },
 
@@ -438,6 +624,68 @@ const resources = {
           description:
             "Rankontre dansè, fè zanmi, aprann nouvo estil epi vin fè pati yon kominote k ap grandi ki renmen danse.",
           button: "Antre nan Kominote a",
+        },
+      },
+
+      testimonials: {
+        title: "Sa Elèv Nou Yo Di",
+        subtitle:
+          "Dekouvri poukisa dansè, mizisyen, fanmi ak òganizatè evènman renmen Freedom Dance Studio.",
+
+        student: "Elèv",
+        testimonial: "temwayaj",
+        defaultStudent: "Elèv Freedom Dance",
+        outOfFiveStars: "sou 5 zetwal",
+
+        readMore: "Li plis",
+        readLess: "Li mwens",
+
+        videoTitle: "Temwayaj Videyo",
+        videoIframeTitle: "Temwayaj videyo Freedom Dance Studio",
+        videoUnavailable: "Videyo a pa disponib",
+        defaultVideoTitle: "Temwayaj Freedom Dance Studio",
+        videoDescription:
+          "Gade epi santi enèji, kominote ak atmosfè Freedom Dance Studio.",
+        watchYoutube: "Gade sou YouTube",
+
+        whyTitle: "Poukisa Moun Renmen Freedom Dance Studio",
+
+        cards: {
+          classes: {
+            title: "Bèl Klas",
+            description:
+              "Salsa, Bachata, Urban Kiz, Konpa, dans pou timoun, Ballet, Hip-Hop, Yoga ak plis ankò.",
+          },
+
+          instructors: {
+            title: "Enstriktè Pwofesyonèl",
+            description:
+              "Enstriktè amikal ki konsantre sou ede chak elèv grandi soti nan debutan rive nan nivo avanse.",
+          },
+
+          liveMusic: {
+            title: "Mizik Live",
+            description:
+              "Danse ak gwoup ak mizisyen live pandan evènman espesyal ak sosyal.",
+          },
+
+          floor: {
+            title: "Bèl Planche Dans",
+            description:
+              "Gwo sal dans ak planche pwofesyonèl, glas ak bon ekleraj.",
+          },
+
+          rentals: {
+            title: "Lwaye pou Evènman",
+            description:
+              "Pafè pou anivèsè, maryaj, repetisyon, atelye, klas prive ak selebrasyon.",
+          },
+
+          community: {
+            title: "Kominote Akeyan",
+            description:
+              "Antre nan yon fanmi akeyan kote tout moun sipòte youn lòt nan vwayaj dans yo.",
+          },
         },
       },
     },
@@ -549,6 +797,68 @@ const resources = {
           description:
             "Знакомьтесь с танцорами, находите друзей, изучайте новые стили и становитесь частью растущего сообщества, которое любит танцевать.",
           button: "Присоединиться к сообществу",
+        },
+      },
+
+      testimonials: {
+        title: "Что Говорят Наши Ученики",
+        subtitle:
+          "Узнайте, почему танцоры, музыканты, семьи и организаторы мероприятий любят Freedom Dance Studio.",
+
+        student: "Ученик",
+        testimonial: "отзыв",
+        defaultStudent: "Ученик Freedom Dance",
+        outOfFiveStars: "из 5 звезд",
+
+        readMore: "Читать далее",
+        readLess: "Скрыть",
+
+        videoTitle: "Видеоотзывы",
+        videoIframeTitle: "Видеоотзыв Freedom Dance Studio",
+        videoUnavailable: "Видео недоступно",
+        defaultVideoTitle: "Отзыв о Freedom Dance Studio",
+        videoDescription:
+          "Посмотрите и почувствуйте энергию, сообщество и атмосферу Freedom Dance Studio.",
+        watchYoutube: "Смотреть на YouTube",
+
+        whyTitle: "Почему Люди Любят Freedom Dance Studio",
+
+        cards: {
+          classes: {
+            title: "Отличные Занятия",
+            description:
+              "Salsa, Bachata, Urban Kiz, Konpa, детские танцы, Ballet, Hip-Hop, Yoga и многое другое.",
+          },
+
+          instructors: {
+            title: "Профессиональные Преподаватели",
+            description:
+              "Дружелюбные преподаватели помогают каждому ученику расти от начинающего до продвинутого уровня.",
+          },
+
+          liveMusic: {
+            title: "Живая Музыка",
+            description:
+              "Танцуйте под живые группы и музыкантов на специальных мероприятиях и социальных вечеринках.",
+          },
+
+          floor: {
+            title: "Красивый Танцевальный Зал",
+            description:
+              "Просторные танцевальные залы с профессиональным покрытием, зеркалами и освещением.",
+          },
+
+          rentals: {
+            title: "Аренда для Мероприятий",
+            description:
+              "Идеально для дней рождения, свадеб, репетиций, воркшопов, частных занятий и праздников.",
+          },
+
+          community: {
+            title: "Дружелюбное Сообщество",
+            description:
+              "Присоединяйтесь к дружной семье, где все поддерживают друг друга в танцевальном развитии.",
+          },
         },
       },
     },

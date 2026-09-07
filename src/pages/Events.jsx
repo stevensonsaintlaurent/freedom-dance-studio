@@ -10,144 +10,15 @@ import {
 
 import { Link, useNavigate } from "react-router-dom";
 
-import lady from "../assets/lady/sandra.jpg";
-import septemberSocial from "../assets/freeman.jpeg";
-import workshop from "../assets/sofi.jpeg";
-import havasu from "../assets/havasu.png";
-import karol_profil3 from "../public/images/4.jpeg";
-import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
-
-const events = [
-  // {
-  //   id: 1,
-  //   type: "WORKSHOP",
-  //   title: "Salsa On2 Ladies Styling",
-  //   instructor: "with Instructor Sandra",
-  //   date: "August 22, 2026",
-  //   time: "2:00 PM – 4:00 PM",
-  //   location: "Freedom Dance Studio",
-  //   price: "$25 Non-Members",
-  //   priceDetails: "Members & Instructors",
-  //   extraPrice: "",
-  //   image: lady,
-  //   description:
-  //     "Ready to level up your Salsa On2? Join Instructor Sandra for an exciting ladies’ styling workshop designed to bring out your confidence, musicality, and personal style. Explore Mambo footwork, fusion, styling, choreography, and performance quality while building stronger foundations and learning how to truly express yourself on the dance floor. Come ready to move, learn, and shine!",
-  //   button: "Register Now",
-  //   featured: true,
-  // },
-
-  {
-    id: 2,
-    type: "SOCIAL",
-    title: "Freedom Dance Social",
-    instructor: "Salsa • Bachata • Kizomba • More",
-    date: "September 4, 2026",
-
-    workshop: {
-      title: "Salsa on 2 Workshop",
-      instructor: "Freeman",
-      time: "8:00 PM – 10:00 PM",
-      earlyBird: "$25",
-      membersAndInstructors: "FREE",
-      doorPrice: "$35 at the door",
-    },
-
-    social: {
-      title: "Freedom Dance Social",
-      time: "10:00 PM – 2:00 AM",
-      musicBy: "Maximo",
-    },
-
-    location: "Freedom Dance Studio",
-    price: "$20",
-    priceDetails: "Admission",
-    image: septemberSocial,
-
-    // Keeps the entire portrait flyer visible
-    imageFit: "contain",
-
-    description:
-      "Join us for a Salsa on 2 workshop with Freeman from 8:00 PM–10:00 PM, followed by the Freedom Dance Social from 10:00 PM–2:00 AM with music by Maximo. Early bird workshop price is $25. Free for members and instructors. $35 at the door.",
-
-    button: "Get Your Ticket",
-  },
-
-  {
-    id: 3,
-    type: "WEEKEND INTENSIVE",
-    title: "Bachata Weekend Intensive",
-    instructor: "Training • Technique • Musicality",
-    date: "September 11–13, 2026",
-    time: "Full Weekend",
-    location: "Freedom Dance Studio",
-    price: "$99",
-    priceDetails: "Early Bird Weekend Pass",
-    image: workshop,
-    description:
-      "A complete Bachata weekend designed to help you improve your technique, musicality, connection, body movement, and confidence.",
-    button: "Register Now",
-    featured: true,
-  },
-
-  // {
-  //   id: 4,
-  //   type: "TRIP",
-  //   title: "SBK Lake Havasu Trip",
-  //   instructor: "Teachers & Students",
-  //   date: "August 28–30, 2026",
-  //   time: "Friday–Sunday",
-  //   location: "Lake Havasu City, Arizona",
-  //   image: havasu,
-  //   description:
-  //     "Join our Freedom Dance Studio family for an unforgettable weekend in Lake Havasu! Teachers and students will come together for dancing, social nights, beach time, music, connection, and unforgettable memories by the lake.",
-  //   button: "Join the Trip",
-  // },
-
-  // {
-  //   id: 6,
-  //   day: "Thursday",
-  //   date: "Every Thursday",
-  //   title: "Salsa Rueda de Casino",
-  //   time: "6:30 PM – 7:30 PM",
-  //   instructor: "Rodolfo",
-  //   category: "Salsa / Latin",
-  //   phone: "702-591-6499",
-  //   location: "Freedom Dance Studio",
-  //   price: "Free",
-  //   instagram: "https://www.instagram.com/law.soon7?igsi=MWd3OGFlMWwzaWdraw==",
-  //   description:
-  //     "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
-  //   image: Rodolfo,
-  //   video:
-  //     "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
-  //   button: "Register Now",
-  // },
-
-  {
-    id: 7,
-    day: "Friday",
-    date: "Starting September 11, 2026",
-    title: "Kids Acting Classes",
-    time: "4:00 PM – 5:00 PM",
-    instructor: "Karol Di Nassif",
-    category: "Acting / Kids",
-    location: "Freedom Dance Studio",
-    price: "$25-$80",
-    phone: "702-496-7934",
-    instagram: "",
-    description:
-      "A creative acting experience for children ages 6–12 designed to build confidence, self-expression, storytelling, improvisation, camera skills, audition techniques, and performance skills. Learn from professional actress, TV presenter, stage performer, and acting coach Karol Di Nassif.",
-    image: karol_profil3,
-    video: "",
-    button: "Register Now",
-  },
-];
+import { events } from "../data/eventsData";
 
 const Events = () => {
   const navigate = useNavigate();
 
   const handleEvents = (id) => {
     const findEvent = events.find((event) => event.id === id);
+
+    if (!findEvent) return;
 
     navigate("/book", {
       state: findEvent,
@@ -159,32 +30,17 @@ const Events = () => {
       id="events"
       className="relative overflow-hidden bg-base-100 py-20 md:py-28"
     >
-      {/* ================= BACKGROUND GLOW ================= */}
+      {/* BACKGROUND */}
 
       <div className="pointer-events-none absolute -left-40 top-20 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
 
       <div className="pointer-events-none absolute -right-40 bottom-20 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* ================= HEADER ================= */}
+        {/* HEADER */}
 
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <div
-            className="
-              mb-5
-              inline-flex
-              animate-pulse
-              items-center
-              gap-2
-              rounded-full
-              bg-primary/10
-              px-4
-              py-2
-              text-sm
-              font-bold
-              text-primary
-            "
-          >
+          <div className="mb-5 inline-flex animate-pulse items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-bold text-primary">
             <Sparkles className="h-4 w-4" />
             FREEDOM DANCE EVENTS
           </div>
@@ -200,7 +56,7 @@ const Events = () => {
           </p>
         </div>
 
-        {/* ================= EVENTS GRID ================= */}
+        {/* EVENTS */}
 
         <div className="grid gap-8 md:grid-cols-2">
           {events.map((event, index) => (
@@ -225,7 +81,7 @@ const Events = () => {
                 animationDelay: `${index * 150}ms`,
               }}
             >
-              {/* ================= IMAGE ================= */}
+              {/* IMAGE */}
 
               <figure className="relative aspect-[2/3] overflow-hidden bg-black">
                 <img
@@ -245,21 +101,9 @@ const Events = () => {
                   `}
                 />
 
-                {/* DARK GRADIENT */}
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
 
-                <div
-                  className="
-                    pointer-events-none
-                    absolute
-                    inset-0
-                    bg-gradient-to-t
-                    from-black/90
-                    via-black/20
-                    to-transparent
-                  "
-                />
-
-                {/* CATEGORY */}
+                {/* TYPE */}
 
                 <div className="absolute left-5 top-5">
                   <span className="badge badge-primary gap-2 px-4 py-4 font-bold shadow-lg">
@@ -278,42 +122,45 @@ const Events = () => {
                   </div>
                 )}
 
-                {/* IMAGE TITLE */}
+                {/* TITLE */}
 
                 <div className="absolute bottom-5 left-5 right-5 text-white">
                   <h3 className="text-2xl font-black md:text-3xl">
                     {event.title}
                   </h3>
 
-                  <p className="mt-1 text-sm font-medium text-white/80">
-                    {event.instructor}
-                  </p>
+                  {event.instructor && (
+                    <p className="mt-1 text-sm font-medium text-white/80">
+                      {event.instructor}
+                    </p>
+                  )}
                 </div>
               </figure>
 
-              {/* ================= CARD BODY ================= */}
+              {/* BODY */}
 
               <div className="card-body p-6 md:p-7">
-                {/* DESCRIPTION */}
-
-                <p className="leading-relaxed text-base-content/70">
-                  {event.description}
-                </p>
-
-                {/* ================= ALL EVENT DETAILS ================= */}
+                {event.description && (
+                  <p className="leading-relaxed text-base-content/70">
+                    {event.description}
+                  </p>
+                )}
 
                 <div className="mt-6 space-y-4">
-                  {/* CORE DETAILS */}
+                  {/* MAIN INFORMATION */}
+
                   <div className="grid gap-3 sm:grid-cols-2">
                     {event.date && (
                       <div className="rounded-2xl bg-base-200 p-4">
                         <div className="flex items-start gap-3">
                           <CalendarDays className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                          <div className="min-w-0">
+
+                          <div>
                             <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
                               Date
                             </p>
-                            <p className="mt-1 break-words text-sm font-bold">
+
+                            <p className="mt-1 text-sm font-bold">
                               {event.date}
                             </p>
                           </div>
@@ -325,11 +172,13 @@ const Events = () => {
                       <div className="rounded-2xl bg-base-200 p-4">
                         <div className="flex items-start gap-3">
                           <Clock3 className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                          <div className="min-w-0">
+
+                          <div>
                             <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
                               Time
                             </p>
-                            <p className="mt-1 break-words text-sm font-bold">
+
+                            <p className="mt-1 text-sm font-bold">
                               {event.time}
                             </p>
                           </div>
@@ -341,11 +190,13 @@ const Events = () => {
                       <div className="rounded-2xl bg-base-200 p-4">
                         <div className="flex items-start gap-3">
                           <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                          <div className="min-w-0">
+
+                          <div>
                             <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
                               Location
                             </p>
-                            <p className="mt-1 break-words text-sm font-bold">
+
+                            <p className="mt-1 text-sm font-bold">
                               {event.location}
                             </p>
                           </div>
@@ -357,183 +208,140 @@ const Events = () => {
                       <div className="rounded-2xl bg-base-200 p-4">
                         <div className="flex items-start gap-3">
                           <Users className="mt-0.5 h-5 w-5 shrink-0 text-primary" />
-                          <div className="min-w-0">
+
+                          <div>
                             <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
                               Instructor
                             </p>
-                            <p className="mt-1 break-words text-sm font-bold">
+
+                            <p className="mt-1 text-sm font-bold">
                               {event.instructor}
                             </p>
                           </div>
                         </div>
                       </div>
                     )}
-
-                    {event.day && (
-                      <div className="rounded-2xl bg-base-200 p-4">
-                        <div className="min-w-0">
-                          <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
-                            Day
-                          </p>
-                          <p className="mt-1 break-words text-sm font-bold">
-                            {event.day}
-                          </p>
-                        </div>
-                      </div>
-                    )}
-
-                    {event.category && (
-                      <div className="rounded-2xl bg-base-200 p-4">
-                        <div className="min-w-0">
-                          <p className="text-xs font-bold uppercase tracking-wide text-base-content/40">
-                            Category
-                          </p>
-                          <p className="mt-1 break-words text-sm font-bold">
-                            {event.category}
-                          </p>
-                        </div>
-                      </div>
-                    )}
                   </div>
 
-                  {/* SOCIAL / WORKSHOP DETAILS */}
-                  {(event.workshop || event.social) && (
-                    <div className="grid gap-4 md:grid-cols-2">
-                      {event.workshop && (
-                        <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-                          <div className="mb-4 flex items-center gap-2">
-                            <Sparkles className="h-5 w-5 text-primary" />
-                            <h4 className="text-lg font-black">
-                              {event.workshop.title || "Workshop"}
-                            </h4>
-                          </div>
+                  {/* WORKSHOP */}
 
-                          <div className="space-y-2 text-sm">
-                            {event.workshop.instructor && (
-                              <p>
-                                <span className="font-bold">Instructor:</span>{" "}
-                                {event.workshop.instructor}
-                              </p>
-                            )}
+                  {event.workshop && (
+                    <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
+                      <div className="mb-4 flex items-center gap-2">
+                        <Sparkles className="h-5 w-5 text-primary" />
 
-                            {event.workshop.time && (
-                              <p>
-                                <span className="font-bold">Time:</span>{" "}
-                                {event.workshop.time}
-                              </p>
-                            )}
+                        <h4 className="text-lg font-black">
+                          {event.workshop.title}
+                        </h4>
+                      </div>
 
-                            {event.workshop.earlyBird && (
-                              <p>
-                                <span className="font-bold">Early Bird:</span>{" "}
-                                {event.workshop.earlyBird}
-                              </p>
-                            )}
+                      <div className="space-y-2 text-sm">
+                        {event.workshop.instructor && (
+                          <p>
+                            <span className="font-bold">Instructor:</span>{" "}
+                            {event.workshop.instructor}
+                          </p>
+                        )}
 
-                            {event.workshop.membersAndInstructors && (
-                              <p>
-                                <span className="font-bold">
-                                  Members & Instructors:
-                                </span>{" "}
-                                {event.workshop.membersAndInstructors}
-                              </p>
-                            )}
+                        {event.workshop.time && (
+                          <p>
+                            <span className="font-bold">Time:</span>{" "}
+                            {event.workshop.time}
+                          </p>
+                        )}
 
-                            {event.workshop.doorPrice && (
-                              <p>
-                                <span className="font-bold">At the Door:</span>{" "}
-                                {event.workshop.doorPrice}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      )}
+                        {event.workshop.earlyBird && (
+                          <p>
+                            <span className="font-bold">Early Bird:</span>{" "}
+                            {event.workshop.earlyBird}
+                          </p>
+                        )}
 
-                      {event.social && (
-                        <div className="rounded-2xl border border-secondary/20 bg-secondary/5 p-5">
-                          <div className="mb-4 flex items-center gap-2">
-                            <Music2 className="h-5 w-5 text-primary" />
-                            <h4 className="text-lg font-black">
-                              {event.social.title || "Social"}
-                            </h4>
-                          </div>
+                        {event.workshop.membersAndInstructors && (
+                          <p>
+                            <span className="font-bold">
+                              Members & Instructors:
+                            </span>{" "}
+                            {event.workshop.membersAndInstructors}
+                          </p>
+                        )}
 
-                          <div className="space-y-2 text-sm">
-                            {event.social.time && (
-                              <p>
-                                <span className="font-bold">Time:</span>{" "}
-                                {event.social.time}
-                              </p>
-                            )}
+                        {event.workshop.doorPrice && (
+                          <p>
+                            <span className="font-bold">At the Door:</span>{" "}
+                            {event.workshop.doorPrice}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                  )}
 
-                            {event.social.musicBy && (
-                              <p>
-                                <span className="font-bold">Music By:</span>{" "}
-                                {event.social.musicBy}
-                              </p>
-                            )}
+                  {/* SOCIAL */}
 
-                            {event.social.admission && (
-                              <p>
-                                <span className="font-bold">Admission:</span>{" "}
-                                {event.social.admission}
-                              </p>
-                            )}
-                          </div>
-                        </div>
-                      )}
+                  {event.social && (
+                    <div className="rounded-2xl border border-secondary/20 bg-secondary/5 p-5">
+                      <div className="mb-4 flex items-center gap-2">
+                        <Music2 className="h-5 w-5 text-primary" />
+
+                        <h4 className="text-lg font-black">
+                          {event.social.title}
+                        </h4>
+                      </div>
+
+                      <div className="space-y-2 text-sm">
+                        {event.social.time && (
+                          <p>
+                            <span className="font-bold">Time:</span>{" "}
+                            {event.social.time}
+                          </p>
+                        )}
+
+                        {event.social.musicBy && (
+                          <p>
+                            <span className="font-bold">Music By:</span>{" "}
+                            {event.social.musicBy}
+                          </p>
+                        )}
+
+                        {event.social.admission && (
+                          <p>
+                            <span className="font-bold">Admission:</span>{" "}
+                            {event.social.admission}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   )}
 
                   {/* PRICE */}
-                  {(event.price || event.priceDetails || event.extraPrice) && (
+
+                  {event.price && (
                     <div className="rounded-2xl bg-base-200 p-5">
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <p className="text-xs font-bold uppercase tracking-widest text-base-content/40">
-                            Admission / Pricing
-                          </p>
+                      <p className="text-xs font-bold uppercase tracking-widest text-base-content/40">
+                        Admission / Pricing
+                      </p>
 
-                          {event.price && (
-                            <p className="mt-1 break-words text-2xl font-black text-primary">
-                              {event.price}
-                            </p>
-                          )}
+                      <p className="mt-1 text-2xl font-black text-primary">
+                        {event.price}
+                      </p>
 
-                          {event.priceDetails && (
-                            <p className="mt-1 break-words text-sm text-base-content/60">
-                              {event.priceDetails}
-                            </p>
-                          )}
-
-                          {event.extraPrice && (
-                            <p className="mt-1 break-words text-sm font-semibold">
-                              {event.extraPrice}
-                            </p>
-                          )}
-                        </div>
-
-                        <div className="hidden h-12 w-12 shrink-0 place-items-center rounded-full bg-primary/10 text-primary sm:grid">
-                          {event.type === "SOCIAL" ? (
-                            <Music2 className="h-6 w-6" />
-                          ) : event.type === "BOOTCAMP" ? (
-                            <Users className="h-6 w-6" />
-                          ) : (
-                            <Sparkles className="h-6 w-6" />
-                          )}
-                        </div>
-                      </div>
+                      {event.priceDetails && (
+                        <p className="mt-1 text-sm text-base-content/60">
+                          {event.priceDetails}
+                        </p>
+                      )}
                     </div>
                   )}
 
-                  {/* CONTACT / SOCIAL LINKS */}
+                  {/* CONTACT */}
+
                   {(event.phone || event.instagram) && (
-                    <div className="rounded-2xl border border-base-300 bg-base-100 p-5">
+                    <div className="rounded-2xl border border-base-300 p-5">
                       <p className="mb-3 text-xs font-bold uppercase tracking-widest text-base-content/40">
                         Contact & Social
                       </p>
 
-                      <div className="flex flex-col gap-2 text-sm sm:flex-row sm:flex-wrap sm:gap-5">
+                      <div className="flex flex-wrap gap-4">
                         {event.phone && (
                           <a
                             href={`tel:${event.phone}`}
@@ -548,7 +356,7 @@ const Events = () => {
                             href={event.instagram}
                             target="_blank"
                             rel="noreferrer"
-                            className="max-w-full break-all font-bold text-primary hover:underline"
+                            className="font-bold text-primary hover:underline"
                           >
                             Instagram
                           </a>
@@ -556,48 +364,18 @@ const Events = () => {
                       </div>
                     </div>
                   )}
-
-                  {/* VIDEO */}
-                  {event.video && (
-                    <div className="overflow-hidden rounded-2xl border border-base-300">
-                      <video
-                        src={event.video}
-                        controls
-                        className="h-auto max-h-96 w-full bg-black object-contain"
-                      />
-                    </div>
-                  )}
                 </div>
 
-                {/* ================= REGISTER ================= */}
+                {/* REGISTER */}
 
                 <div className="card-actions mt-5">
                   <button
-                    className="
-                      btn
-                      btn-primary
-                      w-full
-                      gap-2
-                      text-base
-                      font-bold
-                      transition-all
-                      duration-300
-                      hover:scale-[1.02]
-                      hover:shadow-lg
-                    "
+                    className="btn btn-primary w-full gap-2 text-base font-bold transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
                     onClick={() => handleEvents(event.id)}
                   >
-                    {event.button}
+                    {event.button || "Register Now"}
 
-                    <ArrowRight
-                      className="
-                        h-5
-                        w-5
-                        transition-transform
-                        duration-300
-                        group-hover:translate-x-1
-                      "
-                    />
+                    <ArrowRight className="h-5 w-5" />
                   </button>
                 </div>
               </div>
@@ -605,20 +383,9 @@ const Events = () => {
           ))}
         </div>
 
-        {/* ================= COMMUNITY CTA ================= */}
+        {/* CTA */}
 
-        <div
-          className="
-            mt-16
-            overflow-hidden
-            rounded-3xl
-            bg-primary
-            p-8
-            text-primary-content
-            shadow-2xl
-            md:p-12
-          "
-        >
+        <div className="mt-16 overflow-hidden rounded-3xl bg-primary p-8 text-primary-content shadow-2xl md:p-12">
           <div className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
             <div>
               <div className="mb-3 flex items-center justify-center gap-2 md:justify-start">
@@ -642,18 +409,7 @@ const Events = () => {
 
             <Link
               to="/contact"
-              className="
-                btn
-                btn-lg
-                border-0
-                bg-white
-                text-primary
-                shadow-xl
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:bg-white
-              "
+              className="btn btn-lg border-0 bg-white text-primary shadow-xl hover:bg-white"
             >
               Contact Us
               <ArrowRight className="h-5 w-5" />
