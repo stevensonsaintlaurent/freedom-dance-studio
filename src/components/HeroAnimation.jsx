@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import {
   ArrowRight,
@@ -30,173 +31,96 @@ import havasu from "../assets/havasu.png";
 const HERO_DATA = {
   workshop: {
     type: "event",
-
-    eyebrow: "UPCOMING WORKSHOP • SALSA ON2",
-
-    title: "Salsa On2",
-
-    highlight: "Ladies Styling.",
-
-    description:
-      "Join Sandra for a special Salsa On2 Ladies Styling workshop focused on Mambo Footwork & Fusion, Ladies' Styling, Choreography and Performance Quality. Beginner / Level 1 friendly.",
-
+    eyebrowKey: "hero.workshop.eyebrow",
+    titleKey: "hero.workshop.title",
+    highlightKey: "hero.workshop.highlight",
+    descriptionKey: "hero.workshop.description",
     eventStart: "2026-08-22",
-
-    date: "August 22, 2026",
-
-    time: "2:00 PM – 4:00 PM",
-
+    dateKey: "hero.workshop.date",
+    timeKey: "hero.workshop.time",
     price: "$25",
-
-    priceLabel: "Non-Members",
-
+    priceLabelKey: "hero.workshop.priceLabel",
     secondaryPrice: "FREE",
-
-    secondaryPriceLabel: "Members & Instructors",
-
+    secondaryPriceLabelKey: "hero.workshop.secondaryPriceLabel",
     image: workshop,
-
-    button: "View Workshop",
-
+    buttonKey: "hero.workshop.button",
     link: "/events",
-
     icon: Sparkles,
-
     accent: "secondary",
   },
 
   havasu: {
     type: "event",
-
-    eyebrow: "UPCOMING EVENT • DANCE • TRAVEL",
-
-    title: "SBK Lake Havasu",
-
-    highlight: "Trip.",
-
-    description:
-      "Travel, dance and connect with the Freedom Dance community. Join teachers and students for an unforgettable weekend together.",
-
+    eyebrowKey: "hero.havasu.eyebrow",
+    titleKey: "hero.havasu.title",
+    highlightKey: "hero.havasu.highlight",
+    descriptionKey: "hero.havasu.description",
     eventStart: "2026-08-28",
-
-    date: "August 28–30, 2026",
-
-    time: "Friday – Sunday",
-
-    price: "Join Us",
-
-    priceLabel: "Trip",
-
+    dateKey: "hero.havasu.date",
+    timeKey: "hero.havasu.time",
+    priceKey: "hero.havasu.price",
+    priceLabelKey: "hero.havasu.priceLabel",
     image: havasu,
-
-    button: "View Trip",
-
+    buttonKey: "hero.havasu.button",
     link: "/events",
-
     icon: Plane,
-
     accent: "primary",
   },
 
   social: {
     type: "event",
-
-    eyebrow: "UPCOMING EVENT • FREEDOM DANCE",
-
-    title: "SBK Social",
-
-    highlight: "Night.",
-
-    description:
-      "Join us for a Salsa on 2 workshop with Freeman from 8:00 PM–10:00 PM, followed by the Freedom Dance Social from 10:00 PM–2:00 AM with music by Maximo. Early bird workshop price is $25. Free for members and instructors. $35 at the door.",
-
+    eyebrowKey: "hero.social.eyebrow",
+    titleKey: "hero.social.title",
+    highlightKey: "hero.social.highlight",
+    descriptionKey: "hero.social.description",
     eventStart: "2026-09-04",
-
-    date: "September 4, 2026",
-
-    time: "8:00 PM – 2:00 AM",
-
+    dateKey: "hero.social.date",
+    timeKey: "hero.social.time",
     price: "$20",
-
-    priceLabel: "Cover",
-
+    priceLabelKey: "hero.social.priceLabel",
     image: septemberSocial,
-
-    button: "Register Now",
-
+    buttonKey: "hero.social.button",
     link: "/book",
-
     icon: Music2,
-
     accent: "primary",
   },
 
   learn: {
     type: "message",
-
-    eyebrow: "LEARN • DANCE • GROW",
-
-    title: "Learn How to",
-
-    highlight: "Dance.",
-
-    description:
-      "Book your first class and discover Salsa, Bachata, Urban Kiz, Konpa and more in a welcoming dance community.",
-
-    button: "Book a Class",
-
+    eyebrowKey: "hero.learn.eyebrow",
+    titleKey: "hero.learn.title",
+    highlightKey: "hero.learn.highlight",
+    descriptionKey: "hero.learn.description",
+    buttonKey: "hero.learn.button",
     link: "/schedule",
-
     icon: CalendarCheck,
-
     accent: "primary",
-
     image: heroImage,
   },
 
   studio: {
     type: "message",
-
-    eyebrow: "YOUR CLASS • YOUR EVENT • YOUR STUDIO",
-
-    title: "Host Your Class.",
-
-    highlight: "Your Place.",
-
-    description:
-      "Need a space for your dance class, workshop, rehearsal, private lesson, celebration, or special event? Make Freedom Dance Studio your space.",
-
-    button: "Book the Studio",
-
+    eyebrowKey: "hero.studio.eyebrow",
+    titleKey: "hero.studio.title",
+    highlightKey: "hero.studio.highlight",
+    descriptionKey: "hero.studio.description",
+    buttonKey: "hero.studio.button",
     link: "/rentalStudio",
-
     icon: PartyPopper,
-
     accent: "secondary",
-
     image: heroImage,
   },
 
   community: {
     type: "message",
-
-    eyebrow: "FREEDOM DANCE COMMUNITY",
-
-    title: "Dance More.",
-
-    highlight: "Connect More.",
-
-    description:
-      "Meet dancers, make friends, learn new styles, and become part of a growing community that loves to dance.",
-
-    button: "Join Our Community",
-
+    eyebrowKey: "hero.community.eyebrow",
+    titleKey: "hero.community.title",
+    highlightKey: "hero.community.highlight",
+    descriptionKey: "hero.community.description",
+    buttonKey: "hero.community.button",
     link: "/schedule",
-
     icon: Users,
-
     accent: "primary",
-
     image: heroImage,
   },
 };
@@ -245,6 +169,7 @@ const handleClick = (link) => {
 };
 
 const HeroAnimation = () => {
+  const { t } = useTranslation();
   const hero = getUpcomingEvent();
 
   const HeroIcon = hero.icon;
@@ -303,14 +228,14 @@ const HeroAnimation = () => {
                   <span className="h-px w-6 bg-primary sm:w-10" />
 
                   <span className="text-[9px] font-bold uppercase tracking-[0.14em] text-primary sm:text-xs sm:tracking-[0.2em]">
-                    {hero.eyebrow}
+                    {t(hero.eyebrowKey)}
                   </span>
                 </div>
 
                 {/* Title */}
 
                 <h1 className="text-[3rem] font-black leading-[0.9] tracking-[-0.045em] text-white sm:text-6xl md:text-7xl lg:text-8xl">
-                  {hero.title}
+                  {t(hero.titleKey)}
 
                   <br />
 
@@ -321,14 +246,14 @@ const HeroAnimation = () => {
                         : "text-primary"
                     }
                   >
-                    {hero.highlight}
+                    {t(hero.highlightKey)}
                   </span>
                 </h1>
 
                 {/* Description */}
 
                 <p className="mx-auto mt-4 max-w-[340px] text-sm leading-6 text-white/75 sm:mt-6 sm:max-w-2xl sm:text-lg sm:leading-7 lg:mx-0">
-                  {hero.description}
+                  {t(hero.descriptionKey)}
                 </p>
 
                 {/* =================================================
@@ -346,11 +271,11 @@ const HeroAnimation = () => {
                       />
 
                       <p className="text-[8px] font-bold uppercase tracking-wider text-white/40">
-                        Date
+                        {t("hero.common.date")}
                       </p>
 
                       <p className="mt-0.5 text-[10px] font-bold text-white">
-                        {hero.date}
+                        {t(hero.dateKey)}
                       </p>
                     </div>
 
@@ -363,11 +288,11 @@ const HeroAnimation = () => {
                       />
 
                       <p className="text-[8px] font-bold uppercase tracking-wider text-white/40">
-                        Time
+                        {t("hero.common.time")}
                       </p>
 
                       <p className="mt-0.5 text-[10px] font-bold text-white">
-                        {hero.time}
+                        {t(hero.timeKey)}
                       </p>
                     </div>
 
@@ -377,7 +302,7 @@ const HeroAnimation = () => {
                       <Ticket size={15} className="mx-auto mb-1 text-primary" />
 
                       <p className="text-[8px] font-bold uppercase tracking-wider text-white/40">
-                        Price
+                        {t("hero.common.price")}
                       </p>
 
                       {hero.secondaryPrice ? (
@@ -387,26 +312,28 @@ const HeroAnimation = () => {
                           </p>
 
                           <p className="text-[7px] text-white/50">
-                            {hero.secondaryPriceLabel}
+                            {hero.secondaryPriceLabelKey
+                              ? t(hero.secondaryPriceLabelKey)
+                              : ""}
                           </p>
 
                           <p className="mt-0.5 text-[9px] font-black text-primary">
-                            {hero.price}
+                            {hero.priceKey ? t(hero.priceKey) : hero.price}
                           </p>
 
                           <p className="text-[7px] text-white/50">
-                            {hero.priceLabel}
+                            {hero.priceLabelKey ? t(hero.priceLabelKey) : ""}
                           </p>
                         </>
                       ) : (
                         <>
                           <p className="mt-0.5 text-[10px] font-black text-primary">
-                            {hero.price}
+                            {hero.priceKey ? t(hero.priceKey) : hero.price}
                           </p>
 
                           {hero.priceLabel && (
                             <p className="text-[7px] text-white/50">
-                              {hero.priceLabel}
+                              {hero.priceLabelKey ? t(hero.priceLabelKey) : ""}
                             </p>
                           )}
                         </>
@@ -425,23 +352,27 @@ const HeroAnimation = () => {
                     state={{
                       bookingData: {
                         type: hero.type,
-                        event: hero.title,
-                        highlight: hero.highlight,
-                        description: hero.description,
-                        date: hero.date,
-                        time: hero.time,
-                        price: hero.price,
-                        priceLabel: hero.priceLabel,
+                        event: t(hero.titleKey),
+                        highlight: t(hero.highlightKey),
+                        description: t(hero.descriptionKey),
+                        date: hero.dateKey ? t(hero.dateKey) : "",
+                        time: hero.timeKey ? t(hero.timeKey) : "",
+                        price: hero.priceKey ? t(hero.priceKey) : hero.price,
+                        priceLabel: hero.priceLabelKey
+                          ? t(hero.priceLabelKey)
+                          : "",
                         secondaryPrice: hero.secondaryPrice,
-                        secondaryPriceLabel: hero.secondaryPriceLabel,
-                        location: "Freedom Dance Studio",
+                        secondaryPriceLabel: hero.secondaryPriceLabelKey
+                          ? t(hero.secondaryPriceLabelKey)
+                          : "",
+                        location: t("hero.common.studioName"),
                       },
                     }}
                     className="btn btn-primary btn-md w-full rounded-full px-6 shadow-2xl shadow-primary/25 sm:btn-lg sm:w-auto sm:px-8"
                   >
                     <HeroIcon size={18} />
 
-                    {hero.button}
+                    {t(hero.buttonKey)}
 
                     <ArrowRight size={17} />
                   </Link>
@@ -451,7 +382,7 @@ const HeroAnimation = () => {
                     className="btn btn-md w-full rounded-full border border-white/20 bg-white/10 px-6 text-white backdrop-blur-xl sm:btn-lg sm:w-auto sm:px-8"
                   >
                     <PartyPopper size={18} />
-                    Rent the Studio
+                    {t("hero.common.rentStudio")}
                   </Link>
                 </div>
               </div>
@@ -471,7 +402,7 @@ const HeroAnimation = () => {
                     alt={
                       hero.type === "event"
                         ? hero.title
-                        : "Freedom Dance Studio Las Vegas"
+                        : t("hero.common.imageAlt")
                     }
                     className={`h-[270px] w-full sm:h-[430px] lg:h-[620px] ${
                       hero.type === "event" ? "object-contain" : "object-cover"
@@ -491,11 +422,11 @@ const HeroAnimation = () => {
                           <div className="min-w-0">
                             <div className="mb-2 inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[9px] font-black uppercase tracking-wider text-primary-content">
                               <Sparkles size={9} />
-                              Upcoming Event
+                              {t("hero.common.upcomingEvent")}
                             </div>
 
                             <h3 className="truncate text-base font-black text-white sm:text-2xl">
-                              {hero.title}{" "}
+                              {t(hero.titleKey)}{" "}
                               <span
                                 className={
                                   hero.accent === "secondary"
@@ -503,7 +434,7 @@ const HeroAnimation = () => {
                                     : "text-primary"
                                 }
                               >
-                                {hero.highlight}
+                                {t(hero.highlightKey)}
                               </span>
                             </h3>
                           </div>
@@ -512,29 +443,35 @@ const HeroAnimation = () => {
                             {hero.secondaryPrice ? (
                               <>
                                 <p className="text-[9px] uppercase tracking-wider text-white/40">
-                                  Members
+                                  {t("hero.common.members")}
                                 </p>
 
                                 <p className="text-lg font-black text-primary">
-                                  FREE
+                                  {t("hero.common.free")}
                                 </p>
 
                                 <p className="mt-1 text-[9px] uppercase tracking-wider text-white/40">
-                                  Non-Members
+                                  {t("hero.common.nonMembers")}
                                 </p>
 
                                 <p className="text-lg font-black text-primary">
-                                  {hero.price}
+                                  {hero.priceKey
+                                    ? t(hero.priceKey)
+                                    : hero.price}
                                 </p>
                               </>
                             ) : (
                               <>
                                 <p className="text-[9px] uppercase tracking-wider text-white/40">
-                                  {hero.priceLabel || "Cover"}
+                                  {hero.priceLabelKey
+                                    ? t(hero.priceLabelKey)
+                                    : t("hero.common.cover")}
                                 </p>
 
                                 <p className="text-lg font-black text-primary">
-                                  {hero.price}
+                                  {hero.priceKey
+                                    ? t(hero.priceKey)
+                                    : hero.price}
                                 </p>
                               </>
                             )}
@@ -550,15 +487,15 @@ const HeroAnimation = () => {
                     <div className="absolute bottom-3 left-3 right-3 sm:bottom-6 sm:left-6 sm:right-6">
                       <div className="rounded-xl border border-white/10 bg-black/55 p-3 backdrop-blur-xl sm:rounded-2xl sm:p-5">
                         <p className="text-[9px] font-bold uppercase tracking-[0.15em] text-primary sm:text-xs">
-                          Freedom Dance Studio
+                          {t("hero.common.studioName")}
                         </p>
 
                         <p className="mt-1 text-base font-black text-white sm:text-2xl">
-                          Dance • Learn • Create
+                          {t("hero.common.danceLearnCreate")}
                         </p>
 
                         <p className="mt-1 text-xs text-white/60 sm:text-sm">
-                          Your community. Your space. Your freedom.
+                          {t("hero.common.communitySpaceFreedom")}
                         </p>
                       </div>
                     </div>

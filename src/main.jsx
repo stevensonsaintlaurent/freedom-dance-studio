@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 import App from "./App.jsx";
+import "../i18n.js";
 
 // Restore the selected language after a refresh/navigation. Google Website
 // Translator handles the actual translation of the rendered site text.

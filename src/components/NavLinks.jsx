@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 /* =====================================================
    MAIN NAVIGATION
@@ -26,28 +27,28 @@ const mainLinks = [
   {
     id: 1,
     url: "/",
-    text: "Home",
+    textKey: "nav.home",
     icon: Home,
   },
 
   {
     id: 2,
     url: "/studiopricing",
-    text: "Studio Rental",
+    textKey: "nav.studioRental",
     icon: Building2,
   },
 
   {
     id: 3,
     url: "/events",
-    text: "Upcoming Events",
+    textKey: "nav.upcomingEvents",
     icon: PartyPopper,
   },
 
   {
     id: 4,
     url: "#",
-    text: "Classes",
+    textKey: "nav.classes",
     icon: Music2,
     dropdown: true,
   },
@@ -61,15 +62,15 @@ const classLinks = [
   {
     id: 1,
     url: "/classes",
-    text: "Freedom Dance Classes",
-    description: "Classes offered by Freedom Dance Studio",
+    textKey: "nav.freedomClasses",
+    descriptionKey: "nav.freedomClassesDescription",
   },
 
   {
     id: 2,
     url: "/independent",
-    text: "Classes Hosted at Freedom",
-    description: "Classes from independent instructors",
+    textKey: "nav.hostedClasses",
+    descriptionKey: "nav.hostedClassesDescription",
   },
 ];
 
@@ -81,49 +82,49 @@ const moreLinks = [
   {
     id: 5,
     url: "/schedule",
-    text: "Schedule",
+    textKey: "nav.schedule",
     icon: CalendarDays,
   },
 
   {
     id: 6,
     url: "/about",
-    text: "About",
+    textKey: "nav.about",
     icon: Info,
   },
 
   {
     id: 7,
     url: "/membership",
-    text: "Prices",
+    textKey: "nav.prices",
     icon: DollarSign,
   },
 
   {
     id: 8,
     url: "/teachers",
-    text: "Teachers",
+    textKey: "nav.teachers",
     icon: Users,
   },
 
   {
     id: 9,
     url: "/reviews",
-    text: "Testimonials",
+    textKey: "nav.testimonials",
     icon: Star,
   },
 
   {
     id: 10,
     url: "/gallery",
-    text: "Gallery",
+    textKey: "nav.gallery",
     icon: Images,
   },
 
   {
     id: 11,
     url: "/contact",
-    text: "Contact",
+    textKey: "nav.contact",
     icon: Mail,
   },
 ];
@@ -133,10 +134,10 @@ const moreLinks = [
 ===================================================== */
 
 export const NavLinks = ({ mobileMenu = false, footer = false }) => {
+  const { t } = useTranslation();
   const location = useLocation();
 
   const [classesOpen, setClassesOpen] = useState(false);
-  const [moreOpen, setMoreOpen] = useState(false);
 
   const isClassesActive =
     location.pathname === "/classes" || location.pathname === "/independent";
@@ -147,7 +148,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
   if (footer) {
     return (
-      <nav className="w-full" aria-label="Footer navigation">
+      <nav className="w-full" aria-label={t("nav.footerNavigation")}>
         <div className="grid grid-cols-1 gap-1">
           {mainLinks.map((link) => {
             const Icon = link.icon;
@@ -178,7 +179,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   >
                     <Icon size={17} />
 
-                    <span>Classes</span>
+                    <span>{t("nav.classes")}</span>
                   </div>
 
                   <div className="ml-8 mt-1 space-y-1">
@@ -203,10 +204,10 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                         `
                         }
                       >
-                        <div>{classLink.text}</div>
+                        <div>{t(classLink.textKey)}</div>
 
                         <div className="text-xs opacity-60 mt-0.5">
-                          {classLink.description}
+                          {t(classLink.descriptionKey)}
                         </div>
                       </NavLink>
                     ))}
@@ -249,7 +250,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     <span className="flex items-center gap-3 min-w-0">
                       <Icon size={17} className="shrink-0" />
 
-                      <span className="truncate">{link.text}</span>
+                      <span className="truncate">{t(link.textKey)}</span>
                     </span>
 
                     <span
@@ -310,7 +311,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                     <span className="flex items-center gap-3 min-w-0">
                       <Icon size={17} className="shrink-0" />
 
-                      <span className="truncate">{link.text}</span>
+                      <span className="truncate">{t(link.textKey)}</span>
                     </span>
 
                     <span
@@ -356,7 +357,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           pb-4
           pr-1
         "
-        aria-label="Mobile navigation"
+        aria-label={t("nav.mobileNavigation")}
       >
         {/* ============================
             MAIN LINKS
@@ -401,7 +402,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   <span className="flex items-center gap-4">
                     <Icon size={20} className="shrink-0" />
 
-                    <span>Classes</span>
+                    <span>{t("nav.classes")}</span>
                   </span>
 
                   <ChevronDown
@@ -455,10 +456,12 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                         `
                         }
                       >
-                        <div className="leading-tight">{classLink.text}</div>
+                        <div className="leading-tight">
+                          {t(classLink.textKey)}
+                        </div>
 
                         <div className="mt-1 text-xs opacity-60 leading-relaxed">
-                          {classLink.description}
+                          {t(classLink.descriptionKey)}
                         </div>
                       </NavLink>
                     ))}
@@ -502,7 +505,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               <Icon size={20} className="shrink-0" />
 
               <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
-                {link.text}
+                {t(link.textKey)}
               </span>
             </NavLink>
           );
@@ -516,7 +519,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
           <div className="h-px flex-1 bg-base-content/10" />
 
           <span className="text-xs uppercase tracking-widest text-base-content/40">
-            More
+            {t("nav.more")}
           </span>
 
           <div className="h-px flex-1 bg-base-content/10" />
@@ -559,7 +562,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
               <Icon size={20} className="shrink-0" />
 
               <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
-                {link.text}
+                {t(link.textKey)}
               </span>
             </NavLink>
           );
@@ -617,7 +620,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   className="transition-transform duration-300 group-hover:scale-110"
                 />
 
-                <span>Classes</span>
+                <span>{t("nav.classes")}</span>
 
                 <ChevronDown
                   size={15}
@@ -665,10 +668,12 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                       `
                       }
                     >
-                      <span className="font-semibold">{classLink.text}</span>
+                      <span className="font-semibold">
+                        {t(classLink.textKey)}
+                      </span>
 
                       <span className="text-xs opacity-60">
-                        {classLink.description}
+                        {t(classLink.descriptionKey)}
                       </span>
                     </NavLink>
                   </li>
@@ -714,7 +719,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
             />
 
             <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
-              {link.text}
+              {t(link.textKey)}
             </span>
           </NavLink>
         );
@@ -750,7 +755,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
             className="transition-transform duration-300 group-hover:rotate-12"
           />
 
-          <span>More</span>
+          <span>{t("nav.more")}</span>
 
           <ChevronDown
             size={16}
@@ -804,7 +809,7 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
                   />
 
                   <span className="min-w-0 flex-1 whitespace-normal break-words leading-tight">
-                    {link.text}
+                    {t(link.textKey)}
                   </span>
                 </NavLink>
               </li>

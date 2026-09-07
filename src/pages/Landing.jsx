@@ -1,4 +1,3 @@
-import React from "react";
 import { Hero, Testimonials, StudioRentals } from "../components";
 
 const Landing = () => {

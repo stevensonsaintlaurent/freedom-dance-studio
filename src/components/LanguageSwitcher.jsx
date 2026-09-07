@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FaGlobe } from "react-icons/fa6";
 
 const LANGUAGES = [
@@ -10,46 +11,34 @@ const LANGUAGES = [
 ];
 
 const STORAGE_KEY = "freedom-dance-language";
-const DEFAULT_LANGUAGE = "en";
-
-const getStoredLanguage = () => {
-  if (typeof window === "undefined") return DEFAULT_LANGUAGE;
-
-  const stored = window.localStorage.getItem(STORAGE_KEY);
-
-  return LANGUAGES.some((language) => language.code === stored)
-    ? stored
-    : DEFAULT_LANGUAGE;
-};
-
-const setGoogleTranslateCookie = (language) => {
-  document.cookie = `googtrans=/en/${language}; path=/`;
-  document.cookie = `googtrans=/en/${language}; path=/; SameSite=Lax`;
-};
 
 const LanguageSwitcher = () => {
-  const [language, setLanguage] = useState(getStoredLanguage);
+  const { i18n } = useTranslation();
+
+  const [language, setLanguage] = useState(
+    () => localStorage.getItem(STORAGE_KEY) || i18n.language || "en",
+  );
 
   const currentLanguage =
     LANGUAGES.find((item) => item.code === language) || LANGUAGES[0];
 
-  useEffect(() => {
-    window.localStorage.setItem(STORAGE_KEY, language);
-    document.documentElement.lang = language;
-  }, [language]);
-
-  const changeLanguage = (nextLanguage) => {
+  const changeLanguage = async (nextLanguage) => {
     if (!nextLanguage || nextLanguage === language) return;
 
-    setLanguage(nextLanguage);
-    setGoogleTranslateCookie(nextLanguage);
+    await i18n.changeLanguage(nextLanguage);
 
-    window.location.reload();
+    setLanguage(nextLanguage);
+    localStorage.setItem(STORAGE_KEY, nextLanguage);
+    document.documentElement.lang = nextLanguage;
+
+    // Close DaisyUI dropdown after selection.
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
   };
 
   return (
     <div className="dropdown dropdown-end">
-      {/* Language button */}
       <button
         type="button"
         tabIndex={0}
@@ -71,13 +60,10 @@ const LanguageSwitcher = () => {
         aria-label="Choose language"
       >
         <FaGlobe className="text-sm" />
-
         <span className="text-xs font-bold">{currentLanguage.short}</span>
-
         <span className="text-[10px] opacity-50">▼</span>
       </button>
 
-      {/* Dropdown */}
       <ul
         tabIndex={0}
         className="
@@ -124,9 +110,7 @@ const LanguageSwitcher = () => {
               `}
             >
               <span className="text-lg">{item.flag}</span>
-
               <span className="flex-1">{item.label}</span>
-
               {language === item.code && <span className="text-xs">✓</span>}
             </button>
           </li>
