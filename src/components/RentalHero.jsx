@@ -97,13 +97,13 @@ export default function RentalHero() {
               <ArrowRight size={17} />
             </a>
 
-            <a
-              href="#pricing"
+            <Link
+              to="/pricing"
               className="btn rounded-full border-white/20 bg-white/10 px-7 text-white backdrop-blur-xl"
             >
               View Rental Prices
               <CalendarDays size={17} />
-            </a>
+            </Link>
 
             <Link
               to="/contact"

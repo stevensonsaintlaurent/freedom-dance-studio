@@ -24,6 +24,7 @@ import {
 } from "./components";
 
 import RentalBooking from "./components/RequestAvailable";
+import RentalPrices from "./components/RentalPrices";
 
 const router = createBrowserRouter([
   {
@@ -97,10 +98,10 @@ const router = createBrowserRouter([
         element: <Booking />,
       },
 
-      // {
-      //   path: "rental",
-      //   element: <StudioRental />,
-      // },
+      {
+        path: "pricing",
+        element: <RentalPrices />,
+      },
 
       {
         path: "rentalStudio",
