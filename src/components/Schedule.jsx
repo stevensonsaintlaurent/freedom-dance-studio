@@ -705,7 +705,7 @@ export default function Schedule() {
                         <p className="text-xl font-bold">{item.time}</p>
                       </div>
 
-                      <span className="badge badge-primary">${item.drop}</span>
+                      <span className="badge badge-primary">{item.drop}</span>
                     </div>
 
                     <div className="divider my-1"></div>
