@@ -1,5 +1,5 @@
 import workshop from "../assets/sofi.jpeg";
-import karol_profil3 from "../public/images/4.jpeg";
+import karol_profil3 from "../../public/images/4.jpeg";
 import freeman from "../assets/freeman.png";
 import social from "../assets/socials.png";
 import styling from "../assets/styling.png";

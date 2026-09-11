@@ -18,10 +18,10 @@ import {
   X,
 } from "lucide-react";
 
-import karol_profil from "../public/images/1.jpeg";
-import karol_profil1 from "../public/images/2.jpeg";
-import karol_profil2 from "../public/images/3.jpeg";
-import karol_profil3 from "../public/images/4.jpeg";
+import karol_profil from "../../public/images/1.jpeg";
+import karol_profil1 from "../../public/images/2.jpeg";
+import karol_profil2 from "../../public/images/3.jpeg";
+import karol_profil3 from "../../public/images/4.jpeg";
 
 const galleryImages = [
   { src: karol_profil, alt: "Karol Di Nassif - Acting Instructor" },
@@ -168,7 +168,7 @@ export default function KarolActingClasses() {
 
                 <div className="badge badge-lg border-white/20 bg-white/10 px-4 py-4 text-white">
                   <Clock3 className="mr-2 h-4 w-4" />
-                  4:00 PM
+                  4:30 PM
                 </div>
               </div>
 
