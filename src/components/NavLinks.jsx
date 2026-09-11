@@ -584,36 +584,33 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
       {mainLinks.map((link) => {
         const Icon = link.icon;
 
-        /* ==========================
-           DESKTOP CLASSES DROPDOWN
-        ========================== */
-
+        {
+          /* DESKTOP CLASSES DROPDOWN */
+        }
         if (link.dropdown) {
           return (
-            <div key={link.id} className="dropdown dropdown-hover dropdown-end">
-              <div
-                tabIndex={0}
-                role="button"
+            <div key={link.id} className="relative group">
+              {/* CLASSES BUTTON */}
+              <button
+                type="button"
                 className={`
-                  group
-                  relative
-                  flex
-                  items-center
-                  gap-2
-                  rounded-xl
-                  px-4
-                  py-2.5
-                  font-semibold
-                  cursor-pointer
-                  transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  ${
-                    isClassesActive
-                      ? "bg-primary text-primary-content shadow-lg"
-                      : "text-base-content hover:bg-base-200 hover:text-primary"
-                  }
-                `}
+          flex
+          items-center
+          gap-2
+          rounded-xl
+          px-4
+          py-2.5
+          font-semibold
+          cursor-pointer
+          transition-all
+          duration-300
+          hover:-translate-y-0.5
+          ${
+            isClassesActive
+              ? "bg-primary text-primary-content shadow-lg"
+              : "text-base-content hover:bg-base-200 hover:text-primary"
+          }
+        `}
               >
                 <Icon
                   size={17}
@@ -624,61 +621,74 @@ export const NavLinks = ({ mobileMenu = false, footer = false }) => {
 
                 <ChevronDown
                   size={15}
-                  className="transition-transform duration-300 group-hover:rotate-180"
+                  className="
+            transition-transform
+            duration-300
+            group-hover:rotate-180
+          "
                 />
-              </div>
+              </button>
 
-              <ul
-                tabIndex={0}
+              {/* DROPDOWN */}
+              <div
                 className="
-                  dropdown-content
-                  menu
-                  mt-3
-                  w-80
-                  rounded-2xl
-                  bg-base-100
-                  p-2
-                  shadow-2xl
-                  border
-                  border-base-200
-                  z-[100]
-                "
+          absolute
+          top-full
+          right-0
+          pt-3
+          w-80
+          z-[100]
+          invisible
+          opacity-0
+          translate-y-2
+          pointer-events-none
+          group-hover:visible
+          group-hover:opacity-100
+          group-hover:translate-y-0
+          group-hover:pointer-events-auto
+          transition-all
+          duration-200
+        "
               >
-                {classLinks.map((classLink) => (
-                  <li key={classLink.id}>
+                <div
+                  className="
+            bg-base-100
+            rounded-2xl
+            shadow-2xl
+            border
+            border-base-200
+            p-2
+          "
+                >
+                  {classLinks.map((classLink) => (
                     <NavLink
+                      key={classLink.id}
                       to={classLink.url}
-                      className={({ isActive }) =>
-                        `
-                        group
-                        flex
-                        flex-col
-                        items-start
-                        gap-0.5
-                        rounded-xl
-                        px-4
-                        py-3
-                        transition-all
-                        duration-200
-                        ${
-                          isActive
-                            ? "bg-primary text-primary-content"
-                            : "hover:bg-primary/10 hover:text-primary"
-                        }
-                      `
-                      }
+                      className={({ isActive }) => `
+                block
+                rounded-xl
+                px-4
+                py-3
+                transition-all
+                duration-200
+                ${
+                  isActive
+                    ? "bg-primary text-primary-content"
+                    : "text-base-content hover:bg-primary/10 hover:text-primary"
+                }
+              `}
                     >
-                      <span className="font-semibold">
+                      <div className="font-semibold">
                         {t(classLink.textKey)}
-                      </span>
+                      </div>
 
-                      <span className="text-xs opacity-60">
+                      <div className="text-xs opacity-60 mt-1">
                         {t(classLink.descriptionKey)}
-                      </span>
+                      </div>
                     </NavLink>
-                  </li>
-                ))}
-              </ul>
+                  ))}
+                </div>
+              </div>
             </div>
           );
         }
