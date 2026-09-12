@@ -1,8 +1,9 @@
 import workshop from "../assets/sofi.jpeg";
-import karol_profil3 from "../../public/images/4.jpeg";
 import freeman from "../assets/freeman.png";
 import social from "../assets/socials.png";
 import styling from "../assets/styling.png";
+
+const karol_profil3 = "/images/4.jpeg";
 
 export const events = [
   {
@@ -52,7 +53,7 @@ export const events = [
 
     title: "Kids Acting Classes",
 
-    time: "4:00 PM – 5:00 PM",
+    time: "4:30 PM – 5:30 PM",
 
     instructor: "Karol Di Nassif",
 

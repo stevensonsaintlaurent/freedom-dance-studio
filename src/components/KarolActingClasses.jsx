@@ -18,10 +18,10 @@ import {
   X,
 } from "lucide-react";
 
-import karol_profil from "../../public/images/1.jpeg";
-import karol_profil1 from "../../public/images/2.jpeg";
-import karol_profil2 from "../../public/images/3.jpeg";
-import karol_profil3 from "../../public/images/4.jpeg";
+const karol_profil = "/images/1.jpeg";
+const karol_profil1 = "/images/2.jpeg";
+const karol_profil2 = "/images/3.jpeg";
+const karol_profil3 = "/images/4.jpeg";
 
 const galleryImages = [
   { src: karol_profil, alt: "Karol Di Nassif - Acting Instructor" },
