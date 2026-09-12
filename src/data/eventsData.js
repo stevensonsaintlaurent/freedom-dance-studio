@@ -23,7 +23,7 @@ export const events = [
 
     location: "Freedom Dance Studio",
 
-    price: "$99",
+    price: "$109",
 
     priceDetails: "Early Bird Weekend Pass",
 
