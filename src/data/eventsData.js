@@ -1,8 +1,7 @@
 import freeman from "../assets/freeman.png";
 import social from "../assets/socials.png";
 import styling from "../assets/styling.png";
-
-const karol_profil3 = "/images/4.jpeg";
+import carlo from "../assets/instructors/carlos.jpeg";
 
 export const events = [
   {
@@ -49,49 +48,6 @@ export const events = [
   },
 
   {
-    id: 7,
-
-    eventStart: "2026-09-14",
-
-    day: "Monday",
-
-    date: "Starting September 14, 2026",
-
-    type: "KIDS CLASS",
-
-    title: "Kids Acting Classes",
-
-    time: "4:30 PM – 5:30 PM",
-
-    instructor: "Karol Di Nassif",
-
-    category: "Acting / Kids",
-
-    location: "Freedom Dance Studio",
-
-    price: "$25-$80",
-
-    phone: "702-496-7934",
-
-    instagram: "",
-
-    description:
-      "A creative acting experience for children ages 6–12 designed to build confidence, self-expression, storytelling, improvisation, camera skills, audition techniques, and performance skills. Learn from professional actress, TV presenter, stage performer, and acting coach Karol Di Nassif.",
-
-    image: karol_profil3,
-
-    imageFit: "contain",
-
-    video: "",
-
-    button: "Register Now",
-
-    showInHero: false,
-
-    featured: false,
-  },
-
-  {
     id: 9,
 
     eventStart: "2026-09-26",
@@ -135,7 +91,7 @@ export const events = [
 
     button: "Register Now",
 
-    showInHero: false,
+    showInHero: true,
 
     featured: false,
   },
@@ -177,8 +133,32 @@ export const events = [
 
     button: "Get Your Ticket",
 
-    showInHero: false,
+    showInHero: true,
 
     featured: false,
+  },
+
+  {
+    id: 11,
+    eventStart: "2026-10-02",
+    type: "WEEKEND INTENSIVE",
+    title: "Bachata Intensive Weekend",
+    instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
+    date: "October 2–4, 2026",
+    time: "Friday–Sunday",
+    image: carlo,
+    imageFit: "contain",
+    location: "Freedom Dance Studio",
+    price: "$99 Early Bird",
+    workshop: {
+      title: "Bachata Intensive Weekend",
+      instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
+      time: "October 2–4",
+    },
+    description:
+      "Join us for an incredible Bachata Intensive Weekend at Freedom Dance Studio from October 2–4! Train with two amazing guest artists, Michelle from Los Angeles and Carlos from Madrid, Spain. Enjoy a full weekend of Bachata workshops, connection, technique, styling, and social dancing with dancers from Las Vegas and beyond. Early Bird Pass: $99.",
+    button: "Get Your Pass",
+    showInHero: true,
+    featured: true,
   },
 ];

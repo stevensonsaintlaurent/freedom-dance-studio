@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-
 import {
   ArrowRight,
   CalendarCheck,
@@ -10,17 +9,22 @@ import {
 } from "lucide-react";
 
 import heroImage from "../assets/recentClip1.jpeg";
-
 import { events } from "../data/eventsData";
 
 /*
 =========================================================
-GET UPCOMING EVENT
+GET THE CLOSEST UPCOMING HERO EVENT
+=========================================================
 
-1. Ignore events with showInHero: false
-2. Ignore events that already ended
-3. Prefer featured: true
-4. Otherwise show the closest upcoming event
+The Hero is controlled entirely by eventsData.js.
+
+Rules:
+1. Only events with showInHero: true can appear.
+2. Events without eventStart are ignored.
+3. Events that have already ended are ignored.
+4. The closest upcoming event is selected.
+5. featured does NOT override the date.
+6. eventEnd can be used for multi-day events.
 =========================================================
 */
 
@@ -31,35 +35,29 @@ const getUpcomingEvent = () => {
 
   const upcomingEvents = events
     .filter((event) => {
-      if (event.showInHero === false) {
+      // Only events specifically enabled for the Hero
+      if (event.showInHero !== true) {
         return false;
       }
 
+      // Event must have a start date
       if (!event.eventStart) {
         return false;
       }
 
+      // Use eventEnd when available for multi-day events
       const endDate = new Date(
         `${event.eventEnd || event.eventStart}T23:59:59`,
       );
 
+      // Ignore events that have completely ended
       return endDate >= today;
     })
     .sort((first, second) => {
-      // Featured event comes first
-      if (first.featured && !second.featured) {
-        return -1;
-      }
-
-      if (!first.featured && second.featured) {
-        return 1;
-      }
-
-      // Then sort by date
       const firstDate = new Date(`${first.eventStart}T00:00:00`);
-
       const secondDate = new Date(`${second.eventStart}T00:00:00`);
 
+      // Always show the closest upcoming event first
       return firstDate - secondDate;
     });
 
@@ -147,7 +145,7 @@ const HeroAnimation = () => {
 
       <div className="absolute inset-0">
         <img
-          src={event.image}
+          src={event.image || heroImage}
           alt=""
           aria-hidden="true"
           className="h-full w-full object-cover object-center"
@@ -201,9 +199,11 @@ const HeroAnimation = () => {
 
               {/* DESCRIPTION */}
 
-              <p className="mx-auto mt-4 max-w-[500px] text-sm leading-6 text-white/75 sm:mt-6 sm:text-lg sm:leading-7 lg:mx-0">
-                {event.description}
-              </p>
+              {event.description && (
+                <p className="mx-auto mt-4 max-w-[500px] text-sm leading-6 text-white/75 sm:mt-6 sm:text-lg sm:leading-7 lg:mx-0">
+                  {event.description}
+                </p>
+              )}
 
               {/* EVENT INFORMATION */}
 
@@ -221,7 +221,7 @@ const HeroAnimation = () => {
                   </p>
 
                   <p className="mt-1 text-[10px] font-bold text-white sm:text-xs">
-                    {event.date}
+                    {event.date || event.eventStart}
                   </p>
                 </div>
 
@@ -298,7 +298,7 @@ const HeroAnimation = () => {
               <div className="relative overflow-hidden rounded-[2rem] border border-white/15 bg-white/10 p-1.5 shadow-2xl backdrop-blur-sm sm:rounded-[2.5rem] sm:p-2">
                 <div className="relative overflow-hidden rounded-[1.5rem] bg-black sm:rounded-[2rem]">
                   <img
-                    src={event.image}
+                    src={event.image || heroImage}
                     alt={event.title}
                     className={`h-[380px] w-full sm:h-[500px] lg:h-[620px] ${
                       event.imageFit === "contain"
@@ -329,7 +329,9 @@ const HeroAnimation = () => {
                       )}
 
                       <div className="mt-3 flex items-center justify-between gap-4">
-                        <p className="text-xs text-white/70">{event.date}</p>
+                        <p className="text-xs text-white/70">
+                          {event.date || event.eventStart}
+                        </p>
 
                         {event.price && (
                           <p className="text-xl font-black text-primary">
