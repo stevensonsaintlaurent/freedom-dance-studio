@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Play, ExternalLink } from "lucide-react";
 
 import steve from "../assets/stevean.jpg";
@@ -19,6 +19,7 @@ const instructors = [
     image: steve,
     bio: "Passionate dance instructor, performer, and band leader dedicated to helping students grow on and off the dance floor.",
     videoTitle: "Konpa",
+    price: "$15",
   },
   {
     name: "Zagir",
@@ -27,6 +28,7 @@ const instructors = [
     image: zagir,
     bio: "Specializes in ladies styling, confidence, musicality, and inspiring young dancers through fun Latin dance classes.",
     videoTitle: "Ladies Styling Bachata",
+    price: "$15",
   },
   {
     name: "Desmond",
@@ -35,6 +37,7 @@ const instructors = [
     image: desmond,
     bio: "Brings energy, technique, and passion to every salsa class for students of all levels.",
     videoTitle: "Salsa at Freedom Dance Studio",
+    price: "$15",
   },
   {
     name: "Adriana",
@@ -43,6 +46,7 @@ const instructors = [
     image: adriana,
     bio: "Focused on elegance, confidence, body movement, and styling for social dancers.",
     videoTitle: "Ladies Styling Bachata",
+    price: "$15",
   },
   {
     name: "Alain",
@@ -51,6 +55,7 @@ const instructors = [
     image: alain,
     bio: "Leads the Freedom Dance Studio band, bringing live Latin music to socials and special events.",
     videoTitle: "Konpa",
+    price: "$15",
   },
   {
     name: "Allyson",
@@ -60,6 +65,7 @@ const instructors = [
     bio: "Assists classes, encourages new dancers, and helps create a welcoming learning environment.",
     videoTitle:
       "Bachata Sensual at Freedom Dance Studio | Connection, Musicality & Expression",
+    price: "$15",
   },
 ];
 
@@ -101,6 +107,15 @@ const findVideo = (title) => {
 };
 
 export default function Instructors() {
+  const navigate = useNavigate();
+
+  const handleInstructor = (instructor) => {
+    const findInstructor = instructors.find(
+      (teacher) => teacher.name === instructor,
+    );
+
+    navigate("/book", { state: findInstructor });
+  };
   return (
     <section id="instructors" className="py-20 bg-base-200">
       <div className="max-w-7xl mx-auto px-6">
@@ -185,9 +200,12 @@ export default function Instructors() {
 
                   {/* BUTTONS */}
                   <div className="card-actions mt-6 flex-wrap justify-center">
-                    <Link to="/schedule" className="btn btn-primary">
+                    <button
+                      className="btn btn-primary"
+                      onClick={() => handleInstructor(teacher.name)}
+                    >
                       Book a Lesson
-                    </Link>
+                    </button>
 
                     {teacherVideo && (
                       <a

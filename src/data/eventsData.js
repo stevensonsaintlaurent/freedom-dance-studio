@@ -1,4 +1,3 @@
-import workshop from "../assets/sofi.jpeg";
 import freeman from "../assets/freeman.png";
 import social from "../assets/socials.png";
 import styling from "../assets/styling.png";
@@ -7,47 +6,56 @@ const karol_profil3 = "/images/4.jpeg";
 
 export const events = [
   {
-    id: 3,
+    id: 8,
 
-    eventStart: "2026-09-11",
+    eventStart: "2026-09-14",
 
-    type: "WEEKEND INTENSIVE",
+    day: "Monday",
 
-    title: "Bachata Weekend Intensive",
+    date: "Starting September 14, 2026",
 
-    instructor: "Alondra • Sofi • Steven",
+    type: "BACHATA CLASS",
 
-    date: "September 11–13, 2026",
+    title: "Men's Styling — Bachata Sensual Fusion",
 
-    time: "Full Weekend",
+    instructor: "Steven",
+
+    category: "Bachata Sensual / Men's Styling",
+
+    time: "8:00 PM",
+
+    duration: "2-Month Program",
+
+    level: "Beginner to Intermediate",
 
     location: "Freedom Dance Studio",
 
-    price: "$109",
+    price: "$15",
 
-    priceDetails: "Early Bird Weekend Pass",
+    priceDetails: "Drop-In • FREE for Members & Instructors",
 
-    image: workshop,
+    image: styling,
 
     imageFit: "contain",
 
     description:
-      "A complete Bachata weekend designed to help you improve your technique, musicality, connection, body movement, and confidence.",
+      "A two-month Men's Styling Bachata Sensual Fusion program with Steven. Designed for beginner to intermediate dancers to improve body movement, styling, musicality, confidence, technique, and expression.",
 
-    button: "Register Now",
+    button: "Join the Class",
 
-    // Current main event
+    showInHero: true,
+
     featured: true,
   },
 
   {
     id: 7,
 
-    eventStart: "2026-09-11",
+    eventStart: "2026-09-14",
 
-    day: "Friday",
+    day: "Monday",
 
-    date: "Starting September 11, 2026",
+    date: "Starting September 14, 2026",
 
     type: "KIDS CLASS",
 
@@ -71,52 +79,13 @@ export const events = [
       "A creative acting experience for children ages 6–12 designed to build confidence, self-expression, storytelling, improvisation, camera skills, audition techniques, and performance skills. Learn from professional actress, TV presenter, stage performer, and acting coach Karol Di Nassif.",
 
     image: karol_profil3,
+
     imageFit: "contain",
 
     video: "",
 
     button: "Register Now",
 
-    showInHero: false,
-  },
-
-  {
-    id: 8,
-
-    eventStart: "2026-09-14",
-
-    day: "Monday",
-
-    date: "Starting September 14, 2026",
-
-    type: "BACHATA CLASS",
-
-    title: "Men's Styling — Bachata Sensual Fusion",
-
-    instructor: "Steven",
-
-    category: "Bachata Sensual / Men's Styling",
-
-    time: "8:00 PM",
-    image: styling,
-    imageFit: "contain",
-
-    duration: "2-Month Program",
-
-    level: "Beginner to Intermediate",
-
-    location: "Freedom Dance Studio",
-
-    price: "$15",
-
-    priceDetails: "Drop-In • FREE for Members & Instructors",
-
-    description:
-      "A two-month Men's Styling Bachata Sensual Fusion program with Steven. Designed for beginner to intermediate dancers to improve body movement, styling, musicality, confidence, technique, and expression.",
-
-    button: "Join the Class",
-
-    // Recurring class — do not make it the main Hero event
     showInHero: false,
 
     featured: false,
@@ -136,7 +105,9 @@ export const events = [
     date: "September 26, 2026",
 
     time: "2:00 PM",
+
     image: freeman,
+
     imageFit: "contain",
 
     location: "Freedom Dance Studio",
@@ -164,6 +135,8 @@ export const events = [
 
     button: "Register Now",
 
+    showInHero: false,
+
     featured: false,
   },
 
@@ -181,7 +154,9 @@ export const events = [
     date: "October 2, 2026",
 
     time: "Workshop + Social",
+
     image: social,
+
     imageFit: "contain",
 
     location: "Freedom Dance Studio",
@@ -201,6 +176,8 @@ export const events = [
       "Our next Freedom Dance SBK Social is October 2! Start the night with a Salsa On 1 workshop taught by amazing instructors, followed by an incredible night of Salsa, Bachata, Kizomba and more. Dance with Freedom Dance Studio instructors and some of the best dancers in Las Vegas, with music by DJ Young Fuego and Maximo.",
 
     button: "Get Your Ticket",
+
+    showInHero: false,
 
     featured: false,
   },

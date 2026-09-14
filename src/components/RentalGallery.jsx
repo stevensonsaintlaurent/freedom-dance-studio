@@ -222,7 +222,7 @@ export default function RentalGallery() {
 
           {/* RENTAL CTA */}
           <motion.a
-            href="/rentalStudio"
+            href="/request"
             whileHover={{ y: -4 }}
             whileTap={{ scale: 0.98 }}
             className="group flex min-h-full min-w-[250px] flex-col justify-between rounded-[1.75rem] bg-neutral p-7 text-white shadow-xl transition-shadow duration-300 hover:shadow-2xl"

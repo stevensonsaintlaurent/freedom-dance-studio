@@ -150,6 +150,24 @@ Please confirm availability and final pricing.
         id="booking"
         className="relative overflow-hidden bg-neutral py-20 text-neutral-content sm:py-24 lg:py-28"
       >
+        <div className="relative z-10 mx-auto mb-14 max-w-3xl px-4 text-center sm:px-6">
+          <p className="mb-3 text-xs font-black uppercase tracking-[0.3em] text-primary">
+            Freedom Dance Studio
+          </p>
+
+          <h2 className="text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
+            Reserve Your
+            <span className="block text-primary">Studio Space</span>
+          </h2>
+
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-white/55 sm:text-lg">
+            Find the perfect time for your class, rehearsal, workshop, private
+            event, or special occasion. Choose your time, get your estimate, and
+            request your rental today.
+          </p>
+
+          <div className="mx-auto mt-6 h-1 w-16 rounded-full bg-primary" />
+        </div>
         {/* BACKGROUND */}
         <div className="pointer-events-none absolute -left-24 top-0 h-80 w-80 rounded-full bg-primary/15 blur-3xl" />
         <div className="pointer-events-none absolute -right-24 bottom-0 h-80 w-80 rounded-full bg-secondary/10 blur-3xl" />

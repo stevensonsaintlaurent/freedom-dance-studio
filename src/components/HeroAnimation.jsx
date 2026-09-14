@@ -173,7 +173,7 @@ const HeroAnimation = () => {
               <div className="mb-5 inline-flex">
                 <div className="flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-white shadow-xl backdrop-blur-xl">
                   <Sparkles size={12} className="text-primary" />
-                  Upcoming Event at Freedom Dance
+                  Upcoming Events at Freedom Dance
                 </div>
               </div>
 
@@ -277,7 +277,7 @@ const HeroAnimation = () => {
                   to="/events"
                   className="btn btn-md w-full rounded-full border border-white/20 bg-white/10 px-6 text-white backdrop-blur-xl sm:btn-lg sm:w-auto sm:px-8"
                 >
-                  View Event
+                  View Events
                 </Link>
 
                 <Link

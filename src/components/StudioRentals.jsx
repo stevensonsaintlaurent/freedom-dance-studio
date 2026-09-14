@@ -38,9 +38,9 @@ export default function StudioRentals() {
     <main className="min-h-screen bg-base-100">
       <RentalHero />
 
-      <div id="pricing">
+      {/* <div id="pricing">
         <StudioRentalPricing />
-      </div>
+      </div> */}
 
       <RentalFeatures />
 
