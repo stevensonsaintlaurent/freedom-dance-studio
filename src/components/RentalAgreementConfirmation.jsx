@@ -54,7 +54,7 @@ export default function RentalAgreementConfirmation({
   const [agreedToTerms, setAgreedToTerms] = useState(false);
   const [agreedToDeposit, setAgreedToDeposit] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
+  console.log(bookingData);
   const {
     name = "",
     email = "",
