@@ -239,7 +239,7 @@ export default function KarolActingClasses() {
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
             <Clock3 className="h-6 w-6 shrink-0 text-secondary" />
             <div>
-              <p className="font-bold">4:00 PM</p>
+              <p className="font-bold">4:30 PM</p>
               <p className="text-xs text-base-content/60">
                 Weekly acting class
               </p>
