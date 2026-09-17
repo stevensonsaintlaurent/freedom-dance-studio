@@ -109,7 +109,7 @@ export const events = [
 
     date: "October 2, 2026",
 
-    time: "Workshop + Social",
+    time: "Bachata Intensive 8:00 PM • Social 10:00 PM",
 
     image: social,
 
@@ -118,18 +118,19 @@ export const events = [
     location: "Freedom Dance Studio",
 
     workshop: {
-      title: "Salsa On 1 Workshop",
-      instructor: "Special Guest Instructors",
-      time: "Before the Social",
+      title: "Bachata Weekend Intensive",
+      instructor: "Freedom Dance Instructors • Special Guest Instructors",
+      time: "8:00 PM",
     },
 
     social: {
-      title: "SBK Social",
+      title: "Freedom Dance SBK Social",
       musicBy: "DJ Young Fuego • Maximo",
+      time: "10:00 PM",
     },
 
     description:
-      "Our next Freedom Dance SBK Social is October 2! Start the night with a Salsa On 1 workshop taught by amazing instructors, followed by an incredible night of Salsa, Bachata, Kizomba and more. Dance with Freedom Dance Studio instructors and some of the best dancers in Las Vegas, with music by DJ Young Fuego and Maximo.",
+      "Join us Friday, October 2 for an exciting night of Bachata and SBK dancing at Freedom Dance Studio! The evening starts at 8:00 PM with our Bachata Weekend Intensive, followed by the Freedom Dance SBK Social at 10:00 PM. Dance the night away with Salsa, Bachata, Kizomba and more alongside Freedom Dance instructors, guest dancers, and the Las Vegas dance community. Music by DJ Young Fuego and Maximo. Dress Code: Men wear all black. Women may wear any color except black.",
 
     button: "Get Your Ticket",
 
