@@ -21,6 +21,24 @@ export const independentClasses = [
     description: "",
     video: "",
   },
+  {
+    id: "independent-sandra-salsa-wednesday",
+    day: "Wednesday",
+    date: "Every Wednesday",
+    time: "6:00 PM – 7:00 PM",
+    dance: "Salsa",
+    title: "Salsa",
+    instructor: "Sandra",
+    // drop: "",
+    level: "Open Level",
+    category: "Salsa / Latin",
+    type: "independent",
+    phone: "",
+    instagram: "",
+    description:
+      "Build your salsa fundamentals, timing, musicality, partner connection, and styling in a fun and welcoming class with Sandra.",
+    video: "",
+  },
 
   {
     id: "independent-rodolfo-rueda",
@@ -109,25 +127,6 @@ export const independentClasses = [
     phone: "",
     instagram: "",
     description: "",
-    video: "",
-  },
-
-  {
-    id: "independent-sandra-salsa-wednesday",
-    day: "Wednesday",
-    date: "Every Wednesday",
-    time: "6:00 PM – 7:00 PM",
-    dance: "Salsa",
-    title: "Salsa",
-    instructor: "Sandra",
-    // drop: "",
-    level: "Open Level",
-    category: "Salsa / Latin",
-    type: "independent",
-    phone: "",
-    instagram: "",
-    description:
-      "Build your salsa fundamentals, timing, musicality, partner connection, and styling in a fun and welcoming class with Sandra.",
     video: "",
   },
 ];

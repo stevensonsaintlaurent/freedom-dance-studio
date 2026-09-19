@@ -99,6 +99,16 @@ const weeklySchedule = [
     type: "freedom",
   },
   {
+    id: 13,
+    day: "Monday",
+    time: "8:00 PM",
+    dance: "Beginner Bachata Man Styling",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Beginner",
+    type: "freedom",
+  },
+  {
     id: 4,
     day: "Tuesday",
     time: "6:00 PM",
