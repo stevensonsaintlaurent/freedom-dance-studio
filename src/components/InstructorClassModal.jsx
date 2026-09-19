@@ -20,6 +20,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
     liability: false,
     media: false,
   });
+
   const { onSubmit, submitted } = useOnSudmit();
 
   if (!danceClass) return null;
@@ -27,38 +28,80 @@ export default function InstructorClassModal({ danceClass, onClose }) {
   return (
     <dialog
       open
-      className="modal modal-open items-start sm:items-center overflow-y-auto"
+      className="modal modal-open items-start overflow-y-auto sm:items-center"
     >
       {/* ================= BACKDROP ================= */}
-      <div className="fixed inset-0 bg-black/60" onClick={onClose} />
+
+      <div
+        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+        onClick={onClose}
+      />
 
       {/* ================= MODAL BOX ================= */}
+
       <div
         className="
           relative
           z-10
-          w-11/12
+          my-4
+          w-[calc(100%-1rem)]
           max-w-4xl
-          my-6
-          sm:my-10
-          max-h-[calc(100vh-3rem)]
-          overflow-y-auto
-          rounded-2xl
+          overflow-hidden
+          rounded-3xl
           bg-base-100
           shadow-2xl
+          sm:my-8
+          sm:w-11/12
         "
       >
-        {/* ================= IMAGE ================= */}
-        <div className="relative">
+        {/* ==================================================
+            FULL INSTRUCTOR IMAGE
+        ================================================== */}
+
+        <div className="relative h-[420px] overflow-hidden bg-neutral sm:h-[520px]">
+          {/* Blurred background using the SAME image */}
           <img
             src={danceClass.image}
-            alt={danceClass.instructor}
-            className={`w-full h-60 sm:h-80 ${
-              danceClass.imageFit === "contain"
-                ? "object-contain bg-neutral"
-                : "object-cover"
-            }`}
+            alt=""
+            aria-hidden="true"
+            className="
+              absolute
+              inset-0
+              h-full
+              w-full
+              scale-110
+              object-cover
+              opacity-40
+              blur-2xl
+            "
           />
+
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/25" />
+
+          {/* Full original image */}
+          <div className="relative">
+            <img
+              src={danceClass.image}
+              alt={`${danceClass.instructor} - ${danceClass.title}`}
+              className="w-full h-60 sm:h-80 lg:h-[1000px] object-cover object-center"
+            />
+
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white">
+              <p className="text-sm sm:text-base font-medium opacity-90">
+                {danceClass.instructor}
+              </p>
+
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
+                {danceClass.title}
+              </h2>
+            </div>
+          </div>
+
+          {/* Bottom gradient */}
+          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
 
           {/* Close Button */}
           <button
@@ -69,37 +112,46 @@ export default function InstructorClassModal({ danceClass, onClose }) {
               btn-circle
               btn-sm
               absolute
-              top-4
               right-4
+              top-4
+              z-20
+              border-none
               bg-black/70
               text-white
-              border-none
+              shadow-xl
+              backdrop-blur-sm
               hover:bg-black/90
-              z-20
             "
             aria-label="Close"
           >
             <X size={18} />
           </button>
 
-          {/* Instructor Name */}
-          <div className="absolute bottom-4 left-5 right-5">
-            <div className="badge badge-warning mb-2">
+          {/* Instructor information */}
+          <div className="absolute bottom-6 left-6 right-6 z-10 text-white sm:bottom-8 sm:left-8 sm:right-8">
+            <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs font-bold backdrop-blur-md">
+              <Sparkles size={13} />
               Independent Instructor
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-black text-white drop-shadow-lg">
+            <h2 className="text-4xl font-black tracking-tight drop-shadow-lg sm:text-5xl">
               {danceClass.instructor}
             </h2>
+
+            <p className="mt-1 text-base font-semibold text-white/80 sm:text-lg">
+              {danceClass.title}
+            </p>
           </div>
         </div>
 
         {/* ================= CONTENT ================= */}
-        <div className="p-5 sm:p-7">
+
+        <div className="p-5 sm:p-8">
           {/* Instructor */}
-          <div className="flex items-center gap-3 mb-6">
+
+          <div className="mb-6 flex items-center gap-3">
             <div className="avatar placeholder">
-              <div className="bg-primary text-primary-content rounded-full w-12">
+              <div className="w-12 rounded-full bg-primary text-primary-content">
                 <UserRound size={22} />
               </div>
             </div>
@@ -109,30 +161,31 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                 Independent Instructor
               </p>
 
-              <h3 className="font-bold text-lg">{danceClass.instructor}</h3>
+              <h3 className="text-lg font-bold">{danceClass.instructor}</h3>
             </div>
           </div>
 
           {/* ================= CLASS INFO ================= */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-7">
-            <div className="p-4 rounded-xl bg-base-200">
-              <CalendarDays size={20} className="text-primary mb-2" />
+
+          <div className="mb-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            <div className="rounded-2xl bg-base-200 p-4">
+              <CalendarDays size={20} className="mb-2 text-primary" />
 
               <p className="text-sm text-base-content/60">Schedule</p>
 
               <p className="font-semibold">{danceClass.date}</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-base-200">
-              <Clock size={20} className="text-primary mb-2" />
+            <div className="rounded-2xl bg-base-200 p-4">
+              <Clock size={20} className="mb-2 text-primary" />
 
               <p className="text-sm text-base-content/60">Time</p>
 
               <p className="font-semibold">{danceClass.time}</p>
             </div>
 
-            <div className="p-4 rounded-xl bg-base-200">
-              <Users size={20} className="text-primary mb-2" />
+            <div className="rounded-2xl bg-base-200 p-4">
+              <Users size={20} className="mb-2 text-primary" />
 
               <p className="text-sm text-base-content/60">Style</p>
 
@@ -141,29 +194,32 @@ export default function InstructorClassModal({ danceClass, onClose }) {
           </div>
 
           {/* ================= BIO ================= */}
+
           <div className="mb-7">
-            <h3 className="text-2xl font-bold mb-3">
+            <h3 className="mb-3 text-2xl font-bold">
               About {danceClass.instructor}
             </h3>
 
-            <p className="text-base-content/70 leading-relaxed">
+            <p className="leading-relaxed text-base-content/70">
               {danceClass.bio ||
                 `${danceClass.instructor} is an independent instructor hosting classes at Freedom Dance Studio.`}
             </p>
           </div>
 
           {/* ================= CLASS DESCRIPTION ================= */}
-          <div className="mb-7">
-            <h3 className="text-2xl font-bold mb-3">About This Class</h3>
 
-            <p className="text-base-content/70 leading-relaxed">
+          <div className="mb-7">
+            <h3 className="mb-3 text-2xl font-bold">About This Class</h3>
+
+            <p className="leading-relaxed text-base-content/70">
               {danceClass.description}
             </p>
           </div>
 
           {/* ================= CONTACT ================= */}
-          <div className="p-4 sm:p-5 rounded-2xl bg-base-200 mb-7">
-            <h3 className="font-bold text-lg mb-4">
+
+          <div className="mb-7 rounded-2xl bg-base-200 p-4 sm:p-5">
+            <h3 className="mb-4 text-lg font-bold">
               Contact {danceClass.instructor}
             </h3>
 
@@ -197,8 +253,9 @@ export default function InstructorClassModal({ danceClass, onClose }) {
           </div>
 
           {/* ================= BOOKING BUTTON ================= */}
+
           {!showBooking && !submitted && (
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
                 onClick={() => setShowBooking(true)}
@@ -219,20 +276,22 @@ export default function InstructorClassModal({ danceClass, onClose }) {
           )}
 
           {/* ================= BOOKING FORM ================= */}
+
           {showBooking && !submitted && (
-            <div className="border border-base-300 rounded-2xl p-5 sm:p-6">
+            <div className="rounded-2xl border border-base-300 p-5 sm:p-6">
               <div className="mb-6">
                 <div className="badge badge-primary mb-3">Class Booking</div>
 
                 <h3 className="text-2xl font-bold">Book {danceClass.title}</h3>
 
-                <p className="text-base-content/60 mt-1">
+                <p className="mt-1 text-base-content/60">
                   with {danceClass.instructor}
                 </p>
               </div>
 
               <form onSubmit={onSubmit} className="space-y-4">
                 {/* Name */}
+
                 <div>
                   <label className="label">
                     <span className="label-text font-semibold">Full Name</span>
@@ -248,6 +307,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                 </div>
 
                 {/* Email */}
+
                 <div>
                   <label className="label">
                     <span className="label-text font-semibold">Email</span>
@@ -263,6 +323,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                 </div>
 
                 {/* Phone */}
+
                 <div>
                   <label className="label">
                     <span className="label-text font-semibold">
@@ -279,30 +340,37 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                   />
                 </div>
 
-                {/* Info data in my data form submite but not in client  */}
+                {/* Hidden class information */}
+
                 <input
                   type="text"
                   name="instructor"
                   hidden
                   value={danceClass.instructor}
+                  readOnly
                   required
                 />
+
                 <input
                   type="text"
                   name="day"
                   hidden
                   value={danceClass.date}
+                  readOnly
                   required
                 />
+
                 <input
                   type="text"
                   name="time"
                   hidden
                   value={danceClass.time}
+                  readOnly
                   required
                 />
 
                 {/* Message */}
+
                 <div>
                   <label className="label">
                     <span className="label-text font-semibold">Message</span>
@@ -317,6 +385,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                 </div>
 
                 {/* Selected Class */}
+
                 <div className="alert alert-info">
                   <div>
                     <p className="font-bold">{danceClass.title}</p>
@@ -332,27 +401,34 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                 </div>
 
                 {/* ================= POLICIES & WAIVERS ================= */}
-                <div className="rounded-2xl border border-base-300 bg-base-200/60 p-4 sm:p-5 space-y-4">
+
+                <div className="space-y-4 rounded-2xl border border-base-300 bg-base-200/60 p-4 sm:p-5">
                   <div>
-                    <h4 className="font-bold text-lg">Policies & Waivers</h4>
-                    <p className="text-sm text-base-content/60 mt-1">
+                    <h4 className="text-lg font-bold">Policies & Waivers</h4>
+
+                    <p className="mt-1 text-sm text-base-content/60">
                       Please click each section below to read the full policy
                       before agreeing.
                     </p>
                   </div>
 
-                  <div className="rounded-xl border border-base-300 bg-base-100 overflow-hidden">
+                  {/* Terms */}
+
+                  <div className="overflow-hidden rounded-xl border border-base-300 bg-base-100">
                     <details className="group">
-                      <summary className="cursor-pointer list-none p-4 font-semibold flex items-center justify-between gap-3">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold">
                         <span>Class Booking Terms & Policies</span>
-                        <span className="text-primary text-sm group-open:hidden">
+
+                        <span className="text-sm text-primary group-open:hidden">
                           Read More
                         </span>
-                        <span className="text-primary text-sm hidden group-open:inline">
+
+                        <span className="hidden text-sm text-primary group-open:inline">
                           Read Less
                         </span>
                       </summary>
-                      <div className="px-4 pb-4 text-sm leading-relaxed text-base-content/70 space-y-2">
+
+                      <div className="space-y-2 px-4 pb-4 text-sm leading-relaxed text-base-content/70">
                         <p>
                           This booking is for an independent class hosted at
                           Freedom Dance Studio. The independent instructor is
@@ -360,6 +436,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                           collection, cancellations, refunds, attendance, and
                           class-specific rules.
                         </p>
+
                         <p>
                           Submitting this form sends a booking request only. It
                           does not guarantee a place in the class. Your
@@ -367,6 +444,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                           instructor confirms your participation and provides
                           any required payment or registration instructions.
                         </p>
+
                         <p>
                           By booking, you agree to follow the reasonable rules
                           and instructions of both the instructor and Freedom
@@ -376,7 +454,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                     </details>
                   </div>
 
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary mt-0.5 shrink-0"
@@ -389,36 +467,44 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                       }
                       required
                     />
+
                     <span className="text-sm leading-relaxed">
-                      I have read and agree to the{" "}
+                      I have read and agree to{" "}
                       <strong>Class Booking Terms & Policies</strong>.
                     </span>
                   </label>
 
-                  <div className="rounded-xl border border-base-300 bg-base-100 overflow-hidden">
+                  {/* Liability */}
+
+                  <div className="overflow-hidden rounded-xl border border-base-300 bg-base-100">
                     <details className="group">
-                      <summary className="cursor-pointer list-none p-4 font-semibold flex items-center justify-between gap-3">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold">
                         <span>Participation & Liability Waiver</span>
-                        <span className="text-primary text-sm group-open:hidden">
+
+                        <span className="text-sm text-primary group-open:hidden">
                           Read More
                         </span>
-                        <span className="text-primary text-sm hidden group-open:inline">
+
+                        <span className="hidden text-sm text-primary group-open:inline">
                           Read Less
                         </span>
                       </summary>
-                      <div className="px-4 pb-4 text-sm leading-relaxed text-base-content/70 space-y-2">
+
+                      <div className="space-y-2 px-4 pb-4 text-sm leading-relaxed text-base-content/70">
                         <p>
                           I understand that dance is a physical activity and
                           that participation may involve risks, including slips,
                           trips, falls, strains, sprains, collisions, or other
                           injuries.
                         </p>
+
                         <p>
                           I voluntarily choose to participate and agree to use
                           reasonable care, follow the instructor's directions,
                           respect other participants, and follow Freedom Dance
                           Studio's safety and facility rules.
                         </p>
+
                         <p>
                           I understand that Freedom Dance Studio is providing
                           the facility and that this independent class is
@@ -431,7 +517,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                     </details>
                   </div>
 
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary mt-0.5 shrink-0"
@@ -444,30 +530,37 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                       }
                       required
                     />
+
                     <span className="text-sm leading-relaxed">
-                      I have read and agree to the{" "}
+                      I have read and agree to{" "}
                       <strong>Participation & Liability Waiver</strong>.
                     </span>
                   </label>
 
-                  <div className="rounded-xl border border-base-300 bg-base-100 overflow-hidden">
+                  {/* Media */}
+
+                  <div className="overflow-hidden rounded-xl border border-base-300 bg-base-100">
                     <details className="group">
-                      <summary className="cursor-pointer list-none p-4 font-semibold flex items-center justify-between gap-3">
+                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold">
                         <span>Photo & Video Marketing Release</span>
-                        <span className="text-primary text-sm group-open:hidden">
+
+                        <span className="text-sm text-primary group-open:hidden">
                           Read More
                         </span>
-                        <span className="text-primary text-sm hidden group-open:inline">
+
+                        <span className="hidden text-sm text-primary group-open:inline">
                           Read Less
                         </span>
                       </summary>
-                      <div className="px-4 pb-4 text-sm leading-relaxed text-base-content/70 space-y-2">
+
+                      <div className="space-y-2 px-4 pb-4 text-sm leading-relaxed text-base-content/70">
                         <p>
                           I understand that Freedom Dance Studio and/or its
                           authorized representatives may photograph, film, or
                           otherwise record me during classes, workshops,
                           socials, events, and other activities at the studio.
                         </p>
+
                         <p>
                           I give Freedom Dance Studio permission to use my
                           photograph, video, image, likeness, and/or voice for
@@ -475,6 +568,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                           social media, website, and other business-related
                           promotional purposes.
                         </p>
+
                         <p>
                           This may include use on Freedom Dance Studio's
                           Instagram, Facebook, TikTok, YouTube, website,
@@ -483,6 +577,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                           will not receive payment or other compensation for
                           this use.
                         </p>
+
                         <p>
                           If I have questions or concerns about being
                           photographed or recorded, I will speak with the
@@ -493,7 +588,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                     </details>
                   </div>
 
-                  <label className="flex items-start gap-3 cursor-pointer">
+                  <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
                       className="checkbox checkbox-primary mt-0.5 shrink-0"
@@ -506,14 +601,16 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                       }
                       required
                     />
+
                     <span className="text-sm leading-relaxed">
-                      I have read and agree to the{" "}
+                      I have read and agree to{" "}
                       <strong>Photo & Video Marketing Release</strong>.
                     </span>
                   </label>
 
                   <div className="alert alert-info">
                     <Sparkles size={18} className="shrink-0" />
+
                     <span className="text-xs leading-relaxed">
                       Please click <strong>Read More</strong> on each policy
                       above before checking the agreement boxes. All three
@@ -526,11 +623,13 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                     name="booking_terms_agreed"
                     value={agreements.terms ? "Yes" : "No"}
                   />
+
                   <input
                     type="hidden"
                     name="liability_waiver_agreed"
                     value={agreements.liability ? "Yes" : "No"}
                   />
+
                   <input
                     type="hidden"
                     name="freedom_dance_studio_photo_video_marketing_release_agreed"
@@ -539,7 +638,8 @@ export default function InstructorClassModal({ danceClass, onClose }) {
                 </div>
 
                 {/* Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3 pt-2">
+
+                <div className="flex flex-col gap-3 pt-2 sm:flex-row">
                   <button
                     type="submit"
                     disabled={
@@ -566,19 +666,20 @@ export default function InstructorClassModal({ danceClass, onClose }) {
           )}
 
           {/* ================= SUCCESS ================= */}
+
           {submitted && (
-            <div className="text-center py-8">
-              <div className="flex justify-center mb-5">
-                <div className="w-16 h-16 rounded-full bg-success/20 flex items-center justify-center">
+            <div className="py-8 text-center">
+              <div className="mb-5 flex justify-center">
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/20">
                   <CheckCircle2 size={36} className="text-success" />
                 </div>
               </div>
 
-              <h3 className="text-2xl sm:text-3xl font-bold">
+              <h3 className="text-2xl font-bold sm:text-3xl">
                 Booking Request Sent!
               </h3>
 
-              <p className="text-base-content/70 mt-3 max-w-lg mx-auto">
+              <p className="mx-auto mt-3 max-w-lg text-base-content/70">
                 Thank you for your interest in{" "}
                 <strong>{danceClass.title}</strong>. Please contact{" "}
                 <strong>{danceClass.instructor}</strong> directly for
@@ -596,6 +697,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
           )}
 
           {/* ================= NOTICE ================= */}
+
           <div className="alert alert-warning mt-6">
             <Sparkles size={20} className="shrink-0" />
 

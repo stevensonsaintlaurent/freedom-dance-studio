@@ -24,6 +24,7 @@ import edourdo from "../assets/instructors/edourdo.jpg";
 import luis from "../assets/instructors/luis1.jpg";
 import luz from "../assets/instructors/luz.jpeg";
 import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
+import Sandra from "../assets/instructors/sandra1.jpg";
 
 // ======================================================
 // INDEPENDENT CLASSES
@@ -128,6 +129,22 @@ const independentClasses = [
     video:
       "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
   },
+
+  {
+    id: 7,
+    day: "Wednesday",
+    date: "Every Wednesday",
+    title: "Salsa",
+    time: "6:00 PM – 7:00 PM",
+    instructor: "Sandra",
+    category: "Salsa / Latin",
+    phone: "",
+    instagram: "",
+    description:
+      "Build your salsa fundamentals, timing, musicality, partner connection, and styling in a fun and welcoming class with Sandra.",
+    image: Sandra,
+    video: "",
+  },
 ];
 
 // ======================================================
@@ -141,104 +158,147 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.35 }}
-      whileHover={{ y: -6 }}
-      className="group flex h-full flex-col overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-md transition-shadow hover:shadow-xl"
+      whileHover={{ y: -5 }}
+      className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-base-300/70 bg-base-100 shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-2xl"
     >
-      {/* IMAGE */}
+      {/* ==================================================
+          INSTRUCTOR PHOTO
+      ================================================== */}
 
-      <div className="relative aspect-[4/3] overflow-hidden bg-base-300">
-        <img
-          src={danceClass.image}
-          alt={`${danceClass.title} with ${danceClass.instructor}`}
-          className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-        />
+      <div className="relative h-[330px] overflow-hidden bg-base-200 sm:h-[350px]">
+        {/* Soft background behind image */}
+        <div className="absolute inset-0 bg-gradient-to-br from-base-300 via-base-200 to-base-300" />
 
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+        {/* Instructor image */}
+        <div className="absolute inset-3 overflow-hidden rounded-[1.5rem] bg-base-100">
+          <img
+            src={danceClass.image}
+            alt={`${danceClass.title} with ${danceClass.instructor}`}
+            className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
+          />
 
-        <div className="absolute left-4 top-4">
-          <div className="badge badge-warning gap-2 border-0 px-3 py-3 font-bold shadow-lg">
+          {/* Very subtle bottom fade */}
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" />
+        </div>
+
+        {/* Independent badge */}
+        <div className="absolute left-6 top-6 z-10">
+          <div className="flex items-center gap-2 rounded-full border border-white/20 bg-black/55 px-3.5 py-2 text-xs font-bold text-white shadow-lg backdrop-blur-md">
             <Sparkles size={13} />
-            Independent
+            Independent Instructor
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={() => onVideo(danceClass)}
-          className="btn btn-circle btn-primary absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0 shadow-2xl transition-all duration-300 group-hover:scale-110 group-hover:opacity-100"
-        >
-          <Play size={20} fill="currentColor" />
-        </button>
-
-        <div className="absolute bottom-4 left-4 right-4 text-white">
-          <p className="text-xs font-semibold uppercase tracking-wider text-white/75">
-            {danceClass.category}
-          </p>
-
-          <h3 className="mt-1 text-2xl font-black">{danceClass.title}</h3>
-        </div>
+        {/* Video button */}
+        {danceClass.video && (
+          <button
+            type="button"
+            onClick={() => onVideo(danceClass)}
+            aria-label={`Watch ${danceClass.title} video`}
+            className="absolute bottom-6 right-6 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary shadow-xl transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-content"
+          >
+            <Play size={18} fill="currentColor" />
+          </button>
+        )}
       </div>
 
-      {/* CONTENT */}
+      {/* ==================================================
+          CONTENT
+      ================================================== */}
 
-      <div className="flex flex-1 flex-col p-5 sm:p-6">
-        <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm font-semibold text-primary">
-            <CalendarDays size={17} />
-            {danceClass.date}
-          </div>
+      <div className="flex flex-1 flex-col p-6 sm:p-7">
+        {/* Category */}
+        <div className="mb-2">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
+            {danceClass.category}
+          </span>
+        </div>
 
-          <div className="flex items-center gap-2 text-sm text-base-content/60">
-            <Clock size={17} />
-            {danceClass.time}
+        {/* Class + Instructor */}
+        <div>
+          <h3 className="text-2xl font-black tracking-tight sm:text-3xl">
+            {danceClass.title}
+          </h3>
+
+          <div className="mt-1 flex items-center gap-2">
+            <Users size={16} className="text-primary" />
+
+            <p className="font-semibold text-base-content/70">
+              with {danceClass.instructor}
+            </p>
           </div>
         </div>
 
-        {/* Instructor */}
+        {/* Schedule */}
+        <div className="mt-5 space-y-2.5 rounded-2xl bg-base-200/70 p-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <CalendarDays size={17} />
+            </div>
 
-        <div className="mt-4 flex items-center gap-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <Users size={17} />
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-base-content/40">
+                Schedule
+              </p>
+
+              <p className="text-sm font-semibold">{danceClass.date}</p>
+            </div>
           </div>
 
-          <div>
-            <p className="text-xs text-base-content/50">Instructor</p>
+          <div className="flex items-center gap-3">
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Clock size={17} />
+            </div>
 
-            <p className="font-bold">{danceClass.instructor}</p>
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-wider text-base-content/40">
+                Time
+              </p>
+
+              <p className="text-sm font-semibold">{danceClass.time}</p>
+            </div>
           </div>
         </div>
 
         {/* Description */}
-
-        <p className="mt-4 line-clamp-3 text-sm leading-6 text-base-content/60">
+        <p className="mt-5 line-clamp-3 text-sm leading-6 text-base-content/60">
           {danceClass.description}
         </p>
 
         {/* Bottom */}
-
         <div className="mt-auto pt-6">
-          <div className="mb-4 flex items-center gap-2 text-xs text-base-content/50">
+          <div className="mb-4 flex items-center gap-2 text-xs font-medium text-base-content/45">
             <MapPin size={14} />
             Freedom Dance Studio
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2.5">
             <button
               type="button"
               onClick={() => onLearnMore(danceClass)}
-              className="btn btn-primary btn-sm gap-2"
+              className="btn btn-primary btn-sm rounded-xl gap-2"
             >
               Learn More
               <ArrowRight size={15} />
             </button>
 
-            <a
-              href={`tel:${danceClass.phone}`}
-              className="btn btn-outline btn-sm gap-2"
-            >
-              <Phone size={15} />
-              Call
-            </a>
+            {danceClass.phone ? (
+              <a
+                href={`tel:${danceClass.phone}`}
+                className="btn btn-outline btn-sm rounded-xl gap-2"
+              >
+                <Phone size={15} />
+                Call
+              </a>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onLearnMore(danceClass)}
+                className="btn btn-outline btn-sm rounded-xl"
+              >
+                Details
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -257,13 +317,19 @@ function VideoModal({ danceClass, onClose }) {
     <dialog open className="modal modal-open">
       <div className="modal-box max-h-[90vh] w-11/12 max-w-4xl overflow-y-auto p-0">
         <div className="relative bg-black">
-          <video
-            src={danceClass.video}
-            controls
-            autoPlay
-            playsInline
-            className="aspect-video w-full object-cover"
-          />
+          {danceClass.video ? (
+            <video
+              src={danceClass.video}
+              controls
+              autoPlay
+              playsInline
+              className="aspect-video w-full object-cover"
+            />
+          ) : (
+            <div className="flex aspect-video items-center justify-center text-white">
+              No video available
+            </div>
+          )}
 
           <button
             type="button"
@@ -303,13 +369,15 @@ function VideoModal({ danceClass, onClose }) {
             <p className="mb-3 font-bold">Contact {danceClass.instructor}</p>
 
             <div className="flex flex-wrap gap-2">
-              <a
-                href={`tel:${danceClass.phone}`}
-                className="btn btn-primary btn-sm gap-2"
-              >
-                <Phone size={16} />
-                {danceClass.phone}
-              </a>
+              {danceClass.phone && (
+                <a
+                  href={`tel:${danceClass.phone}`}
+                  className="btn btn-primary btn-sm gap-2"
+                >
+                  <Phone size={16} />
+                  {danceClass.phone}
+                </a>
+              )}
 
               {danceClass.instagram && (
                 <a
@@ -484,7 +552,7 @@ export default function IndependentClasses() {
 
           <motion.div
             layout
-            className="mt-5 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+            className="mt-5 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
           >
             {filteredClasses.map((danceClass) => (
               <ClassCard
