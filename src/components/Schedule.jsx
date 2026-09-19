@@ -12,6 +12,7 @@ import {
 import { motion } from "framer-motion";
 
 import { events } from "../data/eventsData";
+import { independentClasses } from "../data/indepedentInstructors";
 
 // ==================================================
 // SERVICES
@@ -206,78 +207,6 @@ const weeklySchedule = [
     drop: "Free",
     level: "All Levels",
     type: "freedom",
-  },
-];
-
-// ==================================================
-// INDEPENDENT INSTRUCTORS
-// ==================================================
-//
-// These instructors host their own classes at Freedom.
-// They are intentionally separate from Freedom's regular
-// studio classes.
-// ==================================================
-
-const independentClasses = [
-  {
-    id: "independent-luis-reparto-monday",
-    day: "Monday",
-    time: "5:00 PM",
-    dance: "Reparto",
-    instructor: "Luis",
-    drop: "$20",
-    level: "Open Level",
-    type: "independent",
-  },
-  {
-    id: "independent-rodolfo-rueda",
-    day: "Thursday",
-    time: "6:30 PM",
-    dance: "Salsa Rueda de Casino",
-    instructor: "Rodolfo",
-    drop: "$15",
-    level: "Open Level",
-    type: "independent",
-  },
-  {
-    id: "independent-luz-twerk",
-    day: "Friday",
-    time: "6:30 PM",
-    dance: "Twerk",
-    instructor: "Luz",
-    drop: "$15",
-    level: "Open Level",
-    type: "independent",
-  },
-  {
-    id: "independent-eduardo-reggaeton",
-    day: "Saturday",
-    time: "7:00 PM",
-    dance: "Reggaeton",
-    instructor: "Eduardo",
-    drop: "$15",
-    level: "Open Level",
-    type: "independent",
-  },
-  {
-    id: "independent-luis-reparto-sunday",
-    day: "Sunday",
-    time: "5:30 PM",
-    dance: "Reparto",
-    instructor: "Luis",
-    drop: "$20",
-    level: "Open Level",
-    type: "independent",
-  },
-  {
-    id: "independent-eduardo-hiphop",
-    day: "Sunday",
-    time: "6:30 PM",
-    dance: "Hip-Hop",
-    instructor: "Eduardo",
-    drop: "$15",
-    level: "Open Level",
-    type: "independent",
   },
 ];
 
@@ -759,6 +688,7 @@ export default function Schedule() {
 
               <div className="text-left">
                 <div className="font-bold">All Classes</div>
+
                 <div className="text-xs opacity-70">Freedom + Independent</div>
               </div>
             </button>
@@ -773,6 +703,7 @@ export default function Schedule() {
 
               <div className="text-left">
                 <div className="font-bold">Freedom Classes</div>
+
                 <div className="text-xs opacity-70">Regular studio classes</div>
               </div>
             </button>
@@ -787,6 +718,7 @@ export default function Schedule() {
 
               <div className="text-left">
                 <div className="font-bold">Independent Instructors</div>
+
                 <div className="text-xs opacity-70">Hosted at Freedom</div>
               </div>
             </button>
