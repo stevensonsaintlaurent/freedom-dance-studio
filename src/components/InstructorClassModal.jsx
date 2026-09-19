@@ -15,6 +15,7 @@ import useOnSudmit from "../hooks/useOnSudmit";
 
 export default function InstructorClassModal({ danceClass, onClose }) {
   const [showBooking, setShowBooking] = useState(false);
+
   const [agreements, setAgreements] = useState({
     terms: false,
     liability: false,
@@ -25,85 +26,128 @@ export default function InstructorClassModal({ danceClass, onClose }) {
 
   if (!danceClass) return null;
 
+  const allAgreementsAccepted =
+    agreements.terms && agreements.liability && agreements.media;
+
+  const handleAgreementChange = (name) => {
+    setAgreements((prev) => ({
+      ...prev,
+      [name]: !prev[name],
+    }));
+  };
+
+  const handleSubmit = async (event) => {
+    if (!allAgreementsAccepted) {
+      event.preventDefault();
+      return;
+    }
+
+    await onSubmit(event);
+  };
+
   return (
     <dialog
       open
       className="modal modal-open items-start overflow-y-auto sm:items-center"
     >
-      {/* ================= BACKDROP ================= */}
-
+      {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-black/70 backdrop-blur-sm"
+        className="modal-backdrop fixed inset-0 bg-black/70 backdrop-blur-sm"
         onClick={onClose}
       />
 
-      {/* ================= MODAL BOX ================= */}
-
+      {/* Modal */}
       <div
         className="
           relative
           z-10
           my-4
+          flex
           w-[calc(100%-1rem)]
-          max-w-4xl
+          max-w-6xl
+          flex-col
           overflow-hidden
           rounded-3xl
           bg-base-100
           shadow-2xl
           sm:my-8
           sm:w-11/12
+          lg:max-h-[90vh]
+          lg:flex-row
         "
       >
-        {/* ==================================================
-            FULL INSTRUCTOR IMAGE
-        ================================================== */}
-
-        <div className="relative h-[420px] overflow-hidden bg-neutral sm:h-[520px]">
-          {/* Blurred background using the SAME image */}
-          <img
-            src={danceClass.image}
-            alt=""
-            aria-hidden="true"
+        {/* =========================================================
+            LEFT SIDE — INSTRUCTOR IMAGE
+        ========================================================== */}
+        <div
+          className="
+            relative
+            h-[320px]
+            shrink-0
+            overflow-hidden
+            bg-neutral
+            sm:h-[420px]
+            lg:h-auto
+            lg:min-h-[700px]
+            lg:w-[45%]
+            xl:w-[42%]
+          "
+        >
+          {/* Blurred background */}
+          <div
             className="
               absolute
               inset-0
+              scale-110
+              bg-cover
+              bg-center
+              blur-2xl
+            "
+            style={{
+              backgroundImage: `url("${danceClass.image}")`,
+            }}
+          />
+
+          {/* Dark background overlay */}
+          <div className="absolute inset-0 bg-black/30" />
+
+          {/* Main instructor image */}
+          <img
+            src={danceClass.image}
+            alt={`${danceClass.instructor} - ${danceClass.title}`}
+            className="
+              absolute
+              inset-0
+              z-10
               h-full
               w-full
-              scale-110
               object-cover
-              opacity-40
-              blur-2xl
+              object-center
+            "
+            onError={(e) => {
+              console.error(
+                "Instructor image failed to load:",
+                danceClass.image,
+              );
+
+              e.currentTarget.style.display = "none";
+            }}
+          />
+
+          {/* Gradient */}
+          <div
+            className="
+              absolute
+              inset-0
+              z-20
+              bg-gradient-to-t
+              from-black/95
+              via-black/25
+              to-transparent
             "
           />
 
-          {/* Dark overlay */}
-          <div className="absolute inset-0 bg-black/25" />
-
-          {/* Full original image */}
-          <div className="relative">
-            <img
-              src={danceClass.image}
-              alt={`${danceClass.instructor} - ${danceClass.title}`}
-              className="w-full h-60 sm:h-80 lg:h-[1000px] object-cover object-center"
-            />
-
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
-            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white">
-              <p className="text-sm sm:text-base font-medium opacity-90">
-                {danceClass.instructor}
-              </p>
-
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
-                {danceClass.title}
-              </h2>
-            </div>
-          </div>
-
-          {/* Bottom gradient */}
-          <div className="absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-
-          {/* Close Button */}
+          {/* Close button */}
           <button
             type="button"
             onClick={onClose}
@@ -114,7 +158,7 @@ export default function InstructorClassModal({ danceClass, onClose }) {
               absolute
               right-4
               top-4
-              z-20
+              z-40
               border-none
               bg-black/70
               text-white
@@ -127,14 +171,51 @@ export default function InstructorClassModal({ danceClass, onClose }) {
             <X size={18} />
           </button>
 
-          {/* Instructor information */}
-          <div className="absolute bottom-6 left-6 right-6 z-10 text-white sm:bottom-8 sm:left-8 sm:right-8">
-            <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/20 bg-black/50 px-3 py-1.5 text-xs font-bold backdrop-blur-md">
+          {/* Instructor information over image */}
+          <div
+            className="
+              absolute
+              bottom-0
+              left-0
+              right-0
+              z-30
+              p-5
+              text-white
+              sm:p-7
+              lg:p-8
+            "
+          >
+            <div
+              className="
+                mb-3
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-white/20
+                bg-black/50
+                px-3
+                py-1.5
+                text-xs
+                font-bold
+                backdrop-blur-md
+              "
+            >
               <Sparkles size={13} />
               Independent Instructor
             </div>
 
-            <h2 className="text-4xl font-black tracking-tight drop-shadow-lg sm:text-5xl">
+            <h2
+              className="
+                text-3xl
+                font-black
+                tracking-tight
+                drop-shadow-lg
+                sm:text-4xl
+                lg:text-5xl
+              "
+            >
               {danceClass.instructor}
             </h2>
 
@@ -144,571 +225,498 @@ export default function InstructorClassModal({ danceClass, onClose }) {
           </div>
         </div>
 
-        {/* ================= CONTENT ================= */}
-
-        <div className="p-5 sm:p-8">
-          {/* Instructor */}
-
-          <div className="mb-6 flex items-center gap-3">
-            <div className="avatar placeholder">
-              <div className="w-12 rounded-full bg-primary text-primary-content">
-                <UserRound size={22} />
-              </div>
-            </div>
-
+        {/* =========================================================
+            RIGHT SIDE — CONTENT
+        ========================================================== */}
+        <div
+          className="
+            min-w-0
+            flex-1
+            overflow-y-auto
+            bg-base-100
+            p-5
+            sm:p-7
+            lg:p-8
+          "
+        >
+          {/* Mobile close button */}
+          <div className="mb-5 flex items-center justify-between lg:hidden">
             <div>
-              <p className="text-sm text-base-content/60">
-                Independent Instructor
+              <p className="text-xs font-bold uppercase tracking-widest text-primary">
+                Independent Class
               </p>
 
-              <h3 className="text-lg font-bold">{danceClass.instructor}</h3>
-            </div>
-          </div>
-
-          {/* ================= CLASS INFO ================= */}
-
-          <div className="mb-7 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            <div className="rounded-2xl bg-base-200 p-4">
-              <CalendarDays size={20} className="mb-2 text-primary" />
-
-              <p className="text-sm text-base-content/60">Schedule</p>
-
-              <p className="font-semibold">{danceClass.date}</p>
+              <h3 className="mt-1 text-xl font-black">{danceClass.title}</h3>
             </div>
 
-            <div className="rounded-2xl bg-base-200 p-4">
-              <Clock size={20} className="mb-2 text-primary" />
-
-              <p className="text-sm text-base-content/60">Time</p>
-
-              <p className="font-semibold">{danceClass.time}</p>
-            </div>
-
-            <div className="rounded-2xl bg-base-200 p-4">
-              <Users size={20} className="mb-2 text-primary" />
-
-              <p className="text-sm text-base-content/60">Style</p>
-
-              <p className="font-semibold">{danceClass.category}</p>
-            </div>
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn btn-circle btn-sm"
+              aria-label="Close"
+            >
+              <X size={18} />
+            </button>
           </div>
 
-          {/* ================= BIO ================= */}
-
-          <div className="mb-7">
-            <h3 className="mb-3 text-2xl font-bold">
-              About {danceClass.instructor}
-            </h3>
-
-            <p className="leading-relaxed text-base-content/70">
-              {danceClass.bio ||
-                `${danceClass.instructor} is an independent instructor hosting classes at Freedom Dance Studio.`}
-            </p>
-          </div>
-
-          {/* ================= CLASS DESCRIPTION ================= */}
-
-          <div className="mb-7">
-            <h3 className="mb-3 text-2xl font-bold">About This Class</h3>
-
-            <p className="leading-relaxed text-base-content/70">
-              {danceClass.description}
-            </p>
-          </div>
-
-          {/* ================= CONTACT ================= */}
-
-          <div className="mb-7 rounded-2xl bg-base-200 p-4 sm:p-5">
-            <h3 className="mb-4 text-lg font-bold">
-              Contact {danceClass.instructor}
-            </h3>
-
-            <div className="flex flex-wrap gap-3">
-              {danceClass.phone && (
-                <a
-                  href={`tel:${danceClass.phone}`}
-                  className="btn btn-outline gap-2"
-                >
-                  <Phone size={18} />
-                  Call Instructor
-                </a>
-              )}
-
-              {danceClass.instagram && (
-                <a
-                  href={
-                    danceClass.instagram.startsWith("http")
-                      ? danceClass.instagram
-                      : `https://instagram.com/${danceClass.instagram}`
-                  }
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-outline gap-2"
-                >
-                  <BsInstagram size={18} />
-                  Instagram
-                </a>
-              )}
-            </div>
-          </div>
-
-          {/* ================= BOOKING BUTTON ================= */}
-
+          {/* =======================================================
+              CLASS INFORMATION
+          ======================================================== */}
           {!showBooking && !submitted && (
-            <div className="flex flex-col gap-3 sm:flex-row">
-              <button
-                type="button"
-                onClick={() => setShowBooking(true)}
-                className="btn btn-primary flex-1 gap-2"
-              >
-                Book This Class
-                <ArrowRight size={18} />
-              </button>
+            <>
+              {/* Category */}
+              {danceClass.category && (
+                <div className="mb-4">
+                  <span className="badge badge-primary badge-outline font-bold">
+                    {danceClass.category}
+                  </span>
+                </div>
+              )}
 
-              <button
-                type="button"
-                onClick={onClose}
-                className="btn btn-outline"
-              >
-                Close
-              </button>
-            </div>
+              {/* Title */}
+              <h1 className="text-3xl font-black leading-tight sm:text-4xl">
+                {danceClass.title}
+              </h1>
+
+              {danceClass.description && (
+                <p className="mt-4 text-base leading-7 text-base-content/70">
+                  {danceClass.description}
+                </p>
+              )}
+
+              {/* ===================================================
+                  CLASS DETAILS
+              ==================================================== */}
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                {/* Date */}
+                {danceClass.date && (
+                  <div className="flex items-center gap-3 rounded-2xl bg-base-200 p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <CalendarDays size={20} />
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/50">
+                        Schedule
+                      </p>
+
+                      <p className="mt-0.5 font-bold">{danceClass.date}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Time */}
+                {danceClass.time && (
+                  <div className="flex items-center gap-3 rounded-2xl bg-base-200 p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Clock size={20} />
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/50">
+                        Time
+                      </p>
+
+                      <p className="mt-0.5 font-bold">{danceClass.time}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Level */}
+                {danceClass.level && (
+                  <div className="flex items-center gap-3 rounded-2xl bg-base-200 p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Users size={20} />
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/50">
+                        Level
+                      </p>
+
+                      <p className="mt-0.5 font-bold">{danceClass.level}</p>
+                    </div>
+                  </div>
+                )}
+
+                {/* Drop-in */}
+                {danceClass.drop && (
+                  <div className="flex items-center gap-3 rounded-2xl bg-base-200 p-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                      <Sparkles size={20} />
+                    </div>
+
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold uppercase tracking-wide text-base-content/50">
+                        Drop-In
+                      </p>
+
+                      <p className="mt-0.5 font-bold">{danceClass.drop}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* ===================================================
+                  BIO
+              ==================================================== */}
+              {danceClass.bio && (
+                <div className="mt-8">
+                  <div className="mb-3 flex items-center gap-2">
+                    <UserRound size={19} className="text-primary" />
+
+                    <h3 className="text-lg font-black">About the Instructor</h3>
+                  </div>
+
+                  <div className="rounded-2xl border border-base-300 bg-base-200/50 p-5">
+                    <p className="leading-7 text-base-content/75">
+                      {danceClass.bio}
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* ===================================================
+                  INDEPENDENT INSTRUCTOR NOTE
+              ==================================================== */}
+              <div className="mt-7 rounded-2xl border border-primary/20 bg-primary/5 p-5">
+                <div className="flex gap-3">
+                  <Sparkles
+                    size={20}
+                    className="mt-0.5 shrink-0 text-primary"
+                  />
+
+                  <div>
+                    <h3 className="font-black">Independent Instructor</h3>
+
+                    <p className="mt-1 text-sm leading-6 text-base-content/70">
+                      This class is independently operated by the instructor and
+                      hosted at Freedom Dance Studio. Please contact the
+                      instructor directly for class-specific questions, payment,
+                      and registration.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* ===================================================
+                  CONTACT BUTTONS
+              ==================================================== */}
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                {danceClass.phone && (
+                  <a
+                    href={`tel:${danceClass.phone}`}
+                    className="btn btn-outline"
+                  >
+                    <Phone size={18} />
+                    Contact Instructor
+                  </a>
+                )}
+
+                {danceClass.instagram && (
+                  <a
+                    href={
+                      danceClass.instagram.startsWith("http")
+                        ? danceClass.instagram
+                        : `https://instagram.com/${danceClass.instagram.replace(
+                            "@",
+                            "",
+                          )}`
+                    }
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline"
+                  >
+                    <BsInstagram size={18} />
+                    Instagram
+                  </a>
+                )}
+              </div>
+
+              {/* ===================================================
+                  BOOKING BUTTON
+              ==================================================== */}
+              <div className="mt-6">
+                <button
+                  type="button"
+                  onClick={() => setShowBooking(true)}
+                  className="btn btn-primary btn-lg w-full rounded-2xl font-black shadow-lg"
+                >
+                  Request to Join Class
+                  <ArrowRight size={20} />
+                </button>
+              </div>
+            </>
           )}
 
-          {/* ================= BOOKING FORM ================= */}
-
+          {/* =======================================================
+              BOOKING FORM
+          ======================================================== */}
           {showBooking && !submitted && (
-            <div className="rounded-2xl border border-base-300 p-5 sm:p-6">
-              <div className="mb-6">
-                <div className="badge badge-primary mb-3">Class Booking</div>
+            <div>
+              {/* Header */}
+              <div className="mb-7">
+                <button
+                  type="button"
+                  onClick={() => setShowBooking(false)}
+                  className="mb-5 flex items-center gap-2 text-sm font-bold text-base-content/60 transition hover:text-primary"
+                >
+                  <ArrowRight size={16} className="rotate-180" />
+                  Back to class
+                </button>
 
-                <h3 className="text-2xl font-bold">Book {danceClass.title}</h3>
+                <p className="text-xs font-bold uppercase tracking-widest text-primary">
+                  Class Registration
+                </p>
 
-                <p className="mt-1 text-base-content/60">
-                  with {danceClass.instructor}
+                <h2 className="mt-1 text-3xl font-black">Request to Join</h2>
+
+                <p className="mt-2 text-sm leading-6 text-base-content/60">
+                  Complete the form below and we will receive your registration
+                  request.
                 </p>
               </div>
 
-              <form onSubmit={onSubmit} className="space-y-4">
-                {/* Name */}
+              {/* Form */}
+              <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Web3Forms */}
+                <input
+                  type="hidden"
+                  name="subject"
+                  value={`Independent Class Registration - ${danceClass.title} - ${danceClass.instructor}`}
+                />
 
+                <input type="hidden" name="Class" value={danceClass.title} />
+
+                <input
+                  type="hidden"
+                  name="Instructor"
+                  value={danceClass.instructor}
+                />
+
+                <input
+                  type="hidden"
+                  name="Schedule"
+                  value={`${danceClass.date || ""} ${danceClass.time || ""}`}
+                />
+
+                <input
+                  type="hidden"
+                  name="Hosted At"
+                  value="Freedom Dance Studio"
+                />
+
+                {/* Name */}
                 <div>
-                  <label className="label">
-                    <span className="label-text font-semibold">Full Name</span>
+                  <label
+                    htmlFor="student-name"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Full Name *
                   </label>
 
                   <input
+                    id="student-name"
                     type="text"
-                    name="name"
-                    placeholder="Your full name"
-                    className="input input-bordered w-full"
+                    name="Name"
                     required
+                    placeholder="Your full name"
+                    className="input input-bordered w-full rounded-xl"
                   />
                 </div>
 
                 {/* Email */}
-
                 <div>
-                  <label className="label">
-                    <span className="label-text font-semibold">Email</span>
+                  <label
+                    htmlFor="student-email"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Email *
                   </label>
 
                   <input
+                    id="student-email"
                     type="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    className="input input-bordered w-full"
+                    name="Email"
                     required
+                    placeholder="you@example.com"
+                    className="input input-bordered w-full rounded-xl"
                   />
                 </div>
 
                 {/* Phone */}
-
                 <div>
-                  <label className="label">
-                    <span className="label-text font-semibold">
-                      Phone Number
-                    </span>
+                  <label
+                    htmlFor="student-phone"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Phone *
                   </label>
 
                   <input
+                    id="student-phone"
                     type="tel"
-                    name="phone"
-                    placeholder="Your phone number"
-                    className="input input-bordered w-full"
+                    name="Phone"
                     required
+                    placeholder="(702) 555-1234"
+                    className="input input-bordered w-full rounded-xl"
                   />
                 </div>
 
-                {/* Hidden class information */}
+                {/* Experience */}
+                <div>
+                  <label
+                    htmlFor="experience"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Dance Experience
+                  </label>
 
-                <input
-                  type="text"
-                  name="instructor"
-                  hidden
-                  value={danceClass.instructor}
-                  readOnly
-                  required
-                />
+                  <select
+                    id="experience"
+                    name="Dance Experience"
+                    className="select select-bordered w-full rounded-xl"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select your experience
+                    </option>
 
-                <input
-                  type="text"
-                  name="day"
-                  hidden
-                  value={danceClass.date}
-                  readOnly
-                  required
-                />
+                    <option value="Beginner">Beginner</option>
 
-                <input
-                  type="text"
-                  name="time"
-                  hidden
-                  value={danceClass.time}
-                  readOnly
-                  required
-                />
+                    <option value="Intermediate">Intermediate</option>
+
+                    <option value="Advanced">Advanced</option>
+
+                    <option value="Professional">Professional</option>
+                  </select>
+                </div>
 
                 {/* Message */}
-
                 <div>
-                  <label className="label">
-                    <span className="label-text font-semibold">Message</span>
+                  <label
+                    htmlFor="student-message"
+                    className="mb-2 block text-sm font-bold"
+                  >
+                    Message
                   </label>
 
                   <textarea
-                    name="message"
+                    id="student-message"
+                    name="Message"
                     rows="4"
-                    className="textarea textarea-bordered w-full"
-                    placeholder="Anything you'd like the instructor to know?"
+                    placeholder="Anything you would like the instructor to know?"
+                    className="textarea textarea-bordered w-full rounded-xl"
                   />
                 </div>
 
-                {/* Selected Class */}
-
-                <div className="alert alert-info">
-                  <div>
-                    <p className="font-bold">{danceClass.title}</p>
-
-                    <p className="text-sm">{danceClass.date}</p>
-
-                    <p className="text-sm">{danceClass.time}</p>
-
-                    <p className="text-sm">
-                      Instructor: {danceClass.instructor}
-                    </p>
-                  </div>
-                </div>
-
-                {/* ================= POLICIES & WAIVERS ================= */}
-
-                <div className="space-y-4 rounded-2xl border border-base-300 bg-base-200/60 p-4 sm:p-5">
-                  <div>
-                    <h4 className="text-lg font-bold">Policies & Waivers</h4>
-
-                    <p className="mt-1 text-sm text-base-content/60">
-                      Please click each section below to read the full policy
-                      before agreeing.
-                    </p>
-                  </div>
+                {/* =================================================
+                    AGREEMENTS
+                ================================================== */}
+                <div className="space-y-3 rounded-2xl border border-base-300 bg-base-200/50 p-5">
+                  <h3 className="mb-4 font-black">Required Agreements</h3>
 
                   {/* Terms */}
-
-                  <div className="overflow-hidden rounded-xl border border-base-300 bg-base-100">
-                    <details className="group">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold">
-                        <span>Class Booking Terms & Policies</span>
-
-                        <span className="text-sm text-primary group-open:hidden">
-                          Read More
-                        </span>
-
-                        <span className="hidden text-sm text-primary group-open:inline">
-                          Read Less
-                        </span>
-                      </summary>
-
-                      <div className="space-y-2 px-4 pb-4 text-sm leading-relaxed text-base-content/70">
-                        <p>
-                          This booking is for an independent class hosted at
-                          Freedom Dance Studio. The independent instructor is
-                          responsible for registration, pricing, payment
-                          collection, cancellations, refunds, attendance, and
-                          class-specific rules.
-                        </p>
-
-                        <p>
-                          Submitting this form sends a booking request only. It
-                          does not guarantee a place in the class. Your
-                          registration is confirmed only after the independent
-                          instructor confirms your participation and provides
-                          any required payment or registration instructions.
-                        </p>
-
-                        <p>
-                          By booking, you agree to follow the reasonable rules
-                          and instructions of both the instructor and Freedom
-                          Dance Studio while using the facility.
-                        </p>
-                      </div>
-                    </details>
-                  </div>
-
                   <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary mt-0.5 shrink-0"
                       checked={agreements.terms}
-                      onChange={(e) =>
-                        setAgreements((prev) => ({
-                          ...prev,
-                          terms: e.target.checked,
-                        }))
-                      }
-                      required
+                      onChange={() => handleAgreementChange("terms")}
+                      className="checkbox checkbox-primary mt-0.5"
                     />
 
-                    <span className="text-sm leading-relaxed">
-                      I have read and agree to{" "}
-                      <strong>Class Booking Terms & Policies</strong>.
+                    <span className="text-sm leading-6">
+                      I agree to the studio and class terms and conditions.
                     </span>
                   </label>
 
                   {/* Liability */}
-
-                  <div className="overflow-hidden rounded-xl border border-base-300 bg-base-100">
-                    <details className="group">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold">
-                        <span>Participation & Liability Waiver</span>
-
-                        <span className="text-sm text-primary group-open:hidden">
-                          Read More
-                        </span>
-
-                        <span className="hidden text-sm text-primary group-open:inline">
-                          Read Less
-                        </span>
-                      </summary>
-
-                      <div className="space-y-2 px-4 pb-4 text-sm leading-relaxed text-base-content/70">
-                        <p>
-                          I understand that dance is a physical activity and
-                          that participation may involve risks, including slips,
-                          trips, falls, strains, sprains, collisions, or other
-                          injuries.
-                        </p>
-
-                        <p>
-                          I voluntarily choose to participate and agree to use
-                          reasonable care, follow the instructor's directions,
-                          respect other participants, and follow Freedom Dance
-                          Studio's safety and facility rules.
-                        </p>
-
-                        <p>
-                          I understand that Freedom Dance Studio is providing
-                          the facility and that this independent class is
-                          operated by the independent instructor. To the extent
-                          permitted by applicable law, I accept responsibility
-                          for my own participation and assume the ordinary risks
-                          associated with dance activities.
-                        </p>
-                      </div>
-                    </details>
-                  </div>
-
                   <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary mt-0.5 shrink-0"
                       checked={agreements.liability}
-                      onChange={(e) =>
-                        setAgreements((prev) => ({
-                          ...prev,
-                          liability: e.target.checked,
-                        }))
-                      }
-                      required
+                      onChange={() => handleAgreementChange("liability")}
+                      className="checkbox checkbox-primary mt-0.5"
                     />
 
-                    <span className="text-sm leading-relaxed">
-                      I have read and agree to{" "}
-                      <strong>Participation & Liability Waiver</strong>.
+                    <span className="text-sm leading-6">
+                      I understand that dance activities involve physical
+                      activity and I accept responsibility for participating.
                     </span>
                   </label>
 
                   {/* Media */}
-
-                  <div className="overflow-hidden rounded-xl border border-base-300 bg-base-100">
-                    <details className="group">
-                      <summary className="flex cursor-pointer list-none items-center justify-between gap-3 p-4 font-semibold">
-                        <span>Photo & Video Marketing Release</span>
-
-                        <span className="text-sm text-primary group-open:hidden">
-                          Read More
-                        </span>
-
-                        <span className="hidden text-sm text-primary group-open:inline">
-                          Read Less
-                        </span>
-                      </summary>
-
-                      <div className="space-y-2 px-4 pb-4 text-sm leading-relaxed text-base-content/70">
-                        <p>
-                          I understand that Freedom Dance Studio and/or its
-                          authorized representatives may photograph, film, or
-                          otherwise record me during classes, workshops,
-                          socials, events, and other activities at the studio.
-                        </p>
-
-                        <p>
-                          I give Freedom Dance Studio permission to use my
-                          photograph, video, image, likeness, and/or voice for
-                          the studio's marketing, advertising, promotional,
-                          social media, website, and other business-related
-                          promotional purposes.
-                        </p>
-
-                        <p>
-                          This may include use on Freedom Dance Studio's
-                          Instagram, Facebook, TikTok, YouTube, website,
-                          advertisements, flyers, promotional materials, and
-                          other studio marketing channels. I understand that I
-                          will not receive payment or other compensation for
-                          this use.
-                        </p>
-
-                        <p>
-                          If I have questions or concerns about being
-                          photographed or recorded, I will speak with the
-                          instructor or Freedom Dance Studio before
-                          participating.
-                        </p>
-                      </div>
-                    </details>
-                  </div>
-
                   <label className="flex cursor-pointer items-start gap-3">
                     <input
                       type="checkbox"
-                      className="checkbox checkbox-primary mt-0.5 shrink-0"
                       checked={agreements.media}
-                      onChange={(e) =>
-                        setAgreements((prev) => ({
-                          ...prev,
-                          media: e.target.checked,
-                        }))
-                      }
-                      required
+                      onChange={() => handleAgreementChange("media")}
+                      className="checkbox checkbox-primary mt-0.5"
                     />
 
-                    <span className="text-sm leading-relaxed">
-                      I have read and agree to{" "}
-                      <strong>Photo & Video Marketing Release</strong>.
+                    <span className="text-sm leading-6">
+                      I allow photos and videos taken during studio activities
+                      to be used for promotional purposes, including social
+                      media and the studio website.
                     </span>
                   </label>
-
-                  <div className="alert alert-info">
-                    <Sparkles size={18} className="shrink-0" />
-
-                    <span className="text-xs leading-relaxed">
-                      Please click <strong>Read More</strong> on each policy
-                      above before checking the agreement boxes. All three
-                      agreements are required to submit your booking.
-                    </span>
-                  </div>
-
-                  <input
-                    type="hidden"
-                    name="booking_terms_agreed"
-                    value={agreements.terms ? "Yes" : "No"}
-                  />
-
-                  <input
-                    type="hidden"
-                    name="liability_waiver_agreed"
-                    value={agreements.liability ? "Yes" : "No"}
-                  />
-
-                  <input
-                    type="hidden"
-                    name="freedom_dance_studio_photo_video_marketing_release_agreed"
-                    value={agreements.media ? "Yes" : "No"}
-                  />
                 </div>
 
-                {/* Buttons */}
+                {/* Warning */}
+                {!allAgreementsAccepted && (
+                  <p className="text-sm font-medium text-warning">
+                    Please accept all required agreements before submitting.
+                  </p>
+                )}
 
-                <div className="flex flex-col gap-3 pt-2 sm:flex-row">
-                  <button
-                    type="submit"
-                    disabled={
-                      !agreements.terms ||
-                      !agreements.liability ||
-                      !agreements.media
-                    }
-                    className="btn btn-primary flex-1 gap-2"
-                  >
-                    Submit Booking
-                    <CheckCircle2 size={18} />
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => setShowBooking(false)}
-                    className="btn btn-outline"
-                  >
-                    Back
-                  </button>
-                </div>
+                {/* Submit */}
+                <button
+                  type="submit"
+                  disabled={!allAgreementsAccepted}
+                  className="btn btn-primary btn-lg w-full rounded-2xl font-black"
+                >
+                  Submit Registration
+                  <ArrowRight size={20} />
+                </button>
               </form>
             </div>
           )}
 
-          {/* ================= SUCCESS ================= */}
-
+          {/* =======================================================
+              SUCCESS
+          ======================================================== */}
           {submitted && (
-            <div className="py-8 text-center">
-              <div className="mb-5 flex justify-center">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-success/20">
-                  <CheckCircle2 size={36} className="text-success" />
-                </div>
+            <div className="flex min-h-[500px] flex-col items-center justify-center text-center">
+              <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-success/10 text-success">
+                <CheckCircle2 size={46} />
               </div>
 
-              <h3 className="text-2xl font-bold sm:text-3xl">
-                Booking Request Sent!
-              </h3>
+              <p className="text-xs font-bold uppercase tracking-widest text-success">
+                Registration Received
+              </p>
 
-              <p className="mx-auto mt-3 max-w-lg text-base-content/70">
-                Thank you for your interest in{" "}
-                <strong>{danceClass.title}</strong>. Please contact{" "}
-                <strong>{danceClass.instructor}</strong> directly for
-                confirmation, pricing, and registration details.
+              <h2 className="mt-2 text-3xl font-black">Thank You!</h2>
+
+              <p className="mx-auto mt-4 max-w-md leading-7 text-base-content/70">
+                Your request to join <strong>{danceClass.title}</strong> with{" "}
+                <strong>{danceClass.instructor}</strong> has been submitted
+                successfully.
+              </p>
+
+              <p className="mt-3 text-sm text-base-content/50">
+                The instructor or Freedom Dance Studio will follow up with you
+                with the next steps.
               </p>
 
               <button
                 type="button"
                 onClick={onClose}
-                className="btn btn-primary mt-6"
+                className="btn btn-primary mt-8 rounded-xl px-8"
               >
                 Done
               </button>
             </div>
           )}
-
-          {/* ================= NOTICE ================= */}
-
-          <div className="alert alert-warning mt-6">
-            <Sparkles size={20} className="shrink-0" />
-
-            <span className="text-sm">
-              This is an independent class hosted at Freedom Dance Studio. The
-              instructor manages registration, pricing, payments, cancellations,
-              and class-specific information. By booking, you also acknowledge
-              the studio's participation, media, and booking policies shown
-              above.
-            </span>
-          </div>
         </div>
       </div>
     </dialog>
