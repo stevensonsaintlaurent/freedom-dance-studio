@@ -75,7 +75,7 @@ const weeklySchedule = [
     dance: "Beginner Kizomba",
     instructor: "Stevenson",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -85,7 +85,7 @@ const weeklySchedule = [
     dance: "Ladies Styling Bachata",
     instructor: "Luna",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -95,7 +95,7 @@ const weeklySchedule = [
     dance: "Beginner Bachata",
     instructor: "Stevenson",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -105,7 +105,7 @@ const weeklySchedule = [
     dance: "Beginner Bachata Man Styling",
     instructor: "Stevenson",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -115,7 +115,7 @@ const weeklySchedule = [
     dance: "Beginner Salsa",
     instructor: "Stevenson",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -125,7 +125,7 @@ const weeklySchedule = [
     dance: "Beginner Bachata",
     instructor: "Stevenson",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -165,7 +165,7 @@ const weeklySchedule = [
     dance: "Ladies Styling Bachata",
     instructor: "Zagir",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {
@@ -195,7 +195,7 @@ const weeklySchedule = [
     dance: "Beginner Salsa",
     instructor: "Desmond",
     drop: "$15",
-    level: "Beginner",
+    level: "Beginner Friendly",
     type: "freedom",
   },
   {

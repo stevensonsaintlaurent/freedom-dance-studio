@@ -576,7 +576,9 @@ const Booking = () => {
                   <>
                     <div className="divider"></div>
 
-                    <p className="break-words">✔ Beginner Friendly</p>
+                    <p className="break-words">
+                      ✔ {level || "Beginner Friendly"}
+                    </p>
 
                     <p className="break-words">✔ No Partner Required</p>
 
