@@ -108,7 +108,7 @@ const router = createBrowserRouter([
         element: <StudioRentalConfirmation />,
       },
       {
-        path: "studiopricing",
+        path: "rental",
         element: <StudioRentals />,
       },
       {

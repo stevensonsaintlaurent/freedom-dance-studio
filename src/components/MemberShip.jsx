@@ -28,7 +28,11 @@ const plans = [
     price: "$69",
     period: "/month",
     description: "Our popular membership.",
-    features: ["day pass ", "All the classes that day", "Free ladies styling"],
+    features: [
+      "day pass or group of 8 classes  ",
+      "All the classes that day",
+      "Free ladies styling",
+    ],
     button: "Get Started",
     popular: true,
   },
@@ -86,7 +90,7 @@ export default function Pricing() {
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`card bg-base-100 shadow-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl ${
+              className={`card bg-base-100 shadow-xl border transition-all capitalize duration-300 hover:-translate-y-2 hover:shadow-2xl ${
                 plan.popular ? "border-primary scale-105" : "border-base-300"
               }`}
             >

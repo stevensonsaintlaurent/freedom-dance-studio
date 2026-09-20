@@ -33,7 +33,7 @@ const mainLinks = [
 
   {
     id: 2,
-    url: "/studiopricing",
+    url: "/rental",
     textKey: "nav.studioRental",
     icon: Building2,
   },
