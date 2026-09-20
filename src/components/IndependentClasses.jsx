@@ -428,7 +428,15 @@ export default function IndependentClasses() {
   const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [filter, setFilter] = useState("All");
 
-  const filters = ["All", "Monday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const filters = [
+    "All",
+    "Monday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   const filteredClasses =
     filter === "All"
