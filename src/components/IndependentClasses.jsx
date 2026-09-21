@@ -24,7 +24,7 @@ import edourdo from "../assets/instructors/edourdo.jpg";
 import luis from "../assets/instructors/luis1.jpg";
 import luz from "../assets/instructors/luz.jpeg";
 import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
-import Sandra from "../assets/instructors/sandra1.jpg";
+import Sandra from "../assets/instructors/sandra2.jpeg";
 
 // ======================================================
 // INDEPENDENT CLASSES
