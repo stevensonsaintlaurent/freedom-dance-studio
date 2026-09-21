@@ -40,12 +40,44 @@ const independentClasses = [
     time: "5:00 PM – 6:00 PM",
     instructor: "Luis",
     category: "Latin / Urban",
-    phone: "702-555-0101",
-    instagram: "luisdance",
+    phone: "+1 (786) 979-5525",
+    instagram:
+      "https://www.instagram.com/luisi_veliz_dancer?stkn=MXdmbWk1cTI2NjZ5MQ==",
     description:
       "Learn Cuban urban movement, musicality, and powerful Reparto combinations in a fun and welcoming environment.",
     image: luis,
     video: "https://youtu.be/2IaBcV1tRcw?si=YkE_gEwWzxUGO_0X",
+  },
+  {
+    id: 7,
+    day: "Wednesday",
+    date: "Every Wednesday",
+    title: "Salsalogía Training",
+    time: "6:00 PM – 7:00 PM",
+    instructor: "Sandra",
+    category: "Salsa / Latin",
+    phone: "+1 (702) 449-2040",
+    instagram: "",
+    description:
+      "An intensive Salsa On2 class focused on mambo footwork, timing, technique, styling, presence, expression, and joy. Each 4-week session builds choreography while keeping a strong foundation in Salsa On2 fundamentals.",
+    image: Sandra,
+    video: "",
+  },
+  {
+    id: 6,
+    day: "Thursday",
+    date: "Every Thursday",
+    title: "Salsa Rueda de Casino",
+    time: "6:30 PM – 7:30 PM",
+    instructor: "Rodolfo",
+    category: "Salsa / Latin",
+    phone: "+1 (702) 472-3424",
+    instagram: "",
+    description:
+      "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
+    image: Rodolfo,
+    video:
+      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
   },
 
   {
@@ -56,8 +88,8 @@ const independentClasses = [
     time: "6:30 PM – 8:30 PM",
     instructor: "Luz",
     category: "Urban / Fitness",
-    phone: "702-555-0102",
-    instagram: "luzdance",
+    phone: "+1 (725) 247-9390",
+    instagram: "",
     description:
       "Build confidence, learn powerful movements, and have fun with energetic Twerk combinations.",
     image: luz,
@@ -72,8 +104,8 @@ const independentClasses = [
     time: "7:00 PM – 8:00 PM",
     instructor: "Eduardo",
     category: "Urban / Reggaeton",
-    phone: "702-555-0103",
-    instagram: "reggaetoninstructor",
+    phone: "+1 (562) 325-4115",
+    instagram: "",
     description:
       "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
     image: edourdo,
@@ -89,7 +121,7 @@ const independentClasses = [
     instructor: "Eduardo",
     category: "Hip-Hop / Urban",
     phone: "702-555-0104",
-    instagram: "hiphopinstructor",
+    instagram: "",
     description:
       "Learn Hip-Hop fundamentals, combinations, musicality, and freestyle movement.",
     image: edourdo,
@@ -104,45 +136,13 @@ const independentClasses = [
     time: "5:30 PM – 6:30 PM",
     instructor: "Luis",
     category: "Latin / Urban",
-    phone: "702-555-0101",
-    instagram: "luisdance",
+    phone: "+1 (786) 979-5525",
+    instagram:
+      "https://www.instagram.com/luisi_veliz_dancer?stkn=MXdmbWk1cTI2NjZ5MQ==",
     description:
       "Bring your energy and learn Reparto with Luis through fun combinations and musicality.",
     image: luis,
     video: "https://youtu.be/2IaBcV1tRcw?si=OsL5zUY1rKtA7nBI",
-  },
-
-  {
-    id: 6,
-    day: "Thursday",
-    date: "Every Thursday",
-    title: "Salsa Rueda de Casino",
-    time: "6:30 PM – 7:30 PM",
-    instructor: "Rodolfo",
-    category: "Salsa / Latin",
-    phone: "702-591-6499",
-    instagram: "https://www.instagram.com/law.soon7?igsi=MWd3OGFlMWwzaWdraw==",
-    description:
-      "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
-    image: Rodolfo,
-    video:
-      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
-  },
-
-  {
-    id: 7,
-    day: "Wednesday",
-    date: "Every Wednesday",
-    title: "Salsalogía Training",
-    time: "6:00 PM – 7:00 PM",
-    instructor: "Sandra",
-    category: "Salsa / Latin",
-    phone: "",
-    instagram: "",
-    description:
-      "An intensive Salsa On2 class focused on mambo footwork, timing, technique, styling, presence, expression, and joy. Each 4-week session builds choreography while keeping a strong foundation in Salsa On2 fundamentals.",
-    image: Sandra,
-    video: "",
   },
 ];
 
