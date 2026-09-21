@@ -8,6 +8,7 @@ import {
   Play,
   Sparkles,
   Users,
+  X,
 } from "lucide-react";
 import { BsInstagram } from "react-icons/bs";
 import { Link } from "react-router-dom";
@@ -44,8 +45,7 @@ const independentClasses = [
     description:
       "Learn Cuban urban movement, musicality, and powerful Reparto combinations in a fun and welcoming environment.",
     image: luis,
-    video:
-      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
+    video: "https://youtu.be/2IaBcV1tRcw?si=YkE_gEwWzxUGO_0X",
   },
 
   {
@@ -61,7 +61,7 @@ const independentClasses = [
     description:
       "Build confidence, learn powerful movements, and have fun with energetic Twerk combinations.",
     image: luz,
-    video: "https://cdn.coverr.co/videos/coverr-woman-dancing-1573/1080p.mp4",
+    video: "https://youtu.be/zCsTro3nO2g?si=euprrYnwx2iqT4h1",
   },
 
   {
@@ -77,7 +77,7 @@ const independentClasses = [
     description:
       "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
     image: edourdo,
-    video: "https://cdn.coverr.co/videos/coverr-woman-dancing-1574/1080p.mp4",
+    video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
   },
 
   {
@@ -93,7 +93,7 @@ const independentClasses = [
     description:
       "Learn Hip-Hop fundamentals, combinations, musicality, and freestyle movement.",
     image: edourdo,
-    video: "https://cdn.coverr.co/videos/coverr-dancing-1576/1080p.mp4",
+    video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
   },
 
   {
@@ -109,8 +109,7 @@ const independentClasses = [
     description:
       "Bring your energy and learn Reparto with Luis through fun combinations and musicality.",
     image: luis,
-    video:
-      "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
+    video: "https://youtu.be/2IaBcV1tRcw?si=OsL5zUY1rKtA7nBI",
   },
 
   {
@@ -148,6 +147,76 @@ const independentClasses = [
 ];
 
 // ======================================================
+// VIDEO HELPERS
+// ======================================================
+
+/**
+ * Returns true when the supplied URL is a YouTube URL.
+ */
+function isYouTubeUrl(url) {
+  if (!url) return false;
+
+  return (
+    url.includes("youtube.com") ||
+    url.includes("youtu.be") ||
+    url.includes("youtube-nocookie.com")
+  );
+}
+
+/**
+ * Converts normal YouTube URLs into an iframe embed URL.
+ *
+ * Supports:
+ * - https://youtu.be/VIDEO_ID
+ * - https://www.youtube.com/watch?v=VIDEO_ID
+ * - https://www.youtube.com/embed/VIDEO_ID
+ */
+function getYouTubeEmbedUrl(url) {
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url);
+
+    let videoId = "";
+
+    // --------------------------------------------
+    // youtu.be/VIDEO_ID
+    // --------------------------------------------
+    if (parsed.hostname === "youtu.be") {
+      videoId = parsed.pathname.replace(/^\/+/, "");
+    }
+
+    // --------------------------------------------
+    // youtube.com/watch?v=VIDEO_ID
+    // --------------------------------------------
+    else if (
+      parsed.hostname.includes("youtube.com") ||
+      parsed.hostname.includes("youtube-nocookie.com")
+    ) {
+      if (parsed.pathname.startsWith("/watch")) {
+        videoId = parsed.searchParams.get("v") || "";
+      }
+
+      // Already an embed URL
+      else if (parsed.pathname.startsWith("/embed/")) {
+        videoId = parsed.pathname.replace("/embed/", "").split("/")[0];
+      }
+
+      // YouTube shorts
+      else if (parsed.pathname.startsWith("/shorts/")) {
+        videoId = parsed.pathname.replace("/shorts/", "").split("/")[0];
+      }
+    }
+
+    if (!videoId) return null;
+
+    return `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+  } catch {
+    return null;
+  }
+}
+
+// ======================================================
 // CLASS CARD
 // ======================================================
 
@@ -166,7 +235,7 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
       ================================================== */}
 
       <div className="relative h-[330px] overflow-hidden bg-base-200 sm:h-[350px]">
-        {/* Soft background behind image */}
+        {/* Soft background */}
         <div className="absolute inset-0 bg-gradient-to-br from-base-300 via-base-200 to-base-300" />
 
         {/* Instructor image */}
@@ -177,7 +246,7 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
             className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.03]"
           />
 
-          {/* Very subtle bottom fade */}
+          {/* Bottom fade */}
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" />
         </div>
 
@@ -313,42 +382,85 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
 function VideoModal({ danceClass, onClose }) {
   if (!danceClass) return null;
 
+  const youtubeEmbedUrl = getYouTubeEmbedUrl(danceClass.video);
+
+  const isYouTube = isYouTubeUrl(danceClass.video);
+
   return (
     <dialog open className="modal modal-open">
-      <div className="modal-box max-h-[90vh] w-11/12 max-w-4xl overflow-y-auto p-0">
-        <div className="relative bg-black">
-          {danceClass.video ? (
+      <div className="modal-box max-h-[92vh] w-11/12 max-w-5xl overflow-y-auto p-0">
+        {/* ==================================================
+            VIDEO
+        ================================================== */}
+
+        <div className="relative overflow-hidden bg-black">
+          {youtubeEmbedUrl ? (
+            /* ------------------------------------------------
+               YOUTUBE
+            ------------------------------------------------ */
+            <div className="aspect-video w-full">
+              <iframe
+                src={youtubeEmbedUrl}
+                title={`${danceClass.title} with ${danceClass.instructor}`}
+                className="h-full w-full border-0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          ) : danceClass.video && !isYouTube ? (
+            /* ------------------------------------------------
+               DIRECT VIDEO / MP4
+            ------------------------------------------------ */
             <video
               src={danceClass.video}
               controls
               autoPlay
               playsInline
-              className="aspect-video w-full object-cover"
+              className="aspect-video w-full object-contain"
             />
           ) : (
+            /* ------------------------------------------------
+               NO VIDEO
+            ------------------------------------------------ */
             <div className="flex aspect-video items-center justify-center text-white">
-              No video available
+              <div className="text-center">
+                <Play className="mx-auto mb-3 opacity-50" size={40} />
+
+                <p className="font-semibold">No video available</p>
+              </div>
             </div>
           )}
 
+          {/* Close button */}
           <button
             type="button"
             onClick={onClose}
-            className="btn btn-circle btn-sm absolute right-3 top-3 border-0 bg-black/70 text-white hover:bg-black"
+            aria-label="Close video"
+            className="btn btn-circle btn-sm absolute right-3 top-3 z-20 border-0 bg-black/75 text-white shadow-lg hover:bg-black"
           >
-            ✕
+            <X size={17} />
           </button>
         </div>
 
+        {/* ==================================================
+            VIDEO INFORMATION
+        ================================================== */}
+
         <div className="p-5 sm:p-7">
+          {/* Badge */}
           <div className="badge badge-warning mb-3">Independent Class</div>
 
-          <h2 className="text-3xl font-black">{danceClass.title}</h2>
+          {/* Title */}
+          <h2 className="text-3xl font-black sm:text-4xl">
+            {danceClass.title}
+          </h2>
 
+          {/* Instructor */}
           <p className="mt-1 font-semibold text-primary">
             with {danceClass.instructor}
           </p>
 
+          {/* Schedule */}
           <div className="mt-5 flex flex-wrap gap-2">
             <div className="badge badge-outline gap-2 px-3 py-3">
               <CalendarDays size={14} />
@@ -361,10 +473,12 @@ function VideoModal({ danceClass, onClose }) {
             </div>
           </div>
 
+          {/* Description */}
           <p className="mt-5 leading-7 text-base-content/70">
             {danceClass.description}
           </p>
 
+          {/* Contact */}
           <div className="mt-6 rounded-2xl bg-base-200 p-5">
             <p className="mb-3 font-bold">Contact {danceClass.instructor}</p>
 
@@ -397,6 +511,7 @@ function VideoModal({ danceClass, onClose }) {
             </div>
           </div>
 
+          {/* Independent notice */}
           <div className="alert alert-warning mt-5 text-sm">
             <Sparkles size={18} className="shrink-0" />
 
@@ -406,6 +521,7 @@ function VideoModal({ danceClass, onClose }) {
             </span>
           </div>
 
+          {/* Close */}
           <div className="mt-6 flex justify-end">
             <button type="button" onClick={onClose} className="btn">
               Close
@@ -414,19 +530,24 @@ function VideoModal({ danceClass, onClose }) {
         </div>
       </div>
 
+      {/* Backdrop */}
       <div className="modal-backdrop" onClick={onClose} />
     </dialog>
   );
 }
 
 // ======================================================
-// MAIN
+// MAIN COMPONENT
 // ======================================================
 
 export default function IndependentClasses() {
   const [selectedClass, setSelectedClass] = useState(null);
   const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [filter, setFilter] = useState("All");
+
+  // ====================================================
+  // FILTERS
+  // ====================================================
 
   const filters = [
     "All",
@@ -443,6 +564,10 @@ export default function IndependentClasses() {
       ? independentClasses
       : independentClasses.filter((danceClass) => danceClass.day === filter);
 
+  // ====================================================
+  // RENDER
+  // ====================================================
+
   return (
     <main className="min-h-screen bg-base-200">
       {/* ==================================================
@@ -457,7 +582,9 @@ export default function IndependentClasses() {
 
       <section className="px-4 pb-14 pt-0 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          {/* HEADER */}
+          {/* ==================================================
+              HEADER
+          ================================================== */}
 
           <motion.div
             initial={{ opacity: 0, y: 15 }}
@@ -480,7 +607,9 @@ export default function IndependentClasses() {
             </p>
           </motion.div>
 
-          {/* NOTICE */}
+          {/* ==================================================
+              NOTICE
+          ================================================== */}
 
           <div className="mx-auto mt-8 max-w-4xl">
             <div className="alert border border-primary/10 bg-base-100 shadow-sm">
@@ -498,11 +627,12 @@ export default function IndependentClasses() {
             </div>
           </div>
 
-          {/* FILTERS */}
+          {/* ==================================================
+              FILTERS
+          ================================================== */}
 
           <div className="mt-8">
             {/* MOBILE */}
-
             <div className="sm:hidden">
               <select
                 value={filter}
@@ -518,7 +648,6 @@ export default function IndependentClasses() {
             </div>
 
             {/* DESKTOP */}
-
             <div className="hidden justify-center sm:flex">
               <div className="join rounded-xl shadow-sm">
                 {filters.map((day) => (
@@ -537,7 +666,9 @@ export default function IndependentClasses() {
             </div>
           </div>
 
-          {/* COUNT */}
+          {/* ==================================================
+              COUNT
+          ================================================== */}
 
           <div className="mt-6 flex items-center justify-between">
             <p className="text-sm font-medium text-base-content/50">
@@ -556,7 +687,9 @@ export default function IndependentClasses() {
             )}
           </div>
 
-          {/* CARDS */}
+          {/* ==================================================
+              CARDS
+          ================================================== */}
 
           <motion.div
             layout
@@ -615,13 +748,17 @@ export default function IndependentClasses() {
       </section>
 
       {/* ==================================================
-          MODALS
+          VIDEO MODAL
       ================================================== */}
 
       <VideoModal
         danceClass={selectedClass}
         onClose={() => setSelectedClass(null)}
       />
+
+      {/* ==================================================
+          INSTRUCTOR MODAL
+      ================================================== */}
 
       <InstructorClassModal
         danceClass={selectedInstructor}
