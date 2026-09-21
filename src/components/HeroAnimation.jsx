@@ -119,11 +119,11 @@ const HeroAnimation = () => {
                 </Link>
 
                 <Link
-                  to="/studiopricing"
+                  to="/rental"
                   className="btn btn-lg rounded-full border border-white/20 bg-white/10 px-8 text-white"
                 >
                   <PartyPopper size={18} />
-                  Rent Studio
+                  Rent Studios
                 </Link>
               </div>
             </div>
@@ -281,7 +281,7 @@ const HeroAnimation = () => {
                 </Link>
 
                 <Link
-                  to="/studiopricing"
+                  to="/rental"
                   className="btn btn-md w-full rounded-full border border-white/20 bg-white/10 px-6 text-white backdrop-blur-xl sm:btn-lg sm:w-auto sm:px-8"
                 >
                   <PartyPopper size={18} />
