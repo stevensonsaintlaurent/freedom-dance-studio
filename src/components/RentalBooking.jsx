@@ -1704,7 +1704,10 @@ export default function RentalBooking({
     } = confirmationData;
 
     return (
-      <section className="fixed inset-0 z-[99999] min-h-screen w-full overflow-y-auto bg-base-200 px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12">
+      <section
+        className="fixed inset-0 z-[99999] min-h-screen w-full overflow-y-auto bg-base-200 px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12"
+        id="request"
+      >
         <div className="mx-auto flex min-h-full w-full max-w-6xl items-center justify-center">
           <motion.div
             initial={{

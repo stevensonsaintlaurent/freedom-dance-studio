@@ -1,7 +1,7 @@
 export const videos = [
   {
     id: 1,
-    title: "Interview",
+    title: "A Student’s Experience at Freedom Dance Studio",
     url: "https://youtube.com/shorts/alXOnlKuZHM?si=i3cbDHCzh_7PK_EX",
   },
   {
@@ -11,38 +11,59 @@ export const videos = [
   },
   {
     id: 3,
+    title: "Interview with Luz",
+    style: "Twerk Instructor",
+    category: "Independent Instructor — Hosts Classes at Freedom Dance Studio",
+    url: "https://youtu.be/zCsTro3nO2g?si=GCrZgsTw5fcMfR87",
+  },
+  {
+    id: 4,
+    title: "Interview with Luis",
+    style: "Reparto de Cuba Instructor",
+    category: "Independent Instructor — Hosts Classes at Freedom Dance Studio",
+    url: "https://youtu.be/2IaBcV1tRcw?si=62yrWRe-nfxrJVIm",
+  },
+  {
+    id: 5,
+    title: "Interview with Eduardo",
+    style: "Hip-Hop & Reggaeton Instructor",
+    category: "Independent Instructor — Hosts Classes at Freedom Dance Studio",
+    url: "https://youtu.be/FBbGFDKIMdQ?si=kLvoqTCt5SxT0Zsz",
+  },
+  {
+    id: 6,
     title: "Ladies Styling Bachata",
     url: "https://youtu.be/_SzL7KnyPlU",
   },
   {
-    id: 4,
+    id: 7,
     title: "Kizomba UrbanKiz",
     url: "https://youtu.be/x7Y_xpnp9yM",
   },
   {
-    id: 5,
+    id: 8,
     title:
       "Bachata Sensual at Freedom Dance Studio | Connection, Musicality & Expression 💃🏽🕺🏽",
     url: "https://youtu.be/sv1URMQj1PM",
   },
   {
-    id: 6,
+    id: 10,
     title: "🔥 Salsa at Freedom Dance Studio 🔥",
     url: "https://youtu.be/XQZI_pEq8gY",
   },
   {
-    id: 7,
+    id: 11,
     title: "Konpa",
     url: "https://youtu.be/EzxmYycrxXg",
   },
 
   {
-    id: 8,
+    id: 12,
     title: "Main room  event",
     url: "https://youtu.be/pJqSAwVAjc8?si=HMF638V15AA001KV",
   },
   {
-    id: 9,
+    id: 13,
     title: "Small Kizomba room",
     url: "https://youtu.be/8ZKyjrjztQQ?si=5Xo2qh4gG_Jn3QO5",
   },
@@ -51,3 +72,4 @@ export const videos = [
 
 // bachata 2
 // https://youtu.be/7E6LQu123sE
+// https://youtu.be/zCsTro3nO2g?si=GCrZgsTw5fcMfR87

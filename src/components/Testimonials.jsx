@@ -11,7 +11,7 @@ const Reviews = () => {
   const shouldReduceMotion = useReducedMotion();
 
   // Only display the first 2 video testimonials
-  const reviewVideos = videos?.slice(0, 2) || [];
+  const reviewVideos = videos?.slice(0, 5) || [];
 
   // Expand / collapse review
   const toggleReview = (id) => {
@@ -366,26 +366,32 @@ const Reviews = () => {
 
                     {/* VIDEO INFORMATION */}
                     <div className="card-body p-5 md:p-6">
+                      {/* Title */}
                       <h3 className="card-title text-lg md:text-xl">
                         {video.title || t("testimonials.defaultVideoTitle")}
                       </h3>
 
-                      <p className="text-base-content/70 text-sm md:text-base">
-                        {t("testimonials.videoDescription")}
-                      </p>
+                      {/* Instructor Style */}
+                      {video.style && (
+                        <p className="mt-1 text-sm md:text-base font-medium text-primary">
+                          {video.style}
+                        </p>
+                      )}
 
+                      {/* Category */}
+                      {video.category && (
+                        <p className="mt-2 text-sm md:text-base text-base-content/70">
+                          {video.category}
+                        </p>
+                      )}
+
+                      {/* Watch Button */}
                       {video.url && (
                         <a
                           href={video.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="
-                            btn
-                            btn-primary
-                            mt-3
-                            w-full
-                            sm:w-auto
-                          "
+                          className="btn btn-primary mt-4 w-full sm:w-auto"
                         >
                           {t("testimonials.watchYoutube")}
                         </a>
