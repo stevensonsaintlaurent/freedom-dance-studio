@@ -24,10 +24,22 @@ const karol_profil2 = "/images/3.jpeg";
 const karol_profil3 = "/images/4.jpeg";
 
 const galleryImages = [
-  { src: karol_profil, alt: "Karol Di Nassif - Acting Instructor" },
-  { src: karol_profil1, alt: "Kids Acting Classes at Freedom Dance Studio" },
-  { src: karol_profil2, alt: "Kids Acting Classes promotional flyer" },
-  { src: karol_profil3, alt: "Kids Acting Classes promotional flyer" },
+  {
+    src: karol_profil,
+    alt: "Karol Di Nassif - Acting Instructor",
+  },
+  {
+    src: karol_profil1,
+    alt: "Kids Acting Classes at Freedom Dance Studio",
+  },
+  {
+    src: karol_profil2,
+    alt: "Kids Acting Classes promotional flyer",
+  },
+  {
+    src: karol_profil3,
+    alt: "Karol Di Nassif - Acting Instructor",
+  },
 ];
 
 const experience = [
@@ -62,13 +74,22 @@ const benefits = [
   "Learn from a professional working actress",
 ];
 
+const programHighlights = [
+  "Acting and performance training",
+  "Camera and audition practice",
+  "Storytelling and improvisation",
+  "Confidence and creativity development",
+  "Creative performance activities",
+  "Professional acting guidance",
+];
+
 const pricingPlans = [
   {
     title: "Monthly Program",
     price: "$80",
     suffix: "/ month",
     description:
-      "The best value for children who want to attend the weekly acting program.",
+      "The best value for children who want to attend the ongoing weekly acting program.",
     icon: CalendarDays,
     featured: true,
     button: "Join for $80/month",
@@ -85,7 +106,7 @@ const pricingPlans = [
     price: "$25",
     suffix: "/ class",
     description:
-      "Perfect for families who want to try a class or attend occasionally.",
+      "Perfect for families who want to try the program or attend individual classes.",
     icon: Star,
     featured: false,
     button: "Book a $25 Class",
@@ -103,7 +124,7 @@ export default function KarolActingClasses() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const bookingMessage = encodeURIComponent(
-    "Hi Karol! I would like to reserve a spot for my child in the Kids Acting Classes at Freedom Dance Studio. Can you please send me the registration information?",
+    "Hi Karol! I would like to register my child for the ongoing Kids Acting Classes at Freedom Dance Studio. Can you please send me the registration information?",
   );
 
   const whatsappUrl = `https://wa.me/17024967934?text=${bookingMessage}`;
@@ -124,21 +145,28 @@ export default function KarolActingClasses() {
 
   return (
     <div className="w-full overflow-hidden pb-5">
-      {/* HERO */}
+      {/* =====================================================
+          HERO
+      ====================================================== */}
       <section className="relative bg-gradient-to-br from-violet-950 via-purple-900 to-fuchsia-900">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.12),transparent_30%),radial-gradient(circle_at_80%_80%,rgba(236,72,153,0.18),transparent_30%)]" />
 
         <div className="relative mx-auto max-w-7xl px-5 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-10">
+            {/* HERO CONTENT */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               className="text-center lg:text-left"
             >
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur">
-                <Sparkles className="h-4 w-4 text-yellow-300" />
-                NEW INDEPENDENT CLASS
+              {/* ACTIVE PROGRAM BADGE */}
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-green-300/30 bg-green-400/10 px-4 py-2 text-sm font-bold text-green-200 backdrop-blur">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-300 opacity-75" />
+                  <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-green-300" />
+                </span>
+                ONGOING KIDS PROGRAM
               </div>
 
               <h1 className="text-4xl font-black leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -151,10 +179,33 @@ export default function KarolActingClasses() {
               </p>
 
               <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-purple-100/80 lg:mx-0">
-                A creative acting experience designed to help children discover
-                confidence, imagination, storytelling and the joy of performing.
+                An exciting ongoing acting program designed to help children
+                discover confidence, imagination, storytelling and the joy of
+                performing with professional actress and TV presenter Karol Di
+                Nassif.
               </p>
 
+              {/* IMPORTANT DATE MESSAGE */}
+              <div className="mx-auto mt-6 max-w-xl rounded-2xl border border-white/15 bg-white/10 p-4 text-left backdrop-blur lg:mx-0">
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-green-400/20">
+                    <CheckCircle2 className="h-5 w-5 text-green-300" />
+                  </div>
+
+                  <div>
+                    <p className="font-black text-white">
+                      Classes are currently ongoing
+                    </p>
+
+                    <p className="mt-1 text-sm leading-6 text-purple-100/75">
+                      The program began on September 11, 2026 and continues
+                      every Friday at 4:30 PM. New students can still join.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* QUICK TAGS */}
               <div className="mt-7 flex flex-wrap justify-center gap-2 lg:justify-start">
                 <div className="badge badge-lg border-white/20 bg-white/10 px-4 py-4 text-white">
                   <Users className="mr-2 h-4 w-4" />
@@ -163,7 +214,7 @@ export default function KarolActingClasses() {
 
                 <div className="badge badge-lg border-white/20 bg-white/10 px-4 py-4 text-white">
                   <CalendarDays className="mr-2 h-4 w-4" />
-                  Fridays
+                  Every Friday
                 </div>
 
                 <div className="badge badge-lg border-white/20 bg-white/10 px-4 py-4 text-white">
@@ -172,6 +223,7 @@ export default function KarolActingClasses() {
                 </div>
               </div>
 
+              {/* CTA */}
               <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row lg:justify-start">
                 <a
                   href={whatsappUrl}
@@ -193,6 +245,7 @@ export default function KarolActingClasses() {
               </div>
             </motion.div>
 
+            {/* HERO IMAGE */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -202,7 +255,7 @@ export default function KarolActingClasses() {
               <div className="relative overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 p-2 shadow-2xl backdrop-blur">
                 <img
                   src={karol_profil3}
-                  alt="Karol Di Nassif"
+                  alt="Karol Di Nassif - Kids Acting Instructor"
                   className="h-[430px] w-full rounded-[1.5rem] object-cover object-top sm:h-[500px]"
                 />
 
@@ -223,23 +276,29 @@ export default function KarolActingClasses() {
         </div>
       </section>
 
-      {/* QUICK INFO */}
+      {/* =====================================================
+          QUICK INFO
+      ====================================================== */}
       <section className="bg-base-100">
         <div className="mx-auto grid max-w-6xl gap-3 px-5 py-5 sm:grid-cols-3 lg:px-8">
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
             <CalendarDays className="h-6 w-6 shrink-0 text-primary" />
+
             <div>
               <p className="font-bold">Every Friday</p>
+
               <p className="text-xs text-base-content/60">
-                Starting September 11, 2026
+                Ongoing weekly program
               </p>
             </div>
           </div>
 
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
             <Clock3 className="h-6 w-6 shrink-0 text-secondary" />
+
             <div>
               <p className="font-bold">4:30 PM</p>
+
               <p className="text-xs text-base-content/60">
                 Weekly acting class
               </p>
@@ -248,27 +307,31 @@ export default function KarolActingClasses() {
 
           <div className="flex items-center justify-center gap-3 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm">
             <Users className="h-6 w-6 shrink-0 text-accent" />
+
             <div>
               <p className="font-bold">Ages 6–12</p>
+
               <p className="text-xs text-base-content/60">Creative learning</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* PRICING */}
+      {/* =====================================================
+          PRICING
+      ====================================================== */}
       <section className="bg-base-200">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <div className="badge badge-warning mb-4">SIMPLE PRICING</div>
+            <div className="badge badge-warning mb-4">JOIN THE PROGRAM</div>
 
             <h2 className="text-3xl font-black sm:text-4xl">
               Choose the Best Option for Your Child
             </h2>
 
             <p className="mt-3 text-base text-base-content/60">
-              Give your child the opportunity to learn, perform and grow in a
-              fun and creative environment.
+              The Kids Acting Program is ongoing. New students can join the
+              weekly Friday classes.
             </p>
           </div>
 
@@ -316,6 +379,7 @@ export default function KarolActingClasses() {
 
                   <div className="mt-2 flex items-end gap-1">
                     <span className="text-5xl font-black">{plan.price}</span>
+
                     <span className="mb-2 text-base text-base-content/60">
                       {plan.suffix}
                     </span>
@@ -329,6 +393,7 @@ export default function KarolActingClasses() {
                     {plan.items.map((item) => (
                       <div key={item} className="flex items-center gap-3">
                         <CheckCircle2 className="h-5 w-5 shrink-0 text-success" />
+
                         <span className="text-sm font-medium">{item}</span>
                       </div>
                     ))}
@@ -345,7 +410,9 @@ export default function KarolActingClasses() {
                     }`}
                   >
                     <MessageCircle className="h-5 w-5" />
+
                     {plan.button}
+
                     <ArrowRight className="h-5 w-5" />
                   </a>
                 </motion.div>
@@ -358,14 +425,16 @@ export default function KarolActingClasses() {
               <span className="font-black text-primary">
                 Save with the monthly option:
               </span>{" "}
-              $80/month gives your child access to the weekly Friday acting
-              class instead of paying $25 each time.
+              $80/month gives your child access to the ongoing weekly Friday
+              acting class instead of paying $25 each time.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ABOUT KAROL */}
+      {/* =====================================================
+          ABOUT KAROL
+      ====================================================== */}
       <section
         id="karol-about"
         className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8"
@@ -453,7 +522,9 @@ export default function KarolActingClasses() {
         </div>
       </section>
 
-      {/* BENEFITS */}
+      {/* =====================================================
+          BENEFITS
+      ====================================================== */}
       <section className="bg-base-200">
         <div className="mx-auto max-w-6xl px-5 py-12 sm:px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
@@ -480,6 +551,7 @@ export default function KarolActingClasses() {
                 className="flex items-start gap-3 rounded-2xl border border-base-300 bg-base-100 p-4 shadow-sm"
               >
                 <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-success" />
+
                 <span className="text-sm font-medium">{benefit}</span>
               </motion.div>
             ))}
@@ -487,7 +559,9 @@ export default function KarolActingClasses() {
         </div>
       </section>
 
-      {/* SPECIAL FINALE */}
+      {/* =====================================================
+          SPECIAL FINALE
+      ====================================================== */}
       <section className="bg-gradient-to-r from-purple-950 via-violet-900 to-purple-950">
         <div className="mx-auto max-w-6xl px-5 py-10 sm:px-6 lg:px-8">
           <div className="rounded-3xl border border-white/10 bg-white/10 p-7 text-center text-white backdrop-blur sm:p-10">
@@ -496,7 +570,7 @@ export default function KarolActingClasses() {
             </div>
 
             <p className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-yellow-300">
-              Special Finale
+              SPECIAL PROGRAM FEATURE
             </p>
 
             <h2 className="mt-2 text-2xl font-black sm:text-3xl">
@@ -504,29 +578,31 @@ export default function KarolActingClasses() {
             </h2>
 
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-purple-100 sm:text-base">
-              Featuring Claudio Galvan, the voice of Disney's Brazilian Donald
-              Duck.
+              Featuring Claudio Galvan, recognized for his voice work as the
+              Brazilian voice of Disney's Donald Duck.
             </p>
 
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="btn btn-warning mt-6 rounded-full px-7"
-            >
-              Reserve a Spot
-              <ArrowRight className="h-5 w-5" />
-            </a>
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white">
+              <Sparkles className="h-5 w-5 text-yellow-300" />
+              Part of the Kids Acting experience
+            </div>
           </div>
         </div>
       </section>
 
-      {/* GALLERY */}
+      {/* =====================================================
+          GALLERY
+      ====================================================== */}
       <section className="mx-auto max-w-7xl px-5 py-12 sm:px-6 lg:px-8">
         <div className="mb-8 text-center">
           <div className="badge badge-secondary mb-4">KIDS ACTING PROGRAM</div>
 
           <h2 className="text-3xl font-black sm:text-4xl">See the Program</h2>
+
+          <p className="mx-auto mt-3 max-w-2xl text-base text-base-content/60">
+            Get a look at Karol, the program and the creative acting experience
+            happening at Freedom Dance Studio.
+          </p>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -558,7 +634,9 @@ export default function KarolActingClasses() {
         </div>
       </section>
 
-      {/* FINAL BOOKING CTA */}
+      {/* =====================================================
+          FINAL CTA
+      ====================================================== */}
       <section className="bg-primary">
         <div className="mx-auto max-w-5xl px-5 py-10 text-center sm:px-6 lg:px-8">
           <Sparkles className="mx-auto h-8 w-8 text-primary-content" />
@@ -575,11 +653,16 @@ export default function KarolActingClasses() {
             <span className="badge badge-outline badge-lg border-primary-content px-5 py-4 font-black text-primary-content">
               $25 / Class
             </span>
+
+            <span className="badge badge-outline badge-lg border-primary-content px-5 py-4 font-black text-primary-content">
+              Every Friday
+            </span>
           </div>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-primary-content/80 sm:text-base">
-            Contact Karol today to reserve your child's place in the Kids Acting
-            Classes at Freedom Dance Studio.
+            The Kids Acting Program is ongoing. Contact Karol today to reserve
+            your child's place in the weekly Friday class at Freedom Dance
+            Studio.
           </p>
 
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">
@@ -602,12 +685,14 @@ export default function KarolActingClasses() {
           </div>
 
           <p className="mt-5 text-xs text-primary-content/60">
-            Freedom Dance Studio • 3110 E Sunset Rd, Las Vegas, NV 89120
+            Freedom Dance Studio • 3110 E Sunset Rd, Ste C, Las Vegas, NV 89120
           </p>
         </div>
       </section>
 
-      {/* LIGHTBOX */}
+      {/* =====================================================
+          LIGHTBOX
+      ====================================================== */}
       {selectedImage !== null && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
@@ -617,6 +702,7 @@ export default function KarolActingClasses() {
             type="button"
             onClick={() => setSelectedImage(null)}
             className="btn btn-circle btn-ghost absolute right-4 top-4 z-10 text-white"
+            aria-label="Close image"
           >
             <X />
           </button>
@@ -628,6 +714,7 @@ export default function KarolActingClasses() {
               previousImage();
             }}
             className="btn btn-circle btn-neutral absolute left-3 z-10"
+            aria-label="Previous image"
           >
             <ChevronLeft />
           </button>
@@ -646,6 +733,7 @@ export default function KarolActingClasses() {
               nextImage();
             }}
             className="btn btn-circle btn-neutral absolute right-3 z-10"
+            aria-label="Next image"
           >
             <ChevronRight />
           </button>
