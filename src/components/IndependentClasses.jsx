@@ -23,7 +23,7 @@ import InstructorClassModal from "./InstructorClassModal";
 
 import edourdo from "../assets/instructors/edourdo.jpg";
 import luis from "../assets/instructors/luis1.jpg";
-import luz from "../assets/instructors/luz.jpeg";
+import luz from "../assets/instructors/luz.png";
 import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
 import Sandra from "../assets/instructors/sandra2.jpeg";
 
@@ -93,7 +93,7 @@ const independentClasses = [
     description:
       "Build confidence, learn powerful movements, and have fun with energetic Twerk combinations.",
     image: luz,
-    video: "https://youtu.be/zCsTro3nO2g?si=euprrYnwx2iqT4h1",
+    video: "https://youtu.be/7z2epLsOyrY",
   },
 
   {
