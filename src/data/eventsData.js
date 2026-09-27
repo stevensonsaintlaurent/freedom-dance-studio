@@ -47,54 +47,54 @@ export const events = [
     featured: true,
   },
 
-  {
-    id: 9,
+  // {
+  //   id: 9,
 
-    eventStart: "2026-09-26",
+  //   eventStart: "2026-09-26",
 
-    type: "WORKSHOP",
+  //   type: "WORKSHOP",
 
-    title: "Salsa Styling & Partnerwork Workshop",
+  //   title: "Salsa Styling & Partnerwork Workshop",
 
-    instructor: "Freeman • Sandra",
+  //   instructor: "Freeman • Sandra",
 
-    date: "September 26, 2026",
+  //   date: "September 26, 2026",
 
-    time: "2:00 PM",
+  //   time: "2:00 PM",
 
-    image: freeman,
+  //   image: freeman,
 
-    imageFit: "contain",
+  //   imageFit: "contain",
 
-    location: "Freedom Dance Studio",
+  //   location: "Freedom Dance Studio",
 
-    schedule: [
-      {
-        time: "2:00 PM",
-        title: "Men's Styling & Ladies Styling",
-        instructors: "Freeman • Sandra",
-      },
-      {
-        time: "3:00 PM",
-        title: "Salsa On 2 Partnerwork",
-        instructors: "Freeman • Sandra",
-      },
-    ],
+  //   schedule: [
+  //     {
+  //       time: "2:00 PM",
+  //       title: "Men's Styling & Ladies Styling",
+  //       instructors: "Freeman • Sandra",
+  //     },
+  //     {
+  //       time: "3:00 PM",
+  //       title: "Salsa On 2 Partnerwork",
+  //       instructors: "Freeman • Sandra",
+  //     },
+  //   ],
 
-    price: "$25",
+  //   price: "$25",
 
-    priceDetails:
-      "Early Bird • $40 at the Door • Donation for Members & Instructors",
+  //   priceDetails:
+  //     "Early Bird • $40 at the Door • Donation for Members & Instructors",
 
-    description:
-      "Join Freeman and Sandra for a special Salsa workshop. At 2:00 PM, train Men's Styling and Ladies Styling. At 3:00 PM, bring everything together with Salsa On 2 Partnerwork. Early bird admission is $25, $40 at the door, and donation-based for Freedom Dance Studio members and instructors.",
+  //   description:
+  //     "Join Freeman and Sandra for a special Salsa workshop. At 2:00 PM, train Men's Styling and Ladies Styling. At 3:00 PM, bring everything together with Salsa On 2 Partnerwork. Early bird admission is $25, $40 at the door, and donation-based for Freedom Dance Studio members and instructors.",
 
-    button: "Register Now",
+  //   button: "Register Now",
 
-    showInHero: true,
+  //   showInHero: false,
 
-    featured: false,
-  },
+  //   featured: false,
+  // },
 
   {
     id: 10,
