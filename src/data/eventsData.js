@@ -109,7 +109,7 @@ export const events = [
 
     date: "October 2, 2026",
 
-    time: "Bachata Intensive 8:00 PM • Social 10:00 PM",
+    time: "Bachata Intensive 8:30 PM • Social 10:00 PM",
 
     image: social,
 
@@ -130,7 +130,7 @@ export const events = [
     },
 
     description:
-      "Join us Friday, October 2 for an exciting night of Bachata and SBK dancing at Freedom Dance Studio! The evening starts at 8:00 PM with our Bachata Weekend Intensive, followed by the Freedom Dance SBK Social at 10:00 PM. Dance the night away with Salsa, Bachata, Kizomba and more alongside Freedom Dance instructors, guest dancers, and the Las Vegas dance community. Music by DJ Young Fuego and Maximo. Dress Code: Men wear all black. Women may wear any color except black.",
+      "Join us Friday, October 2 for an exciting night of Bachata and SBK dancing at Freedom Dance Studio! The evening starts at 8:30 PM with our Bachata Weekend Intensive, followed by the Freedom Dance SBK Social at 10:00 PM. Dance the night away with Salsa, Bachata, Kizomba and more alongside Freedom Dance instructors, guest dancers, and the Las Vegas dance community. Music by DJ Young Fuego and Maximo. Dress Code: Men wear all black. Women may wear any color except black.",
 
     button: "Get Your Ticket",
 

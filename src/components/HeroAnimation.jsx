@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   ArrowRight,
   CalendarCheck,
@@ -66,6 +66,7 @@ const getUpcomingEvent = () => {
 
 const HeroAnimation = () => {
   const event = getUpcomingEvent();
+  const navigate = useNavigate();
 
   /*
   =========================================================
@@ -241,7 +242,10 @@ const HeroAnimation = () => {
 
                 {/* PRICE */}
 
-                <div className="p-3 text-center">
+                <div
+                  className="p-3 text-center cursor-pointer"
+                  onClick={() => navigate("/tickets")}
+                >
                   <Ticket size={17} className="mx-auto mb-1 text-primary" />
 
                   <p className="text-[8px] font-bold uppercase tracking-wider text-white/40">
