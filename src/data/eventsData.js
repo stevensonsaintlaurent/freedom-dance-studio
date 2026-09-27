@@ -120,7 +120,7 @@ export const events = [
     workshop: {
       title: "Bachata Weekend Intensive",
       instructor: "Freedom Dance Instructors • Special Guest Instructors",
-      time: "8:00 PM",
+      time: "8:30 PM",
     },
 
     social: {

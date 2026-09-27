@@ -261,7 +261,7 @@ const Events = () => {
                           <p>
                             <span className="font-bold">
                               Members & Instructors:
-                            </span>{" "}
+                            </span>
                             {event.workshop.membersAndInstructors}
                           </p>
                         )}
