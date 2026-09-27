@@ -9,6 +9,15 @@ const BachataIntensiveBooking = () => {
   const [selection, setSelection] = useState(null);
   const [selectedDays, setSelectedDays] = useState([]);
 
+  // NEW: booking confirmation
+  const [bookingSubmitted, setBookingSubmitted] = useState(false);
+  const [bookingConfirmation, setBookingConfirmation] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // =========================
+  // PASSES
+  // =========================
+
   const passes = [
     {
       id: "full",
@@ -37,6 +46,10 @@ const BachataIntensiveBooking = () => {
     },
   ];
 
+  // =========================
+  // SCHEDULE
+  // =========================
+
   const schedule = [
     {
       day: "Friday",
@@ -54,6 +67,10 @@ const BachataIntensiveBooking = () => {
       time: "5:00 PM – 6:30 PM",
     },
   ];
+
+  // =========================
+  // PRIVATE LESSONS
+  // =========================
 
   const privates = [
     {
@@ -78,6 +95,10 @@ const BachataIntensiveBooking = () => {
     },
   ];
 
+  // =========================
+  // HELPERS
+  // =========================
+
   const scrollToForm = () => {
     setTimeout(() => {
       formRef.current?.scrollIntoView({
@@ -94,7 +115,6 @@ const BachataIntensiveBooking = () => {
     });
 
     setSelectedDays([]);
-
     scrollToForm();
   };
 
@@ -125,15 +145,18 @@ const BachataIntensiveBooking = () => {
   const selectedDaysText =
     selectedDays.length > 0 ? selectedDays.join(", ") : "";
 
-  const handleSubmit = (event) => {
+  // =========================
+  // SUBMIT
+  // =========================
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
     if (!selection) {
-      event.preventDefault();
       return;
     }
 
     if (!daySelectionComplete) {
-      event.preventDefault();
-
       alert(
         `Please select ${selection.daysRequired} ${
           selection.daysRequired === 1 ? "day" : "days"
@@ -143,12 +166,267 @@ const BachataIntensiveBooking = () => {
       return;
     }
 
-    onSubmit(event);
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    const confirmationData = {
+      fullName: formData.get("FullName"),
+      email: formData.get("Email"),
+      phone: formData.get("Phone"),
+
+      bookingType: selection.type,
+      selection: selection.name,
+      price: selection.price,
+
+      selectedDays:
+        selection.id === "full" ? "Friday, Saturday, Sunday" : selectedDaysText,
+
+      privateTime: formData.get("PreferredPrivateTime") || "",
+    };
+
+    try {
+      setIsSubmitting(true);
+
+      // Send through your existing submission hook
+      await onSubmit(event);
+
+      // Save confirmation
+      setBookingConfirmation(confirmationData);
+      setBookingSubmitted(true);
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } catch (error) {
+      console.error("Booking submission failed:", error);
+
+      alert(
+        "We couldn't submit your booking. Please try again or contact Freedom Dance Studio.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
+
+  // =========================
+  // NEW BOOKING
+  // =========================
+
+  const handleNewBooking = () => {
+    setBookingSubmitted(false);
+    setBookingConfirmation(null);
+    setSelection(null);
+    setSelectedDays([]);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  // =====================================================
+  // CONFIRMATION SCREEN
+  // =====================================================
+
+  if (bookingSubmitted && bookingConfirmation) {
+    return (
+      <section className="min-h-screen bg-black text-white px-4 py-12 md:py-20">
+        <div className="max-w-2xl mx-auto">
+          <div className="bg-zinc-950 border border-yellow-500/40 rounded-3xl overflow-hidden shadow-2xl">
+            {/* SUCCESS HEADER */}
+
+            <div className="bg-yellow-500 text-black px-6 py-10 md:py-12 text-center">
+              <div className="w-20 h-20 mx-auto bg-black text-yellow-400 rounded-full flex items-center justify-center text-4xl font-black">
+                ✓
+              </div>
+
+              <p className="uppercase tracking-[0.25em] text-xs font-black mt-6">
+                Freedom Dance Studio
+              </p>
+
+              <h1 className="text-3xl md:text-4xl font-black mt-2">
+                Booking Request Received!
+              </h1>
+
+              <p className="mt-3 font-semibold">
+                Thank you, {bookingConfirmation.fullName}.
+              </p>
+            </div>
+
+            <div className="p-6 md:p-10">
+              {/* EVENT */}
+
+              <div className="text-center">
+                <p className="text-gray-400">You registered for</p>
+
+                <h2 className="text-2xl md:text-3xl font-black mt-2">
+                  Bachata Intensive Vol. 5
+                </h2>
+
+                <p className="text-yellow-400 font-semibold mt-2">
+                  Michelle 🇺🇸 & Carlos 🇪🇸
+                </p>
+
+                <p className="text-gray-400 mt-1">October 2–4, 2026</p>
+              </div>
+
+              {/* BOOKING DETAILS */}
+
+              <div className="mt-8">
+                <p className="text-xs text-yellow-400 font-bold uppercase tracking-[0.2em] mb-3">
+                  Your Booking
+                </p>
+
+                <div className="bg-black border border-zinc-800 rounded-2xl overflow-hidden divide-y divide-zinc-800">
+                  <div className="flex justify-between gap-5 p-4">
+                    <span className="text-gray-500">Name</span>
+
+                    <span className="font-semibold text-right">
+                      {bookingConfirmation.fullName}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between gap-5 p-4">
+                    <span className="text-gray-500">Booking</span>
+
+                    <span className="font-bold text-right">
+                      {bookingConfirmation.selection}
+                    </span>
+                  </div>
+
+                  <div className="flex justify-between gap-5 p-4">
+                    <span className="text-gray-500">Type</span>
+
+                    <span className="font-semibold text-right">
+                      {bookingConfirmation.bookingType}
+                    </span>
+                  </div>
+
+                  {bookingConfirmation.selectedDays && (
+                    <div className="flex justify-between gap-5 p-4">
+                      <span className="text-gray-500">Selected Days</span>
+
+                      <span className="font-semibold text-right">
+                        {bookingConfirmation.selectedDays}
+                      </span>
+                    </div>
+                  )}
+
+                  {bookingConfirmation.privateTime && (
+                    <div className="flex justify-between gap-5 p-4">
+                      <span className="text-gray-500">
+                        Preferred Private Time
+                      </span>
+
+                      <span className="font-semibold text-right">
+                        {bookingConfirmation.privateTime}
+                      </span>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between items-center gap-5 p-4">
+                    <span className="text-gray-500">Price</span>
+
+                    <span className="text-3xl font-black text-yellow-400">
+                      ${bookingConfirmation.price}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* STATUS */}
+
+              <div className="mt-6 bg-yellow-500/10 border border-yellow-500/40 rounded-2xl p-5">
+                <div className="flex items-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-yellow-400" />
+
+                  <h3 className="text-yellow-400 font-black">
+                    PAYMENT PENDING
+                  </h3>
+                </div>
+
+                <p className="text-gray-300 text-sm leading-relaxed mt-3">
+                  We received your booking request. Your spot is officially
+                  confirmed only after your payment has been received and
+                  verified by Freedom Dance Studio.
+                </p>
+              </div>
+
+              {/* NEXT STEP */}
+
+              <div className="mt-6 bg-zinc-900 border border-zinc-800 rounded-2xl p-5">
+                <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">
+                  What's Next?
+                </p>
+
+                <h3 className="text-xl font-black mt-2">
+                  Complete Your Payment
+                </h3>
+
+                <p className="text-gray-400 text-sm mt-2 leading-relaxed">
+                  Freedom Dance Studio will provide payment instructions for
+                  your registration. Once your payment is received and verified,
+                  your registration will be officially confirmed.
+                </p>
+              </div>
+
+              {/* CONTACT */}
+
+              <div className="mt-8 text-center">
+                <p className="text-gray-500 text-sm">
+                  Booking request submitted for
+                </p>
+
+                <p className="font-bold mt-1">{bookingConfirmation.email}</p>
+
+                <p className="text-gray-500 text-sm mt-1">
+                  {bookingConfirmation.phone}
+                </p>
+              </div>
+
+              {/* LOCATION */}
+
+              <div className="mt-8 border-t border-zinc-800 pt-8 text-center">
+                <p className="text-xs uppercase tracking-[0.25em] text-yellow-400 font-bold">
+                  Event Location
+                </p>
+
+                <h3 className="font-black text-xl mt-3">
+                  Freedom Dance Studio
+                </h3>
+
+                <address className="not-italic text-gray-400 mt-2 leading-relaxed">
+                  3110 E. Sunset Rd., Ste. C
+                  <br />
+                  Las Vegas, NV 89120
+                </address>
+              </div>
+
+              {/* BUTTON */}
+
+              <button
+                type="button"
+                onClick={handleNewBooking}
+                className="w-full mt-8 border border-zinc-700 hover:border-yellow-500 hover:text-yellow-400 py-4 rounded-xl font-black transition"
+              >
+                MAKE ANOTHER BOOKING
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // =====================================================
+  // MAIN BOOKING PAGE
+  // =====================================================
 
   return (
     <section className="min-h-screen bg-black text-white">
       {/* HERO */}
+
       <div className="relative overflow-hidden border-b border-yellow-500/20">
         <div className="absolute inset-0 bg-gradient-to-b from-yellow-500/10 via-transparent to-black pointer-events-none" />
 
@@ -183,6 +461,7 @@ const BachataIntensiveBooking = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         {/* SCHEDULE */}
+
         <div className="mb-20">
           <div className="text-center mb-8">
             <p className="text-yellow-400 font-bold uppercase tracking-widest text-sm">
@@ -221,6 +500,7 @@ const BachataIntensiveBooking = () => {
         </div>
 
         {/* PASSES */}
+
         <div className="mb-20">
           <div className="text-center mb-10">
             <p className="text-yellow-400 font-bold uppercase tracking-widest text-sm">
@@ -302,6 +582,7 @@ const BachataIntensiveBooking = () => {
         </div>
 
         {/* INSTRUCTOR CLASS */}
+
         <div className="mb-20">
           <div className="relative overflow-hidden bg-gradient-to-br from-zinc-900 to-black border-2 border-yellow-500 rounded-3xl p-7 md:p-12">
             <div className="absolute top-0 right-0 w-52 h-52 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none" />
@@ -319,7 +600,9 @@ const BachataIntensiveBooking = () => {
 
               <div className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-8 mt-6 text-gray-300">
                 <p>Saturday, October 3</p>
+
                 <p className="hidden sm:block">•</p>
+
                 <p>6:30 PM – 8:00 PM</p>
               </div>
 
@@ -347,6 +630,7 @@ const BachataIntensiveBooking = () => {
         </div>
 
         {/* PRIVATE LESSONS */}
+
         <div className="mb-20">
           <div className="text-center mb-10">
             <p className="text-yellow-400 font-bold uppercase tracking-widest text-sm">
@@ -441,6 +725,7 @@ const BachataIntensiveBooking = () => {
         </div>
 
         {/* BOOKING FORM */}
+
         <div
           ref={formRef}
           id="booking-form"
@@ -462,6 +747,8 @@ const BachataIntensiveBooking = () => {
             </div>
 
             <div className="p-7 md:p-10">
+              {/* SELECTED ITEM */}
+
               {selection ? (
                 <div className="bg-black border border-yellow-500/50 rounded-2xl p-5 mb-7">
                   <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -503,6 +790,7 @@ const BachataIntensiveBooking = () => {
               )}
 
               {/* DAY SELECTION */}
+
               {selection?.daysRequired > 0 && (
                 <div className="mb-7">
                   <label className="block font-bold mb-3">
@@ -545,6 +833,8 @@ const BachataIntensiveBooking = () => {
                   </p>
                 </div>
               )}
+
+              {/* FORM */}
 
               <form className="space-y-5" onSubmit={handleSubmit}>
                 <input
@@ -601,6 +891,8 @@ const BachataIntensiveBooking = () => {
                   value={selection?.price || ""}
                 />
 
+                {/* NAME + PHONE */}
+
                 <div className="grid md:grid-cols-2 gap-5">
                   <div>
                     <label
@@ -641,6 +933,8 @@ const BachataIntensiveBooking = () => {
                   </div>
                 </div>
 
+                {/* EMAIL */}
+
                 <div>
                   <label
                     htmlFor="Email"
@@ -659,6 +953,8 @@ const BachataIntensiveBooking = () => {
                     className="w-full bg-black border border-zinc-700 focus:border-yellow-500 focus:outline-none rounded-xl p-4 transition"
                   />
                 </div>
+
+                {/* PRIVATE TIME */}
 
                 {selection?.type === "Private Lesson" && (
                   <div>
@@ -679,6 +975,8 @@ const BachataIntensiveBooking = () => {
                   </div>
                 )}
 
+                {/* MESSAGE */}
+
                 <div>
                   <label
                     htmlFor="Message"
@@ -696,6 +994,8 @@ const BachataIntensiveBooking = () => {
                   />
                 </div>
 
+                {/* AGREEMENT */}
+
                 <label className="flex items-start gap-3 bg-black border border-zinc-800 rounded-xl p-4 cursor-pointer">
                   <input
                     type="checkbox"
@@ -712,18 +1012,22 @@ const BachataIntensiveBooking = () => {
                   </span>
                 </label>
 
+                {/* SUBMIT */}
+
                 <button
-                  disabled={!selection || !daySelectionComplete}
+                  disabled={!selection || !daySelectionComplete || isSubmitting}
                   type="submit"
                   className="w-full bg-yellow-500 hover:bg-yellow-400 disabled:bg-zinc-800 disabled:text-zinc-500 disabled:cursor-not-allowed text-black font-black text-lg py-4 rounded-xl transition"
                 >
-                  {!selection
-                    ? "SELECT A BOOKING OPTION FIRST"
-                    : !daySelectionComplete
-                      ? `SELECT ${selection.daysRequired} ${
-                          selection.daysRequired === 1 ? "DAY" : "DAYS"
-                        }`
-                      : `SUBMIT BOOKING • $${selection.price}`}
+                  {isSubmitting
+                    ? "SUBMITTING BOOKING..."
+                    : !selection
+                      ? "SELECT A BOOKING OPTION FIRST"
+                      : !daySelectionComplete
+                        ? `SELECT ${selection.daysRequired} ${
+                            selection.daysRequired === 1 ? "DAY" : "DAYS"
+                          }`
+                        : `SUBMIT BOOKING • $${selection.price}`}
                 </button>
 
                 <p className="text-xs text-gray-500 text-center">
@@ -736,6 +1040,7 @@ const BachataIntensiveBooking = () => {
         </div>
 
         {/* LOCATION */}
+
         <div className="mt-16 text-center">
           <p className="text-xs uppercase tracking-[0.25em] text-yellow-400 font-bold">
             Location
