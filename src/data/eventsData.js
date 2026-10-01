@@ -134,7 +134,7 @@ export const events = [
 
     button: "Get Your Ticket",
 
-    showInHero: true,
+    showInHero: false,
 
     featured: false,
   },
