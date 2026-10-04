@@ -96,48 +96,48 @@ export const events = [
   //   featured: false,
   // },
 
-  {
-    id: 10,
+  // {
+  //   id: 10,
 
-    eventStart: "2026-10-02",
+  //   eventStart: "2026-10-02",
 
-    type: "SBK SOCIAL",
+  //   type: "SBK SOCIAL",
 
-    title: "Freedom Dance SBK Social",
+  //   title: "Freedom Dance SBK Social",
 
-    instructor: "Freedom Dance Instructors • Las Vegas Guest Dancers",
+  //   instructor: "Freedom Dance Instructors • Las Vegas Guest Dancers",
 
-    date: "October 2, 2026",
+  //   date: "October 2, 2026",
 
-    time: "Bachata Intensive 8:30 PM • Social 10:00 PM",
+  //   time: "Bachata Intensive 8:30 PM • Social 10:00 PM",
 
-    image: social,
+  //   image: social,
 
-    imageFit: "contain",
+  //   imageFit: "contain",
 
-    location: "Freedom Dance Studio",
+  //   location: "Freedom Dance Studio",
 
-    workshop: {
-      title: "Bachata Weekend Intensive",
-      instructor: "Freedom Dance Instructors • Special Guest Instructors",
-      time: "8:30 PM",
-    },
+  //   workshop: {
+  //     title: "Bachata Weekend Intensive",
+  //     instructor: "Freedom Dance Instructors • Special Guest Instructors",
+  //     time: "8:30 PM",
+  //   },
 
-    social: {
-      title: "Freedom Dance SBK Social",
-      musicBy: "DJ Young Fuego • Maximo",
-      time: "10:00 PM",
-    },
+  //   social: {
+  //     title: "Freedom Dance SBK Social",
+  //     musicBy: "DJ Young Fuego • Maximo",
+  //     time: "10:00 PM",
+  //   },
 
-    description:
-      "Join us Friday, October 2 for an exciting night of Bachata and SBK dancing at Freedom Dance Studio! The evening starts at 8:30 PM with our Bachata Weekend Intensive, followed by the Freedom Dance SBK Social at 10:00 PM. Dance the night away with Salsa, Bachata, Kizomba and more alongside Freedom Dance instructors, guest dancers, and the Las Vegas dance community. Music by DJ Young Fuego and Maximo. Dress Code: Men wear all black. Women may wear any color except black.",
+  //   description:
+  //     "Join us Friday, October 2 for an exciting night of Bachata and SBK dancing at Freedom Dance Studio! The evening starts at 8:30 PM with our Bachata Weekend Intensive, followed by the Freedom Dance SBK Social at 10:00 PM. Dance the night away with Salsa, Bachata, Kizomba and more alongside Freedom Dance instructors, guest dancers, and the Las Vegas dance community. Music by DJ Young Fuego and Maximo. Dress Code: Men wear all black. Women may wear any color except black.",
 
-    button: "Get Your Ticket",
+  //   button: "Get Your Ticket",
 
-    showInHero: false,
+  //   showInHero: false,
 
-    featured: false,
-  },
+  //   featured: false,
+  // },
 
   {
     id: 11,
