@@ -2,6 +2,7 @@ import freeman from "../assets/freeman.png";
 import social from "../assets/socials.png";
 import styling from "../assets/styling.png";
 import carlo from "../assets/instructors/carlos.jpeg";
+import bachataZouk from "../assets/instructors/bachataZouk.jpeg";
 
 export const events = [
   {
@@ -139,27 +140,71 @@ export const events = [
   //   featured: false,
   // },
 
+  // {
+  //   id: 11,
+  //   eventStart: "2026-10-02",
+  //   type: "WEEKEND INTENSIVE",
+  //   title: "Bachata Intensive Weekend",
+  //   instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
+  //   date: "October 2–4, 2026",
+  //   time: "Friday–Sunday",
+  //   image: carlo,
+  //   imageFit: "contain",
+  //   location: "Freedom Dance Studio",
+  //   price: "$99 Early Bird",
+  //   workshop: {
+  //     title: "Bachata Intensive Weekend",
+  //     instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
+  //     time: "October 2–4",
+  //   },
+  //   description:
+  //     "Join us for an incredible Bachata Intensive Weekend at Freedom Dance Studio from October 2–4! Train with two amazing guest artists, Michelle from Los Angeles and Carlos from Madrid, Spain. Enjoy a full weekend of Bachata workshops, connection, technique, styling, and social dancing with dancers from Las Vegas and beyond. Early Bird Pass: $99.",
+  //   button: "Get Your Pass",
+  //   showInHero: false,
+  //   featured: false,
+  // },
+
   {
-    id: 11,
-    eventStart: "2026-10-02",
-    type: "WEEKEND INTENSIVE",
-    title: "Bachata Intensive Weekend",
-    instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
-    date: "October 2–4, 2026",
-    time: "Friday–Sunday",
-    image: carlo,
+    id: 30,
+
+    eventStart: "2026-10-12",
+
+    day: "Monday",
+
+    date: "October 12, 19 & 26, 2026",
+
+    type: "BACHATA ZOUK SERIES",
+
+    title: "Debut Bachata Zouk Series — Henrique & Sofi",
+
+    instructor: "Henrique (Seattle) & Sofi (Orlando)",
+
+    category: "Bachata Zouk / Fusion / Partnerwork",
+
+    time: "8:00 PM – 9:30 PM",
+
+    duration: "3-Week Series • Every Monday",
+
+    level: "Open Level",
+
+    location: "Freedom Dance Studio, Las Vegas",
+
+    price: "$99",
+
+    priceDetails:
+      "Weekender Dancers: $99 (Regular $129) • Private Lessons: $85 for Series Dancers (Regular $120)",
+
+    image: bachataZouk,
+
     imageFit: "contain",
-    location: "Freedom Dance Studio",
-    price: "$99 Early Bird",
-    workshop: {
-      title: "Bachata Intensive Weekend",
-      instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
-      time: "October 2–4",
-    },
+
     description:
-      "Join us for an incredible Bachata Intensive Weekend at Freedom Dance Studio from October 2–4! Train with two amazing guest artists, Michelle from Los Angeles and Carlos from Madrid, Spain. Enjoy a full weekend of Bachata workshops, connection, technique, styling, and social dancing with dancers from Las Vegas and beyond. Early Bird Pass: $99.",
-    button: "Get Your Pass",
+      "Experience the debut Bachata Zouk Series in Las Vegas with Henrique from Seattle and Sofi from Orlando! Starting October 12, this exclusive 3-week Monday training series takes place October 12, 19, and 26 from 8:00 PM to 9:30 PM at Freedom Dance Studio. Continue your dance journey beyond the weekender with focused training, partnerwork, musicality, technique, body movement, and direct attention from visiting instructors. Dancers who register for the weekender receive the complete 3-week series for only $99 instead of $129. Series dancers also enjoy special private lesson pricing of $85 instead of $120. Don't miss this opportunity to grow, connect, and take your dancing to the next level. Register now and join Henrique & Sofi for an unforgettable training experience!",
+
+    button: "Register for the Series",
+
     showInHero: true,
+
     featured: true,
   },
 ];

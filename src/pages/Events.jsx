@@ -20,7 +20,7 @@ const Events = () => {
 
     if (!findEvent) return;
 
-    navigate("/tickets");
+    navigate("/book", { state: findEvent });
   };
 
   return (
