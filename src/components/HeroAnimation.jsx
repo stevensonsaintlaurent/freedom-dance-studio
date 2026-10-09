@@ -268,7 +268,7 @@ const HeroAnimation = () => {
 
               <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
                 <Link
-                  to="/tickets"
+                  to="/book"
                   state={event}
                   className="btn btn-primary btn-md w-full rounded-full px-6 shadow-2xl shadow-primary/25 sm:btn-lg sm:w-auto sm:px-8"
                 >
