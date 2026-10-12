@@ -2,7 +2,7 @@ import freeman from "../assets/freeman.png";
 import social from "../assets/socials.png";
 import styling from "../assets/styling.png";
 import carlo from "../assets/instructors/carlos.jpeg";
-import bachataZouk from "../assets/instructors/bachataZouk.jpeg";
+import bachataZouk from "../assets/instructors/bachataZouk1.jpeg";
 
 export const events = [
   {
@@ -171,7 +171,7 @@ export const events = [
 
     day: "Monday",
 
-    date: "October 12, 19 & 26, 2026",
+    date: "October 19, 26 & November 2, 2026",
 
     type: "BACHATA ZOUK SERIES",
 
@@ -199,7 +199,7 @@ export const events = [
     imageFit: "contain",
 
     description:
-      "Experience the debut Bachata Zouk Series in Las Vegas with Henrique from Seattle and Sofi from Orlando! Starting October 12, this exclusive 3-week Monday training series takes place October 12, 19, and 26 from 8:00 PM to 9:30 PM at Freedom Dance Studio. Continue your dance journey beyond the weekender with focused training, partnerwork, musicality, technique, body movement, and direct attention from visiting instructors. Dancers who register for the weekender receive the complete 3-week series for only $99 instead of $129. Series dancers also enjoy special private lesson pricing of $85 instead of $120. Don't miss this opportunity to grow, connect, and take your dancing to the next level. Register now and join Henrique & Sofi for an unforgettable training experience!",
+      "Experience the debut Bachata Zouk Series in Las Vegas with Henrique from Seattle and Sofi from Orlando! Starting October 19, this exclusive 3-week Monday training series takes place October 19, 26 & November 2, 2026 from 8:00 PM to 9:30 PM at Freedom Dance Studio. Continue your dance journey beyond the weekender with focused training, partnerwork, musicality, technique, body movement, and direct attention from visiting instructors. Dancers who register for the weekender receive the complete 3-week series for only $99 instead of $129. Series dancers also enjoy special private lesson pricing of $85 instead of $120. Don't miss this opportunity to grow, connect, and take your dancing to the next level. Register now and join Henrique & Sofi for an unforgettable training experience!",
 
     button: "Register for the Series",
 

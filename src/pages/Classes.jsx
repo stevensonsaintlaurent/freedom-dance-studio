@@ -33,7 +33,7 @@ const classes = [
     image: adultsImg,
     description:
       "Learn Bachata, Salsa, Urban Kiz, Konpa, and more in beginner and intermediate classes for adults.",
-    ages: "13+",
+    ages: "19+",
     schedule: "Mon, Thu & Sat • 6:00 PM",
     badge: "Best Seller",
     link: "/adult",
