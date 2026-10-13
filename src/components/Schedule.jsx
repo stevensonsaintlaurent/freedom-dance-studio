@@ -33,14 +33,14 @@ import { independentClasses } from "../data/indepedentInstructors";
 
 // Add real portraits to public/assets/instructors/ using these filenames.
 // Missing photos automatically display a clean initials avatar.
-const instructorPhotos = {
-  Stevenson: "/assets/instructors/stevenson.jpg",
-  Desmond: "/assets/instructors/desmond.jpg",
-  Luna: "/assets/instructors/luna.jpg",
-  Zagir: "/assets/instructors/zagir.jpg",
-  Alain: "/assets/instructors/alain.jpg",
-  Steven: "/assets/instructors/steven.jpg",
-};
+// const instructorPhotos = {
+//   Stevenson: "/assets/instructors/stevenson.jpg",
+//   Desmond: "/assets/instructors/desmond.jpg",
+//   Luna: "/assets/instructors/luna.jpg",
+//   Zagir: "/assets/instructors/zagir.jpg",
+//   Alain: "/assets/instructors/alain.jpg",
+//   Steven: "/assets/instructors/steven.jpg",
+// };
 
 function InstructorAvatar({ name = "Instructor", size = "md", image }) {
   const [failed, setFailed] = useState(false);

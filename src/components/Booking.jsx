@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
+
 import { useLocation, Link } from "react-router-dom";
+
 import {
   CheckCircle2,
   CalendarDays,
@@ -9,52 +11,87 @@ import {
   Ticket,
   Info,
 } from "lucide-react";
+
 import useOnSudmit from "../hooks/useOnSudmit";
 
 const Booking = () => {
   const { setText, onSubmit } = useOnSudmit();
+
   const location = useLocation();
 
   /*
+
    * =========================================================
+
    * BOOKING DATA
+
    * =========================================================
+
    */
 
   const [confirm] = useState(location.state || {});
 
   const bookingData = confirm.bookingData || {};
 
+  // Display the selected class/event photo when provided by the previous page.
+  // Supports imported Vite assets and regular image URLs.
+  const bookingImage =
+    bookingData.image ||
+    bookingData.picture ||
+    bookingData.photo ||
+    confirm.image ||
+    confirm.picture ||
+    confirm.photo ||
+    null;
+  const imageFit = bookingData.imageFit || confirm.imageFit || "cover";
+  const [imageError, setImageError] = useState(false);
+
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [bookingReference, setBookingReference] = useState("");
 
   /*
+
    * =========================================================
+
    * SCROLL TO TOP
+
    *
+
    * IMPORTANT:
+
    * This runs again when bookingConfirmed changes to true.
+
    * The previous version only ran once when the component loaded.
+
    * =========================================================
+
    */
 
   useEffect(() => {
     if (bookingConfirmed) {
       // Wait until React has rendered the confirmation screen.
+
       requestAnimationFrame(() => {
         window.scrollTo({
           top: 0,
+
           left: 0,
+
           behavior: "smooth",
         });
       });
 
       // Extra protection for browsers / router scroll restoration.
+
       setTimeout(() => {
         window.scrollTo({
           top: 0,
+
           left: 0,
+
           behavior: "smooth",
         });
       }, 100);
@@ -62,9 +99,13 @@ const Booking = () => {
   }, [bookingConfirmed]);
 
   /*
+
    * =========================================================
+
    * INITIAL PAGE SCROLL
+
    * =========================================================
+
    */
 
   useEffect(() => {
@@ -72,48 +113,79 @@ const Booking = () => {
   }, []);
 
   /*
+
    * =========================================================
+
    * NORMALIZE BOOKING INFORMATION
+
    * =========================================================
+
    */
 
   const {
     name,
+
     title,
+
     dance,
+
     age,
+
     day,
+
     time,
+
     level,
+
     instructor,
+
     drop,
+
     date,
+
     price,
+
     priceDetails,
+
     extraPrice,
   } = confirm;
 
   /*
+
    * =========================================================
+
    * EVENT INFORMATION
+
    * =========================================================
+
    */
 
   const eventTitle = bookingData.event || "";
+
   const eventHighlight = bookingData.highlight || "";
+
   const eventDescription = bookingData.description || "";
+
   const eventDate = bookingData.date || "";
+
   const eventTime = bookingData.time || "";
+
   const eventPrice = bookingData.price || "";
+
   const eventPriceLabel = bookingData.priceLabel || "";
+
   const eventLocation = bookingData.location || "Freedom Dance Studio";
 
   const isEventBooking = Boolean(bookingData.event);
 
   /*
+
    * =========================================================
+
    * EVENT / CLASS TITLE
+
    * =========================================================
+
    */
 
   const className = isEventBooking
@@ -121,9 +193,13 @@ const Booking = () => {
     : dance || title || name || "Dance Class";
 
   /*
+
    * =========================================================
+
    * DATE
+
    * =========================================================
+
    */
 
   const classDate = isEventBooking
@@ -131,9 +207,13 @@ const Booking = () => {
     : day || date || "Date not specified";
 
   /*
+
    * =========================================================
+
    * TIME
+
    * =========================================================
+
    */
 
   const classTime = isEventBooking
@@ -141,9 +221,13 @@ const Booking = () => {
     : time || "Time not specified";
 
   /*
+
    * =========================================================
+
    * PRICE
+
    * =========================================================
+
    */
 
   const classPrice = isEventBooking
@@ -154,9 +238,13 @@ const Booking = () => {
       "Contact Studio";
 
   /*
+
    * =========================================================
+
    * INSTRUCTOR
+
    * =========================================================
+
    */
 
   const classInstructor = isEventBooking
@@ -164,17 +252,25 @@ const Booking = () => {
     : instructor || "Freedom Dance Studio";
 
   /*
+
    * =========================================================
+
    * LOCATION
+
    * =========================================================
+
    */
 
   const classLocation = isEventBooking ? eventLocation : "Freedom Dance Studio";
 
   /*
+
    * =========================================================
+
    * HANDLE FORM CHANGES
+
    * =========================================================
+
    */
 
   const handleChange = () => {
@@ -182,9 +278,13 @@ const Booking = () => {
   };
 
   /*
+
    * =========================================================
+
    * SUBMIT BOOKING
+
    * =========================================================
+
    */
 
   const handleSubmit = async (e) => {
@@ -198,8 +298,11 @@ const Booking = () => {
       const result = await onSubmit(e);
 
       /*
+
        * ONLY show confirmation if Web3Forms
+
        * reports a successful submission.
+
        */
 
       if (result?.success) {
@@ -214,9 +317,13 @@ const Booking = () => {
         );
 
         /*
+
          * This triggers the confirmation screen AND
+
          * the scroll-to-top useEffect above.
+
          */
+
         setBookingConfirmed(true);
       }
     } catch (error) {
@@ -227,9 +334,13 @@ const Booking = () => {
   };
 
   /*
+
    * =========================================================
+
    * SUCCESS / CONFIRMATION SCREEN
+
    * =========================================================
+
    */
 
   if (bookingConfirmed) {
@@ -270,6 +381,16 @@ const Booking = () => {
               <div className="badge badge-primary badge-lg mt-5 p-4 max-w-full">
                 Booking #{bookingReference}
               </div>
+              {bookingImage && !imageError && (
+                <img
+                  src={bookingImage}
+                  alt={`${className} — ${classInstructor}`}
+                  className={`mt-6 h-48 w-full max-w-xl rounded-2xl bg-base-200 sm:h-64 ${
+                    imageFit === "contain" ? "object-contain" : "object-cover"
+                  }`}
+                  onError={() => setImageError(true)}
+                />
+              )}
 
               {/* DETAILS */}
 
@@ -422,9 +543,13 @@ const Booking = () => {
   }
 
   /*
+
    * =========================================================
+
    * BOOKING FORM
+
    * =========================================================
+
    */
 
   return (
@@ -448,10 +573,37 @@ const Booking = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 w-full min-w-0">
           {/* =====================================================
+
               BOOKING SUMMARY
+
           ===================================================== */}
 
           <div className="card bg-base-100 shadow-2xl w-full min-w-0 overflow-hidden">
+            {bookingImage && !imageError && (
+              <div className="relative w-full overflow-hidden bg-base-200">
+                <img
+                  src={bookingImage}
+                  alt={`${className} — ${classInstructor}`}
+                  className={`block h-56 w-full sm:h-72 lg:h-80 ${
+                    imageFit === "contain" ? "object-contain" : "object-cover"
+                  }`}
+                  loading="eager"
+                  onError={() => setImageError(true)}
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent p-5 pt-16">
+                  <span className="badge badge-primary mb-2">
+                    {isEventBooking ? "Special Event" : "Dance Class"}
+                  </span>
+                  <h3 className="text-xl font-bold text-white sm:text-2xl break-words">
+                    {className}
+                  </h3>
+                  <p className="mt-1 text-sm text-white/90 break-words">
+                    {classInstructor}
+                  </p>
+                </div>
+              </div>
+            )}
+
             <div className="card-body min-w-0 p-5 sm:p-6">
               <div className="flex items-center gap-3 mb-6">
                 <Ticket size={28} className="text-primary flex-shrink-0" />
@@ -594,7 +746,9 @@ const Booking = () => {
           </div>
 
           {/* =====================================================
+
               PERSONAL INFORMATION
+
           ===================================================== */}
 
           <div className="card bg-base-100 shadow-2xl w-full min-w-0 overflow-hidden">
@@ -778,10 +932,15 @@ const Booking = () => {
 
                         <ul className="list-disc list-inside space-y-1">
                           <li>Instagram</li>
+
                           <li>TikTok</li>
+
                           <li>Facebook</li>
+
                           <li>YouTube</li>
+
                           <li>Freedom Dance Studio's website</li>
+
                           <li>Online advertising and promotional materials</li>
                         </ul>
 
