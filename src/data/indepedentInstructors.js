@@ -1,3 +1,9 @@
+import edourdo from "../assets/instructors/edourdo.jpg";
+import luis from "../assets/instructors/luis1.jpg";
+import luz from "../assets/instructors/luz.png";
+import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
+import Sandra from "../assets/instructors/sandra2.jpeg";
+
 // ==================================================
 // INDEPENDENT CLASSES
 // SINGLE SOURCE OF TRUTH
@@ -20,6 +26,7 @@ export const independentClasses = [
     instagram: "",
     description: "",
     video: "",
+    image: luis,
   },
   {
     id: "independent-sandra-salsa-wednesday",
@@ -29,6 +36,7 @@ export const independentClasses = [
     dance: "Salsa On2",
     title: "Salsalogía Training",
     instructor: "Sandra",
+    image: Sandra,
     level: "Open Level",
     category: "Salsa / Latin",
     type: "independent",
@@ -55,6 +63,7 @@ export const independentClasses = [
     instagram: "",
     description: "",
     video: "",
+    image: Rodolfo,
   },
 
   {
@@ -73,13 +82,14 @@ export const independentClasses = [
     instagram: "",
     description: "",
     video: "",
+    image: luz,
   },
 
   {
     id: "independent-eduardo-reggaeton",
     day: "Saturday",
-    date: "Every Saturday",
-    time: "7:00 PM – 8:00 PM",
+    date: "Every Thursday",
+    time: "7:30 PM – 8:30 PM",
     dance: "Reggaeton",
     title: "Reggaeton",
     instructor: "Eduardo",
@@ -91,6 +101,7 @@ export const independentClasses = [
     instagram: "",
     description: "",
     video: "",
+    image: edourdo,
   },
 
   {
@@ -109,6 +120,7 @@ export const independentClasses = [
     instagram: "",
     description: "",
     video: "",
+    image: luis,
   },
 
   {
@@ -127,6 +139,7 @@ export const independentClasses = [
     instagram: "",
     description: "",
     video: "",
+    image: edourdo,
   },
 ];
 

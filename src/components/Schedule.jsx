@@ -1,5 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
+
 import { Link, useNavigate } from "react-router-dom";
+
 import {
   CalendarDays,
   CalendarX2,
@@ -8,224 +10,80 @@ import {
   GraduationCap,
   Sparkles,
   ChevronRight,
+  Search,
+  X,
 } from "lucide-react";
+
 import { motion } from "framer-motion";
 
 import { events } from "../data/eventsData";
+
+import lady from "../assets/lady/followerClip1.jpeg";
+import steven from "../assets/instructors/steven.png";
+import luna from "../assets/adriana.jpg";
+import desmond from "../assets/instructors/desmond.jpg";
+
 import { independentClasses } from "../data/indepedentInstructors";
 
 // ==================================================
+
 // SERVICES
-// ==================================================
-
-const services = [
-  {
-    id: 1,
-    title: "Private Lessons",
-    icon: "💃",
-    color: "primary",
-    description: "One-on-one personalized instruction for faster progress.",
-    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
-    duration: "60 Minutes",
-    price: "$80+",
-  },
-  {
-    id: 2,
-    title: "Partner Lessons",
-    icon: "❤️",
-    color: "secondary",
-    description:
-      "Perfect for couples preparing for weddings, socials, or competitions.",
-    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
-    duration: "60 Minutes",
-    price: "$120+",
-  },
-  {
-    id: 3,
-    title: "Group Classes",
-    icon: "👥",
-    color: "accent",
-    description: "Fun group classes for beginners through advanced dancers.",
-    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
-    duration: "1 Hour",
-    price: "$15 Drop-In",
-  },
-  {
-    id: 4,
-    title: "Live Band & Orchestra",
-    icon: "🎺",
-    color: "warning",
-    description:
-      "Book our professional musicians for festivals, weddings, birthdays, and special events.",
-    styles: ["Salsa", "Konpa", "Latin Jazz", "Caribbean Music"],
-    duration: "Custom",
-    price: "Call for Quote",
-  },
-];
 
 // ==================================================
-// FREEDOM DANCE STUDIO WEEKLY CLASSES
-// ==================================================
 
-const weeklySchedule = [
-  {
-    id: 1,
-    day: "Monday",
-    time: "6:00 PM",
-    dance: "Beginner Kizomba",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 2,
-    day: "Monday",
-    time: "6:00 PM",
-    dance: "Ladies Styling Bachata",
-    instructor: "Luna",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 3,
-    day: "Monday",
-    time: "7:00 PM",
-    dance: "Beginner Bachata",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 13,
-    day: "Monday",
-    time: "8:00 PM",
-    dance: "Beginner Bachata Man Styling",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 4,
-    day: "Tuesday",
-    time: "6:00 PM",
-    dance: "Beginner Salsa",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 5,
-    day: "Tuesday",
-    time: "7:00 PM",
-    dance: "Beginner Bachata",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 6,
-    day: "Tuesday",
-    time: "8:00 PM",
-    dance: "Konpa",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Open Level",
-    type: "freedom",
-  },
-  {
-    id: 7,
-    day: "Wednesday",
-    time: "6:00 PM",
-    dance: "Intermediate & Beyond Kizomba",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Intermediate & Beyond",
-    type: "freedom",
-  },
-  {
-    id: 8,
-    day: "Wednesday",
-    time: "7:00 PM",
-    dance: "Intermediate & Beyond Bachata Sensual",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Intermediate & Beyond",
-    type: "freedom",
-  },
-  {
-    id: 9,
-    day: "Thursday",
-    time: "6:30 PM",
-    dance: "Ladies Styling Bachata",
-    instructor: "Zagir",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 10,
-    day: "Saturday",
-    time: "2:00 PM",
-    dance: "Open Level Kizomba",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Open Level",
-    type: "freedom",
-  },
-  {
-    id: 11,
-    day: "Saturday",
-    time: "3:00 PM",
-    dance: "Open Level Bachata",
-    instructor: "Stevenson",
-    drop: "$15",
-    level: "Open Level",
-    type: "freedom",
-  },
-  {
-    id: 12,
-    day: "Saturday",
-    time: "4:00 PM",
-    dance: "Beginner Salsa",
-    instructor: "Desmond",
-    drop: "$15",
-    level: "Beginner Friendly",
-    type: "freedom",
-  },
-  {
-    id: 13,
-    day: "Saturday",
-    time: "5:00 PM",
-    dance: "Intermediate & Beyond Salsa",
-    instructor: "Desmond",
-    drop: "$15",
-    level: "Intermediate & Beyond",
-    type: "freedom",
-  },
-  {
-    id: 14,
-    day: "Saturday",
-    time: "5:00 PM",
-    dance: "Jazz Band",
-    instructor: "Alain",
-    drop: "Free",
-    level: "All Levels",
-    type: "freedom",
-  },
-];
+// Add real portraits to public/assets/instructors/ using these filenames.
+// Missing photos automatically display a clean initials avatar.
+const instructorPhotos = {
+  Stevenson: "/assets/instructors/stevenson.jpg",
+  Desmond: "/assets/instructors/desmond.jpg",
+  Luna: "/assets/instructors/luna.jpg",
+  Zagir: "/assets/instructors/zagir.jpg",
+  Alain: "/assets/instructors/alain.jpg",
+  Steven: "/assets/instructors/steven.jpg",
+};
 
-// ==================================================
-// DAYS
-// ==================================================
+function InstructorAvatar({ name = "Instructor", size = "md", image }) {
+  const [failed, setFailed] = useState(false);
+  const src = image || instructorPhotos[name];
+  const initials = name
+    .split(/\\s+/)
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+  const dimensions = size === "lg" ? "h-16 w-16 text-xl" : "h-11 w-11 text-sm";
+  useEffect(() => setFailed(false), [src]);
+  return (
+    <div
+      className={`${dimensions} shrink-0 overflow-hidden rounded-full border-2 border-primary/20 bg-primary/10 flex items-center justify-center font-bold text-primary`}
+    >
+      {src && !failed ? (
+        <img
+          src={src}
+          alt={`Portrait of ${name}`}
+          loading="lazy"
+          className="h-full w-full object-cover"
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span aria-label={`${name} photo unavailable`}>{initials}</span>
+      )}
+    </div>
+  );
+}
 
-const days = [
-  "All",
+const danceStyleOf = (dance = "") => {
+  const value = dance.toLowerCase();
+  if (value.includes("bachata")) return "Bachata";
+  if (value.includes("salsa")) return "Salsa";
+  if (value.includes("kizomba") || value.includes("urban kiz"))
+    return "Kizomba";
+  if (value.includes("konpa") || value.includes("kompa")) return "Konpa";
+  if (value.includes("jazz") || value.includes("band")) return "Music";
+  return "Other";
+};
+
+const dayOrder = [
   "Monday",
   "Tuesday",
   "Wednesday",
@@ -234,27 +92,437 @@ const days = [
   "Saturday",
   "Sunday",
 ];
+const timeMinutes = (time = "") => {
+  const match = time.match(/(\\d{1,2}):(\\d{2})\\s*(AM|PM)/i);
+  if (!match) return 9999;
+  return (
+    ((Number(match[1]) % 12) + (match[3].toUpperCase() === "PM" ? 12 : 0)) *
+      60 +
+    Number(match[2])
+  );
+};
+
+const services = [
+  {
+    id: 1,
+
+    title: "Private Lessons",
+
+    icon: "💃",
+
+    color: "primary",
+
+    description: "One-on-one personalized instruction for faster progress.",
+
+    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
+
+    duration: "60 Minutes",
+
+    price: "$80+",
+  },
+
+  {
+    id: 2,
+
+    title: "Partner Lessons",
+
+    icon: "❤️",
+
+    color: "secondary",
+
+    description:
+      "Perfect for couples preparing for weddings, socials, or competitions.",
+
+    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
+
+    duration: "60 Minutes",
+
+    price: "$120+",
+  },
+
+  {
+    id: 3,
+
+    title: "Group Classes",
+
+    icon: "👥",
+
+    color: "accent",
+
+    description: "Fun group classes for beginners through advanced dancers.",
+
+    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
+
+    duration: "1 Hour",
+
+    price: "$15 Drop-In",
+  },
+
+  {
+    id: 4,
+
+    title: "Live Band & Orchestra",
+
+    icon: "🎺",
+
+    color: "warning",
+
+    description:
+      "Book our professional musicians for festivals, weddings, birthdays, and special events.",
+
+    styles: ["Salsa", "Konpa", "Latin Jazz", "Caribbean Music"],
+
+    duration: "Custom",
+
+    price: "Call for Quote",
+  },
+];
 
 // ==================================================
+
+// FREEDOM DANCE STUDIO WEEKLY CLASSES
+
+// ==================================================
+
+const weeklySchedule = [
+  {
+    id: 1,
+
+    day: "Monday",
+
+    time: "6:00 PM",
+
+    dance: "Beginner Kizomba",
+
+    instructor: "Stevenson",
+
+    drop: "Free",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 2,
+
+    day: "Monday",
+
+    time: "6:00 PM",
+
+    dance: "Ladies Styling Bachata",
+
+    instructor: "Luna",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: luna,
+  },
+
+  {
+    id: 3,
+
+    day: "Monday",
+
+    time: "7:00 PM",
+
+    dance: "Beginner Bachata",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 13,
+
+    day: "Monday",
+
+    time: "8:00 PM",
+
+    dance: "Beginner Bachata Man Styling",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 4,
+
+    day: "Tuesday",
+
+    time: "6:00 PM",
+
+    dance: "Beginner Salsa",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 5,
+
+    day: "Tuesday",
+
+    time: "7:00 PM",
+
+    dance: "Beginner Bachata",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 6,
+
+    day: "Tuesday",
+
+    time: "8:00 PM",
+
+    dance: "Konpa",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Open Level",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 7,
+
+    day: "Wednesday",
+
+    time: "6:00 PM",
+
+    dance: "Intermediate & Beyond Kizomba",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Intermediate & Beyond",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 8,
+
+    day: "Wednesday",
+
+    time: "7:00 PM",
+
+    dance: "Intermediate & Beyond Bachata Sensual",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Intermediate & Beyond",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 9,
+
+    day: "Thursday",
+
+    time: "6:30 PM",
+
+    dance: "Ladies Styling Bachata",
+
+    instructor: "Zagir",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: lady,
+  },
+
+  {
+    id: 10,
+
+    day: "Saturday",
+
+    time: "2:00 PM",
+
+    dance: "Open Level Kizomba",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Open Level",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 11,
+
+    day: "Saturday",
+
+    time: "3:00 PM",
+
+    dance: "Open Level Bachata",
+
+    instructor: "Stevenson",
+
+    drop: "$15",
+
+    level: "Open Level",
+
+    type: "freedom",
+    image: steven,
+  },
+
+  {
+    id: 12,
+
+    day: "Saturday",
+
+    time: "4:00 PM",
+
+    dance: "Beginner Salsa",
+
+    instructor: "Desmond",
+
+    drop: "$15",
+
+    level: "Beginner Friendly",
+
+    type: "freedom",
+    image: desmond,
+  },
+
+  {
+    id: 13,
+
+    day: "Saturday",
+
+    time: "5:00 PM",
+
+    dance: "Intermediate & Beyond Salsa",
+
+    instructor: "Desmond",
+
+    drop: "$15",
+
+    level: "Intermediate & Beyond",
+
+    type: "freedom",
+    image: desmond,
+  },
+
+  {
+    id: 14,
+
+    day: "Saturday",
+
+    time: "5:00 PM",
+
+    dance: "Jazz Band",
+
+    instructor: "Alain",
+
+    drop: "Free",
+
+    level: "All Levels",
+
+    type: "freedom",
+    image: steven,
+  },
+];
+
+// ==================================================
+
+// DAYS
+
+// ==================================================
+
+const days = [
+  "All",
+
+  "Monday",
+
+  "Tuesday",
+
+  "Wednesday",
+
+  "Thursday",
+
+  "Friday",
+
+  "Saturday",
+
+  "Sunday",
+];
+
+// ==================================================
+
 // CANCELLED DAYS
+
 // ==================================================
 
 const cancelledDays = [
   {
     day: "Saturday",
-    date: "OCtober 17, 2026",
+
+    date: "October 17, 2026",
+
     title: "All Classes Cancelled",
+
     reason:
       "There will be no regular classes on Saturday, October 17, 2026. This cancellation will not affect your membership.",
   },
 ];
 
 // ==================================================
+
 // HELPERS
+
 // ==================================================
 
 const getTypeLabel = (type) => {
   if (type === "independent") return "Independent Instructor";
+
   return "Freedom Dance";
 };
 
@@ -275,7 +543,9 @@ const formatEventDate = (dateString) => {
 
   return date.toLocaleDateString("en-US", {
     month: "short",
+
     day: "numeric",
+
     year: "numeric",
   });
 };
@@ -293,17 +563,25 @@ const getEventDateRange = (event) => {
 };
 
 // ==================================================
+
 // COMPONENT
+
 // ==================================================
 
 export default function Schedule() {
   const navigate = useNavigate();
 
   const [selectedDay, setSelectedDay] = useState("All");
+
   const [scheduleType, setScheduleType] = useState("all");
+  const [selectedStyle, setSelectedStyle] = useState("All");
+  const [selectedInstructor, setSelectedInstructor] = useState("All");
+  const [search, setSearch] = useState("");
 
   // ==================================================
+
   // ALL WEEKLY CLASSES
+
   // ==================================================
 
   const allClasses = useMemo(() => {
@@ -311,34 +589,43 @@ export default function Schedule() {
   }, []);
 
   // ==================================================
+
   // BOOK WEEKLY CLASS
+
   // ==================================================
 
   const handleBooking = (item) => {
     navigate("/book", {
       state: {
         ...item,
+
         bookingType: item.type,
       },
     });
   };
 
   // ==================================================
+
   // BOOK EVENT / WORKSHOP
+
   // ==================================================
 
   const handleEventBooking = (event) => {
     navigate("/book", {
       state: {
         bookingType: "event",
+
         event,
+
         findEvent: event,
       },
     });
   };
 
   // ==================================================
+
   // SERVICES
+
   // ==================================================
 
   const handleServices = (id) => {
@@ -350,7 +637,9 @@ export default function Schedule() {
   };
 
   // ==================================================
+
   // CANCELLED DAY
+
   // ==================================================
 
   const isDayCancelled = (day) => {
@@ -358,32 +647,83 @@ export default function Schedule() {
   };
 
   // ==================================================
+
   // FILTER SCHEDULE
+
   // ==================================================
 
+  const danceStyles = useMemo(
+    () =>
+      [
+        "All",
+        ...new Set(allClasses.map((item) => danceStyleOf(item.dance))),
+      ].sort((a, b) =>
+        a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b),
+      ),
+    [allClasses],
+  );
+  const instructors = useMemo(
+    () =>
+      [
+        "All",
+        ...new Set(allClasses.map((item) => item.instructor).filter(Boolean)),
+      ].sort((a, b) =>
+        a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b),
+      ),
+    [allClasses],
+  );
   const filteredSchedule = useMemo(() => {
-    let result = allClasses.filter((item) => !isDayCancelled(item.day));
-
-    if (scheduleType !== "all") {
-      result = result.filter((item) => item.type === scheduleType);
-    }
-
-    if (selectedDay !== "All") {
-      result = result.filter((item) => item.day === selectedDay);
-    }
-
-    return result;
-  }, [allClasses, selectedDay, scheduleType]);
+    return allClasses
+      .filter((item) => {
+        if (scheduleType !== "all" && item.type !== scheduleType) return false;
+        if (selectedDay !== "All" && item.day !== selectedDay) return false;
+        if (
+          selectedStyle !== "All" &&
+          danceStyleOf(item.dance) !== selectedStyle
+        )
+          return false;
+        if (
+          selectedInstructor !== "All" &&
+          item.instructor !== selectedInstructor
+        )
+          return false;
+        const term = search.trim().toLowerCase();
+        return (
+          !term ||
+          [item.dance, item.day, item.instructor, item.level].some((v) =>
+            String(v || "")
+              .toLowerCase()
+              .includes(term),
+          )
+        );
+      })
+      .sort(
+        (a, b) =>
+          dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day) ||
+          timeMinutes(a.time) - timeMinutes(b.time),
+      );
+  }, [
+    allClasses,
+    selectedDay,
+    scheduleType,
+    selectedStyle,
+    selectedInstructor,
+    search,
+  ]);
 
   // ==================================================
+
   // UPCOMING EVENTS
+
   // ==================================================
 
   const upcomingEvents = useMemo(() => {
     const today = new Date();
+
     today.setHours(0, 0, 0, 0);
 
     return [...events]
+
       .filter((event) => {
         if (!event.eventStart) return false;
 
@@ -391,6 +731,7 @@ export default function Schedule() {
 
         return eventDate >= today;
       })
+
       .sort(
         (a, b) =>
           new Date(`${a.eventStart}T12:00:00`) -
@@ -399,7 +740,9 @@ export default function Schedule() {
   }, []);
 
   // ==================================================
+
   // VISIBLE CANCELLATIONS
+
   // ==================================================
 
   const visibleCancellations = useMemo(() => {
@@ -409,25 +752,32 @@ export default function Schedule() {
   }, [selectedDay]);
 
   // ==================================================
+
   // SCROLL TO TOP
+
   // ==================================================
 
   useEffect(() => {
     window.scrollTo({
       top: 0,
+
       behavior: "smooth",
     });
   }, []);
 
   // ==================================================
+
   // RENDER
+
   // ==================================================
 
   return (
     <section className="w-full overflow-x-hidden py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-7xl">
         {/* ==================================================
+
             HERO
+
         ================================================== */}
 
         <motion.div
@@ -475,7 +825,9 @@ export default function Schedule() {
         </motion.div>
 
         {/* ==================================================
+
             UPCOMING WORKSHOPS & EVENTS
+
         ================================================== */}
 
         {upcomingEvents.length > 0 && (
@@ -509,6 +861,7 @@ export default function Schedule() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
                     duration: 0.5,
+
                     delay: index * 0.08,
                   }}
                   className="group card bg-base-100 border border-base-200 shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
@@ -543,12 +896,14 @@ export default function Schedule() {
                     <div className="space-y-2 text-sm text-base-content/70 mt-1">
                       <p className="flex items-center gap-2">
                         <CalendarDays className="h-4 w-4 text-primary" />
+
                         {getEventDateRange(event)}
                       </p>
 
                       {event.instructor && (
                         <p className="flex items-center gap-2">
                           <Users className="h-4 w-4 text-secondary" />
+
                           {event.instructor}
                         </p>
                       )}
@@ -585,7 +940,9 @@ export default function Schedule() {
         )}
 
         {/* ==================================================
+
             CANCELLATION NOTICE
+
         ================================================== */}
 
         {visibleCancellations.map((cancelled) => (
@@ -593,16 +950,21 @@ export default function Schedule() {
             key={cancelled.date}
             initial={{
               opacity: 0,
+
               y: -25,
+
               scale: 0.98,
             }}
             animate={{
               opacity: 1,
+
               y: 0,
+
               scale: 1,
             }}
             transition={{
               duration: 0.6,
+
               ease: [0.22, 1, 0.36, 1],
             }}
             className="relative mb-10 overflow-hidden rounded-3xl border border-error/30 bg-error/10 shadow-xl"
@@ -610,11 +972,14 @@ export default function Schedule() {
             <motion.div
               animate={{
                 scale: [1, 1.2, 1],
+
                 opacity: [0.15, 0.3, 0.15],
               }}
               transition={{
                 duration: 3,
+
                 repeat: Infinity,
+
                 ease: "easeInOut",
               }}
               className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-error/30 blur-3xl"
@@ -669,7 +1034,9 @@ export default function Schedule() {
         ))}
 
         {/* ==================================================
+
             SCHEDULE SECTION
+
         ================================================== */}
 
         <section>
@@ -684,7 +1051,9 @@ export default function Schedule() {
           </div>
 
           {/* ==================================================
+
               CATEGORY FILTERS
+
           ================================================== */}
 
           <div className="grid sm:grid-cols-3 gap-3 mb-7">
@@ -734,65 +1103,105 @@ export default function Schedule() {
             </button>
           </div>
 
-          {/* ==================================================
-              DAY FILTER
-          ================================================== */}
-
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 p-4 rounded-2xl bg-base-200 border border-base-300">
-            <div>
-              <h3 className="font-bold text-lg">Select a Day</h3>
-
-              <p className="text-sm text-base-content/60">
-                {filteredSchedule.length}{" "}
-                {filteredSchedule.length === 1 ? "class" : "classes"} available
-              </p>
-            </div>
-
-            <select
-              value={selectedDay}
-              onChange={(e) => setSelectedDay(e.target.value)}
-              className="select select-primary w-full sm:w-56"
-            >
-              {days.map((day) => (
-                <option key={day} value={day}>
-                  {day === "All" ? "All Days" : day}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* ==================================================
-              CANCELLED SELECTED DAY
-          ================================================== */}
-
-          {selectedDay !== "All" && isDayCancelled(selectedDay) && (
-            <motion.div
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: 0,
-              }}
-              className="mb-10"
-            >
-              <div className="alert alert-error shadow-xl rounded-2xl">
-                <CalendarX2 className="h-6 w-6" />
-
-                <div>
-                  <h3 className="font-bold">No Classes on {selectedDay}</h3>
-
-                  <p className="text-sm">
-                    All classes have been cancelled for this day.
-                  </p>
-                </div>
+          <div className="mb-8 rounded-2xl border border-base-300 bg-base-200 p-4 sm:p-6">
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <h3 className="text-lg font-bold">Find your perfect class</h3>
+                <p className="text-sm opacity-70">
+                  {filteredSchedule.length} matching classes · Choose a day,
+                  style, or teacher
+                </p>
               </div>
-            </motion.div>
+              <button
+                type="button"
+                className="btn btn-ghost btn-sm"
+                onClick={() => {
+                  setSelectedDay("All");
+                  setSelectedStyle("All");
+                  setSelectedInstructor("All");
+                  setSearch("");
+                  setScheduleType("all");
+                }}
+              >
+                <X className="h-4 w-4" /> Clear filters
+              </button>
+            </div>
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              <label className="form-control">
+                <span className="label-text mb-1 font-semibold">Day</span>
+                <select
+                  aria-label="Filter by day"
+                  className="select select-bordered w-full"
+                  value={selectedDay}
+                  onChange={(e) => setSelectedDay(e.target.value)}
+                >
+                  {days.map((day) => (
+                    <option key={day} value={day}>
+                      {day === "All" ? "All days" : day}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="form-control">
+                <span className="label-text mb-1 font-semibold">
+                  Dance style
+                </span>
+                <select
+                  aria-label="Filter by dance style"
+                  className="select select-bordered w-full"
+                  value={selectedStyle}
+                  onChange={(e) => setSelectedStyle(e.target.value)}
+                >
+                  {danceStyles.map((style) => (
+                    <option key={style} value={style}>
+                      {style === "All" ? "All styles" : style}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="form-control">
+                <span className="label-text mb-1 font-semibold">
+                  Instructor
+                </span>
+                <select
+                  aria-label="Filter by instructor"
+                  className="select select-bordered w-full"
+                  value={selectedInstructor}
+                  onChange={(e) => setSelectedInstructor(e.target.value)}
+                >
+                  {instructors.map((name) => (
+                    <option key={name} value={name}>
+                      {name === "All" ? "All instructors" : name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label className="form-control">
+                <span className="label-text mb-1 font-semibold">Search</span>
+                <div className="relative">
+                  <Search className="absolute left-3 top-3 h-5 w-5 opacity-50" />
+                  <input
+                    type="search"
+                    aria-label="Search classes"
+                    placeholder="Class or instructor..."
+                    className="input input-bordered w-full pl-10"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                </div>
+              </label>
+            </div>
+          </div>
+          {filteredSchedule.length === 0 && (
+            <div className="alert mb-8">
+              <span>No classes match your filters. Try clearing a filter.</span>
+            </div>
           )}
 
           {/* ==================================================
+
               DESKTOP TABLE
+
           ================================================== */}
 
           {filteredSchedule.length > 0 && (
@@ -802,12 +1211,19 @@ export default function Schedule() {
                   <thead>
                     <tr>
                       <th>Day</th>
+
                       <th>Time</th>
+
                       <th>Class</th>
+
                       <th>Type</th>
+
                       <th>Level</th>
+
                       <th>Instructor</th>
+
                       <th>Drop-In</th>
+
                       <th></th>
                     </tr>
                   </thead>
@@ -815,7 +1231,7 @@ export default function Schedule() {
                   <tbody>
                     {filteredSchedule.map((item) => (
                       <tr
-                        key={item.id}
+                        key={`${item.type}-${item.id}-${item.day}-${item.time}`}
                         className="transition-all duration-300 hover:bg-base-200"
                       >
                         <td className="font-semibold">{item.day}</td>
@@ -840,7 +1256,17 @@ export default function Schedule() {
                           </span>
                         </td>
 
-                        <td>{item.instructor}</td>
+                        <td>
+                          <div className="flex items-center gap-3">
+                            <InstructorAvatar
+                              name={item.instructor}
+                              image={item.image}
+                            />
+                            <span className="font-semibold">
+                              {item.instructor}
+                            </span>
+                          </div>
+                        </td>
 
                         <td className="font-bold">{item.drop}</td>
 
@@ -865,25 +1291,29 @@ export default function Schedule() {
           )}
 
           {/* ==================================================
+
               MOBILE SCHEDULE CARDS
+
           ================================================== */}
 
           <div className="md:hidden space-y-4 mb-16">
             {filteredSchedule.length === 0
               ? !isDayCancelled(selectedDay) && (
                   <div className="alert alert-info rounded-2xl">
-                    <span>No classes scheduled for this day.</span>
+                    <span>No classes match your filters.</span>
                   </div>
                 )
               : filteredSchedule.map((item, index) => (
                   <motion.div
-                    key={item.id}
+                    key={`${item.type}-${item.id}-${item.day}-${item.time}`}
                     initial={{
                       opacity: 0,
+
                       y: 15,
                     }}
                     animate={{
                       opacity: 1,
+
                       y: 0,
                     }}
                     transition={{
@@ -926,12 +1356,19 @@ export default function Schedule() {
 
                       <h3 className="text-xl font-black">{item.dance}</h3>
 
-                      <p className="text-sm text-base-content/60">
-                        Instructor:{" "}
-                        <span className="font-semibold text-base-content">
-                          {item.instructor}
-                        </span>
-                      </p>
+                      <div className="flex items-center gap-3 rounded-xl bg-base-200 p-3">
+                        <InstructorAvatar
+                          name={item.instructor}
+                          size="lg"
+                          image={item.image}
+                        />
+                        <div>
+                          <p className="text-xs text-base-content/60">
+                            Your instructor
+                          </p>
+                          <p className="font-bold">{item.instructor}</p>
+                        </div>
+                      </div>
 
                       <button
                         className={`btn w-full mt-3 ${
@@ -950,7 +1387,9 @@ export default function Schedule() {
         </section>
 
         {/* ==================================================
+
             INDEPENDENT INSTRUCTOR MESSAGE
+
         ================================================== */}
 
         <section className="mb-16">
@@ -984,7 +1423,9 @@ export default function Schedule() {
         </section>
 
         {/* ==================================================
+
             SERVICES
+
         ================================================== */}
 
         <section>
@@ -1004,11 +1445,17 @@ export default function Schedule() {
             {services.map((service, index) => {
               const {
                 icon,
+
                 title,
+
                 description,
+
                 color,
+
                 styles,
+
                 duration,
+
                 price,
               } = service;
 
@@ -1017,10 +1464,12 @@ export default function Schedule() {
                   key={service.id}
                   initial={{
                     opacity: 0,
+
                     y: 20,
                   }}
                   whileInView={{
                     opacity: 1,
+
                     y: 0,
                   }}
                   viewport={{
@@ -1078,7 +1527,9 @@ export default function Schedule() {
         </section>
 
         {/* ==================================================
+
             FINAL CTA
+
         ================================================== */}
 
         <div className="hero bg-primary text-primary-content rounded-3xl mt-20 overflow-hidden shadow-xl">
