@@ -1,5 +1,5 @@
 import freeman from "../assets/freeman.png";
-import social from "../assets/socials.png";
+import social from "../assets/freedom.png";
 import styling from "../assets/styling.png";
 import carlo from "../assets/instructors/carlos.jpeg";
 import bachataZouk from "../assets/instructors/bachataZouk1.jpeg";
@@ -97,48 +97,76 @@ export const events = [
   //   featured: false,
   // },
 
-  // {
-  //   id: 10,
+  {
+    id: 10,
 
-  //   eventStart: "2026-10-02",
+    eventStart: "2026-10-16",
 
-  //   type: "SBK SOCIAL",
+    day: "Friday",
 
-  //   title: "Freedom Dance SBK Social",
+    type: "BACHATA SOCIAL",
 
-  //   instructor: "Freedom Dance Instructors • Las Vegas Guest Dancers",
+    title: "Pop-Up Bachata Freedom Night",
 
-  //   date: "October 2, 2026",
+    instructor: "Steven • DJ J-Flow",
 
-  //   time: "Bachata Intensive 8:30 PM • Social 10:00 PM",
+    date: "October 16, 2026",
 
-  //   image: social,
+    time: "Free Bachata Class 8:30 PM • Social 9:30 PM – 1:00 AM",
 
-  //   imageFit: "contain",
+    image: social,
 
-  //   location: "Freedom Dance Studio",
+    imageFit: "contain",
 
-  //   workshop: {
-  //     title: "Bachata Weekend Intensive",
-  //     instructor: "Freedom Dance Instructors • Special Guest Instructors",
-  //     time: "8:30 PM",
-  //   },
+    location: "Freedom Dance Studio",
 
-  //   social: {
-  //     title: "Freedom Dance SBK Social",
-  //     musicBy: "DJ Young Fuego • Maximo",
-  //     time: "10:00 PM",
-  //   },
+    address: "3110 E. Sunset Rd., Ste. C, Las Vegas, NV 89120",
 
-  //   description:
-  //     "Join us Friday, October 2 for an exciting night of Bachata and SBK dancing at Freedom Dance Studio! The evening starts at 8:30 PM with our Bachata Weekend Intensive, followed by the Freedom Dance SBK Social at 10:00 PM. Dance the night away with Salsa, Bachata, Kizomba and more alongside Freedom Dance instructors, guest dancers, and the Las Vegas dance community. Music by DJ Young Fuego and Maximo. Dress Code: Men wear all black. Women may wear any color except black.",
+    workshop: {
+      title: "FREE Bachata Class",
+      instructor: "Steven",
+      time: "8:30 PM – 9:30 PM",
+      level: "All Levels",
+      price: "Included with admission",
+    },
 
-  //   button: "Get Your Ticket",
+    social: {
+      title: "Pop-Up Bachata Freedom Night",
+      musicBy: "DJ J-Flow",
+      time: "9:30 PM – 1:00 AM",
+      musicRatio: "5 Bachata • 1 Salsa",
+      musicDetails:
+        "Music selection may change based on attendance and the crowd's preferences.",
+    },
 
-  //   showInHero: false,
+    price: "$20",
 
-  //   featured: false,
-  // },
+    discounts: {
+      repost: {
+        description: "Repost the event flyer",
+        discount: 5,
+      },
+      advancePayment: {
+        description: "Pay before Thursday at 11:59 PM",
+        deadline: "2026-10-15T23:59:00",
+        discount: 5,
+      },
+      combined: {
+        description: "Repost the flyer AND pay in advance",
+        totalDiscount: 10,
+        finalPrice: 10,
+      },
+    },
+
+    description:
+      "Join us Friday, October 16, 2026, for Pop-Up Bachata Freedom Night at Freedom Dance Studio! Start your evening with a FREE Bachata class with Steven from 8:30 PM to 9:30 PM, followed by social dancing with DJ J-Flow until 1:00 AM. Enjoy a music mix of 5 Bachata songs for every 1 Salsa song, with adjustments based on attendance and crowd preferences. Regular admission is $20. Repost our flyer to save $5, pay before Thursday at 11:59 PM to save another $5, or do both and pay only $10! Beginners and experienced dancers are welcome. Come dance, meet new people, and enjoy an unforgettable night in Las Vegas!",
+
+    button: "Get Your Ticket",
+
+    showInHero: true,
+
+    featured: true,
+  },
 
   // {
   //   id: 11,
