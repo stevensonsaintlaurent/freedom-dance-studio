@@ -26,6 +26,7 @@ import {
 import RentalBooking from "./components/RequestAvailable";
 import RentalPrices from "./components/RentalPrices";
 import BachataIntensiveBooking from "./components/BachataIntensiveBooking";
+import FreedomStudioAgreement from "./components/FreedomStudioAgreement";
 
 const router = createBrowserRouter([
   {
@@ -118,7 +119,7 @@ const router = createBrowserRouter([
       },
       {
         path: "confirmation",
-        element: <RentalAgreementConfirmation />,
+        element: <FreedomStudioAgreement />,
       },
       {
         path: "info",
