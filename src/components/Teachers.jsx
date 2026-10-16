@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Play, ExternalLink } from "lucide-react";
 
-import steve from "../assets/stevean.jpg";
-import desmond from "../assets/desm.png";
+import steve from "../assets/instructors/steven.png";
+import desmond from "../assets/instructors/desmond.jpg";
 import adriana from "../assets/adriana.jpg";
 import zagir from "../assets/lady/followerClip.jpeg";
 import allyson from "../assets/ally3.jpg";
@@ -15,7 +15,16 @@ const instructors = [
   {
     name: "Stevenson",
     role: "Founder • Band Leader",
-    specialties: ["Bachata", "Kizomba", "Konpa"],
+    specialties: [
+      "Bachata",
+      "Kizomba",
+      "Konpa",
+      "Live Music",
+      "Performance",
+      "Salsa",
+      "Website Development",
+      "Website maintenance",
+    ],
     image: steve,
     bio: "Passionate dance instructor, performer, and band leader dedicated to helping students grow on and off the dance floor.",
     videoTitle: "Konpa",
@@ -55,7 +64,7 @@ const instructors = [
     image: alain,
     bio: "Leads the Freedom Dance Studio band, bringing live Latin music to socials and special events.",
     videoTitle: "Konpa",
-    price: "$15",
+    price: "Free",
   },
   {
     name: "Allyson",
