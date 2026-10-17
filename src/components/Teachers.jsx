@@ -122,6 +122,7 @@ export default function Instructors() {
     const findInstructor = instructors.find(
       (teacher) => teacher.name === instructor,
     );
+    console.log("Selected Instructor:", findInstructor);
 
     navigate("/book", { state: findInstructor });
   };
