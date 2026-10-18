@@ -502,16 +502,13 @@ const days = [
 // ==================================================
 
 const cancelledDays = [
-  {
-    day: "Saturday",
-
-    date: "October 17, 2026",
-
-    title: "All Classes Cancelled",
-
-    reason:
-      "There will be no regular classes on Saturday, October 17, 2026. This cancellation will not affect your membership.",
-  },
+  // {
+  //   day: "Saturday",
+  //   date: "October 17, 2026",
+  //   title: "All Classes Cancelled",
+  //   reason:
+  //     "There will be no regular classes on Saturday, October 17, 2026. This cancellation will not affect your membership.",
+  // },
 ];
 
 // ==================================================
