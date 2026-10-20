@@ -33,6 +33,22 @@ const Booking = () => {
 
   const bookingData = confirm.bookingData || {};
 
+  // Multi-class selections from Schedule. Existing single-class/event flows remain unchanged.
+  const selectedClasses = Array.isArray(confirm.selectedClasses)
+    ? confirm.selectedClasses
+    : Array.isArray(confirm.classes) &&
+        confirm.bookingType === "multiple-classes"
+      ? confirm.classes
+      : [];
+  const isMultiClassBooking = selectedClasses.length > 0;
+  const selectedClassSummary = selectedClasses
+    .map(
+      (item, index) =>
+        `${index + 1}. ${item.day || "Day TBD"} | ${item.time || "Time TBD"} | ${item.dance || item.title || "Class"} | ${item.instructor || "Instructor TBD"} | ${item.level || "Level TBD"} | ${item.drop ?? item.price ?? "Price TBD"} | ${item.type || "freedom"}`,
+    )
+    .join("\\n");
+  const multiClassTitle = `${selectedClasses.length} Selected Classes`;
+
   // Display the selected class/event photo when provided by the previous page.
   // Supports imported Vite assets and regular image URLs.
   const bookingImage =
@@ -190,7 +206,9 @@ const Booking = () => {
 
   const className = isEventBooking
     ? `${eventTitle}${eventHighlight ? ` ${eventHighlight}` : ""}`
-    : dance || title || name || "Dance Class";
+    : isMultiClassBooking
+      ? multiClassTitle
+      : dance || title || name || "Dance Class";
 
   /*
 
@@ -204,7 +222,11 @@ const Booking = () => {
 
   const classDate = isEventBooking
     ? eventDate || "Date not specified"
-    : day || date || "Date not specified";
+    : isMultiClassBooking
+      ? [
+          ...new Set(selectedClasses.map((item) => item.day).filter(Boolean)),
+        ].join(", ")
+      : day || date || "Date not specified";
 
   /*
 
@@ -218,7 +240,9 @@ const Booking = () => {
 
   const classTime = isEventBooking
     ? eventTime || "Time not specified"
-    : time || "Time not specified";
+    : isMultiClassBooking
+      ? "See selected classes below"
+      : time || "Time not specified";
 
   /*
 
@@ -232,10 +256,12 @@ const Booking = () => {
 
   const classPrice = isEventBooking
     ? eventPrice || "Contact Studio"
-    : drop ||
-      price ||
-      (price && priceDetails && extraPrice) ||
-      "Contact Studio";
+    : isMultiClassBooking
+      ? "See individual class prices"
+      : drop ||
+        price ||
+        (price && priceDetails && extraPrice) ||
+        "Contact Studio";
 
   /*
 
@@ -249,7 +275,13 @@ const Booking = () => {
 
   const classInstructor = isEventBooking
     ? "Freedom Dance Studio"
-    : instructor || "Freedom Dance Studio";
+    : isMultiClassBooking
+      ? [
+          ...new Set(
+            selectedClasses.map((item) => item.instructor).filter(Boolean),
+          ),
+        ].join(", ")
+      : instructor || "Freedom Dance Studio";
 
   /*
 
@@ -313,7 +345,9 @@ const Booking = () => {
         setText(
           isEventBooking
             ? `Your registration for ${className} has been submitted successfully.`
-            : `Your class has been booked successfully with ${classInstructor}.`,
+            : isMultiClassBooking
+              ? `Your ${selectedClasses.length} selected classes have been submitted successfully.`
+              : `Your class has been booked successfully with ${classInstructor}.`,
         );
 
         /*
@@ -404,6 +438,35 @@ const Booking = () => {
                     </h2>
 
                     <div className="grid gap-5 min-w-0">
+                      {isMultiClassBooking && (
+                        <div className="rounded-2xl border border-primary/30 bg-base-200 p-4 space-y-3">
+                          <h3 className="font-bold text-lg">
+                            All selected classes ({selectedClasses.length})
+                          </h3>
+                          {selectedClasses.map((item, index) => (
+                            <div
+                              key={`${item.type || "class"}-${item.id || index}-${item.day}-${item.time}-${index}`}
+                              className="rounded-xl bg-base-100 p-3"
+                            >
+                              <p className="font-bold">
+                                {index + 1}.{" "}
+                                {item.dance || item.title || "Dance Class"}
+                              </p>
+                              <p className="text-sm">
+                                {item.day} · {item.time}
+                              </p>
+                              <p className="text-sm">
+                                Instructor:{" "}
+                                {item.instructor || "To be confirmed"}
+                              </p>
+                              <p className="text-sm">
+                                Level: {item.level || "Not specified"} · Price:{" "}
+                                {item.drop ?? item.price ?? "Contact Studio"}
+                              </p>
+                            </div>
+                          ))}
+                        </div>
+                      )}
                       {/* EVENT / CLASS */}
 
                       <div className="flex items-start gap-4 min-w-0">
@@ -624,6 +687,34 @@ const Booking = () => {
               )}
 
               <div className="space-y-5 min-w-0">
+                {isMultiClassBooking && (
+                  <div className="rounded-2xl border border-primary/30 bg-base-200 p-4 space-y-3">
+                    <h3 className="font-bold text-lg">
+                      All selected classes ({selectedClasses.length})
+                    </h3>
+                    {selectedClasses.map((item, index) => (
+                      <div
+                        key={`${item.type || "class"}-${item.id || index}-${item.day}-${item.time}-${index}`}
+                        className="rounded-xl bg-base-100 p-3"
+                      >
+                        <p className="font-bold">
+                          {index + 1}.{" "}
+                          {item.dance || item.title || "Dance Class"}
+                        </p>
+                        <p className="text-sm">
+                          {item.day} · {item.time}
+                        </p>
+                        <p className="text-sm">
+                          Instructor: {item.instructor || "To be confirmed"}
+                        </p>
+                        <p className="text-sm">
+                          Level: {item.level || "Not specified"} · Price:{" "}
+                          {item.drop ?? item.price ?? "Contact Studio"}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 {/* EVENT / CLASS */}
 
                 <div className="rounded-2xl bg-base-200 p-4">
@@ -854,7 +945,9 @@ const Booking = () => {
                   value={
                     isEventBooking
                       ? "Event Registration"
-                      : "Dance Class Booking"
+                      : isMultiClassBooking
+                        ? "Multiple Dance Classes Booking"
+                        : "Dance Class Booking"
                   }
                   readOnly
                 />
@@ -865,6 +958,59 @@ const Booking = () => {
                   value={bookingReference}
                   readOnly
                 />
+
+                {isMultiClassBooking && (
+                  <>
+                    <input
+                      type="hidden"
+                      name="selectedClasses"
+                      value={selectedClassSummary}
+                      readOnly
+                    />
+                    <input
+                      type="hidden"
+                      name="classCount"
+                      value={selectedClasses.length}
+                      readOnly
+                    />
+                    <input
+                      type="hidden"
+                      name="classSummary"
+                      value={selectedClassSummary}
+                      readOnly
+                    />
+                    <input
+                      type="hidden"
+                      name="selectedClassesJson"
+                      value={JSON.stringify(
+                        selectedClasses.map(
+                          ({
+                            id,
+                            day,
+                            time,
+                            dance,
+                            title,
+                            instructor,
+                            level,
+                            drop,
+                            price,
+                            type,
+                          }) => ({
+                            id,
+                            day,
+                            time,
+                            dance: dance || title,
+                            instructor,
+                            level,
+                            price: drop ?? price,
+                            type,
+                          }),
+                        ),
+                      )}
+                      readOnly
+                    />
+                  </>
+                )}
 
                 {/* SPECIAL REQUEST */}
 

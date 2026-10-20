@@ -12,6 +12,8 @@ import {
   ChevronRight,
   Search,
   X,
+  Check,
+  ShoppingBag,
 } from "lucide-react";
 
 import { motion } from "framer-motion";
@@ -19,8 +21,11 @@ import { motion } from "framer-motion";
 import { events } from "../data/eventsData";
 
 import lady from "../assets/lady/followerClip1.jpeg";
+
 import steven from "../assets/instructors/steven.png";
+
 import luna from "../assets/adriana.jpg";
+
 import desmond from "../assets/instructors/desmond.jpg";
 
 import { independentClasses } from "../data/indepedentInstructors";
@@ -32,27 +37,44 @@ import { independentClasses } from "../data/indepedentInstructors";
 // ==================================================
 
 // Add real portraits to public/assets/instructors/ using these filenames.
+
 // Missing photos automatically display a clean initials avatar.
-// const instructorPhotos = {
-//   Stevenson: "/assets/instructors/stevenson.jpg",
-//   Desmond: "/assets/instructors/desmond.jpg",
-//   Luna: "/assets/instructors/luna.jpg",
-//   Zagir: "/assets/instructors/zagir.jpg",
-//   Alain: "/assets/instructors/alain.jpg",
-//   Steven: "/assets/instructors/steven.jpg",
-// };
+
+const instructorPhotos = {
+  Stevenson: "/assets/instructors/stevenson.jpg",
+
+  Desmond: "/assets/instructors/desmond.jpg",
+
+  Luna: "/assets/instructors/luna.jpg",
+
+  Zagir: "/assets/instructors/zagir.jpg",
+
+  Alain: "/assets/instructors/alain.jpg",
+
+  Steven: "/assets/instructors/steven.jpg",
+};
 
 function InstructorAvatar({ name = "Instructor", size = "md", image }) {
   const [failed, setFailed] = useState(false);
+
   const src = image || instructorPhotos[name];
+
   const initials = name
-    .split(/\\s+/)
+
+    .split(/\s+/)
+
     .map((part) => part[0])
+
     .slice(0, 2)
+
     .join("")
+
     .toUpperCase();
+
   const dimensions = size === "lg" ? "h-16 w-16 text-xl" : "h-11 w-11 text-sm";
+
   useEffect(() => setFailed(false), [src]);
+
   return (
     <div
       className={`${dimensions} shrink-0 overflow-hidden rounded-full border-2 border-primary/20 bg-primary/10 flex items-center justify-center font-bold text-primary`}
@@ -74,27 +96,42 @@ function InstructorAvatar({ name = "Instructor", size = "md", image }) {
 
 const danceStyleOf = (dance = "") => {
   const value = dance.toLowerCase();
+
   if (value.includes("bachata")) return "Bachata";
+
   if (value.includes("salsa")) return "Salsa";
+
   if (value.includes("kizomba") || value.includes("urban kiz"))
     return "Kizomba";
+
   if (value.includes("konpa") || value.includes("kompa")) return "Konpa";
+
   if (value.includes("jazz") || value.includes("band")) return "Music";
+
   return "Other";
 };
 
 const dayOrder = [
   "Monday",
+
   "Tuesday",
+
   "Wednesday",
+
   "Thursday",
+
   "Friday",
+
   "Saturday",
+
   "Sunday",
 ];
+
 const timeMinutes = (time = "") => {
-  const match = time.match(/(\\d{1,2}):(\\d{2})\\s*(AM|PM)/i);
+  const match = time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+
   if (!match) return 9999;
+
   return (
     ((Number(match[1]) % 12) + (match[3].toUpperCase() === "PM" ? 12 : 0)) *
       60 +
@@ -201,6 +238,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -220,6 +258,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: luna,
   },
 
@@ -239,6 +278,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -258,6 +298,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -277,6 +318,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -296,6 +338,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -315,6 +358,7 @@ const weeklySchedule = [
     level: "Open Level",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -334,6 +378,7 @@ const weeklySchedule = [
     level: "Intermediate & Beyond",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -353,6 +398,7 @@ const weeklySchedule = [
     level: "Intermediate & Beyond",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -372,6 +418,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: lady,
   },
 
@@ -391,6 +438,7 @@ const weeklySchedule = [
     level: "Open Level",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -410,6 +458,7 @@ const weeklySchedule = [
     level: "Open Level",
 
     type: "freedom",
+
     image: steven,
   },
 
@@ -429,6 +478,7 @@ const weeklySchedule = [
     level: "Beginner Friendly",
 
     type: "freedom",
+
     image: desmond,
   },
 
@@ -448,6 +498,7 @@ const weeklySchedule = [
     level: "Intermediate & Beyond",
 
     type: "freedom",
+
     image: desmond,
   },
 
@@ -467,6 +518,7 @@ const weeklySchedule = [
     level: "All Levels",
 
     type: "freedom",
+
     image: steven,
   },
 ];
@@ -571,9 +623,13 @@ export default function Schedule() {
   const [selectedDay, setSelectedDay] = useState("All");
 
   const [scheduleType, setScheduleType] = useState("all");
+
   const [selectedStyle, setSelectedStyle] = useState("All");
+
   const [selectedInstructor, setSelectedInstructor] = useState("All");
+
   const [search, setSearch] = useState("");
+  const [selectedClasses, setSelectedClasses] = useState([]);
 
   // ==================================================
 
@@ -606,6 +662,58 @@ export default function Schedule() {
   // BOOK EVENT / WORKSHOP
 
   // ==================================================
+
+  const classKey = (item) =>
+    `${item.type}-${item.id}-${item.day}-${item.time}-${item.dance}`;
+  const toggleClass = (item) => {
+    setSelectedClasses((current) =>
+      current.some((entry) => classKey(entry) === classKey(item))
+        ? current.filter((entry) => classKey(entry) !== classKey(item))
+        : [...current, item],
+    );
+  };
+  // Select every class for the chosen day, or remove that day's classes.
+  const dayClasses = allClasses.filter((item) => item.day === selectedDay);
+  const allDaySelected =
+    dayClasses.length > 0 &&
+    dayClasses.every((item) =>
+      selectedClasses.some((entry) => classKey(entry) === classKey(item)),
+    );
+  const toggleAllDay = () => {
+    setSelectedClasses((current) => {
+      const dayKeys = new Set(dayClasses.map(classKey));
+      const alreadyAll = dayClasses.every((item) =>
+        current.some((entry) => classKey(entry) === classKey(item)),
+      );
+      return alreadyAll
+        ? current.filter((item) => !dayKeys.has(classKey(item)))
+        : [
+            ...current,
+            ...dayClasses.filter(
+              (item) =>
+                !current.some((entry) => classKey(entry) === classKey(item)),
+            ),
+          ];
+    });
+  };
+  const bookSelectedClasses = () => {
+    if (!selectedClasses.length) return;
+    const bookingClasses = selectedClasses.map((item) => ({ ...item }));
+    navigate("/book", {
+      state: {
+        bookingType: "multiple-classes",
+        selectedClasses: bookingClasses,
+        classes: bookingClasses,
+        classCount: bookingClasses.length,
+        classSummary: bookingClasses
+          .map(
+            (item) =>
+              `${item.day} ${item.time} - ${item.dance} (${item.instructor})`,
+          )
+          .join("; "),
+      },
+    });
+  };
 
   const handleEventBooking = (event) => {
     navigate("/book", {
@@ -653,47 +761,61 @@ export default function Schedule() {
     () =>
       [
         "All",
+
         ...new Set(allClasses.map((item) => danceStyleOf(item.dance))),
       ].sort((a, b) =>
         a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b),
       ),
+
     [allClasses],
   );
+
   const instructors = useMemo(
     () =>
       [
         "All",
+
         ...new Set(allClasses.map((item) => item.instructor).filter(Boolean)),
       ].sort((a, b) =>
         a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b),
       ),
+
     [allClasses],
   );
+
   const filteredSchedule = useMemo(() => {
     return allClasses
+
       .filter((item) => {
         if (scheduleType !== "all" && item.type !== scheduleType) return false;
+
         if (selectedDay !== "All" && item.day !== selectedDay) return false;
+
         if (
           selectedStyle !== "All" &&
           danceStyleOf(item.dance) !== selectedStyle
         )
           return false;
+
         if (
           selectedInstructor !== "All" &&
           item.instructor !== selectedInstructor
         )
           return false;
+
         const term = search.trim().toLowerCase();
+
         return (
           !term ||
           [item.dance, item.day, item.instructor, item.level].some((v) =>
             String(v || "")
               .toLowerCase()
+
               .includes(term),
           )
         );
       })
+
       .sort(
         (a, b) =>
           dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day) ||
@@ -701,10 +823,15 @@ export default function Schedule() {
       );
   }, [
     allClasses,
+
     selectedDay,
+
     scheduleType,
+
     selectedStyle,
+
     selectedInstructor,
+
     search,
   ]);
 
@@ -773,7 +900,11 @@ export default function Schedule() {
       <div className="mx-auto w-full max-w-7xl">
         {/* ==================================================
 
+
+
             HERO
+
+
 
         ================================================== */}
 
@@ -823,7 +954,11 @@ export default function Schedule() {
 
         {/* ==================================================
 
+
+
             UPCOMING WORKSHOPS & EVENTS
+
+
 
         ================================================== */}
 
@@ -938,7 +1073,11 @@ export default function Schedule() {
 
         {/* ==================================================
 
+
+
             CANCELLATION NOTICE
+
+
 
         ================================================== */}
 
@@ -1032,7 +1171,11 @@ export default function Schedule() {
 
         {/* ==================================================
 
+
+
             SCHEDULE SECTION
+
+
 
         ================================================== */}
 
@@ -1049,7 +1192,11 @@ export default function Schedule() {
 
           {/* ==================================================
 
+
+
               CATEGORY FILTERS
+
+
 
           ================================================== */}
 
@@ -1104,28 +1251,36 @@ export default function Schedule() {
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <div>
                 <h3 className="text-lg font-bold">Find your perfect class</h3>
+
                 <p className="text-sm opacity-70">
                   {filteredSchedule.length} matching classes · Choose a day,
                   style, or teacher
                 </p>
               </div>
+
               <button
                 type="button"
                 className="btn btn-ghost btn-sm"
                 onClick={() => {
                   setSelectedDay("All");
+
                   setSelectedStyle("All");
+
                   setSelectedInstructor("All");
+
                   setSearch("");
+
                   setScheduleType("all");
                 }}
               >
                 <X className="h-4 w-4" /> Clear filters
               </button>
             </div>
+
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               <label className="form-control">
                 <span className="label-text mb-1 font-semibold">Day</span>
+
                 <select
                   aria-label="Filter by day"
                   className="select select-bordered w-full"
@@ -1139,10 +1294,12 @@ export default function Schedule() {
                   ))}
                 </select>
               </label>
+
               <label className="form-control">
                 <span className="label-text mb-1 font-semibold">
                   Dance style
                 </span>
+
                 <select
                   aria-label="Filter by dance style"
                   className="select select-bordered w-full"
@@ -1156,10 +1313,12 @@ export default function Schedule() {
                   ))}
                 </select>
               </label>
+
               <label className="form-control">
                 <span className="label-text mb-1 font-semibold">
                   Instructor
                 </span>
+
                 <select
                   aria-label="Filter by instructor"
                   className="select select-bordered w-full"
@@ -1173,10 +1332,13 @@ export default function Schedule() {
                   ))}
                 </select>
               </label>
+
               <label className="form-control">
                 <span className="label-text mb-1 font-semibold">Search</span>
+
                 <div className="relative">
                   <Search className="absolute left-3 top-3 h-5 w-5 opacity-50" />
+
                   <input
                     type="search"
                     aria-label="Search classes"
@@ -1189,6 +1351,110 @@ export default function Schedule() {
               </label>
             </div>
           </div>
+
+          {selectedDay !== "All" && (
+            <div className="mb-6 rounded-2xl border border-base-300 bg-base-100 p-4 sm:p-6 shadow-sm">
+              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
+                <div>
+                  <h3 className="text-xl font-bold">
+                    {selectedDay} — Choose your classes
+                  </h3>
+                  <p className="text-sm opacity-70">
+                    Select one, several, or every class on {selectedDay}.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  className="btn btn-outline btn-primary btn-sm"
+                  disabled={!dayClasses.length}
+                  onClick={toggleAllDay}
+                >
+                  {allDaySelected
+                    ? `Remove all ${selectedDay} classes`
+                    : `Select all ${selectedDay} classes`}
+                </button>
+              </div>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {dayClasses.map((item) => {
+                  const checked = selectedClasses.some(
+                    (entry) => classKey(entry) === classKey(item),
+                  );
+                  return (
+                    <label
+                      key={classKey(item)}
+                      className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${checked ? "border-primary bg-primary/10" : "border-base-300 hover:border-primary/50"}`}
+                    >
+                      <input
+                        type="checkbox"
+                        className="checkbox checkbox-primary mt-1"
+                        checked={checked}
+                        onChange={() => toggleClass(item)}
+                      />
+                      <span className="min-w-0">
+                        <span className="block font-bold">{item.dance}</span>
+                        <span className="block text-sm opacity-70">
+                          {item.time} · {item.instructor}
+                        </span>
+                        <span className="block text-sm font-semibold">
+                          {item.drop}
+                        </span>
+                      </span>
+                    </label>
+                  );
+                })}
+                {!dayClasses.length && (
+                  <p className="text-sm opacity-70">
+                    No classes scheduled for this day.
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="mb-6 rounded-2xl border border-primary/30 bg-primary/5 p-4 sm:p-5">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h3 className="font-bold text-lg">
+                  Selected classes ({selectedClasses.length})
+                </h3>
+                <p className="text-sm opacity-70">
+                  Choose multiple classes, including on the same day.
+                </p>
+                <div className="flex flex-wrap gap-2 mt-3">
+                  {selectedClasses.map((item) => (
+                    <button
+                      key={classKey(item)}
+                      type="button"
+                      onClick={() => toggleClass(item)}
+                      className="badge badge-primary badge-lg h-auto py-2 gap-2"
+                    >
+                      {item.day} {item.time} · {item.dance}{" "}
+                      <X className="h-3 w-3" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="flex gap-2">
+                {selectedClasses.length > 0 && (
+                  <button
+                    className="btn btn-ghost"
+                    onClick={() => setSelectedClasses([])}
+                  >
+                    Clear
+                  </button>
+                )}
+                <button
+                  className="btn btn-primary"
+                  disabled={!selectedClasses.length}
+                  onClick={bookSelectedClasses}
+                >
+                  Continue with {selectedClasses.length}{" "}
+                  {selectedClasses.length === 1 ? "class" : "classes"}
+                </button>
+              </div>
+            </div>
+          </div>
+
           {filteredSchedule.length === 0 && (
             <div className="alert mb-8">
               <span>No classes match your filters. Try clearing a filter.</span>
@@ -1197,7 +1463,11 @@ export default function Schedule() {
 
           {/* ==================================================
 
+
+
               DESKTOP TABLE
+
+
 
           ================================================== */}
 
@@ -1259,6 +1529,7 @@ export default function Schedule() {
                               name={item.instructor}
                               image={item.image}
                             />
+
                             <span className="font-semibold">
                               {item.instructor}
                             </span>
@@ -1274,9 +1545,17 @@ export default function Schedule() {
                                 ? "btn-secondary"
                                 : "btn-primary"
                             } transition-all duration-300 hover:scale-105`}
-                            onClick={() => handleBooking(item)}
+                            onClick={() => toggleClass(item)}
                           >
-                            Book Now
+                            {selectedClasses.some(
+                              (entry) => classKey(entry) === classKey(item),
+                            ) ? (
+                              <>
+                                <Check className="h-4 w-4" /> Selected
+                              </>
+                            ) : (
+                              "Select Class"
+                            )}
                           </button>
                         </td>
                       </tr>
@@ -1289,7 +1568,11 @@ export default function Schedule() {
 
           {/* ==================================================
 
+
+
               MOBILE SCHEDULE CARDS
+
+
 
           ================================================== */}
 
@@ -1359,10 +1642,12 @@ export default function Schedule() {
                           size="lg"
                           image={item.image}
                         />
+
                         <div>
                           <p className="text-xs text-base-content/60">
                             Your instructor
                           </p>
+
                           <p className="font-bold">{item.instructor}</p>
                         </div>
                       </div>
@@ -1373,9 +1658,13 @@ export default function Schedule() {
                             ? "btn-secondary"
                             : "btn-primary"
                         } transition-all duration-300 hover:scale-[1.02]`}
-                        onClick={() => handleBooking(item)}
+                        onClick={() => toggleClass(item)}
                       >
-                        Book Now
+                        {selectedClasses.some(
+                          (entry) => classKey(entry) === classKey(item),
+                        )
+                          ? "✓ Selected"
+                          : "Select Class"}
                       </button>
                     </div>
                   </motion.div>
@@ -1385,7 +1674,11 @@ export default function Schedule() {
 
         {/* ==================================================
 
+
+
             INDEPENDENT INSTRUCTOR MESSAGE
+
+
 
         ================================================== */}
 
@@ -1421,7 +1714,11 @@ export default function Schedule() {
 
         {/* ==================================================
 
+
+
             SERVICES
+
+
 
         ================================================== */}
 
@@ -1525,7 +1822,11 @@ export default function Schedule() {
 
         {/* ==================================================
 
+
+
             FINAL CTA
+
+
 
         ================================================== */}
 
