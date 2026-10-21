@@ -141,6 +141,27 @@ export const independentClasses = [
     video: "",
     image: edourdo,
   },
+
+  {
+    id: "independent-santi-afrodance",
+    day: "Tuesday",
+    date: "Every Tuesday",
+    time: "7:00 PM",
+    dance: "AfroDance",
+    title: "AfroDance",
+    instructor: "Santi",
+    drop: "$15",
+    monthly: "$40",
+    level: "Open Level",
+    category: "AfroDance",
+    type: "independent",
+    phone: "",
+    instagram: "",
+    description:
+      "Join Santi every Tuesday at 7:00 PM for an energetic AfroDance class at Freedom Dance Studio! Explore African-inspired dance movements, improve your rhythm, coordination, and confidence while having fun. All levels are welcome. Drop-in $15 or monthly membership $40.",
+    video: "",
+    // image: santi,
+  },
 ];
 
 export default independentClasses;

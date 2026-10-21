@@ -48,8 +48,28 @@ const independentClasses = [
     image: luis,
     video: "https://youtu.be/2IaBcV1tRcw?si=YkE_gEwWzxUGO_0X",
   },
+
   {
-    id: 7,
+    id: 2,
+    day: "Tuesday",
+    date: "Every Tuesday",
+    title: "AfroDance",
+    time: "7:00 PM – 8:00 PM",
+    instructor: "Santi",
+    category: "AfroDance",
+    type: "independent",
+    drop: "$15",
+    monthly: "$40",
+    phone: "",
+    instagram: "",
+    description:
+      "Join Santi every Tuesday for an energetic AfroDance class at Freedom Dance Studio! Learn African-inspired dance moves, improve your rhythm, coordination, and confidence. All levels are welcome! Drop-in $15 or $40 monthly.",
+    // image: santi,
+    video: "",
+  },
+
+  {
+    id: 3,
     day: "Wednesday",
     date: "Every Wednesday",
     title: "Salsalogía Training",
@@ -64,7 +84,7 @@ const independentClasses = [
     video: "",
   },
   {
-    id: 6,
+    id: 4,
     day: "Thursday",
     date: "Every Thursday",
     title: "Salsa Rueda de Casino",
@@ -79,9 +99,24 @@ const independentClasses = [
     video:
       "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
   },
+  {
+    id: 5,
+    day: "Thursday",
+    date: "Every Thursday",
+    title: "Reggaeton",
+    time: "7:30 PM – 8:30 PM",
+    instructor: "Eduardo",
+    category: "Urban / Reggaeton",
+    phone: "+1 (562) 325-4115",
+    instagram: "",
+    description:
+      "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
+    image: edourdo,
+    video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
+  },
 
   {
-    id: 2,
+    id: 6,
     day: "Friday",
     date: "Every Friday",
     title: "Twerk",
@@ -97,23 +132,7 @@ const independentClasses = [
   },
 
   {
-    id: 3,
-    day: "Saturday",
-    date: "Every Saturday",
-    title: "Reggaeton",
-    time: "7:00 PM – 8:00 PM",
-    instructor: "Eduardo",
-    category: "Urban / Reggaeton",
-    phone: "+1 (562) 325-4115",
-    instagram: "",
-    description:
-      "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
-    image: edourdo,
-    video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
-  },
-
-  {
-    id: 4,
+    id: 7,
     day: "Sunday",
     date: "Every Sunday",
     title: "Hip-Hop",
@@ -129,7 +148,7 @@ const independentClasses = [
   },
 
   {
-    id: 5,
+    id: 8,
     day: "Sunday",
     date: "Every Sunday",
     title: "Reparto",
@@ -552,6 +571,7 @@ export default function IndependentClasses() {
   const filters = [
     "All",
     "Monday",
+    "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
