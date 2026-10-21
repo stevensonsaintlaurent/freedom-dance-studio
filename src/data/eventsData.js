@@ -100,19 +100,19 @@ export const events = [
   {
     id: 10,
 
-    eventStart: "2026-10-16",
+    eventStart: "2026-11-06",
 
     day: "Friday",
 
-    type: "BACHATA SOCIAL",
+    type: "SBK SOCIAL",
 
-    title: "Pop-Up Bachata Freedom Night",
+    title: "Freedom Monthly SBK Social",
 
-    instructor: "Steven • DJ J-Flow",
+    instructor: "Steven & Luz • DJ Maximo • DJ J-Flow",
 
-    date: "October 16, 2026",
+    date: "November 6, 2026",
 
-    time: "Free Bachata Class 8:30 PM • Social 9:30 PM – 1:00 AM",
+    time: "Bachata Workshop 8:30 PM • Social 10:00 PM – 2:00 AM",
 
     image: social,
 
@@ -123,43 +123,43 @@ export const events = [
     address: "3110 E. Sunset Rd., Ste. C, Las Vegas, NV 89120",
 
     workshop: {
-      title: "FREE Bachata Class",
-      instructor: "Steven",
-      time: "8:30 PM – 9:30 PM",
-      level: "All Levels",
-      price: "Included with admission",
+      title: "Bachata Clip Workshop",
+      instructor: "Steven & Luz",
+      time: "8:30 PM – 10:00 PM",
+      level: "Open Level",
+      price: "Contact studio for workshop pricing",
+      description:
+        "Join Steven and Luz for a special Bachata workshop where they will teach the choreography from their previous Bachata clip. Learn the movements, musicality, partner connection, and styling featured in their performance.",
     },
 
     social: {
-      title: "Pop-Up Bachata Freedom Night",
-      musicBy: "DJ J-Flow",
-      time: "9:30 PM – 1:00 AM",
-      musicRatio: "5 Bachata • 1 Salsa",
+      title: "Freedom Monthly SBK Social",
+      musicBy: "DJ Maximo • DJ J-Flow",
+      time: "10:00 PM – 2:00 AM",
+
+      rooms: [
+        {
+          name: "Room 1",
+          music: "Salsa & Bachata",
+          description:
+            "Enjoy Salsa and Bachata music with great dancers from the Las Vegas community.",
+        },
+        {
+          name: "Room 2",
+          music: "Kizomba",
+          description:
+            "Dance Kizomba and enjoy the connection, rhythm, and atmosphere.",
+        },
+      ],
+
       musicDetails:
-        "Music selection may change based on attendance and the crowd's preferences.",
+        "Two rooms featuring Salsa, Bachata, and Kizomba, with music by DJ Maximo and DJ J-Flow.",
     },
 
     price: "$20",
 
-    discounts: {
-      repost: {
-        description: "Repost the event flyer",
-        discount: 5,
-      },
-      advancePayment: {
-        description: "Pay before Thursday at 11:59 PM",
-        deadline: "2026-10-15T23:59:00",
-        discount: 5,
-      },
-      combined: {
-        description: "Repost the flyer AND pay in advance",
-        totalDiscount: 10,
-        finalPrice: 10,
-      },
-    },
-
     description:
-      "Join us Friday, October 16, 2026, for Pop-Up Bachata Freedom Night at Freedom Dance Studio! Start your evening with a FREE Bachata class with Steven from 8:30 PM to 9:30 PM, followed by social dancing with DJ J-Flow until 1:00 AM. Enjoy a music mix of 5 Bachata songs for every 1 Salsa song, with adjustments based on attendance and crowd preferences. Regular admission is $20. Repost our flyer to save $5, pay before Thursday at 11:59 PM to save another $5, or do both and pay only $10! Beginners and experienced dancers are welcome. Come dance, meet new people, and enjoy an unforgettable night in Las Vegas!",
+      "Join us Friday, November 6, 2026, for our Monthly SBK Social at Freedom Dance Studio in Las Vegas! We are bringing together amazing dancers for another unforgettable night of Salsa, Bachata, and Kizomba. Start the evening with a special Bachata Clip Workshop taught by Steven and Luz from 8:30 PM to 10:00 PM, where they will teach the choreography from their previous Bachata clip. Then dance from 10:00 PM to 2:00 AM with music by DJ Maximo and DJ J-Flow! Enjoy two dance rooms: Room 1 for Salsa and Bachata, and Room 2 for Kizomba. Social admission is $20. Come dance, connect with the community, meet new people, and enjoy an incredible night at Freedom Dance Studio!",
 
     button: "Get Your Ticket",
 
