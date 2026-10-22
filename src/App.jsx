@@ -27,6 +27,7 @@ import RentalBooking from "./components/RequestAvailable";
 import RentalPrices from "./components/RentalPrices";
 import BachataIntensiveBooking from "./components/BachataIntensiveBooking";
 import FreedomStudioAgreement from "./components/FreedomStudioAgreement";
+import KarolActingClasses from "./components/KarolActingClasses";
 
 const router = createBrowserRouter([
   {
@@ -134,6 +135,10 @@ const router = createBrowserRouter([
       {
         path: "independent",
         element: <IndependentClasses />,
+      },
+      {
+        path: "acting",
+        element: <KarolActingClasses />,
       },
 
       {

@@ -14,7 +14,6 @@ import { BsInstagram } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
-import KarolActingClasses from "./KarolActingClasses";
 import InstructorClassModal from "./InstructorClassModal";
 
 // ======================================================
@@ -26,6 +25,7 @@ import luis from "../assets/instructors/luis1.jpg";
 import luz from "../assets/instructors/luz.png";
 import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
 import Sandra from "../assets/instructors/sandra2.jpeg";
+import karol_profil3 from "../../public/images/4.jpeg";
 
 // ======================================================
 // INDEPENDENT CLASSES
@@ -115,6 +115,33 @@ const independentClasses = [
     video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
   },
 
+  {
+    id: 9,
+    day: "Friday",
+    date: "Every Friday",
+    title: "Kids Acting Classes",
+    time: "4:30 PM",
+    instructor: "Karol Di Nassif",
+    category: "Kids / Acting / Theater",
+    phone: "+1 (702) 496-7934",
+    instagram: "",
+    description:
+      "Kids Acting Classes for ages 6–12 with professional actress and TV presenter Karol Di Nassif. Children develop confidence, creativity, storytelling, improvisation, camera performance, and audition skills in a fun and supportive environment. No previous acting experience required. Classes are ongoing, and new students are welcome. $80 monthly or $25 per class.",
+    image: karol_profil3,
+    video: "",
+    level: "Beginner Friendly",
+    ageGroup: "6–12 years",
+    drop: "$25",
+    monthly: "$80",
+    location: "Freedom Dance Studio",
+    address: "3110 E Sunset Rd, Suite C, Las Vegas, NV 89120",
+    booking:
+      "https://wa.me/17024967934?text=Hi%20Karol!%20I%20would%20like%20to%20register%20my%20child%20for%20Kids%20Acting%20Classes.",
+
+    // Dedicated component navigation
+    route: "/kids-acting",
+    buttonText: "View Acting Program",
+  },
   {
     id: 6,
     day: "Friday",
@@ -593,8 +620,6 @@ export default function IndependentClasses() {
       {/* ==================================================
           KAROL FEATURE
       ================================================== */}
-
-      <KarolActingClasses />
 
       {/* ==================================================
           INDEPENDENT CLASSES

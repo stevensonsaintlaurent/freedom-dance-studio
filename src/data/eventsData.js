@@ -1,7 +1,6 @@
-import freeman from "../assets/freeman.png";
+import stevenLuz from "../assets/stevenLuz.png";
 import social from "../assets/freedom.png";
 import styling from "../assets/styling.png";
-import carlo from "../assets/instructors/carlos.jpeg";
 import bachataZouk from "../assets/instructors/bachataZouk1.jpeg";
 
 export const events = [
@@ -43,59 +42,57 @@ export const events = [
 
     button: "Join the Class",
 
-    showInHero: true,
+    showInHero: false,
+
+    featured: false,
+  },
+
+  {
+    id: 9,
+
+    eventStart: "2026-11-06",
+
+    day: "Friday",
+
+    type: "WORKSHOP",
+
+    title: "Bachata Workshop with Steven & Luz",
+
+    instructor: "Steven • Luz",
+
+    date: "November 6, 2026",
+
+    time: "8:30 PM – 10:00 PM",
+
+    image: stevenLuz,
+
+    imageFit: "contain",
+
+    location: "Freedom Dance Studio",
+
+    address: "3110 E. Sunset Rd., Suite C, Las Vegas, NV 89120",
+
+    schedule: [
+      {
+        time: "8:30 PM – 10:00 PM",
+        title: "Bachata Choreography Workshop",
+        instructors: "Steven • Luz",
+      },
+    ],
+
+    price: "$30",
+
+    priceDetails: "90-Minute Bachata Workshop",
+
+    description:
+      "Join Steven and Luz for a special 90-minute Bachata workshop! Learn the choreography from their previous Bachata video clip, improve your technique, musicality, and partnerwork, and have fun dancing with us. Come learn the moves and enjoy an unforgettable evening at Freedom Dance Studio!",
+
+    button: "Register Now",
+
+    showInHero: false,
 
     featured: true,
   },
-
-  // {
-  //   id: 9,
-
-  //   eventStart: "2026-09-26",
-
-  //   type: "WORKSHOP",
-
-  //   title: "Salsa Styling & Partnerwork Workshop",
-
-  //   instructor: "Freeman • Sandra",
-
-  //   date: "September 26, 2026",
-
-  //   time: "2:00 PM",
-
-  //   image: freeman,
-
-  //   imageFit: "contain",
-
-  //   location: "Freedom Dance Studio",
-
-  //   schedule: [
-  //     {
-  //       time: "2:00 PM",
-  //       title: "Men's Styling & Ladies Styling",
-  //       instructors: "Freeman • Sandra",
-  //     },
-  //     {
-  //       time: "3:00 PM",
-  //       title: "Salsa On 2 Partnerwork",
-  //       instructors: "Freeman • Sandra",
-  //     },
-  //   ],
-
-  //   price: "$25",
-
-  //   priceDetails:
-  //     "Early Bird • $40 at the Door • Donation for Members & Instructors",
-
-  //   description:
-  //     "Join Freeman and Sandra for a special Salsa workshop. At 2:00 PM, train Men's Styling and Ladies Styling. At 3:00 PM, bring everything together with Salsa On 2 Partnerwork. Early bird admission is $25, $40 at the door, and donation-based for Freedom Dance Studio members and instructors.",
-
-  //   button: "Register Now",
-
-  //   showInHero: false,
-
-  //   featured: false,
-  // },
 
   {
     id: 10,
