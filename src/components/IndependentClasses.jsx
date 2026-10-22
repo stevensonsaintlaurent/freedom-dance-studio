@@ -65,7 +65,7 @@ const independentClasses = [
     description:
       "Join Santi every Tuesday for an energetic AfroDance class at Freedom Dance Studio! Learn African-inspired dance moves, improve your rhythm, coordination, and confidence. All levels are welcome! Drop-in $15 or $40 monthly.",
     // image: santi,
-    video: "",
+    video: "https://youtube.com/shorts/ERUpqqthyi0?si=1Gcn7aAGqZiRyrMt",
   },
 
   {
