@@ -1411,40 +1411,45 @@ export default function Schedule() {
             </div>
           )}
 
-          <div className="mb-6 rounded-2xl border border-primary/30 bg-primary/5 p-4 sm:p-5">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-              <div>
-                <h3 className="font-bold text-lg">
+          <div className="mb-6 w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-4 sm:p-5">
+            <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+              <div className="min-w-0 flex-1">
+                <h3 className="text-lg font-bold">
                   Selected classes ({selectedClasses.length})
                 </h3>
                 <p className="text-sm opacity-70">
                   Choose multiple classes, including on the same day.
                 </p>
-                <div className="flex flex-wrap gap-2 mt-3">
+                <div className="mt-3 flex max-h-44 min-w-0 flex-wrap gap-2 overflow-x-hidden overflow-y-auto">
                   {selectedClasses.map((item) => (
                     <button
                       key={classKey(item)}
                       type="button"
                       onClick={() => toggleClass(item)}
-                      className="badge badge-primary badge-lg h-auto py-2 gap-2"
+                      className="inline-flex h-auto max-w-full min-w-0 items-center gap-2 rounded-lg border border-primary/30 bg-primary px-3 py-2 text-left text-xs font-semibold leading-snug text-primary-content transition-opacity hover:opacity-80 sm:text-sm"
+                      title="Remove selected class"
                     >
-                      {item.day} {item.time} · {item.dance}{" "}
-                      <X className="h-3 w-3" />
+                      <span className="min-w-0 break-words">
+                        {item.day} {item.time} · {item.dance}
+                      </span>
+                      <X className="h-4 w-4 shrink-0" />
                     </button>
                   ))}
                 </div>
               </div>
-              <div className="flex gap-2">
+              <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row lg:w-auto lg:shrink-0">
                 {selectedClasses.length > 0 && (
                   <button
-                    className="btn btn-ghost"
+                    type="button"
+                    className="btn btn-ghost w-full sm:w-auto"
                     onClick={() => setSelectedClasses([])}
                   >
                     Clear
                   </button>
                 )}
                 <button
-                  className="btn btn-primary"
+                  type="button"
+                  className="btn btn-primary h-auto min-h-12 w-full min-w-0 whitespace-normal px-4 py-2 text-center leading-snug sm:w-auto"
                   disabled={!selectedClasses.length}
                   onClick={bookSelectedClasses}
                 >
