@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   ArrowRight,
   CalendarDays,
@@ -10,195 +11,324 @@ import {
   Users,
   X,
 } from "lucide-react";
+
 import { BsInstagram } from "react-icons/bs";
+
 import { Link } from "react-router-dom";
+
 import { motion } from "framer-motion";
 
 import InstructorClassModal from "./InstructorClassModal";
 
 // ======================================================
+
 // IMAGES
+
 // ======================================================
 
 import edourdo from "../assets/instructors/edourdo.jpg";
+
 import luis from "../assets/instructors/luis1.jpg";
+
 import luz from "../assets/instructors/luz.png";
+
 import Rodolfo from "../assets/instructors/Rodolfo.jpeg";
+
 import Sandra from "../assets/instructors/sandra2.jpeg";
+
 import karol_profil3 from "../../public/images/4.jpeg";
 
 // ======================================================
+
 // INDEPENDENT CLASSES
+
 // ======================================================
 
 const independentClasses = [
   {
     id: 1,
+
     day: "Monday",
+
     date: "Every Monday",
+
     title: "Reparto",
+
     time: "5:00 PM – 6:00 PM",
+
     instructor: "Luis",
+
     category: "Latin / Urban",
+
     phone: "+1 (786) 979-5525",
+
     instagram:
       "https://www.instagram.com/luisi_veliz_dancer?stkn=MXdmbWk1cTI2NjZ5MQ==",
+
     description:
       "Learn Cuban urban movement, musicality, and powerful Reparto combinations in a fun and welcoming environment.",
+
     image: luis,
+
     video: "https://youtu.be/2IaBcV1tRcw?si=YkE_gEwWzxUGO_0X",
   },
 
   {
     id: 2,
+
     day: "Tuesday",
+
     date: "Every Tuesday",
+
     title: "AfroDance",
+
     time: "7:00 PM – 8:00 PM",
+
     instructor: "Santi",
+
     category: "AfroDance",
+
     type: "independent",
+
     drop: "$15",
+
     monthly: "$40",
+
     phone: "",
+
     instagram: "",
+
     description:
       "Join Santi every Tuesday for an energetic AfroDance class at Freedom Dance Studio! Learn African-inspired dance moves, improve your rhythm, coordination, and confidence. All levels are welcome! Drop-in $15 or $40 monthly.",
+
     // image: santi,
+
     video: "https://youtube.com/shorts/ERUpqqthyi0?si=1Gcn7aAGqZiRyrMt",
   },
 
   {
     id: 3,
+
     day: "Wednesday",
+
     date: "Every Wednesday",
+
     title: "Salsalogía Training",
+
     time: "6:00 PM – 7:00 PM",
+
     instructor: "Sandra",
+
     category: "Salsa / Latin",
+
     phone: "+1 (702) 449-2040",
+
     instagram: "",
+
     description:
       "An intensive Salsa On2 class focused on mambo footwork, timing, technique, styling, presence, expression, and joy. Each 4-week session builds choreography while keeping a strong foundation in Salsa On2 fundamentals.",
+
     image: Sandra,
+
     video: "",
   },
+
   {
     id: 4,
+
     day: "Thursday",
+
     date: "Every Thursday",
+
     title: "Salsa Rueda de Casino",
+
     time: "6:30 PM – 7:30 PM",
+
     instructor: "Rodolfo",
+
     category: "Salsa / Latin",
+
     phone: "+1 (702) 472-3424",
+
     instagram: "",
+
     description:
       "Learn partner patterns, Cuban-style movements, timing, musicality, and energetic Rueda combinations.",
+
     image: Rodolfo,
+
     video:
       "https://cdn.coverr.co/videos/coverr-dancing-in-a-club-1575/1080p.mp4",
   },
+
   {
     id: 5,
+
     day: "Thursday",
+
     date: "Every Thursday",
+
     title: "Reggaeton",
+
     time: "7:30 PM – 8:30 PM",
+
     instructor: "Eduardo",
+
     category: "Urban / Reggaeton",
+
     phone: "+1 (562) 325-4115",
+
     instagram: "",
+
     description:
       "Move to the rhythm and learn fun Reggaeton combinations in a welcoming environment.",
+
     image: edourdo,
+
     video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
   },
 
   {
     id: 9,
+
     day: "Friday",
+
     date: "Every Friday",
+
     title: "Kids Acting Classes",
+
     time: "4:30 PM",
+
     instructor: "Karol Di Nassif",
+
     category: "Kids / Acting / Theater",
-    phone: "+1 (702) 496-7934",
+
     instagram: "",
+
     description:
       "Kids Acting Classes for ages 6–12 with professional actress and TV presenter Karol Di Nassif. Children develop confidence, creativity, storytelling, improvisation, camera performance, and audition skills in a fun and supportive environment. No previous acting experience required. Classes are ongoing, and new students are welcome. $80 monthly or $25 per class.",
+
     image: karol_profil3,
+
     video: "",
+
     level: "Beginner Friendly",
+
     ageGroup: "6–12 years",
+
     drop: "$25",
+
     monthly: "$80",
+
     location: "Freedom Dance Studio",
+
     address: "3110 E Sunset Rd, Suite C, Las Vegas, NV 89120",
+
     booking:
       "https://wa.me/17024967934?text=Hi%20Karol!%20I%20would%20like%20to%20register%20my%20child%20for%20Kids%20Acting%20Classes.",
 
     // Dedicated component navigation
-    route: "/kids-acting",
+
+    route: "/acting",
+
     buttonText: "View Acting Program",
   },
+
   {
     id: 6,
+
     day: "Friday",
+
     date: "Every Friday",
+
     title: "Twerk",
+
     time: "6:30 PM – 8:30 PM",
+
     instructor: "Luz",
+
     category: "Urban / Fitness",
+
     phone: "+1 (725) 247-9390",
+
     instagram: "",
+
     description:
       "Build confidence, learn powerful movements, and have fun with energetic Twerk combinations.",
+
     image: luz,
+
     video: "https://youtu.be/7z2epLsOyrY",
   },
 
   {
     id: 7,
+
     day: "Sunday",
+
     date: "Every Sunday",
+
     title: "Hip-Hop",
+
     time: "6:30 PM",
+
     instructor: "Eduardo",
+
     category: "Hip-Hop / Urban",
+
     phone: "702-555-0104",
+
     instagram: "",
+
     description:
       "Learn Hip-Hop fundamentals, combinations, musicality, and freestyle movement.",
+
     image: edourdo,
+
     video: "https://youtu.be/FBbGFDKIMdQ?si=T_jDehxqFwSAi0gC",
   },
 
   {
     id: 8,
+
     day: "Sunday",
+
     date: "Every Sunday",
+
     title: "Reparto",
+
     time: "5:30 PM – 6:30 PM",
+
     instructor: "Luis",
+
     category: "Latin / Urban",
+
     phone: "+1 (786) 979-5525",
+
     instagram:
       "https://www.instagram.com/luisi_veliz_dancer?stkn=MXdmbWk1cTI2NjZ5MQ==",
+
     description:
       "Bring your energy and learn Reparto with Luis through fun combinations and musicality.",
+
     image: luis,
+
     video: "https://youtu.be/2IaBcV1tRcw?si=OsL5zUY1rKtA7nBI",
   },
 ];
 
 // ======================================================
+
 // VIDEO HELPERS
+
 // ======================================================
 
 /**
+
  * Returns true when the supplied URL is a YouTube URL.
+
  */
+
 function isYouTubeUrl(url) {
   if (!url) return false;
 
@@ -210,13 +340,21 @@ function isYouTubeUrl(url) {
 }
 
 /**
+
  * Converts normal YouTube URLs into an iframe embed URL.
+
  *
+
  * Supports:
+
  * - https://youtu.be/VIDEO_ID
+
  * - https://www.youtube.com/watch?v=VIDEO_ID
+
  * - https://www.youtube.com/embed/VIDEO_ID
+
  */
+
 function getYouTubeEmbedUrl(url) {
   if (!url) return null;
 
@@ -226,14 +364,19 @@ function getYouTubeEmbedUrl(url) {
     let videoId = "";
 
     // --------------------------------------------
+
     // youtu.be/VIDEO_ID
+
     // --------------------------------------------
+
     if (parsed.hostname === "youtu.be") {
       videoId = parsed.pathname.replace(/^\/+/, "");
     }
 
     // --------------------------------------------
+
     // youtube.com/watch?v=VIDEO_ID
+
     // --------------------------------------------
     else if (
       parsed.hostname.includes("youtube.com") ||
@@ -263,7 +406,9 @@ function getYouTubeEmbedUrl(url) {
 }
 
 // ======================================================
+
 // CLASS CARD
+
 // ======================================================
 
 function ClassCard({ danceClass, onVideo, onLearnMore }) {
@@ -277,14 +422,18 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
       className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-base-300/70 bg-base-100 shadow-sm transition-all duration-300 hover:border-primary/20 hover:shadow-2xl"
     >
       {/* ==================================================
+
           INSTRUCTOR PHOTO
+
       ================================================== */}
 
       <div className="relative h-[330px] overflow-hidden bg-base-200 sm:h-[350px]">
         {/* Soft background */}
+
         <div className="absolute inset-0 bg-gradient-to-br from-base-300 via-base-200 to-base-300" />
 
         {/* Instructor image */}
+
         <div className="absolute inset-3 overflow-hidden rounded-[1.5rem] bg-base-100">
           <img
             src={danceClass.image}
@@ -293,10 +442,12 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
           />
 
           {/* Bottom fade */}
+
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/35 to-transparent" />
         </div>
 
         {/* Independent badge */}
+
         <div className="absolute left-6 top-6 z-10">
           <div className="flex items-center gap-2 rounded-full border border-white/20 bg-black/55 px-3.5 py-2 text-xs font-bold text-white shadow-lg backdrop-blur-md">
             <Sparkles size={13} />
@@ -305,6 +456,7 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
         </div>
 
         {/* Video button */}
+
         {danceClass.video && (
           <button
             type="button"
@@ -318,11 +470,14 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
       </div>
 
       {/* ==================================================
+
           CONTENT
+
       ================================================== */}
 
       <div className="flex flex-1 flex-col p-6 sm:p-7">
         {/* Category */}
+
         <div className="mb-2">
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-primary">
             {danceClass.category}
@@ -330,6 +485,7 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
         </div>
 
         {/* Class + Instructor */}
+
         <div>
           <h3 className="text-2xl font-black tracking-tight sm:text-3xl">
             {danceClass.title}
@@ -345,6 +501,7 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
         </div>
 
         {/* Schedule */}
+
         <div className="mt-5 space-y-2.5 rounded-2xl bg-base-200/70 p-4">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
@@ -376,11 +533,13 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
         </div>
 
         {/* Description */}
+
         <p className="mt-5 line-clamp-3 text-sm leading-6 text-base-content/60">
           {danceClass.description}
         </p>
 
         {/* Bottom */}
+
         <div className="mt-auto pt-6">
           <div className="mb-4 flex items-center gap-2 text-xs font-medium text-base-content/45">
             <MapPin size={14} />
@@ -388,14 +547,24 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
           </div>
 
           <div className="grid grid-cols-2 gap-2.5">
-            <button
-              type="button"
-              onClick={() => onLearnMore(danceClass)}
-              className="btn btn-primary btn-sm rounded-xl gap-2"
-            >
-              Learn More
-              <ArrowRight size={15} />
-            </button>
+            {danceClass.route ? (
+              <Link
+                to={danceClass.route}
+                className="btn btn-primary btn-sm rounded-xl gap-2"
+              >
+                Acting Program
+                <ArrowRight size={15} />
+              </Link>
+            ) : (
+              <button
+                type="button"
+                onClick={() => onLearnMore(danceClass)}
+                className="btn btn-primary btn-sm rounded-xl gap-2"
+              >
+                Learn More
+                <ArrowRight size={15} />
+              </button>
+            )}
 
             {danceClass.phone ? (
               <a
@@ -422,7 +591,9 @@ function ClassCard({ danceClass, onVideo, onLearnMore }) {
 }
 
 // ======================================================
+
 // VIDEO MODAL
+
 // ======================================================
 
 function VideoModal({ danceClass, onClose }) {
@@ -436,14 +607,19 @@ function VideoModal({ danceClass, onClose }) {
     <dialog open className="modal modal-open">
       <div className="modal-box max-h-[92vh] w-11/12 max-w-5xl overflow-y-auto p-0">
         {/* ==================================================
+
             VIDEO
+
         ================================================== */}
 
         <div className="relative overflow-hidden bg-black">
           {youtubeEmbedUrl ? (
             /* ------------------------------------------------
+
                YOUTUBE
+
             ------------------------------------------------ */
+
             <div className="aspect-video w-full">
               <iframe
                 src={youtubeEmbedUrl}
@@ -455,8 +631,11 @@ function VideoModal({ danceClass, onClose }) {
             </div>
           ) : danceClass.video && !isYouTube ? (
             /* ------------------------------------------------
+
                DIRECT VIDEO / MP4
+
             ------------------------------------------------ */
+
             <video
               src={danceClass.video}
               controls
@@ -466,8 +645,11 @@ function VideoModal({ danceClass, onClose }) {
             />
           ) : (
             /* ------------------------------------------------
+
                NO VIDEO
+
             ------------------------------------------------ */
+
             <div className="flex aspect-video items-center justify-center text-white">
               <div className="text-center">
                 <Play className="mx-auto mb-3 opacity-50" size={40} />
@@ -478,6 +660,7 @@ function VideoModal({ danceClass, onClose }) {
           )}
 
           {/* Close button */}
+
           <button
             type="button"
             onClick={onClose}
@@ -489,42 +672,52 @@ function VideoModal({ danceClass, onClose }) {
         </div>
 
         {/* ==================================================
+
             VIDEO INFORMATION
+
         ================================================== */}
 
         <div className="p-5 sm:p-7">
           {/* Badge */}
+
           <div className="badge badge-warning mb-3">Independent Class</div>
 
           {/* Title */}
+
           <h2 className="text-3xl font-black sm:text-4xl">
             {danceClass.title}
           </h2>
 
           {/* Instructor */}
+
           <p className="mt-1 font-semibold text-primary">
             with {danceClass.instructor}
           </p>
 
           {/* Schedule */}
+
           <div className="mt-5 flex flex-wrap gap-2">
             <div className="badge badge-outline gap-2 px-3 py-3">
               <CalendarDays size={14} />
+
               {danceClass.date}
             </div>
 
             <div className="badge badge-outline gap-2 px-3 py-3">
               <Clock size={14} />
+
               {danceClass.time}
             </div>
           </div>
 
           {/* Description */}
+
           <p className="mt-5 leading-7 text-base-content/70">
             {danceClass.description}
           </p>
 
           {/* Contact */}
+
           <div className="mt-6 rounded-2xl bg-base-200 p-5">
             <p className="mb-3 font-bold">Contact {danceClass.instructor}</p>
 
@@ -535,6 +728,7 @@ function VideoModal({ danceClass, onClose }) {
                   className="btn btn-primary btn-sm gap-2"
                 >
                   <Phone size={16} />
+
                   {danceClass.phone}
                 </a>
               )}
@@ -546,7 +740,7 @@ function VideoModal({ danceClass, onClose }) {
                       ? danceClass.instagram
                       : `https://instagram.com/${danceClass.instagram}`
                   }
-                  target="_blank"
+                  target="\_blank"
                   rel="noopener noreferrer"
                   className="btn btn-outline btn-sm gap-2"
                 >
@@ -558,6 +752,7 @@ function VideoModal({ danceClass, onClose }) {
           </div>
 
           {/* Independent notice */}
+
           <div className="alert alert-warning mt-5 text-sm">
             <Sparkles size={18} className="shrink-0" />
 
@@ -568,6 +763,7 @@ function VideoModal({ danceClass, onClose }) {
           </div>
 
           {/* Close */}
+
           <div className="mt-6 flex justify-end">
             <button type="button" onClick={onClose} className="btn">
               Close
@@ -577,32 +773,46 @@ function VideoModal({ danceClass, onClose }) {
       </div>
 
       {/* Backdrop */}
+
       <div className="modal-backdrop" onClick={onClose} />
     </dialog>
   );
 }
 
 // ======================================================
+
 // MAIN COMPONENT
+
 // ======================================================
 
 export default function IndependentClasses() {
   const [selectedClass, setSelectedClass] = useState(null);
+
   const [selectedInstructor, setSelectedInstructor] = useState(null);
+
   const [filter, setFilter] = useState("All");
 
   // ====================================================
+
   // FILTERS
+
   // ====================================================
 
   const filters = [
     "All",
+
     "Monday",
+
     "Tuesday",
+
     "Wednesday",
+
     "Thursday",
+
     "Friday",
+
     "Saturday",
+
     "Sunday",
   ];
 
@@ -612,23 +822,31 @@ export default function IndependentClasses() {
       : independentClasses.filter((danceClass) => danceClass.day === filter);
 
   // ====================================================
+
   // RENDER
+
   // ====================================================
 
   return (
     <main className="min-h-screen bg-base-200">
       {/* ==================================================
+
           KAROL FEATURE
+
       ================================================== */}
 
       {/* ==================================================
+
           INDEPENDENT CLASSES
+
       ================================================== */}
 
       <section className="px-4 pb-14 pt-0 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-7xl">
           {/* ==================================================
+
               HEADER
+
           ================================================== */}
 
           <motion.div
@@ -637,7 +855,7 @@ export default function IndependentClasses() {
             viewport={{ once: true }}
             className="mx-auto max-w-3xl text-center"
           >
-            <div className="badge badge-primary gap-2 px-4 py-4">
+            <div className="badge badge-primary gap-2 px-3 py-5 text-sm font-bold uppercase tracking-[0.16em] sm:text-base">
               <Sparkles size={15} />
               Hosted at Freedom Dance Studio
             </div>
@@ -653,7 +871,9 @@ export default function IndependentClasses() {
           </motion.div>
 
           {/* ==================================================
+
               NOTICE
+
           ================================================== */}
 
           <div className="mx-auto mt-8 max-w-4xl">
@@ -673,11 +893,14 @@ export default function IndependentClasses() {
           </div>
 
           {/* ==================================================
+
               FILTERS
+
           ================================================== */}
 
           <div className="mt-8">
             {/* MOBILE */}
+
             <div className="sm:hidden">
               <select
                 value={filter}
@@ -693,6 +916,7 @@ export default function IndependentClasses() {
             </div>
 
             {/* DESKTOP */}
+
             <div className="hidden justify-center sm:flex">
               <div className="join rounded-xl shadow-sm">
                 {filters.map((day) => (
@@ -712,7 +936,9 @@ export default function IndependentClasses() {
           </div>
 
           {/* ==================================================
+
               COUNT
+
           ================================================== */}
 
           <div className="mt-6 flex items-center justify-between">
@@ -733,7 +959,9 @@ export default function IndependentClasses() {
           </div>
 
           {/* ==================================================
+
               CARDS
+
           ================================================== */}
 
           <motion.div
@@ -753,7 +981,9 @@ export default function IndependentClasses() {
       </section>
 
       {/* ==================================================
+
           FINAL CTA
+
       ================================================== */}
 
       <section className="px-4 pb-0 sm:px-6 lg:px-8">
@@ -793,7 +1023,9 @@ export default function IndependentClasses() {
       </section>
 
       {/* ==================================================
+
           VIDEO MODAL
+
       ================================================== */}
 
       <VideoModal
@@ -802,7 +1034,9 @@ export default function IndependentClasses() {
       />
 
       {/* ==================================================
+
           INSTRUCTOR MODAL
+
       ================================================== */}
 
       <InstructorClassModal
