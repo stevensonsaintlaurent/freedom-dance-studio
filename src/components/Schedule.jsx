@@ -72,7 +72,7 @@ function InstructorAvatar({ name = "Instructor", size = "md", image }) {
     .toUpperCase();
 
   const dimensions = size === "lg" ? "h-16 w-16 text-xl" : "h-11 w-11 text-sm";
-  console.log("InstructorAvatar src:", src);
+
   useEffect(() => setFailed(false), [src]);
 
   return (

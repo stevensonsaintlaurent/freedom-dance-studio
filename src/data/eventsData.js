@@ -4,48 +4,48 @@ import styling from "../assets/styling.png";
 import bachataZouk from "../assets/instructors/bachataZouk1.jpeg";
 
 export const events = [
-  {
-    id: 8,
+  // {
+  //   id: 8,
 
-    eventStart: "2026-09-14",
+  //   eventStart: "2026-09-14",
 
-    day: "Monday",
+  //   day: "Monday",
 
-    date: "Starting September 14, 2026",
+  //   date: "Starting September 14, 2026",
 
-    type: "BACHATA CLASS",
+  //   type: "BACHATA CLASS",
 
-    title: "Men's Styling — Bachata Sensual Fusion",
+  //   title: "Men's Styling — Bachata Sensual Fusion",
 
-    instructor: "Steven",
+  //   instructor: "Steven",
 
-    category: "Bachata Sensual / Men's Styling",
+  //   category: "Bachata Sensual / Men's Styling",
 
-    time: "8:00 PM",
+  //   time: "8:00 PM",
 
-    duration: "2-Month Program",
+  //   duration: "2-Month Program",
 
-    level: "Beginner to Intermediate",
+  //   level: "Beginner to Intermediate",
 
-    location: "Freedom Dance Studio",
+  //   location: "Freedom Dance Studio",
 
-    price: "$15",
+  //   price: "$15",
 
-    priceDetails: "Drop-In • FREE for Members & Instructors",
+  //   priceDetails: "Drop-In • FREE for Members & Instructors",
 
-    image: styling,
+  //   image: styling,
 
-    imageFit: "contain",
+  //   imageFit: "contain",
 
-    description:
-      "A two-month Men's Styling Bachata Sensual Fusion program with Steven. Designed for beginner to intermediate dancers to improve body movement, styling, musicality, confidence, technique, and expression.",
+  //   description:
+  //     "A two-month Men's Styling Bachata Sensual Fusion program with Steven. Designed for beginner to intermediate dancers to improve body movement, styling, musicality, confidence, technique, and expression.",
 
-    button: "Join the Class",
+  //   button: "Join the Class",
 
-    showInHero: false,
+  //   showInHero: false,
 
-    featured: false,
-  },
+  //   featured: false,
+  // },
 
   {
     id: 9,
