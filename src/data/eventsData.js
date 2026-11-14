@@ -1,4 +1,4 @@
-import weekendIntensive from "../assets/instructors/weekendIntensive.webp";
+import weekendIntensive from "../assets/instructors/salsaBachata.jpeg";
 import freedom from "../assets/instructors/freedom.webp";
 
 export const events = [

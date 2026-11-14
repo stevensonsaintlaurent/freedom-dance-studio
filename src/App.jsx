@@ -25,9 +25,9 @@ import {
 
 import RentalBooking from "./components/RequestAvailable";
 import RentalPrices from "./components/RentalPrices";
-import BachataIntensiveBooking from "./components/BachataIntensiveBooking";
 import FreedomStudioAgreement from "./components/FreedomStudioAgreement";
 import KarolActingClasses from "./components/KarolActingClasses";
+import BachataWeekenderBooking from "./components/BachataWeekenderBooking";
 
 const router = createBrowserRouter([
   {
@@ -146,8 +146,8 @@ const router = createBrowserRouter([
         element: <Events />,
       },
       {
-        path: "tickets",
-        element: <BachataIntensiveBooking />,
+        path: "weekend",
+        element: <BachataWeekenderBooking />,
       },
       {
         path: "policy",

@@ -65,6 +65,24 @@ const plans = [
     button: "Schedule Now",
     popular: false,
   },
+
+  {
+    id: 6,
+    name: "Couples Private Lessons",
+    price: "$125",
+    period: "/hour",
+    description: "Personalized dance lessons for two people.",
+    features: [
+      "Private Instructor",
+      "Designed for Couples",
+      "Customized Training",
+      "Lead & Follow Techniques",
+      "Flexible Schedule",
+      "Progress Tracking",
+    ],
+    button: "Book Couples Lesson",
+    popular: false,
+  },
 ];
 
 export default function Pricing() {

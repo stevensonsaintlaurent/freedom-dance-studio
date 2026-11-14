@@ -155,7 +155,7 @@ const services = [
 
     duration: "60 Minutes",
 
-    price: "$80+",
+    price: "$85",
   },
 
   {
@@ -174,7 +174,7 @@ const services = [
 
     duration: "60 Minutes",
 
-    price: "$120+",
+    price: "$125",
   },
 
   {
@@ -554,13 +554,13 @@ const days = [
 // ==================================================
 
 const cancelledDays = [
-  // {
-  //   day: "Saturday",
-  //   date: "October 17, 2026",
-  //   title: "All Classes Cancelled",
-  //   reason:
-  //     "There will be no regular classes on Saturday, October 17, 2026. This cancellation will not affect your membership.",
-  // },
+  {
+    day: "Saturday",
+    date: "November 21, 2026",
+    title: "All Classes Cancelled",
+    reason:
+      "There will be no regular classes on Saturday, November 22, 2026. This cancellation will not affect your membership.",
+  },
 ];
 
 // ==================================================

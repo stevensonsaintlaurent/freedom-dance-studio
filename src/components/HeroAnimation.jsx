@@ -244,7 +244,7 @@ const HeroAnimation = () => {
 
                 <div
                   className="p-3 text-center cursor-pointer"
-                  onClick={() => navigate("/book")}
+                  onClick={() => navigate("/weekend")}
                 >
                   <Ticket size={17} className="mx-auto mb-1 text-primary" />
 
