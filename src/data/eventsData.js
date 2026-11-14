@@ -1,235 +1,149 @@
-import stevenLuz from "../assets/stevenLuz.png";
-import social from "../assets/freedom.png";
-import styling from "../assets/styling.png";
-import bachataZouk from "../assets/instructors/bachataZouk1.jpeg";
+import weekendIntensive from "../assets/instructors/weekendIntensive.webp";
+import freedom from "../assets/instructors/freedom.webp";
 
 export const events = [
-  // {
-  //   id: 8,
-
-  //   eventStart: "2026-09-14",
-
-  //   day: "Monday",
-
-  //   date: "Starting September 14, 2026",
-
-  //   type: "BACHATA CLASS",
-
-  //   title: "Men's Styling — Bachata Sensual Fusion",
-
-  //   instructor: "Steven",
-
-  //   category: "Bachata Sensual / Men's Styling",
-
-  //   time: "8:00 PM",
-
-  //   duration: "2-Month Program",
-
-  //   level: "Beginner to Intermediate",
-
-  //   location: "Freedom Dance Studio",
-
-  //   price: "$15",
-
-  //   priceDetails: "Drop-In • FREE for Members & Instructors",
-
-  //   image: styling,
-
-  //   imageFit: "contain",
-
-  //   description:
-  //     "A two-month Men's Styling Bachata Sensual Fusion program with Steven. Designed for beginner to intermediate dancers to improve body movement, styling, musicality, confidence, technique, and expression.",
-
-  //   button: "Join the Class",
-
-  //   showInHero: false,
-
-  //   featured: false,
-  // },
-
   {
-    id: 9,
+    id: 1,
+    eventStart: "2026-11-20",
+    eventEnd: "2026-11-22",
 
-    eventStart: "2026-11-06",
+    day: "Friday – Sunday",
+    date: "November 20–22, 2026",
 
-    day: "Friday",
+    type: "WEEKEND INTENSIVE",
+    title: "Salsa & Bachata Weekend Intensive",
 
-    type: "WORKSHOP",
+    instructor: "Henrique (Seattle) • Brenda (Miami) • Desmond (Las Vegas)",
 
-    title: "Bachata Workshop with Steven & Luz",
+    category: "Salsa / Bachata Sensual / Ladies Styling",
 
-    instructor: "Steven • Luz",
-
-    date: "November 6, 2026",
-
-    time: "8:30 PM – 10:00 PM",
-
-    image: stevenLuz,
-
-    imageFit: "contain",
+    time: "November 20–22, 2026",
+    duration: "3 Days",
+    level: "Open Level & Advanced",
 
     location: "Freedom Dance Studio",
-
     address: "3110 E. Sunset Rd., Suite C, Las Vegas, NV 89120",
+
+    // One flyer for the entire weekend
+    image: weekendIntensive,
+    imageFit: "contain",
 
     schedule: [
       {
-        time: "8:30 PM – 10:00 PM",
-        title: "Bachata Choreography Workshop",
-        instructors: "Steven • Luz",
+        day: "Friday",
+        date: "November 20",
+        workshops: [
+          {
+            time: "6:30 PM – 8:00 PM",
+            title: "Advanced Bachata Workshop",
+          },
+          {
+            time: "8:30 PM – 10:00 PM",
+            title: "Open Level Bachata Sensual",
+          },
+        ],
+      },
+      {
+        day: "Saturday",
+        date: "November 21",
+        workshops: [
+          {
+            time: "2:30 PM – 3:30 PM",
+            title: "Salsa Ladies Styling",
+          },
+          {
+            time: "4:00 PM – 5:30 PM",
+            title: "Salsa Workshop",
+          },
+          {
+            time: "8:30 PM – 10:00 PM",
+            title: "Open Level Bachata Sensual",
+          },
+        ],
+      },
+      {
+        day: "Sunday",
+        date: "November 22",
+        workshops: [
+          {
+            time: "2:30 PM – 3:30 PM",
+            title: "Bachata Ladies Styling",
+          },
+          {
+            time: "4:00 PM – 5:30 PM",
+            title: "Open Level Bachata Sensual",
+          },
+        ],
       },
     ],
 
-    price: "$30",
+    price: "$89 Early Bird",
+    regularPrice: "$129",
 
-    priceDetails: "90-Minute Bachata Workshop",
+    earlyBirdDeadline: "2026-11-20T12:00:00",
+
+    priceDetails: "Early Bird Full Pass: $89 • Regular Full Pass: $129",
+
+    stylingPrices: {
+      fullPassHolder: "$20",
+      anyPassHolder: "$30",
+      generalAdmission: "$40",
+    },
 
     description:
-      "Join Steven and Luz for a special 90-minute Bachata workshop! Learn the choreography from their previous Bachata video clip, improve your technique, musicality, and partnerwork, and have fun dancing with us. Come learn the moves and enjoy an unforgettable evening at Freedom Dance Studio!",
+      "Join us November 20–22, 2026, for an unforgettable Salsa & Bachata Weekend Intensive at Freedom Dance Studio! Train with Henrique from Seattle, Brenda from Miami, and Desmond from Las Vegas. Enjoy three days of Salsa, Bachata Sensual, advanced workshops, partnerwork, musicality, technique, and ladies styling. All levels are welcome to participate in the appropriate workshops. Reserve your spot today!",
 
-    button: "Register Now",
+    button: "Get Your Pass",
 
-    showInHero: false,
-
+    showInHero: true,
     featured: true,
   },
 
   {
-    id: 10,
+    id: 2,
 
-    eventStart: "2026-11-06",
+    eventStart: "2026-11-22",
 
-    day: "Friday",
+    day: "Sunday",
+    date: "November 22, 2026",
 
-    type: "SBK SOCIAL",
+    type: "LIVE CONCERT",
 
-    title: "Freedom Monthly SBK Social",
+    title: "Freedom Giving Concert",
 
-    instructor: "Steven & Luz • DJ Maximo • DJ J-Flow",
+    instructor: "Freedom Live Band",
 
-    date: "November 6, 2026",
+    category: "Live Music / Jazz / Latin / Big Band",
 
-    time: "Bachata Workshop 8:30 PM • Social 10:00 PM – 2:00 AM",
+    time: "To Be Announced",
 
-    image: social,
+    duration: "Live Concert",
 
+    level: "Open to Everyone",
+
+    location: "Venue To Be Announced",
+
+    image: freedom,
     imageFit: "contain",
 
-    location: "Freedom Dance Studio",
-
-    address: "3110 E. Sunset Rd., Ste. C, Las Vegas, NV 89120",
-
-    workshop: {
-      title: "Bachata Clip Workshop",
-      instructor: "Steven & Luz",
-      time: "8:30 PM – 10:00 PM",
-      level: "Open Level",
-      price: "Contact studio for workshop pricing",
+    rehearsal: {
+      day: "Every Saturday",
+      time: "6:00 PM – 7:30 PM",
+      location: "Freedom Dance Studio",
       description:
-        "Join Steven and Luz for a special Bachata workshop where they will teach the choreography from their previous Bachata clip. Learn the movements, musicality, partner connection, and styling featured in their performance.",
+        "Weekly rehearsals for participating musicians. Musicians should contact Steven to receive their printed music for their respective instruments.",
     },
 
-    social: {
-      title: "Freedom Monthly SBK Social",
-      musicBy: "DJ Maximo • DJ J-Flow",
-      time: "10:00 PM – 2:00 AM",
+    price: "FREE",
 
-      rooms: [
-        {
-          name: "Room 1",
-          music: "Salsa & Bachata",
-          description:
-            "Enjoy Salsa and Bachata music with great dancers from the Las Vegas community.",
-        },
-        {
-          name: "Room 2",
-          music: "Kizomba",
-          description:
-            "Dance Kizomba and enjoy the connection, rhythm, and atmosphere.",
-        },
-      ],
-
-      musicDetails:
-        "Two rooms featuring Salsa, Bachata, and Kizomba, with music by DJ Maximo and DJ J-Flow.",
-    },
-
-    price: "$20",
+    priceDetails: "Free Admission • Open to the Public",
 
     description:
-      "Join us Friday, November 6, 2026, for our Monthly SBK Social at Freedom Dance Studio in Las Vegas! We are bringing together amazing dancers for another unforgettable night of Salsa, Bachata, and Kizomba. Start the evening with a special Bachata Clip Workshop taught by Steven and Luz from 8:30 PM to 10:00 PM, where they will teach the choreography from their previous Bachata clip. Then dance from 10:00 PM to 2:00 AM with music by DJ Maximo and DJ J-Flow! Enjoy two dance rooms: Room 1 for Salsa and Bachata, and Room 2 for Kizomba. Social admission is $20. Come dance, connect with the community, meet new people, and enjoy an incredible night at Freedom Dance Studio!",
+      "Join us on Sunday, November 22, 2026, for the Freedom Giving Concert! Experience a special live performance featuring our Freedom Live Band, bringing together talented musicians for an unforgettable celebration of music, community, and togetherness. Enjoy an exciting mix of Jazz, Latin, Swing, and classic favorites. Admission is completely FREE and everyone is welcome! Musicians rehearse every Saturday from 6:00 PM to 7:30 PM at Freedom Dance Studio.",
 
-    button: "Get Your Ticket",
-
-    showInHero: true,
-
-    featured: true,
-  },
-
-  // {
-  //   id: 11,
-  //   eventStart: "2026-10-02",
-  //   type: "WEEKEND INTENSIVE",
-  //   title: "Bachata Intensive Weekend",
-  //   instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
-  //   date: "October 2–4, 2026",
-  //   time: "Friday–Sunday",
-  //   image: carlo,
-  //   imageFit: "contain",
-  //   location: "Freedom Dance Studio",
-  //   price: "$99 Early Bird",
-  //   workshop: {
-  //     title: "Bachata Intensive Weekend",
-  //     instructor: "Michelle • Los Angeles & Carlos • Madrid, Spain",
-  //     time: "October 2–4",
-  //   },
-  //   description:
-  //     "Join us for an incredible Bachata Intensive Weekend at Freedom Dance Studio from October 2–4! Train with two amazing guest artists, Michelle from Los Angeles and Carlos from Madrid, Spain. Enjoy a full weekend of Bachata workshops, connection, technique, styling, and social dancing with dancers from Las Vegas and beyond. Early Bird Pass: $99.",
-  //   button: "Get Your Pass",
-  //   showInHero: false,
-  //   featured: false,
-  // },
-
-  {
-    id: 30,
-
-    eventStart: "2026-10-12",
-
-    day: "Monday",
-
-    date: "October 19, 26 & November 2, 2026",
-
-    type: "BACHATA ZOUK SERIES",
-
-    title: "Debut Bachata Zouk Series — Henrique & Sofi",
-
-    instructor: "Henrique (Seattle) & Sofi (Orlando)",
-
-    category: "Bachata Zouk / Fusion / Partnerwork",
-
-    time: "8:00 PM – 9:30 PM",
-
-    duration: "3-Week Series • Every Monday",
-
-    level: "Open Level",
-
-    location: "Freedom Dance Studio, Las Vegas",
-
-    price: "$99",
-
-    priceDetails:
-      "Weekender Dancers: $99 (Regular $129) • Private Lessons: $85 for Series Dancers (Regular $120)",
-
-    image: bachataZouk,
-
-    imageFit: "contain",
-
-    description:
-      "Experience the debut Bachata Zouk Series in Las Vegas with Henrique from Seattle and Sofi from Orlando! Starting October 19, this exclusive 3-week Monday training series takes place October 19, 26 & November 2, 2026 from 8:00 PM to 9:30 PM at Freedom Dance Studio. Continue your dance journey beyond the weekender with focused training, partnerwork, musicality, technique, body movement, and direct attention from visiting instructors. Dancers who register for the weekender receive the complete 3-week series for only $99 instead of $129. Series dancers also enjoy special private lesson pricing of $85 instead of $120. Don't miss this opportunity to grow, connect, and take your dancing to the next level. Register now and join Henrique & Sofi for an unforgettable training experience!",
-
-    button: "Register for the Series",
+    button: "Concert Details",
 
     showInHero: true,
-
     featured: true,
   },
 ];
