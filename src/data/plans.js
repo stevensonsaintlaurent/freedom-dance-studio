@@ -125,6 +125,29 @@ export const plans = [
   },
 
   {
+    id: 8,
+    name: "Individual Private Monthly Special",
+    category: "private",
+    price: "$150",
+    period: "/month",
+    description:
+      "Enjoy personalized one-on-one dance training every week, plus unlimited group classes at Freedom Dance Studio.",
+    features: [
+      "1 Hour of Private Training Per Month",
+      "Unlimited Freedom Dance Studio Group Classes",
+      "One-on-One Coaching",
+      "Professional Dance Instructor",
+      "Beginner to Advanced Levels",
+      "Salsa, Bachata, Kizomba & More",
+      "Personalized Dance Training",
+    ],
+    button: "Claim Private Special",
+    popular: false,
+    special: true,
+    badge: "PRIVATE LESSON SPECIAL",
+  },
+
+  {
     id: 9,
     name: "From Zero to Hero — Couples VIP",
     category: "couples",
@@ -148,28 +171,5 @@ export const plans = [
     popular: false,
     special: true,
     badge: "VIP COUPLES PROGRAM",
-  },
-
-  {
-    id: 8,
-    name: "Couples Private Special",
-    category: "couples",
-    price: "$150",
-    period: "/month",
-    description:
-      "Learn to dance together with personalized couples coaching and unlimited group classes at Freedom Dance Studio.",
-    features: [
-      "1 Hour of Private Training Per Month",
-      "Unlimited Freedom Dance Studio Group Classes",
-      "Professional Dance Instructor",
-      "No Dance Experience Required",
-      "Salsa, Bachata, Kizomba & More",
-      "Lead & Follow Techniques",
-      "Build Confidence & Partner Connection",
-    ],
-    button: "Book Couples Special",
-    popular: false,
-    special: true,
-    badge: "COUPLES SPECIAL",
   },
 ];
