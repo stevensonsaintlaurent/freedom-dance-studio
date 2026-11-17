@@ -19,6 +19,7 @@ import {
 import { motion } from "framer-motion";
 
 import { events } from "../data/eventsData";
+import { specialOffers } from "../data/specialOffers";
 
 import lady from "../assets/lady/followerClip1.jpeg";
 
@@ -557,9 +558,9 @@ const cancelledDays = [
   {
     day: "Saturday",
     date: "November 21, 2026",
-    title: "All Classes Cancelled",
+    title: "Regular Classes Cancelled — Salsa & Bachata Intensive",
     reason:
-      "There will be no regular classes on Saturday, November 22, 2026. This cancellation will not affect your membership.",
+      "All regular classes on Saturday, November 21, 2026, are cancelled because Freedom Dance Studio will be hosting our special Salsa & Bachata Weekend Intensive (November 20–22), featuring guest artists Brenda from Miami, Henrique from Seattle, and Desmond from Las Vegas. Join us for an incredible weekend of workshops, training, and dancing with these talented instructors! This cancellation will not affect your membership. Thank you for your understanding, and we hope to see you at the intensive!",
   },
 ];
 
@@ -619,6 +620,12 @@ const getEventDateRange = (event) => {
 
 export default function Schedule() {
   const navigate = useNavigate();
+
+  const handleSpecialOffer = (offer) => {
+    navigate("/membersForm", {
+      state: { ...offer, bookingType: "special-package" },
+    });
+  };
 
   const [selectedDay, setSelectedDay] = useState("All");
 
@@ -951,6 +958,86 @@ export default function Schedule() {
             </div>
           </div>
         </motion.div>
+
+        {/* SPECIAL OFFERS — visible before events and weekly schedule */}
+        <section className="mb-16" aria-labelledby="special-offers-heading">
+          <div className="mb-8 text-center">
+            <span className="badge badge-warning badge-lg mb-4 gap-2">
+              <Sparkles className="h-4 w-4" /> Special Dance Packages
+            </span>
+            <h2
+              id="special-offers-heading"
+              className="text-3xl sm:text-4xl font-black"
+            >
+              Dance More. Save More.
+            </h2>
+            <p className="mt-3 text-base-content/70">
+              Discover our couples training and holiday private-lesson offers.
+            </p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {specialOffers.map((offer, index) => (
+              <motion.article
+                key={offer.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className={`card border-2 bg-base-100 shadow-xl ${
+                  offer.color === "warning"
+                    ? "border-warning"
+                    : "border-secondary"
+                }`}
+              >
+                <div className="card-body">
+                  <div className="flex items-center justify-between gap-3">
+                    <span
+                      className={`badge font-bold ${
+                        offer.color === "warning"
+                          ? "badge-warning"
+                          : "badge-secondary"
+                      }`}
+                    >
+                      {offer.badge}
+                    </span>
+                    <span className="text-3xl" aria-hidden="true">
+                      {offer.icon}
+                    </span>
+                  </div>
+                  <h3 className="card-title mt-3 text-2xl">{offer.name}</h3>
+                  <p className="text-base-content/70">{offer.description}</p>
+                  <div className="my-4">
+                    <span className="text-5xl font-black">{offer.price}</span>
+                    <span className="ml-2 text-base-content/60">
+                      {offer.period}
+                    </span>
+                  </div>
+                  <ul className="flex-1 space-y-3">
+                    {offer.features.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2">
+                        <Check className="mt-0.5 h-5 w-5 shrink-0 text-success" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <div className="card-actions mt-6">
+                    <button
+                      type="button"
+                      className={`btn w-full ${
+                        offer.color === "warning"
+                          ? "btn-warning"
+                          : "btn-secondary"
+                      }`}
+                      onClick={() => handleSpecialOffer(offer)}
+                    >
+                      {offer.button} <ChevronRight className="h-4 w-4" />
+                    </button>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
 
         {/* ==================================================
 
