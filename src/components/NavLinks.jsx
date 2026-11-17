@@ -96,7 +96,7 @@ const moreLinks = [
   {
     id: 7,
     url: "/membership",
-    textKey: "nav.prices",
+    textKey: "Prices/Privates",
     icon: DollarSign,
   },
 

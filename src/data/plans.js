@@ -90,6 +90,7 @@ export const plans = [
     description: "Personalized private dance instruction for two.",
     features: [
       "Private Dance Instruction",
+      "1 Hour of Couples Private Lessons Per Week",
       "Designed for Two People",
       "Customized Training",
       "Lead & Follow Techniques",
@@ -109,6 +110,7 @@ export const plans = [
       "A structured couples dance program designed to build confidence, technique, and connection.",
     features: [
       "3-Month Couples Dance Program",
+      "1 Hour of Couples Private Lessons Per Week",
       "No Experience Required",
       "Unlimited Group Classes",
       "Step-by-Step Dance Training",
@@ -157,8 +159,7 @@ export const plans = [
     description:
       "Learn to dance together with personalized couples coaching and unlimited group classes at Freedom Dance Studio.",
     features: [
-      "1 Hour of Couples Private Lessons Per Week",
-      "4 Hours of Private Training Per Month",
+      "1 Hour of Private Training Per Month",
       "Unlimited Freedom Dance Studio Group Classes",
       "Professional Dance Instructor",
       "No Dance Experience Required",
