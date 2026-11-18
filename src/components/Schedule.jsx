@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
-
 import { Link, useNavigate } from "react-router-dom";
-
+import { motion } from "framer-motion";
 import {
   CalendarDays,
   CalendarX2,
@@ -13,1958 +12,1014 @@ import {
   Search,
   X,
   Check,
-  ShoppingBag,
+  Clock3,
+  SlidersHorizontal,
+  MapPin,
+  ArrowRight,
+  RotateCcw,
+  Music2,
 } from "lucide-react";
-
-import { motion } from "framer-motion";
-
 import { events } from "../data/eventsData";
 import { specialOffers } from "../data/specialOffers";
-
+import { independentClasses } from "../data/indepedentInstructors";
 import lady from "../assets/lady/followerClip1.jpeg";
-
 import steven from "../assets/instructors/steven.png";
-
 import luna from "../assets/adriana.jpg";
-
 import desmond from "../assets/instructors/desmond.jpg";
 
-import { independentClasses } from "../data/indepedentInstructors";
+const DAYS = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+];
+const weeklySchedule = [
+  {
+    id: 1,
+    day: "Monday",
+    time: "6:00 PM",
+    dance: "Beginner Kizomba",
+    instructor: "Stevenson",
+    drop: "Free",
+    level: "Beginner Friendly",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 2,
+    day: "Monday",
+    time: "6:00 PM",
+    dance: "Ladies Styling Bachata",
+    instructor: "Luna",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: luna,
+    durationMinutes: 60,
+  },
+  {
+    id: 3,
+    day: "Monday",
+    time: "7:00 PM",
+    dance: "Beginner Bachata",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 13,
+    day: "Monday",
+    time: "8:00 PM",
+    dance: "Beginner Bachata Man Styling",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: steven,
+    durationMinutes: 90,
+  },
+  {
+    id: 4,
+    day: "Tuesday",
+    time: "6:00 PM",
+    dance: "Beginner Salsa",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 5,
+    day: "Tuesday",
+    time: "7:00 PM",
+    dance: "Beginner Bachata",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 6,
+    day: "Tuesday",
+    time: "8:00 PM",
+    dance: "Konpa",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Open Level",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 7,
+    day: "Wednesday",
+    time: "6:00 PM",
+    dance: "Intermediate & Beyond Kizomba",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Intermediate & Beyond",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 8,
+    day: "Wednesday",
+    time: "7:00 PM",
+    dance: "Intermediate & Beyond Bachata Sensual",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Intermediate & Beyond",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 9,
+    day: "Thursday",
+    time: "6:30 PM",
+    dance: "Ladies Styling Bachata",
+    instructor: "Zagir",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: lady,
+    durationMinutes: 60,
+  },
+  {
+    id: 10,
+    day: "Saturday",
+    time: "2:00 PM",
+    dance: "Open Level Kizomba",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Open Level",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 11,
+    day: "Saturday",
+    time: "3:00 PM",
+    dance: "Open Level Bachata",
+    instructor: "Stevenson",
+    drop: "$15",
+    level: "Open Level",
+    image: steven,
+    durationMinutes: 60,
+  },
+  {
+    id: 12,
+    day: "Saturday",
+    time: "4:00 PM",
+    dance: "Beginner Salsa",
+    instructor: "Desmond",
+    drop: "$15",
+    level: "Beginner Friendly",
+    image: desmond,
+    durationMinutes: 60,
+  },
+  {
+    id: 15,
+    day: "Saturday",
+    time: "5:00 PM",
+    dance: "Intermediate & Beyond Salsa",
+    instructor: "Desmond",
+    drop: "$15",
+    level: "Intermediate & Beyond",
+    image: desmond,
+    durationMinutes: 60,
+  },
+  {
+    id: 14,
+    day: "Saturday",
+    time: "6:00-7:30 PM",
+    dance: "Jazz Band",
+    instructor: "Steven",
+    drop: "Free",
+    level: "All Levels",
+    image: steven,
+    durationMinutes: null,
+  },
+].map((item) => ({ ...item, type: "freedom" }));
 
-// ==================================================
+// Duration must be supplied by each independent instructor in independentClasses.
+// Supported fields: durationMinutes (number), duration ("60 min" / "1 hour"), or endTime ("8:00 PM").
+const cancellations = [
+  {
+    date: "2026-11-21",
+    title: "Regular Saturday classes cancelled",
+    reason:
+      "Our Salsa & Bachata Weekend Intensive takes place November 20–22. Regular Saturday classes are cancelled on November 21; your membership is unaffected.",
+  },
+];
+const services = [
+  {
+    id: 1,
+    icon: "💃",
+    title: "Private Lessons",
+    description: "Personalized one-on-one training tailored to your goals.",
+    price: "$85",
+    duration: "60 minutes",
+    styles: "Salsa · Bachata · Kizomba · Konpa",
+  },
+  {
+    id: 2,
+    icon: "❤️",
+    title: "Partner Lessons",
+    description: "Learn together for socials, weddings, and special occasions.",
+    price: "$125",
+    duration: "60 minutes",
+    styles: "Salsa · Bachata · Kizomba · Konpa",
+  },
+  {
+    id: 3,
+    icon: "👥",
+    title: "Group Classes",
+    description: "Friendly, energetic instruction for all experience levels.",
+    price: "$15 drop-in",
+    duration: "Usually 60 minutes",
+    styles: "Salsa · Bachata · Kizomba · Konpa",
+  },
+  {
+    id: 4,
+    icon: "🎺",
+    title: "Live Band & Orchestra",
+    description: "Live music for weddings, celebrations, and special events.",
+    price: "Request a quote",
+    duration: "Custom",
+    styles: "Latin Jazz · Salsa · Caribbean Music",
+  },
+];
 
-// SERVICES
-
-// ==================================================
-
-// Add real portraits to public/assets/instructors/ using these filenames.
-
-// Missing photos automatically display a clean initials avatar.
-
-const instructorPhotos = {
-  Stevenson: "/assets/instructors/stevenson.jpg",
-
-  Desmond: "/assets/instructors/desmond.jpg",
-
-  Luna: "/assets/instructors/luna.jpg",
-
-  Zagir: "/assets/instructors/zagir.jpg",
-
-  Alain: "/assets/instructors/alain.jpg",
-
-  Steven: "/assets/instructors/steven.jpg",
+function toMinutes(value) {
+  const match = String(value || "")
+    .trim()
+    .match(/^(\d{1,2})(?::(\d{2}))?\s*(AM|PM)$/i);
+  if (!match) return null;
+  return (
+    ((Number(match[1]) % 12) + (match[3].toUpperCase() === "PM" ? 12 : 0)) *
+      60 +
+    Number(match[2] || 0)
+  );
+}
+function clock(total) {
+  const n = ((total % 1440) + 1440) % 1440;
+  const h = Math.floor(n / 60);
+  return `${h % 12 || 12}:${String(n % 60).padStart(2, "0")} ${h >= 12 ? "PM" : "AM"}`;
+}
+function durationFor(item) {
+  if (
+    Number.isFinite(Number(item.durationMinutes)) &&
+    item.durationMinutes != null &&
+    Number(item.durationMinutes) > 0
+  )
+    return Number(item.durationMinutes);
+  if (
+    item.endTime &&
+    toMinutes(item.time) != null &&
+    toMinutes(item.endTime) != null
+  ) {
+    const diff = (toMinutes(item.endTime) - toMinutes(item.time) + 1440) % 1440;
+    return diff || null;
+  }
+  const value = String(item.duration || "").toLowerCase();
+  const hours = value.match(/(\d+(?:\.\d+)?)\s*(?:hours?|hrs?)/);
+  const minutes = value.match(/(\d+)\s*(?:minutes?|mins?)/);
+  return hours || minutes
+    ? Math.round(Number(hours?.[1] || 0) * 60 + Number(minutes?.[1] || 0))
+    : null;
+}
+function timing(item) {
+  const start = toMinutes(item.time);
+  const duration = durationFor(item);
+  return {
+    range:
+      start != null && duration
+        ? `${clock(start)} – ${clock(start + duration)}`
+        : `${item.time || "Time TBA"}${item.endTime ? ` – ${item.endTime}` : ""}`,
+    duration: duration ? `${duration} min` : "Duration TBA",
+  };
+}
+function styleOf(name = "") {
+  const s = name.toLowerCase();
+  if (s.includes("bachata")) return "Bachata";
+  if (s.includes("salsa")) return "Salsa";
+  if (s.includes("kizomba") || s.includes("urban kiz")) return "Kizomba";
+  if (s.includes("konpa") || s.includes("kompa")) return "Konpa";
+  if (s.includes("jazz") || s.includes("band")) return "Music";
+  return "Other";
+}
+const keyOf = (item) =>
+  `${item.type}-${item.id}-${item.day}-${item.time}-${item.dance}`;
+const eventDate = (value) =>
+  value
+    ? new Date(`${value}T12:00:00`).toLocaleDateString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+      })
+    : "Date TBA";
+const ease = {
+  initial: { opacity: 0, y: 14 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.3 },
 };
 
-function InstructorAvatar({ name = "Instructor", size = "md", image }) {
+function Avatar({ item }) {
   const [failed, setFailed] = useState(false);
-
-  const src = image || instructorPhotos[name];
-
-  const initials = name
-
-    .split(/\s+/)
-
-    .map((part) => part[0])
-
-    .slice(0, 2)
-
-    .join("")
-
-    .toUpperCase();
-
-  const dimensions = size === "lg" ? "h-16 w-16 text-xl" : "h-11 w-11 text-sm";
-
-  useEffect(() => setFailed(false), [src]);
-
+  useEffect(() => setFailed(false), [item.image]);
   return (
-    <div
-      className={`${dimensions} shrink-0 overflow-hidden rounded-full border-2 border-primary/20 bg-primary/10 flex items-center justify-center font-bold text-primary`}
-    >
-      {src && !failed ? (
+    <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-primary/10 text-sm font-black text-primary ring-2 ring-base-100">
+      {item.image && !failed ? (
         <img
-          src={src}
-          alt={`Portrait of ${name}`}
-          loading="lazy"
+          src={item.image}
+          alt={item.instructor || "Instructor"}
           className="h-full w-full object-cover"
+          loading="lazy"
           onError={() => setFailed(true)}
         />
       ) : (
-        <span aria-label={`${name} photo unavailable`}>{initials}</span>
+        (item.instructor || "?").slice(0, 2).toUpperCase()
+      )}
+    </div>
+  );
+}
+function Heading({ eyebrow, title, description }) {
+  return (
+    <div className="mb-7">
+      <p className="mb-2 text-xs font-bold uppercase tracking-[.22em] text-primary">
+        {eyebrow}
+      </p>
+      <h2 className="text-2xl font-black tracking-tight sm:text-4xl">
+        {title}
+      </h2>
+      {description && (
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-base-content/65 sm:text-base">
+          {description}
+        </p>
       )}
     </div>
   );
 }
 
-const danceStyleOf = (dance = "") => {
-  const value = dance.toLowerCase();
-
-  if (value.includes("bachata")) return "Bachata";
-
-  if (value.includes("salsa")) return "Salsa";
-
-  if (value.includes("kizomba") || value.includes("urban kiz"))
-    return "Kizomba";
-
-  if (value.includes("konpa") || value.includes("kompa")) return "Konpa";
-
-  if (value.includes("jazz") || value.includes("band")) return "Music";
-
-  return "Other";
-};
-
-const dayOrder = [
-  "Monday",
-
-  "Tuesday",
-
-  "Wednesday",
-
-  "Thursday",
-
-  "Friday",
-
-  "Saturday",
-
-  "Sunday",
-];
-
-const timeMinutes = (time = "") => {
-  const match = time.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-
-  if (!match) return 9999;
-
-  return (
-    ((Number(match[1]) % 12) + (match[3].toUpperCase() === "PM" ? 12 : 0)) *
-      60 +
-    Number(match[2])
-  );
-};
-
-const services = [
-  {
-    id: 1,
-
-    title: "Private Lessons",
-
-    icon: "💃",
-
-    color: "primary",
-
-    description: "One-on-one personalized instruction for faster progress.",
-
-    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
-
-    duration: "60 Minutes",
-
-    price: "$85",
-  },
-
-  {
-    id: 2,
-
-    title: "Partner Lessons",
-
-    icon: "❤️",
-
-    color: "secondary",
-
-    description:
-      "Perfect for couples preparing for weddings, socials, or competitions.",
-
-    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
-
-    duration: "60 Minutes",
-
-    price: "$125",
-  },
-
-  {
-    id: 3,
-
-    title: "Group Classes",
-
-    icon: "👥",
-
-    color: "accent",
-
-    description: "Fun group classes for beginners through advanced dancers.",
-
-    styles: ["Salsa", "Bachata", "Kizomba", "Konpa"],
-
-    duration: "1 Hour",
-
-    price: "$15 Drop-In",
-  },
-
-  {
-    id: 4,
-
-    title: "Live Band & Orchestra",
-
-    icon: "🎺",
-
-    color: "warning",
-
-    description:
-      "Book our professional musicians for festivals, weddings, birthdays, and special events.",
-
-    styles: ["Salsa", "Konpa", "Latin Jazz", "Caribbean Music"],
-
-    duration: "Custom",
-
-    price: "Call for Quote",
-  },
-];
-
-// ==================================================
-
-// FREEDOM DANCE STUDIO WEEKLY CLASSES
-
-// ==================================================
-
-const weeklySchedule = [
-  {
-    id: 1,
-
-    day: "Monday",
-
-    time: "6:00 PM",
-
-    dance: "Beginner Kizomba",
-
-    instructor: "Stevenson",
-
-    drop: "Free",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 2,
-
-    day: "Monday",
-
-    time: "6:00 PM",
-
-    dance: "Ladies Styling Bachata",
-
-    instructor: "Luna",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: luna,
-  },
-
-  {
-    id: 3,
-
-    day: "Monday",
-
-    time: "7:00 PM",
-
-    dance: "Beginner Bachata",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 13,
-
-    day: "Monday",
-
-    time: "8:00 PM",
-
-    dance: "Beginner Bachata Man Styling",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 4,
-
-    day: "Tuesday",
-
-    time: "6:00 PM",
-
-    dance: "Beginner Salsa",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 5,
-
-    day: "Tuesday",
-
-    time: "7:00 PM",
-
-    dance: "Beginner Bachata",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 6,
-
-    day: "Tuesday",
-
-    time: "8:00 PM",
-
-    dance: "Konpa",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Open Level",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 7,
-
-    day: "Wednesday",
-
-    time: "6:00 PM",
-
-    dance: "Intermediate & Beyond Kizomba",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Intermediate & Beyond",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 8,
-
-    day: "Wednesday",
-
-    time: "7:00 PM",
-
-    dance: "Intermediate & Beyond Bachata Sensual",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Intermediate & Beyond",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 9,
-
-    day: "Thursday",
-
-    time: "6:30 PM",
-
-    dance: "Ladies Styling Bachata",
-
-    instructor: "Zagir",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: lady,
-  },
-
-  {
-    id: 10,
-
-    day: "Saturday",
-
-    time: "2:00 PM",
-
-    dance: "Open Level Kizomba",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Open Level",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 11,
-
-    day: "Saturday",
-
-    time: "3:00 PM",
-
-    dance: "Open Level Bachata",
-
-    instructor: "Stevenson",
-
-    drop: "$15",
-
-    level: "Open Level",
-
-    type: "freedom",
-
-    image: steven,
-  },
-
-  {
-    id: 12,
-
-    day: "Saturday",
-
-    time: "4:00 PM",
-
-    dance: "Beginner Salsa",
-
-    instructor: "Desmond",
-
-    drop: "$15",
-
-    level: "Beginner Friendly",
-
-    type: "freedom",
-
-    image: desmond,
-  },
-
-  {
-    id: 13,
-
-    day: "Saturday",
-
-    time: "5:00 PM",
-
-    dance: "Intermediate & Beyond Salsa",
-
-    instructor: "Desmond",
-
-    drop: "$15",
-
-    level: "Intermediate & Beyond",
-
-    type: "freedom",
-
-    image: desmond,
-  },
-
-  {
-    id: 14,
-
-    day: "Saturday",
-
-    time: "5:00 PM",
-
-    dance: "Jazz Band",
-
-    instructor: "Alain",
-
-    drop: "Free",
-
-    level: "All Levels",
-
-    type: "freedom",
-
-    image: steven,
-  },
-];
-
-// ==================================================
-
-// DAYS
-
-// ==================================================
-
-const days = [
-  "All",
-
-  "Monday",
-
-  "Tuesday",
-
-  "Wednesday",
-
-  "Thursday",
-
-  "Friday",
-
-  "Saturday",
-
-  "Sunday",
-];
-
-// ==================================================
-
-// CANCELLED DAYS
-
-// ==================================================
-
-const cancelledDays = [
-  {
-    day: "Saturday",
-    date: "November 21, 2026",
-    title: "Regular Classes Cancelled — Salsa & Bachata Intensive",
-    reason:
-      "All regular classes on Saturday, November 21, 2026, are cancelled because Freedom Dance Studio will be hosting our special Salsa & Bachata Weekend Intensive (November 20–22), featuring guest artists Brenda from Miami, Henrique from Seattle, and Desmond from Las Vegas. Join us for an incredible weekend of workshops, training, and dancing with these talented instructors! This cancellation will not affect your membership. Thank you for your understanding, and we hope to see you at the intensive!",
-  },
-];
-
-// ==================================================
-
-// HELPERS
-
-// ==================================================
-
-const getTypeLabel = (type) => {
-  if (type === "independent") return "Independent Instructor";
-
-  return "Freedom Dance";
-};
-
-const getTypeBadge = (type) => {
-  if (type === "independent") {
-    return "badge-secondary";
-  }
-
-  return "badge-primary";
-};
-
-const formatEventDate = (dateString) => {
-  if (!dateString) return "";
-
-  const date = new Date(`${dateString}T12:00:00`);
-
-  if (Number.isNaN(date.getTime())) return dateString;
-
-  return date.toLocaleDateString("en-US", {
-    month: "short",
-
-    day: "numeric",
-
-    year: "numeric",
-  });
-};
-
-const getEventDateRange = (event) => {
-  if (!event) return "";
-
-  if (event.eventEnd) {
-    return `${formatEventDate(event.eventStart)} – ${formatEventDate(
-      event.eventEnd,
-    )}`;
-  }
-
-  return formatEventDate(event.eventStart);
-};
-
-// ==================================================
-
-// COMPONENT
-
-// ==================================================
-
 export default function Schedule() {
   const navigate = useNavigate();
-
-  const handleSpecialOffer = (offer) => {
-    navigate("/membersForm", {
-      state: { ...offer, bookingType: "special-package" },
-    });
-  };
-
-  const [selectedDay, setSelectedDay] = useState("All");
-
-  const [scheduleType, setScheduleType] = useState("all");
-
-  const [selectedStyle, setSelectedStyle] = useState("All");
-
-  const [selectedInstructor, setSelectedInstructor] = useState("All");
-
+  const [day, setDay] = useState("All");
+  const [type, setType] = useState("all");
+  const [style, setStyle] = useState("All");
+  const [teacher, setTeacher] = useState("All");
   const [search, setSearch] = useState("");
-  const [selectedClasses, setSelectedClasses] = useState([]);
-
-  // ==================================================
-
-  // ALL WEEKLY CLASSES
-
-  // ==================================================
-
-  const allClasses = useMemo(() => {
-    return [...weeklySchedule, ...independentClasses];
-  }, []);
-
-  // ==================================================
-
-  // BOOK WEEKLY CLASS
-
-  // ==================================================
-
-  const handleBooking = (item) => {
-    navigate("/book", {
-      state: {
-        ...item,
-
-        bookingType: item.type,
-      },
-    });
-  };
-
-  // ==================================================
-
-  // BOOK EVENT / WORKSHOP
-
-  // ==================================================
-
-  const classKey = (item) =>
-    `${item.type}-${item.id}-${item.day}-${item.time}-${item.dance}`;
-  const toggleClass = (item) => {
-    setSelectedClasses((current) =>
-      current.some((entry) => classKey(entry) === classKey(item))
-        ? current.filter((entry) => classKey(entry) !== classKey(item))
+  const [selected, setSelected] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
+  const allClasses = useMemo(
+    () => [...weeklySchedule, ...independentClasses],
+    [],
+  );
+  const styles = useMemo(
+    () => [...new Set(allClasses.map((c) => styleOf(c.dance)))].sort(),
+    [allClasses],
+  );
+  const teachers = useMemo(
+    () =>
+      [...new Set(allClasses.map((c) => c.instructor).filter(Boolean))].sort(),
+    [allClasses],
+  );
+  const filtered = useMemo(
+    () =>
+      allClasses
+        .filter(
+          (c) =>
+            (day === "All" || c.day === day) &&
+            (type === "all" || c.type === type) &&
+            (style === "All" || styleOf(c.dance) === style) &&
+            (teacher === "All" || c.instructor === teacher) &&
+            [c.dance, c.instructor, c.day, c.level]
+              .join(" ")
+              .toLowerCase()
+              .includes(search.trim().toLowerCase()),
+        )
+        .sort(
+          (a, b) =>
+            DAYS.indexOf(a.day) - DAYS.indexOf(b.day) ||
+            (toMinutes(a.time) ?? 9999) - (toMinutes(b.time) ?? 9999),
+        ),
+    [allClasses, day, type, style, teacher, search],
+  );
+  const grouped = DAYS.map((name) => ({
+    day: name,
+    classes: filtered.filter((c) => c.day === name),
+  })).filter((g) => g.classes.length);
+  const selectedKeys = new Set(selected.map(keyOf));
+  const toggle = (item) =>
+    setSelected((current) =>
+      current.some((c) => keyOf(c) === keyOf(item))
+        ? current.filter((c) => keyOf(c) !== keyOf(item))
         : [...current, item],
     );
-  };
-  // Select every class for the chosen day, or remove that day's classes.
-  const dayClasses = allClasses.filter((item) => item.day === selectedDay);
-  const allDaySelected =
-    dayClasses.length > 0 &&
-    dayClasses.every((item) =>
-      selectedClasses.some((entry) => classKey(entry) === classKey(item)),
+  const chooseDay = () => {
+    const items = filtered.filter((c) => c.day === day);
+    const allChosen = items.every((c) => selectedKeys.has(keyOf(c)));
+    setSelected((current) =>
+      allChosen
+        ? current.filter((c) => !items.some((i) => keyOf(i) === keyOf(c)))
+        : [...current, ...items.filter((c) => !selectedKeys.has(keyOf(c)))],
     );
-  const toggleAllDay = () => {
-    setSelectedClasses((current) => {
-      const dayKeys = new Set(dayClasses.map(classKey));
-      const alreadyAll = dayClasses.every((item) =>
-        current.some((entry) => classKey(entry) === classKey(item)),
-      );
-      return alreadyAll
-        ? current.filter((item) => !dayKeys.has(classKey(item)))
-        : [
-            ...current,
-            ...dayClasses.filter(
-              (item) =>
-                !current.some((entry) => classKey(entry) === classKey(item)),
-            ),
-          ];
-    });
   };
-  const bookSelectedClasses = () => {
-    if (!selectedClasses.length) return;
-    const bookingClasses = selectedClasses.map((item) => ({ ...item }));
+  const reset = () => {
+    setDay("All");
+    setType("all");
+    setStyle("All");
+    setTeacher("All");
+    setSearch("");
+  };
+  const upcoming = useMemo(
+    () =>
+      events
+        .filter(
+          (e) =>
+            e.eventStart &&
+            new Date(`${e.eventStart}T12:00:00`) >=
+              new Date(new Date().toDateString()),
+        )
+        .sort((a, b) => a.eventStart.localeCompare(b.eventStart))
+        .slice(0, 3),
+    [],
+  );
+  const activeCancellations = cancellations.filter(
+    (c) =>
+      c.date >= new Date().toLocaleDateString("en-CA") &&
+      (day === "All" ||
+        DAYS[
+          new Date(`${c.date}T12:00:00`).getDay() === 0
+            ? 6
+            : new Date(`${c.date}T12:00:00`).getDay() - 1
+        ] === day),
+  );
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  const bookSelected = () => {
+    if (!selected.length) return;
+    const classes = selected.map((c) => ({
+      ...c,
+      endTime:
+        durationFor(c) && toMinutes(c.time) != null
+          ? clock(toMinutes(c.time) + durationFor(c))
+          : c.endTime,
+      durationMinutes: durationFor(c),
+    }));
     navigate("/book", {
       state: {
         bookingType: "multiple-classes",
-        selectedClasses: bookingClasses,
-        classes: bookingClasses,
-        classCount: bookingClasses.length,
-        classSummary: bookingClasses
+        selectedClasses: classes,
+        classes,
+        classCount: classes.length,
+        classSummary: classes
           .map(
-            (item) =>
-              `${item.day} ${item.time} - ${item.dance} (${item.instructor})`,
+            (c) => `${c.day} ${timing(c).range} · ${c.dance} (${c.instructor})`,
           )
           .join("; "),
       },
     });
   };
-
-  const handleEventBooking = (event) => {
-    navigate("/book", {
-      state: {
-        bookingType: "event",
-
-        event,
-
-        findEvent: event,
-      },
-    });
-  };
-
-  // ==================================================
-
-  // SERVICES
-
-  // ==================================================
-
-  const handleServices = (id) => {
-    const findService = services.find((service) => service.id === id);
-
-    navigate("/membersForm", {
-      state: findService,
-    });
-  };
-
-  // ==================================================
-
-  // CANCELLED DAY
-
-  // ==================================================
-
-  const isDayCancelled = (day) => {
-    return cancelledDays.some((cancelled) => cancelled.day === day);
-  };
-
-  // ==================================================
-
-  // FILTER SCHEDULE
-
-  // ==================================================
-
-  const danceStyles = useMemo(
-    () =>
-      [
-        "All",
-
-        ...new Set(allClasses.map((item) => danceStyleOf(item.dance))),
-      ].sort((a, b) =>
-        a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b),
-      ),
-
-    [allClasses],
-  );
-
-  const instructors = useMemo(
-    () =>
-      [
-        "All",
-
-        ...new Set(allClasses.map((item) => item.instructor).filter(Boolean)),
-      ].sort((a, b) =>
-        a === "All" ? -1 : b === "All" ? 1 : a.localeCompare(b),
-      ),
-
-    [allClasses],
-  );
-
-  const filteredSchedule = useMemo(() => {
-    return allClasses
-
-      .filter((item) => {
-        if (scheduleType !== "all" && item.type !== scheduleType) return false;
-
-        if (selectedDay !== "All" && item.day !== selectedDay) return false;
-
-        if (
-          selectedStyle !== "All" &&
-          danceStyleOf(item.dance) !== selectedStyle
-        )
-          return false;
-
-        if (
-          selectedInstructor !== "All" &&
-          item.instructor !== selectedInstructor
-        )
-          return false;
-
-        const term = search.trim().toLowerCase();
-
-        return (
-          !term ||
-          [item.dance, item.day, item.instructor, item.level].some((v) =>
-            String(v || "")
-              .toLowerCase()
-
-              .includes(term),
-          )
-        );
-      })
-
-      .sort(
-        (a, b) =>
-          dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day) ||
-          timeMinutes(a.time) - timeMinutes(b.time),
-      );
-  }, [
-    allClasses,
-
-    selectedDay,
-
-    scheduleType,
-
-    selectedStyle,
-
-    selectedInstructor,
-
-    search,
-  ]);
-
-  // ==================================================
-
-  // UPCOMING EVENTS
-
-  // ==================================================
-
-  const upcomingEvents = useMemo(() => {
-    const today = new Date();
-
-    today.setHours(0, 0, 0, 0);
-
-    return [...events]
-
-      .filter((event) => {
-        if (!event.eventStart) return false;
-
-        const eventDate = new Date(`${event.eventStart}T12:00:00`);
-
-        return eventDate >= today;
-      })
-
-      .sort(
-        (a, b) =>
-          new Date(`${a.eventStart}T12:00:00`) -
-          new Date(`${b.eventStart}T12:00:00`),
-      );
-  }, []);
-
-  // ==================================================
-
-  // VISIBLE CANCELLATIONS
-
-  // ==================================================
-
-  const visibleCancellations = useMemo(() => {
-    return cancelledDays.filter(
-      (cancelled) => selectedDay === "All" || cancelled.day === selectedDay,
-    );
-  }, [selectedDay]);
-
-  // ==================================================
-
-  // SCROLL TO TOP
-
-  // ==================================================
-
-  useEffect(() => {
-    window.scrollTo({
-      top: 0,
-
-      behavior: "smooth",
-    });
-  }, []);
-
-  // ==================================================
-
-  // RENDER
-
-  // ==================================================
-
   return (
-    <section className="w-full overflow-x-hidden py-10 sm:py-14 px-4 sm:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-7xl">
-        {/* ==================================================
-
-
-
-            HERO
-
-
-
-        ================================================== */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="relative overflow-hidden rounded-[2rem] bg-base-200 border border-base-300 shadow-2xl mb-12"
+    <main className="min-h-screen bg-base-200/40 pb-20">
+      <div className="mx-auto max-w-7xl px-4 pt-7 sm:px-6 lg:px-8">
+        <motion.header
+          {...ease}
+          className="relative mb-14 overflow-hidden rounded-[2rem] bg-neutral px-6 py-14 text-neutral-content shadow-xl sm:px-12 sm:py-20"
         >
-          <div className="absolute -top-32 -right-32 h-72 w-72 rounded-full bg-primary/20 blur-3xl" />
-
-          <div className="absolute -bottom-32 -left-32 h-72 w-72 rounded-full bg-secondary/20 blur-3xl" />
-
-          <div className="relative px-6 py-14 sm:px-10 sm:py-16 lg:px-16 text-center">
-            <div className="badge badge-primary badge-lg mb-5 gap-2">
-              <CalendarDays className="h-4 w-4" />
-              Freedom Dance Studio
-            </div>
-
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight">
-              Dance Schedule <span className="text-primary">& Booking</span>
-            </h1>
-
-            <p className="mt-5 mx-auto max-w-2xl text-base sm:text-lg text-base-content/70">
-              Find your next class, discover independent instructors, and
-              reserve your spot at our upcoming workshops and events.
-            </p>
-
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <div className="badge badge-lg badge-primary gap-2 py-4">
-                <GraduationCap className="h-4 w-4" />
-                Freedom Classes
-              </div>
-
-              <div className="badge badge-lg badge-secondary gap-2 py-4">
-                <Users className="h-4 w-4" />
-                Independent Instructors
-              </div>
-
-              <div className="badge badge-lg badge-accent gap-2 py-4">
-                <Sparkles className="h-4 w-4" />
-                Workshops & Events
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* SPECIAL OFFERS — visible before events and weekly schedule */}
-        <section className="mb-16" aria-labelledby="special-offers-heading">
-          <div className="mb-8 text-center">
-            <span className="badge badge-warning badge-lg mb-4 gap-2">
-              <Sparkles className="h-4 w-4" /> Special Dance Packages
+          <div className="pointer-events-none absolute -right-20 -top-32 h-80 w-80 rounded-full bg-primary/30 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-32 left-1/3 h-72 w-72 rounded-full bg-secondary/20 blur-3xl" />
+          <div className="relative max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-xs font-bold uppercase tracking-widest">
+              <Sparkles size={15} /> Freedom Dance Studio
             </span>
-            <h2
-              id="special-offers-heading"
-              className="text-3xl sm:text-4xl font-black"
-            >
-              Dance More. Save More.
-            </h2>
-            <p className="mt-3 text-base-content/70">
-              Discover our couples training and holiday private-lesson offers.
+            <h1 className="mt-6 text-4xl font-black leading-[1.08] tracking-tight sm:text-6xl">
+              Find your rhythm.
+              <br />
+              <span className="text-primary">Book your next class.</span>
+            </h1>
+            <p className="mt-5 max-w-xl text-base leading-relaxed opacity-80 sm:text-lg">
+              Explore weekly classes, see exact class times and durations, and
+              reserve your spot in just a few clicks.
             </p>
+            <a href="#weekly-classes" className="btn btn-primary mt-8 gap-2">
+              Explore class schedule <ArrowRight size={18} />
+            </a>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
-            {specialOffers.map((offer, index) => (
-              <motion.article
-                key={offer.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className={`card border-2 bg-base-100 shadow-xl ${
-                  offer.color === "warning"
-                    ? "border-warning"
-                    : "border-secondary"
-                }`}
-              >
-                <div className="card-body">
-                  <div className="flex items-center justify-between gap-3">
-                    <span
-                      className={`badge font-bold ${
-                        offer.color === "warning"
-                          ? "badge-warning"
-                          : "badge-secondary"
-                      }`}
-                    >
-                      {offer.badge}
+        </motion.header>
+
+        {specialOffers.length > 0 && (
+          <section className="mb-16">
+            <Heading
+              eyebrow="Limited-time packages"
+              title="More dancing. More value."
+              description="Explore our special training packages and offers."
+            />
+            <div className="grid gap-5 md:grid-cols-2">
+              {specialOffers.map((offer) => (
+                <motion.article
+                  {...ease}
+                  key={offer.id}
+                  className="flex flex-col rounded-3xl border border-base-300 bg-base-100 p-6 shadow-sm sm:p-8"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="badge badge-primary badge-outline">
+                      {offer.badge || "Special offer"}
                     </span>
-                    <span className="text-3xl" aria-hidden="true">
-                      {offer.icon}
-                    </span>
+                    <span className="text-3xl">{offer.icon || "✨"}</span>
                   </div>
-                  <h3 className="card-title mt-3 text-2xl">{offer.name}</h3>
-                  <p className="text-base-content/70">{offer.description}</p>
-                  <div className="my-4">
-                    <span className="text-5xl font-black">{offer.price}</span>
-                    <span className="ml-2 text-base-content/60">
+                  <h3 className="mt-5 text-2xl font-black">{offer.name}</h3>
+                  <p className="mt-2 text-sm text-base-content/65">
+                    {offer.description}
+                  </p>
+                  <div className="mt-5">
+                    <span className="text-4xl font-black">{offer.price}</span>
+                    <span className="ml-2 text-sm text-base-content/60">
                       {offer.period}
                     </span>
                   </div>
-                  <ul className="flex-1 space-y-3">
-                    {offer.features.map((feature) => (
-                      <li key={feature} className="flex items-start gap-2">
-                        <Check className="mt-0.5 h-5 w-5 shrink-0 text-success" />
-                        <span>{feature}</span>
+                  <ul className="my-6 flex-1 space-y-3">
+                    {(offer.features || []).map((f, i) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <Check
+                          size={17}
+                          className="mt-0.5 shrink-0 text-success"
+                        />
+                        {f}
                       </li>
                     ))}
                   </ul>
-                  <div className="card-actions mt-6">
-                    <button
-                      type="button"
-                      className={`btn w-full ${
-                        offer.color === "warning"
-                          ? "btn-warning"
-                          : "btn-secondary"
-                      }`}
-                      onClick={() => handleSpecialOffer(offer)}
-                    >
-                      {offer.button} <ChevronRight className="h-4 w-4" />
-                    </button>
-                  </div>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </section>
-
-        {/* ==================================================
-
-
-
-            UPCOMING WORKSHOPS & EVENTS
-
-
-
-        ================================================== */}
-
-        {upcomingEvents.length > 0 && (
-          <section className="mb-16">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-7">
-              <div>
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-6 w-6 text-accent" />
-
-                  <h2 className="text-3xl sm:text-4xl font-black">
-                    Upcoming Workshops & Events
-                  </h2>
-                </div>
-
-                <p className="mt-2 text-base-content/60">
-                  Special experiences happening at Freedom Dance Studio.
-                </p>
-              </div>
-
-              <Link to="/events" className="btn btn-outline btn-sm sm:btn-md">
-                View All Events
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {upcomingEvents.slice(0, 3).map((event, index) => (
-                <motion.div
-                  key={event.id}
-                  initial={{ opacity: 0, y: 25 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 0.5,
-
-                    delay: index * 0.08,
-                  }}
-                  className="group card bg-base-100 border border-base-200 shadow-xl overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl"
-                >
-                  {event.image && (
-                    <figure className="h-52 bg-base-200 overflow-hidden">
-                      <img
-                        src={event.image}
-                        alt={event.title || "Freedom Dance event"}
-                        className={`w-full h-full ${
-                          event.imageFit === "contain"
-                            ? "object-contain p-3"
-                            : "object-cover"
-                        } transition-transform duration-500 group-hover:scale-105`}
-                      />
-                    </figure>
-                  )}
-
-                  <div className="card-body">
-                    <div className="flex flex-wrap gap-2">
-                      <span className="badge badge-accent font-semibold">
-                        Workshop / Event
-                      </span>
-
-                      {event.featured && (
-                        <span className="badge badge-warning">Featured</span>
-                      )}
-                    </div>
-
-                    <h3 className="card-title text-xl mt-2">{event.title}</h3>
-
-                    <div className="space-y-2 text-sm text-base-content/70 mt-1">
-                      <p className="flex items-center gap-2">
-                        <CalendarDays className="h-4 w-4 text-primary" />
-
-                        {getEventDateRange(event)}
-                      </p>
-
-                      {event.instructor && (
-                        <p className="flex items-center gap-2">
-                          <Users className="h-4 w-4 text-secondary" />
-
-                          {event.instructor}
-                        </p>
-                      )}
-
-                      {event.location && <p>📍 {event.location}</p>}
-                    </div>
-
-                    {event.description && (
-                      <p className="mt-3 text-sm text-base-content/70 line-clamp-3">
-                        {event.description}
-                      </p>
-                    )}
-
-                    {event.price && (
-                      <div className="mt-3 font-bold text-lg">
-                        {event.price}
-                      </div>
-                    )}
-
-                    <div className="card-actions mt-5">
-                      <button
-                        onClick={() => handleEventBooking(event)}
-                        className="btn btn-accent w-full hover:scale-[1.02] transition-transform"
-                      >
-                        Register Now
-                        <ChevronRight className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
+                  <button
+                    className="btn btn-primary w-full"
+                    onClick={() =>
+                      navigate("/membersForm", {
+                        state: { ...offer, bookingType: "special-package" },
+                      })
+                    }
+                  >
+                    {offer.button || "Explore offer"} <ChevronRight size={16} />
+                  </button>
+                </motion.article>
               ))}
             </div>
           </section>
         )}
 
-        {/* ==================================================
-
-
-
-            CANCELLATION NOTICE
-
-
-
-        ================================================== */}
-
-        {visibleCancellations.map((cancelled) => (
-          <motion.div
-            key={cancelled.date}
-            initial={{
-              opacity: 0,
-
-              y: -25,
-
-              scale: 0.98,
-            }}
-            animate={{
-              opacity: 1,
-
-              y: 0,
-
-              scale: 1,
-            }}
-            transition={{
-              duration: 0.6,
-
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="relative mb-10 overflow-hidden rounded-3xl border border-error/30 bg-error/10 shadow-xl"
-          >
-            <motion.div
-              animate={{
-                scale: [1, 1.2, 1],
-
-                opacity: [0.15, 0.3, 0.15],
-              }}
-              transition={{
-                duration: 3,
-
-                repeat: Infinity,
-
-                ease: "easeInOut",
-              }}
-              className="absolute -right-20 -top-20 h-56 w-56 rounded-full bg-error/30 blur-3xl"
-            />
-
-            <div className="relative p-6 sm:p-8">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
-                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-error text-error-content shadow-lg">
-                  <CalendarX2 className="h-8 w-8" />
-                </div>
-
-                <div className="flex-1">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-2xl font-black sm:text-3xl">
-                      {cancelled.title}
-                    </h2>
-
-                    <span className="badge badge-error font-bold">
-                      Important
+        {upcoming.length > 0 && (
+          <section className="mb-16">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <Heading
+                eyebrow="What's happening"
+                title="Upcoming events"
+                description="Workshops, intensives, and special experiences."
+              />
+              <Link to="/events" className="btn btn-outline btn-sm mb-7">
+                All events <ArrowRight size={15} />
+              </Link>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {upcoming.map((event) => (
+                <motion.article
+                  {...ease}
+                  key={event.id}
+                  className="flex flex-col overflow-hidden rounded-3xl border border-base-300 bg-base-100 shadow-sm"
+                >
+                  {event.image && (
+                    <div className="h-52 bg-base-200">
+                      <img
+                        src={event.image}
+                        alt={event.title || "Dance event"}
+                        className={`h-full w-full ${event.imageFit === "contain" ? "object-contain p-2" : "object-cover"}`}
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-1 flex-col p-6">
+                    <span className="badge badge-accent badge-outline">
+                      Event / Workshop
                     </span>
+                    <h3 className="mt-3 text-xl font-black">{event.title}</h3>
+                    <p className="mt-3 flex items-center gap-2 text-sm text-base-content/70">
+                      <CalendarDays size={16} />
+                      {eventDate(event.eventStart)}
+                      {event.eventEnd ? ` – ${eventDate(event.eventEnd)}` : ""}
+                    </p>
+                    {event.instructor && (
+                      <p className="mt-2 flex items-center gap-2 text-sm text-base-content/70">
+                        <Users size={16} />
+                        {event.instructor}
+                      </p>
+                    )}
+                    {event.location && (
+                      <p className="mt-2 flex items-center gap-2 text-sm text-base-content/70">
+                        <MapPin size={16} />
+                        {event.location}
+                      </p>
+                    )}
+                    {event.description && (
+                      <p className="mt-3 line-clamp-3 text-sm text-base-content/65">
+                        {event.description}
+                      </p>
+                    )}
+                    {event.price && (
+                      <p className="mt-4 text-lg font-black">{event.price}</p>
+                    )}
+                    <button
+                      className="btn btn-primary mt-6 w-full"
+                      onClick={() =>
+                        navigate("/book", {
+                          state: {
+                            bookingType: "event",
+                            event,
+                            findEvent: event,
+                          },
+                        })
+                      }
+                    >
+                      Register now <ChevronRight size={16} />
+                    </button>
                   </div>
+                </motion.article>
+              ))}
+            </div>
+          </section>
+        )}
 
-                  <p className="mt-2 text-base text-base-content/70">
-                    There will be no regular classes at Freedom Dance Studio on
-                    this day.
-                  </p>
-
-                  <div className="mt-4 flex flex-wrap gap-3">
-                    <span className="badge badge-lg gap-2">
-                      📅 {cancelled.date}
-                    </span>
-
-                    <span className="badge badge-lg gap-2">🚫 All Day</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-start gap-3 rounded-2xl bg-warning/10 p-4">
-                <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-warning" />
-
-                <div>
-                  <p className="font-bold">Please plan accordingly.</p>
-
-                  <p className="mt-1 text-sm text-base-content/70">
-                    {cancelled.reason} Our regular schedule will continue on the
-                    next scheduled day.
-                  </p>
-                </div>
+        <section id="weekly-classes" className="scroll-mt-8">
+          <Heading
+            eyebrow="Your weekly routine"
+            title="Weekly class schedule"
+            description="Every class shows its start time, end time when known, and total duration. Select multiple classes to book together."
+          />
+          {activeCancellations.map((c) => (
+            <div
+              key={c.date}
+              role="alert"
+              className="mb-6 flex gap-4 rounded-2xl border border-warning/40 bg-warning/10 p-5"
+            >
+              <CalendarX2 className="shrink-0 text-warning" />
+              <div>
+                <h3 className="font-bold">
+                  {c.title} · {eventDate(c.date)}
+                </h3>
+                <p className="mt-1 text-sm text-base-content/70">{c.reason}</p>
               </div>
             </div>
-          </motion.div>
-        ))}
-
-        {/* ==================================================
-
-
-
-            SCHEDULE SECTION
-
-
-
-        ================================================== */}
-
-        <section>
-          <div className="mb-7">
-            <h2 className="text-3xl sm:text-4xl font-black">
-              Weekly Dance Schedule
-            </h2>
-
-            <p className="mt-2 text-base-content/60">
-              Choose a day and class type to find your next dance experience.
-            </p>
+          ))}
+          <div className="mb-5 grid grid-cols-1 gap-3 sm:grid-cols-3">
+            {[
+              { value: "all", label: "All classes", icon: CalendarDays },
+              {
+                value: "freedom",
+                label: "Freedom classes",
+                icon: GraduationCap,
+              },
+              {
+                value: "independent",
+                label: "Independent instructors",
+                icon: Users,
+              },
+            ].map((option) => (
+              <button
+                key={option.value}
+                type="button"
+                onClick={() => setType(option.value)}
+                className={`flex min-h-16 items-center gap-3 rounded-2xl border px-5 text-left font-bold transition ${type === option.value ? "border-primary bg-primary text-primary-content shadow-md" : "border-base-300 bg-base-100 hover:border-primary/50"}`}
+              >
+                <option.icon size={21} />
+                {option.label}
+              </button>
+            ))}
           </div>
-
-          {/* ==================================================
-
-
-
-              CATEGORY FILTERS
-
-
-
-          ================================================== */}
-
-          <div className="grid sm:grid-cols-3 gap-3 mb-7">
-            <button
-              onClick={() => setScheduleType("all")}
-              className={`btn h-auto min-h-14 ${
-                scheduleType === "all" ? "btn-primary" : "btn-outline"
-              }`}
-            >
-              <CalendarDays className="h-5 w-5" />
-
-              <div className="text-left">
-                <div className="font-bold">All Classes</div>
-
-                <div className="text-xs opacity-70">Freedom + Independent</div>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setScheduleType("freedom")}
-              className={`btn h-auto min-h-14 ${
-                scheduleType === "freedom" ? "btn-primary" : "btn-outline"
-              }`}
-            >
-              <GraduationCap className="h-5 w-5" />
-
-              <div className="text-left">
-                <div className="font-bold">Freedom Classes</div>
-
-                <div className="text-xs opacity-70">Regular studio classes</div>
-              </div>
-            </button>
-
-            <button
-              onClick={() => setScheduleType("independent")}
-              className={`btn h-auto min-h-14 ${
-                scheduleType === "independent" ? "btn-secondary" : "btn-outline"
-              }`}
-            >
-              <Users className="h-5 w-5" />
-
-              <div className="text-left">
-                <div className="font-bold">Independent Instructors</div>
-
-                <div className="text-xs opacity-70">Hosted at Freedom</div>
-              </div>
-            </button>
-          </div>
-
-          <div className="mb-8 rounded-2xl border border-base-300 bg-base-200 p-4 sm:p-6">
-            <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <div className="mb-6 rounded-3xl border border-base-300 bg-base-100 p-4 shadow-sm sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
-                <h3 className="text-lg font-bold">Find your perfect class</h3>
-
-                <p className="text-sm opacity-70">
-                  {filteredSchedule.length} matching classes · Choose a day,
-                  style, or teacher
+                <h3 className="text-lg font-black">Find your class</h3>
+                <p className="text-sm text-base-content/60">
+                  {filtered.length} matching classes
                 </p>
               </div>
-
-              <button
-                type="button"
-                className="btn btn-ghost btn-sm"
-                onClick={() => {
-                  setSelectedDay("All");
-
-                  setSelectedStyle("All");
-
-                  setSelectedInstructor("All");
-
-                  setSearch("");
-
-                  setScheduleType("all");
-                }}
-              >
-                <X className="h-4 w-4" /> Clear filters
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              <label className="form-control">
-                <span className="label-text mb-1 font-semibold">Day</span>
-
-                <select
-                  aria-label="Filter by day"
-                  className="select select-bordered w-full"
-                  value={selectedDay}
-                  onChange={(e) => setSelectedDay(e.target.value)}
+              <div className="flex gap-2">
+                <button className="btn btn-ghost btn-sm" onClick={reset}>
+                  <RotateCcw size={15} /> Reset
+                </button>
+                <button
+                  className="btn btn-outline btn-sm lg:hidden"
+                  onClick={() => setShowFilters((v) => !v)}
                 >
-                  {days.map((day) => (
-                    <option key={day} value={day}>
-                      {day === "All" ? "All days" : day}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
+                  <SlidersHorizontal size={15} /> Filters
+                </button>
+              </div>
+            </div>
+            <div className="mt-5 flex gap-2 overflow-x-auto pb-2">
+              {["All", ...DAYS].map((d) => (
+                <button
+                  key={d}
+                  onClick={() => setDay(d)}
+                  className={`btn btn-sm shrink-0 rounded-full ${day === d ? "btn-primary" : "btn-ghost border border-base-300"}`}
+                >
+                  {d}
+                </button>
+              ))}
+            </div>
+            <div
+              className={`mt-4 grid gap-3 lg:grid-cols-3 ${showFilters ? "grid" : "hidden lg:grid"}`}
+            >
               <label className="form-control">
-                <span className="label-text mb-1 font-semibold">
+                <span className="mb-1 block text-xs font-bold uppercase tracking-wide text-base-content/60">
                   Dance style
                 </span>
-
                 <select
-                  aria-label="Filter by dance style"
                   className="select select-bordered w-full"
-                  value={selectedStyle}
-                  onChange={(e) => setSelectedStyle(e.target.value)}
+                  value={style}
+                  onChange={(e) => setStyle(e.target.value)}
                 >
-                  {danceStyles.map((style) => (
-                    <option key={style} value={style}>
-                      {style === "All" ? "All styles" : style}
-                    </option>
+                  <option value="All">All styles</option>
+                  {styles.map((s) => (
+                    <option key={s}>{s}</option>
                   ))}
                 </select>
               </label>
-
               <label className="form-control">
-                <span className="label-text mb-1 font-semibold">
+                <span className="mb-1 block text-xs font-bold uppercase tracking-wide text-base-content/60">
                   Instructor
                 </span>
-
                 <select
-                  aria-label="Filter by instructor"
                   className="select select-bordered w-full"
-                  value={selectedInstructor}
-                  onChange={(e) => setSelectedInstructor(e.target.value)}
+                  value={teacher}
+                  onChange={(e) => setTeacher(e.target.value)}
                 >
-                  {instructors.map((name) => (
-                    <option key={name} value={name}>
-                      {name === "All" ? "All instructors" : name}
-                    </option>
+                  <option value="All">All instructors</option>
+                  {teachers.map((t) => (
+                    <option key={t}>{t}</option>
                   ))}
                 </select>
               </label>
-
               <label className="form-control">
-                <span className="label-text mb-1 font-semibold">Search</span>
-
-                <div className="relative">
-                  <Search className="absolute left-3 top-3 h-5 w-5 opacity-50" />
-
+                <span className="mb-1 block text-xs font-bold uppercase tracking-wide text-base-content/60">
+                  Search
+                </span>
+                <span className="relative block">
+                  <Search
+                    className="absolute left-3 top-3.5 text-base-content/40"
+                    size={18}
+                  />
                   <input
-                    type="search"
-                    aria-label="Search classes"
-                    placeholder="Class or instructor..."
                     className="input input-bordered w-full pl-10"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search classes..."
                   />
-                </div>
+                </span>
               </label>
             </div>
           </div>
-
-          {selectedDay !== "All" && (
-            <div className="mb-6 rounded-2xl border border-base-300 bg-base-100 p-4 sm:p-6 shadow-sm">
-              <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-                <div>
-                  <h3 className="text-xl font-bold">
-                    {selectedDay} — Choose your classes
-                  </h3>
-                  <p className="text-sm opacity-70">
-                    Select one, several, or every class on {selectedDay}.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="btn btn-outline btn-primary btn-sm"
-                  disabled={!dayClasses.length}
-                  onClick={toggleAllDay}
-                >
-                  {allDaySelected
-                    ? `Remove all ${selectedDay} classes`
-                    : `Select all ${selectedDay} classes`}
-                </button>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {dayClasses.map((item) => {
-                  const checked = selectedClasses.some(
-                    (entry) => classKey(entry) === classKey(item),
-                  );
-                  return (
-                    <label
-                      key={classKey(item)}
-                      className={`flex cursor-pointer items-start gap-3 rounded-xl border p-4 transition-colors ${checked ? "border-primary bg-primary/10" : "border-base-300 hover:border-primary/50"}`}
-                    >
-                      <input
-                        type="checkbox"
-                        className="checkbox checkbox-primary mt-1"
-                        checked={checked}
-                        onChange={() => toggleClass(item)}
-                      />
-                      <span className="min-w-0">
-                        <span className="block font-bold">{item.dance}</span>
-                        <span className="block text-sm opacity-70">
-                          {item.time} · {item.instructor}
-                        </span>
-                        <span className="block text-sm font-semibold">
-                          {item.drop}
-                        </span>
-                      </span>
-                    </label>
-                  );
-                })}
-                {!dayClasses.length && (
-                  <p className="text-sm opacity-70">
-                    No classes scheduled for this day.
-                  </p>
-                )}
-              </div>
+          {day !== "All" && filtered.length > 0 && (
+            <div className="mb-5 flex justify-end">
+              <button
+                onClick={chooseDay}
+                className="btn btn-outline btn-primary btn-sm"
+              >
+                {filtered.every((c) => selectedKeys.has(keyOf(c)))
+                  ? `Remove visible ${day} classes`
+                  : `Select all visible ${day} classes`}
+              </button>
             </div>
           )}
-
-          <div className="mb-6 w-full min-w-0 max-w-full overflow-hidden rounded-2xl border border-primary/30 bg-primary/5 p-4 sm:p-5">
-            <div className="flex min-w-0 flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-              <div className="min-w-0 flex-1">
-                <h3 className="text-lg font-bold">
-                  Selected classes ({selectedClasses.length})
-                </h3>
-                <p className="text-sm opacity-70">
-                  Choose multiple classes, including on the same day.
-                </p>
-                <div className="mt-3 flex max-h-44 min-w-0 flex-wrap gap-2 overflow-x-hidden overflow-y-auto">
-                  {selectedClasses.map((item) => (
-                    <button
-                      key={classKey(item)}
-                      type="button"
-                      onClick={() => toggleClass(item)}
-                      className="inline-flex h-auto max-w-full min-w-0 items-center gap-2 rounded-lg border border-primary/30 bg-primary px-3 py-2 text-left text-xs font-semibold leading-snug text-primary-content transition-opacity hover:opacity-80 sm:text-sm"
-                      title="Remove selected class"
-                    >
-                      <span className="min-w-0 break-words">
-                        {item.day} {item.time} · {item.dance}
-                      </span>
-                      <X className="h-4 w-4 shrink-0" />
-                    </button>
-                  ))}
+          {grouped.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-base-300 bg-base-100 p-12 text-center">
+              <Search className="mx-auto mb-3 text-base-content/40" />
+              <p className="font-bold">No classes match your filters.</p>
+              <button onClick={reset} className="btn btn-primary btn-sm mt-4">
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <div className="space-y-9">
+              {grouped.map((group) => (
+                <div key={group.day}>
+                  <div className="mb-4 flex items-center gap-3">
+                    <h3 className="text-xl font-black sm:text-2xl">
+                      {group.day}
+                    </h3>
+                    <span className="badge badge-ghost">
+                      {group.classes.length} classes
+                    </span>
+                    <div className="h-px flex-1 bg-base-300" />
+                  </div>
+                  <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                    {group.classes.map((item) => {
+                      const info = timing(item);
+                      const chosen = selectedKeys.has(keyOf(item));
+                      return (
+                        <motion.article
+                          {...ease}
+                          key={keyOf(item)}
+                          className={`flex flex-col rounded-3xl border bg-base-100 p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-lg sm:p-6 ${chosen ? "border-primary ring-2 ring-primary/20" : "border-base-300"}`}
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <span
+                              className={`badge ${item.type === "independent" ? "badge-secondary" : "badge-primary"} badge-outline text-xs`}
+                            >
+                              {item.type === "independent"
+                                ? "Independent instructor"
+                                : "Freedom class"}
+                            </span>
+                            <span className="text-lg font-black text-primary">
+                              {item.drop || "Ask instructor"}
+                            </span>
+                          </div>
+                          <h4 className="mt-4 min-h-12 text-xl font-black leading-tight">
+                            {item.dance}
+                          </h4>
+                          <span className="mt-2 self-start rounded-full bg-base-200 px-3 py-1 text-xs font-semibold text-base-content/70">
+                            {item.level || "All levels"}
+                          </span>
+                          <div className="mt-5 rounded-2xl border border-primary/15 bg-primary/5 p-4">
+                            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-base-content/60">
+                              <Clock3 size={15} /> Class time
+                            </div>
+                            <p className="mt-2 text-lg font-black leading-snug sm:text-xl">
+                              {info.range}
+                            </p>
+                            <span className="mt-3 inline-flex rounded-lg bg-primary px-3 py-1.5 text-sm font-extrabold text-primary-content">
+                              <Clock3 size={15} className="mr-2" />
+                              {info.duration}
+                            </span>
+                          </div>
+                          <div className="mt-5 flex items-center gap-3">
+                            <Avatar item={item} />
+                            <div>
+                              <p className="text-xs text-base-content/50">
+                                Instructor
+                              </p>
+                              <p className="font-bold">
+                                {item.instructor || "To be announced"}
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            aria-pressed={chosen}
+                            onClick={() => toggle(item)}
+                            className={`btn mt-6 w-full ${chosen ? "btn-outline btn-primary" : item.type === "independent" ? "btn-secondary" : "btn-primary"}`}
+                          >
+                            {chosen ? (
+                              <>
+                                <Check size={17} /> Selected — remove
+                              </>
+                            ) : (
+                              <>
+                                Select class <ChevronRight size={17} />
+                              </>
+                            )}
+                          </button>
+                        </motion.article>
+                      );
+                    })}
+                  </div>
                 </div>
+              ))}
+            </div>
+          )}
+          <div className="sticky bottom-3 z-20 mt-8 rounded-2xl border border-primary/25 bg-base-100/95 p-4 shadow-2xl backdrop-blur-md sm:p-5">
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+              <div className="min-w-0">
+                <h3 className="font-black">
+                  Your selected classes{" "}
+                  <span className="text-primary">({selected.length})</span>
+                </h3>
+                <p className="text-xs text-base-content/60">
+                  Choose one or more classes, then continue to booking.
+                </p>
+                {selected.length > 0 && (
+                  <div className="mt-3 flex max-h-24 flex-wrap gap-2 overflow-y-auto">
+                    {selected.map((c) => (
+                      <button
+                        key={keyOf(c)}
+                        onClick={() => toggle(c)}
+                        className="inline-flex max-w-full items-center gap-2 rounded-full bg-base-200 px-3 py-1.5 text-left text-xs font-semibold hover:bg-base-300"
+                      >
+                        <span className="truncate">
+                          {c.day} · {c.dance} · {timing(c).duration}
+                        </span>
+                        <X size={13} className="shrink-0" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
-              <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row lg:w-auto lg:shrink-0">
-                {selectedClasses.length > 0 && (
+              <div className="flex shrink-0 gap-2">
+                {selected.length > 0 && (
                   <button
-                    type="button"
-                    className="btn btn-ghost w-full sm:w-auto"
-                    onClick={() => setSelectedClasses([])}
+                    onClick={() => setSelected([])}
+                    className="btn btn-ghost"
                   >
                     Clear
                   </button>
                 )}
                 <button
-                  type="button"
-                  className="btn btn-primary h-auto min-h-12 w-full min-w-0 whitespace-normal px-4 py-2 text-center leading-snug sm:w-auto"
-                  disabled={!selectedClasses.length}
-                  onClick={bookSelectedClasses}
+                  onClick={bookSelected}
+                  disabled={!selected.length}
+                  className="btn btn-primary flex-1 lg:flex-none"
                 >
-                  Continue with {selectedClasses.length}{" "}
-                  {selectedClasses.length === 1 ? "class" : "classes"}
+                  Continue with {selected.length}{" "}
+                  {selected.length === 1 ? "class" : "classes"}
+                  <ArrowRight size={17} />
                 </button>
               </div>
             </div>
           </div>
-
-          {filteredSchedule.length === 0 && (
-            <div className="alert mb-8">
-              <span>No classes match your filters. Try clearing a filter.</span>
-            </div>
-          )}
-
-          {/* ==================================================
-
-
-
-              DESKTOP TABLE
-
-
-
-          ================================================== */}
-
-          {filteredSchedule.length > 0 && (
-            <div className="hidden md:block w-full mb-16">
-              <div className="rounded-2xl shadow-xl overflow-hidden border border-base-200">
-                <table className="table bg-base-100 w-full">
-                  <thead>
-                    <tr>
-                      <th>Day</th>
-
-                      <th>Time</th>
-
-                      <th>Class</th>
-
-                      <th>Type</th>
-
-                      <th>Level</th>
-
-                      <th>Instructor</th>
-
-                      <th>Drop-In</th>
-
-                      <th></th>
-                    </tr>
-                  </thead>
-
-                  <tbody>
-                    {filteredSchedule.map((item) => (
-                      <tr
-                        key={`${item.type}-${item.id}-${item.day}-${item.time}`}
-                        className="transition-all duration-300 hover:bg-base-200"
-                      >
-                        <td className="font-semibold">{item.day}</td>
-
-                        <td className="font-medium">{item.time}</td>
-
-                        <td className="font-semibold">{item.dance}</td>
-
-                        <td>
-                          <span
-                            className={`badge ${getTypeBadge(
-                              item.type,
-                            )} whitespace-nowrap`}
-                          >
-                            {getTypeLabel(item.type)}
-                          </span>
-                        </td>
-
-                        <td>
-                          <span className="badge badge-outline">
-                            {item.level}
-                          </span>
-                        </td>
-
-                        <td>
-                          <div className="flex items-center gap-3">
-                            <InstructorAvatar
-                              name={item.instructor}
-                              image={item.image}
-                            />
-
-                            <span className="font-semibold">
-                              {item.instructor}
-                            </span>
-                          </div>
-                        </td>
-
-                        <td className="font-bold">{item.drop}</td>
-
-                        <td>
-                          <button
-                            className={`btn btn-sm ${
-                              item.type === "independent"
-                                ? "btn-secondary"
-                                : "btn-primary"
-                            } transition-all duration-300 hover:scale-105`}
-                            onClick={() => toggleClass(item)}
-                          >
-                            {selectedClasses.some(
-                              (entry) => classKey(entry) === classKey(item),
-                            ) ? (
-                              <>
-                                <Check className="h-4 w-4" /> Selected
-                              </>
-                            ) : (
-                              "Select Class"
-                            )}
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          )}
-
-          {/* ==================================================
-
-
-
-              MOBILE SCHEDULE CARDS
-
-
-
-          ================================================== */}
-
-          <div className="md:hidden space-y-4 mb-16">
-            {filteredSchedule.length === 0
-              ? !isDayCancelled(selectedDay) && (
-                  <div className="alert alert-info rounded-2xl">
-                    <span>No classes match your filters.</span>
-                  </div>
-                )
-              : filteredSchedule.map((item, index) => (
-                  <motion.div
-                    key={`${item.type}-${item.id}-${item.day}-${item.time}`}
-                    initial={{
-                      opacity: 0,
-
-                      y: 15,
-                    }}
-                    animate={{
-                      opacity: 1,
-
-                      y: 0,
-                    }}
-                    transition={{
-                      delay: index * 0.04,
-                    }}
-                    className="card bg-base-100 shadow-xl border border-base-200 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-                  >
-                    <div className="card-body p-5">
-                      <div className="flex items-start justify-between gap-3">
-                        <div>
-                          <p className="text-sm text-base-content/50">
-                            {item.day}
-                          </p>
-
-                          <p className="text-xl font-black">{item.time}</p>
-                        </div>
-
-                        <span
-                          className={`badge ${
-                            item.type === "independent"
-                              ? "badge-secondary"
-                              : "badge-primary"
-                          }`}
-                        >
-                          {item.drop}
-                        </span>
-                      </div>
-
-                      <div className="flex flex-wrap gap-2 mt-2">
-                        <span className={`badge ${getTypeBadge(item.type)}`}>
-                          {getTypeLabel(item.type)}
-                        </span>
-
-                        <span className="badge badge-outline">
-                          {item.level}
-                        </span>
-                      </div>
-
-                      <div className="divider my-1" />
-
-                      <h3 className="text-xl font-black">{item.dance}</h3>
-
-                      <div className="flex items-center gap-3 rounded-xl bg-base-200 p-3">
-                        <InstructorAvatar
-                          name={item.instructor}
-                          size="lg"
-                          image={item.image}
-                        />
-
-                        <div>
-                          <p className="text-xs text-base-content/60">
-                            Your instructor
-                          </p>
-
-                          <p className="font-bold">{item.instructor}</p>
-                        </div>
-                      </div>
-
-                      <button
-                        className={`btn w-full mt-3 ${
-                          item.type === "independent"
-                            ? "btn-secondary"
-                            : "btn-primary"
-                        } transition-all duration-300 hover:scale-[1.02]`}
-                        onClick={() => toggleClass(item)}
-                      >
-                        {selectedClasses.some(
-                          (entry) => classKey(entry) === classKey(item),
-                        )
-                          ? "✓ Selected"
-                          : "Select Class"}
-                      </button>
-                    </div>
-                  </motion.div>
-                ))}
-          </div>
         </section>
-
-        {/* ==================================================
-
-
-
-            INDEPENDENT INSTRUCTOR MESSAGE
-
-
-
-        ================================================== */}
-
-        <section className="mb-16">
-          <div className="relative overflow-hidden rounded-3xl bg-secondary/10 border border-secondary/20 p-7 sm:p-10">
-            <div className="absolute -right-20 -top-20 h-48 w-48 rounded-full bg-secondary/20 blur-3xl" />
-
-            <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-7">
-              <div>
-                <div className="badge badge-secondary mb-4">
-                  Independent Dance Community
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl font-black">
-                  More Instructors. More Styles. More Ways to Dance.
-                </h2>
-
-                <p className="mt-3 max-w-2xl text-base-content/70">
-                  Freedom Dance Studio is also home to independent instructors
-                  who bring their own classes and dance styles into our
-                  community. Their classes are hosted at Freedom while remaining
-                  independently operated.
-                </p>
-              </div>
-
-              <Link to="/independent" className="btn btn-secondary shrink-0">
-                Meet Independent Instructors
-                <ChevronRight className="h-4 w-4" />
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* ==================================================
-
-
-
-            SERVICES
-
-
-
-        ================================================== */}
-
-        <section>
-          <div className="mb-10 text-center">
-            <div className="badge badge-primary mb-4">
-              Private & Group Experiences
-            </div>
-
-            <h2 className="text-3xl sm:text-4xl font-black">Our Services</h2>
-
-            <p className="mt-3 text-base-content/60">
-              Choose the experience that fits your goals.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 lg:gap-8">
-            {services.map((service, index) => {
-              const {
-                icon,
-
-                title,
-
-                description,
-
-                color,
-
-                styles,
-
-                duration,
-
-                price,
-              } = service;
-
-              return (
-                <motion.div
-                  key={service.id}
-                  initial={{
-                    opacity: 0,
-
-                    y: 20,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
-                  transition={{
-                    delay: index * 0.08,
-                  }}
-                  className="card bg-base-100 border border-base-200 shadow-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
-                >
-                  <div className="card-body">
-                    <div className="text-5xl mb-2">{icon}</div>
-
-                    <h2 className="card-title text-2xl">{title}</h2>
-
-                    <p className="text-base-content/70">{description}</p>
-
-                    <div className="divider" />
-
-                    <div className="space-y-3">
-                      <p>
-                        <strong>Styles:</strong>
-                      </p>
-
-                      <div className="flex flex-wrap gap-2">
-                        {styles.map((dance) => (
-                          <span key={dance} className={`badge badge-${color}`}>
-                            {dance}
-                          </span>
-                        ))}
-                      </div>
-
-                      <p>
-                        <strong>Duration:</strong> {duration}
-                      </p>
-
-                      <p>
-                        <strong>Price:</strong> {price}
-                      </p>
-                    </div>
-
-                    <div className="card-actions mt-6">
-                      <button
-                        className="btn btn-primary w-full transition-all duration-300 hover:scale-105"
-                        onClick={() => handleServices(service.id)}
-                      >
-                        Book Now
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* ==================================================
-
-
-
-            FINAL CTA
-
-
-
-        ================================================== */}
-
-        <div className="hero bg-primary text-primary-content rounded-3xl mt-20 overflow-hidden shadow-xl">
-          <div className="hero-content text-center py-12 px-6">
-            <div className="max-w-2xl">
-              <div className="badge badge-secondary mb-4">
-                Your Dance Journey Starts Here
-              </div>
-
-              <h2 className="text-3xl sm:text-4xl font-black">
-                Ready to Dance?
-              </h2>
-
-              <p className="py-6 opacity-90">
-                Join a regular class, discover an independent instructor,
-                register for a workshop, or book a private dance experience at
-                Freedom.
+        <section className="mt-16 rounded-3xl border border-secondary/25 bg-secondary/10 p-7 sm:p-10">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-widest text-secondary">
+                Our dance community
               </p>
-
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
-                <Link
-                  to="/teachers"
-                  className="btn btn-secondary transition-all duration-300 hover:scale-105"
-                >
-                  Book Dance Lessons
-                </Link>
-
-                <Link
-                  to="/events"
-                  className="btn btn-accent transition-all duration-300 hover:scale-105"
-                >
-                  Explore Events
-                </Link>
-
-                <Link
-                  to="/studiopricing"
-                  className="btn btn-outline btn-primary-content transition-all duration-300 hover:scale-105"
-                >
-                  Rent the Studio
-                </Link>
-              </div>
+              <h2 className="mt-2 text-2xl font-black sm:text-3xl">
+                Meet our independent instructors
+              </h2>
+              <p className="mt-3 max-w-2xl text-sm text-base-content/70">
+                Explore additional dance styles taught by independent
+                professionals who host classes at Freedom Dance Studio. Their
+                classes are independently operated.
+              </p>
             </div>
+            <Link to="/independent" className="btn btn-secondary shrink-0">
+              Meet instructors <ArrowRight size={16} />
+            </Link>
           </div>
-        </div>
+        </section>
+        <section className="mt-16">
+          <Heading
+            eyebrow="Beyond the weekly schedule"
+            title="More ways to learn & celebrate"
+            description="From private instruction to live entertainment, find the right experience for you."
+          />
+          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+            {services.map((s) => (
+              <article
+                key={s.id}
+                className="flex flex-col rounded-3xl border border-base-300 bg-base-100 p-6 shadow-sm"
+              >
+                <span className="text-4xl">{s.icon}</span>
+                <h3 className="mt-5 text-xl font-black">{s.title}</h3>
+                <p className="mt-2 flex-1 text-sm text-base-content/65">
+                  {s.description}
+                </p>
+                <p className="mt-4 text-xs text-base-content/60">{s.styles}</p>
+                <div className="mt-5 rounded-xl bg-base-200 p-3">
+                  <p className="flex items-center gap-2 text-sm font-bold">
+                    <Clock3 size={15} />
+                    {s.duration}
+                  </p>
+                  <p className="mt-2 text-xl font-black text-primary">
+                    {s.price}
+                  </p>
+                </div>
+                <button
+                  className="btn btn-primary mt-5 w-full"
+                  onClick={() => navigate("/membersForm", { state: s })}
+                >
+                  Book now <ArrowRight size={16} />
+                </button>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="mt-16 rounded-3xl bg-neutral p-8 text-center text-neutral-content sm:p-12">
+          <Music2 className="mx-auto mb-4 text-primary" size={34} />
+          <h2 className="text-3xl font-black">
+            Your dance journey starts here.
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl opacity-75">
+            Find your class, train with our instructors, and become part of the
+            Freedom Dance Studio community.
+          </p>
+          <div className="mt-7 flex flex-wrap justify-center gap-3">
+            <a href="#weekly-classes" className="btn btn-primary">
+              View schedule
+            </a>
+            <Link
+              to="/events"
+              className="btn btn-outline border-white/40 text-white"
+            >
+              Explore events
+            </Link>
+            <Link
+              to="/rental"
+              className="btn btn-outline border-white/40 text-white"
+            >
+              Rent the studio
+            </Link>
+          </div>
+        </section>
       </div>
-    </section>
+    </main>
   );
 }

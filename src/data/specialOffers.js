@@ -11,7 +11,7 @@ export const specialOffers = [
       "Go from complete beginners to confident dance partners together. No experience required!",
     features: [
       "3-month couples dance program",
-      "2 hours of private couples lessons per week",
+      "1 hour of private couples lessons per week",
       "Unlimited Freedom Dance Studio group classes every week",
       "No dance experience required",
       "Lead and follow techniques",
@@ -33,7 +33,7 @@ export const specialOffers = [
       "Celebrate the holidays with unlimited classes and weekly personalized instruction!",
     features: [
       "Unlimited Freedom Dance Studio group classes",
-      "1 hour of private instruction per week",
+      "1 hour of private instruction per month",
       "Private lessons with an available participating instructor",
       "All experience levels welcome",
       "Private lessons scheduled based on instructor availability",
