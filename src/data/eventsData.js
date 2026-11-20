@@ -1,5 +1,5 @@
 import weekendIntensive from "../assets/instructors/salsaBachata.jpeg";
-import freedom from "../assets/instructors/freedom.webp";
+import freedom from "../assets/instructors/Freedom.jpg";
 
 export const events = [
   {

@@ -1,3 +1,4 @@
+import { cancellations } from "../data/cancellations";
 import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -206,14 +207,7 @@ const weeklySchedule = [
 
 // Duration must be supplied by each independent instructor in independentClasses.
 // Supported fields: durationMinutes (number), duration ("60 min" / "1 hour"), or endTime ("8:00 PM").
-const cancellations = [
-  {
-    date: "2026-11-21",
-    title: "Regular Saturday classes cancelled",
-    reason:
-      "Our Salsa & Bachata Weekend Intensive takes place November 20–22. Regular Saturday classes are cancelled on November 21; your membership is unaffected.",
-  },
-];
+
 const services = [
   {
     id: 1,

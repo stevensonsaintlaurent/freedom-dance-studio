@@ -1,3 +1,4 @@
+import { cancellations, getCancellation } from "../data/cancellations";
 import { useEffect, useState } from "react";
 
 import { useLocation, Link } from "react-router-dom";
@@ -13,6 +14,47 @@ import {
 } from "lucide-react";
 
 import useOnSudmit from "../hooks/useOnSudmit";
+
+const WEEKDAYS = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+const vegasToday = () => {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(new Date());
+  const part = (name) => parts.find((p) => p.type === name).value;
+  return `${part("year")}-${part("month")}-${part("day")}`;
+};
+function dateError(value, weekday, today = vegasToday()) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value || ""))
+    return "Please choose a class date.";
+  const parsed = new Date(`${value}T12:00:00Z`);
+  if (
+    Number.isNaN(parsed.getTime()) ||
+    parsed.toISOString().slice(0, 10) !== value
+  )
+    return "Please choose a valid date.";
+  const cancellation = getCancellation(value);
+  if (cancellation)
+    return (
+      cancellation.reason ||
+      cancellation.title ||
+      "Classes are cancelled on this date. Please choose another date."
+    );
+  if (value < today) return "Please choose today or a future date.";
+  if (WEEKDAYS.includes(weekday) && WEEKDAYS[parsed.getUTCDay()] !== weekday)
+    return `Please choose a ${weekday}.`;
+  return "";
+}
 
 const Booking = () => {
   const { setText, onSubmit } = useOnSudmit();
@@ -34,17 +76,26 @@ const Booking = () => {
   const bookingData = confirm.bookingData || {};
 
   // Multi-class selections from Schedule. Existing single-class/event flows remain unchanged.
-  const selectedClasses = Array.isArray(confirm.selectedClasses)
+  const classSelections = Array.isArray(confirm.selectedClasses)
     ? confirm.selectedClasses
     : Array.isArray(confirm.classes) &&
         confirm.bookingType === "multiple-classes"
       ? confirm.classes
       : [];
+  const [classDates, setClassDates] = useState({});
+  const [singleDate, setSingleDate] = useState("");
+  const [submissionError, setSubmissionError] = useState("");
+  const selectedClasses = classSelections.map((item, index) => ({
+    ...item,
+    date:
+      classDates[index] ??
+      (/^\d{4}-\d{2}-\d{2}$/.test(item.date || "") ? item.date : ""),
+  }));
   const isMultiClassBooking = selectedClasses.length > 0;
   const selectedClassSummary = selectedClasses
     .map(
       (item, index) =>
-        `${index + 1}. ${item.day || "Day TBD"} | ${item.time || "Time TBD"} | ${item.dance || item.title || "Class"} | ${item.instructor || "Instructor TBD"} | ${item.level || "Level TBD"} | ${item.drop ?? item.price ?? "Price TBD"} | ${item.type || "freedom"}`,
+        `${index + 1}. ${item.date || "Date required"} | ${item.day || "Day TBD"} | ${item.time || "Time TBD"} | ${item.dance || item.title || "Class"} | ${item.instructor || "Instructor TBD"} | ${item.level || "Level TBD"} | ${item.drop ?? item.price ?? "Price TBD"} | ${item.type || "freedom"}`,
     )
     .join("\\n");
   const multiClassTitle = `${selectedClasses.length} Selected Classes`;
@@ -220,13 +271,23 @@ const Booking = () => {
 
    */
 
+  const bookingRows = isMultiClassBooking
+    ? selectedClasses
+    : [
+        {
+          day,
+          date:
+            singleDate || (/^\d{4}-\d{2}-\d{2}$/.test(date || "") ? date : ""),
+          dance: dance || title || name || "Class",
+        },
+      ];
+  const bookingErrors = isEventBooking
+    ? []
+    : bookingRows.map((item) => dateError(item.date, item.day));
+  const invalidClassDates = bookingErrors.some(Boolean);
   const classDate = isEventBooking
     ? eventDate || "Date not specified"
-    : isMultiClassBooking
-      ? [
-          ...new Set(selectedClasses.map((item) => item.day).filter(Boolean)),
-        ].join(", ")
-      : day || date || "Date not specified";
+    : bookingRows.map((item) => item.date || "Choose a date").join(", ");
 
   /*
 
@@ -322,6 +383,14 @@ const Booking = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!isEventBooking) {
+      const errors = bookingRows.map((item) => dateError(item.date, item.day));
+      if (errors.some(Boolean)) {
+        setSubmissionError(errors.find(Boolean));
+        return;
+      }
+    }
+    setSubmissionError("");
     if (isSubmitting) return;
 
     setIsSubmitting(true);
@@ -453,7 +522,7 @@ const Booking = () => {
                                 {item.dance || item.title || "Dance Class"}
                               </p>
                               <p className="text-sm">
-                                {item.day} · {item.time}
+                                {item.date} · {item.day} · {item.time}
                               </p>
                               <p className="text-sm">
                                 Instructor:{" "}
@@ -702,7 +771,7 @@ const Booking = () => {
                           {item.dance || item.title || "Dance Class"}
                         </p>
                         <p className="text-sm">
-                          {item.day} · {item.time}
+                          {item.date} · {item.day} · {item.time}
                         </p>
                         <p className="text-sm">
                           Instructor: {item.instructor || "To be confirmed"}
@@ -852,6 +921,66 @@ const Booking = () => {
                 onSubmit={handleSubmit}
                 className="space-y-5 w-full min-w-0"
               >
+                {!isEventBooking && (
+                  <div className="space-y-4">
+                    {cancellations
+                      .filter((item) => item.date >= vegasToday())
+                      .map((item) => (
+                        <p
+                          key={item.date}
+                          role="note"
+                          className="rounded-xl bg-warning/15 p-4 text-sm"
+                        >
+                          <strong>
+                            {item.date}: {item.title || "Classes cancelled"}
+                          </strong>
+                          <br />
+                          {item.reason || "Please choose another date."}
+                        </p>
+                      ))}
+                    {bookingRows.map((item, index) => (
+                      <label key={index} className="block">
+                        <span className="mb-2 block font-semibold">
+                          {item.dance || item.title || "Class"}
+                          {item.day ? ` — ${item.day}` : ""}: date
+                        </span>
+                        <input
+                          type="date"
+                          required
+                          min={vegasToday()}
+                          value={item.date}
+                          aria-invalid={Boolean(bookingErrors[index])}
+                          aria-describedby={`class-date-error-${index}`}
+                          className="input input-bordered w-full"
+                          onChange={(e) => {
+                            const value = e.target.value;
+                            if (isMultiClassBooking)
+                              setClassDates((current) => ({
+                                ...current,
+                                [index]: value,
+                              }));
+                            else setSingleDate(value);
+                            setSubmissionError("");
+                          }}
+                        />
+                        {bookingErrors[index] && (
+                          <span
+                            id={`class-date-error-${index}`}
+                            className="mt-2 block text-sm text-error"
+                          >
+                            {bookingErrors[index]}
+                          </span>
+                        )}
+                      </label>
+                    ))}
+                    {submissionError && (
+                      <p role="alert" className="text-error">
+                        {submissionError}
+                      </p>
+                    )}
+                  </div>
+                )}
+
                 {/* NAME */}
 
                 <input
@@ -986,6 +1115,7 @@ const Booking = () => {
                         selectedClasses.map(
                           ({
                             id,
+                            date,
                             day,
                             time,
                             dance,
@@ -997,6 +1127,7 @@ const Booking = () => {
                             type,
                           }) => ({
                             id,
+                            date,
                             day,
                             time,
                             dance: dance || title,
@@ -1136,7 +1267,9 @@ const Booking = () => {
                 <button
                   className="btn btn-primary w-full text-lg"
                   type="submit"
-                  disabled={isSubmitting}
+                  disabled={
+                    isSubmitting || (!isEventBooking && invalidClassDates)
+                  }
                 >
                   {isSubmitting ? (
                     <>
