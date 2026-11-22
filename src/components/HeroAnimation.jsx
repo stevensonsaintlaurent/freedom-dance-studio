@@ -68,6 +68,17 @@ const HeroAnimation = () => {
   const event = getUpcomingEvent();
   const navigate = useNavigate();
 
+  const handleNavigate = (url) => {
+    const foundEvent = events.find((event) => event.url);
+
+    if (!foundEvent) {
+      console.log("Event not found");
+      return;
+    }
+
+    navigate(foundEvent.url);
+  };
+
   /*
   =========================================================
   NO UPCOMING EVENT
@@ -244,7 +255,7 @@ const HeroAnimation = () => {
 
                 <div
                   className="p-3 text-center cursor-pointer"
-                  onClick={() => navigate("/weekend")}
+                  onClick={(e) => handleNavigate(e.target)}
                 >
                   <Ticket size={17} className="mx-auto mb-1 text-primary" />
 

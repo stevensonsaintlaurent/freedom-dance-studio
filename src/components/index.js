@@ -21,3 +21,4 @@ export { default as PrivacyPolicy } from "./PrivacyPolicy";
 export { default as TermsConditions } from "./TermsConditions";
 export { default as FooterNavlinks } from "./FooterNavlinks";
 export { default as RentalAgreementConfirmation } from "./RentalAgreementConfirmation";
+export { default as FreedomLiveBandBooking } from "./FreedomLiveBandBooking";
