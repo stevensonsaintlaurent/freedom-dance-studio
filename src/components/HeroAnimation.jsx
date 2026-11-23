@@ -66,18 +66,6 @@ const getUpcomingEvent = () => {
 
 const HeroAnimation = () => {
   const event = getUpcomingEvent();
-  const navigate = useNavigate();
-
-  const handleNavigate = (url) => {
-    const foundEvent = events.find((event) => event.url);
-
-    if (!foundEvent) {
-      console.log("Event not found");
-      return;
-    }
-
-    navigate(foundEvent.url);
-  };
 
   /*
   =========================================================
@@ -253,10 +241,7 @@ const HeroAnimation = () => {
 
                 {/* PRICE */}
 
-                <div
-                  className="p-3 text-center cursor-pointer"
-                  onClick={(e) => handleNavigate(e.target)}
-                >
+                <Link to={event.url} className="p-3 text-center cursor-pointer">
                   <Ticket size={17} className="mx-auto mb-1 text-primary" />
 
                   <p className="text-[8px] font-bold uppercase tracking-wider text-white/40">
@@ -272,7 +257,7 @@ const HeroAnimation = () => {
                       {event.priceDetails}
                     </p>
                   )}
-                </div>
+                </Link>
               </div>
 
               {/* BUTTONS */}

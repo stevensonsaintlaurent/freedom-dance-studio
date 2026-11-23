@@ -111,7 +111,7 @@ export const events = [
 
     button: "Get Your Tickets",
 
-    showInHero: false,
+    showInHero: true,
     featured: true,
     url: "band",
   },
