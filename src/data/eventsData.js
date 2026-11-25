@@ -1,5 +1,5 @@
 import bachaZoukWeekender from "../assets/instructors/bachazouk.webp";
-import freedom from "../assets/instructors/Freedom.webp";
+import freedom from "../assets/instructors/freedom.webp";
 
 export const events = [
   {
