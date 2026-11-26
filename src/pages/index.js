@@ -5,3 +5,4 @@ export { default as Contact } from "./Contact";
 export { default as Classes } from "./Classes";
 export { default as StudioRental } from "./Rentals";
 export { default as Events } from "./Events";
+export { default as TraditionalBachata } from "./TraditionalBachata";

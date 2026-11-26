@@ -2,7 +2,15 @@ import { Suspense, lazy } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Main pages
-import { HomeLayout, Landing, About, Contact, Classes, Events } from "./pages";
+import {
+  HomeLayout,
+  Landing,
+  About,
+  Contact,
+  Classes,
+  Events,
+  TraditionalBachata,
+} from "./pages";
 
 // Shared components and pages
 import {
@@ -184,6 +192,14 @@ const eventRoutes = [
     element: (
       <LazyPage>
         <FreedomLiveBandBooking />
+      </LazyPage>
+    ),
+  },
+  {
+    path: "traditional-bachata",
+    element: (
+      <LazyPage>
+        <TraditionalBachata />
       </LazyPage>
     ),
   },

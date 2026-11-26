@@ -1,5 +1,6 @@
 import bachaZoukWeekender from "../assets/instructors/bachazouk.webp";
 import freedom from "../assets/instructors/freedom.webp";
+import ana from "../assets/instructors/ana.jpeg";
 
 export const events = [
   {
@@ -114,5 +115,80 @@ export const events = [
     showInHero: true,
     featured: true,
     url: "band",
+  },
+
+  {
+    id: 3,
+
+    eventStart: "2026-12-13",
+    eventEnd: "2026-12-13",
+
+    day: "Sunday",
+    date: "December 13, 2026",
+
+    type: "DANCE WORKSHOP",
+
+    title: "Traditional Bachata Workshop with Anya",
+
+    instructor: "Anya",
+
+    category: "Traditional Bachata / Dominican Bachata",
+
+    time: "3:00 PM – 5:00 PM",
+
+    duration: "2 Hours",
+
+    level: "Beginner Friendly",
+
+    location:
+      "Freedom Dance Studio – 3110 E Sunset Rd, Suite C, Las Vegas, NV 89120",
+
+    image: ana,
+    imageFit: "contain",
+
+    // Workshop schedule
+    schedule: [
+      {
+        id: 1,
+        title: "Fundamentals and Basic Movements",
+        time: "3:00 PM – 4:00 PM",
+        duration: "1 Hour",
+        instructor: "Anya",
+        level: "Beginner Friendly",
+        price: "$20",
+        description:
+          "Learn the foundations of traditional Dominican Bachata, including basic steps, rhythm, footwork, and fundamental movements.",
+      },
+      {
+        id: 2,
+        title: "Traditional Bachata Partner Work",
+        time: "4:00 PM – 5:00 PM",
+        duration: "1 Hour",
+        instructor: "Anya",
+        level: "Beginner Friendly",
+        price: "$20",
+        description:
+          "Develop your partner dancing skills through traditional Bachata movements, connection, and lead and follow techniques.",
+      },
+    ],
+
+    // Workshop pricing
+    price: "$35 Early Sign-Up",
+
+    regularPrice: "$20 Per Class",
+
+    priceDetails:
+      "Early Sign-Up: $35 for both workshops • Single Workshop: $20 per class",
+
+    // Workshop information
+    description:
+      "Discover the roots of Bachata at Freedom Dance Studio! Join Anya on Sunday, December 13, 2026, for an exciting two-hour Traditional Bachata Workshop. Explore the fundamentals, basic movements, rhythm, footwork, and partner work of Dominican Bachata. This beginner-friendly experience is perfect for anyone looking to start their dance journey or strengthen their traditional Bachata foundations. Take advantage of our early sign-up special and enjoy both workshops for only $35, or attend a single workshop for $20. Come learn, connect, and experience the beauty and culture of traditional Bachata with us!",
+
+    button: "Register Now",
+
+    showInHero: true,
+    featured: true,
+
+    url: "traditional-bachata",
   },
 ];
